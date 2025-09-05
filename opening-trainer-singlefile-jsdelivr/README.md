@@ -1,0 +1,1 @@
+Single-file build using jsDelivr +esm for all dependencies to avoid esm.sh 404s.
