@@ -1,1 +1,179 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🧬 DNA/Genomics Mastery — Interactive</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="logo">🧬</span>
+      <h1>DNA / Genomics Mastery</h1>
+    </div>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="home">Home</button>
+      <button class="tab-btn" data-tab="modules">Modules</button>
+      <button class="tab-btn" data-tab="lab">Lab Drills</button>
+      <button class="tab-btn" data-tab="exam">Final Exam</button>
+      <button class="tab-btn" data-tab="achievements">Achievements</button>
+      <button class="tab-btn" data-tab="profile">Profile</button>
+      <button class="tab-btn" data-tab="settings">Settings</button>
+    </nav>
+  </header>
+
+  <section id="toast" class="toast hidden"></section>
+  <section id="confetti" class="confetti hidden"></section>
+
+  <main>
+    <!-- HOME -->
+    <section id="home" class="tab active">
+      <div class="hero card">
+        <div>
+          <h2>Welcome, Scientist-in-Training 🧪</h2>
+          <p>Master DNA and genomics with interactive tasks, drills, and a gamified progression system. Earn XP, unlock badges, and chase daily goals.</p>
+          <div class="cta">
+            <button id="quickStart" class="primary">Quick Start</button>
+            <button class="secondary" data-tab-to="modules">Browse Modules</button>
+          </div>
+        </div>
+        <div class="stats-mini">
+          <div class="stat"><span id="lvl">Lv. 1</span><small>Level</small></div>
+          <div class="stat"><span id="xp">0 XP</span><small>Experience</small></div>
+          <div class="stat"><span id="streak">0 🔥</span><small>Streak</small></div>
+        </div>
+      </div>
+
+      <div class="goals-grid">
+        <div class="card">
+          <h3>Daily Goals</h3>
+          <ul id="dailyGoals" class="checklist"></ul>
+        </div>
+        <div class="card">
+          <h3>Weekly Challenges</h3>
+          <ul id="weeklyGoals" class="checklist"></ul>
+        </div>
+        <div class="card">
+          <h3>Mystery Event</h3>
+          <p>Complete today’s streak to unlock a surprise quiz! 🎁</p>
+          <button id="mysteryBtn" class="secondary">Unlock Surprise</button>
+          <div id="mysteryArea" class="hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULES -->
+    <section id="modules" class="tab">
+      <h2>Learning Path</h2>
+      <p class="muted">Structured from fundamentals to applications. Each module includes concepts, mini quizzes, and mastery tasks.</p>
+      <div id="moduleList" class="cards"></div>
+
+      <div id="moduleDetail" class="module-detail hidden">
+        <button class="back-btn" id="backToModules">← Back</button>
+        <h3 id="moduleTitle"></h3>
+        <div id="moduleConcepts" class="concepts"></div>
+        <h4>Check Your Understanding</h4>
+        <div id="moduleQuiz" class="quiz"></div>
+      </div>
+    </section>
+
+    <!-- LAB DRILLS -->
+    <section id="lab" class="tab">
+      <h2>Lab Drills & Simulations</h2>
+      <div class="drill-grid">
+        <div class="card">
+          <h3>Base-Pair Reflex</h3>
+          <p>Type the complementary base as fast as you can (A↔T, G↔C). 30 seconds.</p>
+          <button id="bpStart" class="secondary">Start</button>
+          <div id="bpArea" class="drill-area hidden"></div>
+        </div>
+        <div class="card">
+          <h3>Mutation Classifier</h3>
+          <p>Classify changes as silent, missense, or nonsense from short sequences.</p>
+          <button id="mutStart" class="secondary">Start</button>
+          <div id="mutArea" class="drill-area hidden"></div>
+        </div>
+        <div class="card">
+          <h3>Pathway Mapping</h3>
+          <p>Trace variant → expression/protein effect → phenotype (short answer).</p>
+          <button id="pathStart" class="secondary">Start</button>
+          <div id="pathArea" class="drill-area hidden"></div>
+        </div>
+        <div class="card">
+          <h3>Genome Browser Lite</h3>
+          <p>Mini visualization: navigate a toy chromosome, spot genes & promoters.</p>
+          <button id="gbStart" class="secondary">Open</button>
+          <div id="gbArea" class="drill-area hidden"></div>
+        </div>
+        <div class="card">
+          <h3>Rapid Fire Q&A</h3>
+          <p>Answer as many conceptual questions as you can in 60 seconds.</p>
+          <button id="rfStart" class="secondary">Start</button>
+          <div id="rfArea" class="drill-area hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXAM -->
+    <section id="exam" class="tab">
+      <h2>Final Exam</h2>
+      <p>20 MCQs + 5 Scenario play-calls. Your best score unlocks the <strong>Genomics Strategist</strong> badge.</p>
+      <div id="examContainer"></div>
+      <div class="actions">
+        <button id="gradeExam" class="primary">Grade Exam</button>
+        <button id="resetExam" class="danger">Reset Answers</button>
+      </div>
+      <div id="examResult" class="result hidden"></div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="tab">
+      <h2>Badges & Milestones</h2>
+      <div id="badgeGrid" class="badge-grid"></div>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="profile" class="tab">
+      <h2>Your Profile</h2>
+      <div class="profile-wrap card">
+        <div class="avatar-picker">
+          <label for="avatar">Avatar</label>
+          <select id="avatar"></select>
+          <div id="avatarPreview" class="avatar">🙂</div>
+        </div>
+        <div class="profile-stats">
+          <div><strong>Level:</strong> <span id="pLevel">1</span></div>
+          <div><strong>XP:</strong> <span id="pXP">0</span></div>
+          <div><strong>Streak:</strong> <span id="pStreak">0</span></div>
+          <div><strong>Modules Completed:</strong> <span id="pModules">0</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settings" class="tab">
+      <h2>Settings</h2>
+      <div class="card settings-grid">
+        <label><input type="checkbox" id="soundToggle"> Sound effects</label>
+        <label><input type="checkbox" id="notifToggle"> In-app notifications</label>
+        <label><input type="checkbox" id="confettiToggle" checked> Confetti celebrations</label>
+        <label><input type="checkbox" id="surpriseToggle" checked> Enable surprises</label>
+      </div>
+      <div class="actions">
+        <button id="exportBtn" class="secondary">Export Progress</button>
+        <button id="importBtn" class="secondary">Import Progress</button>
+        <button id="resetProgress" class="danger">Reset All Progress</button>
+      </div>
+      <textarea id="progressBox" class="hidden export-box" placeholder="Paste progress JSON here for import"></textarea>
+    </section>
+  </main>
+
+  <footer>
+    <p>Offline-first. No external libraries. Progress saved locally.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
