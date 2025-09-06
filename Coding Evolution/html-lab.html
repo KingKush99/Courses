@@ -1,0 +1,52 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HTML/CSS/JS Playground</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto;background:#0b1424;color:#e7ecf2;margin:0;padding:20px}
+a{color:#23a7ff}.container{max-width:1000px;margin:0 auto}
+h1{color:#cfe3ff}.btn{display:inline-block;padding:8px 12px;margin:4px;background:#152343;color:#e7ecf2;border-radius:8px;text-decoration:none;border:0;cursor:pointer}
+textarea{width:100%}pre{background:#0a1222;padding:10px;border-radius:8px;white-space:pre-wrap}
+iframe{width:100%;min-height:240px;border:1px solid #1f2a44;border-radius:8px;background:#0a1222}
+.split{display:grid;gap:10px}@media(min-width:900px){.split{grid-template-columns:1fr 1fr}}
+hr{border:none;border-top:1px solid #1f2a44;margin:16px 0}
+</style>
+</head><body><div class="container">
+  <p><a class="btn" href="index.html">← Home</a></p>
+  <h1>HTML/CSS/JS Playground</h1>
+  <div class="split">
+    <div>
+      <h3>HTML</h3>
+      <textarea id="html" rows="8"><div class="box">Hello, web!</div></textarea>
+      <h3>CSS</h3>
+      <textarea id="css" rows="8">.box{padding:16px;border-radius:12px;background:#1a4a7d;color:#fff;font-weight:bold}</textarea>
+      <h3>JS</h3>
+      <textarea id="js" rows="8">document.querySelector('.box').innerHTML += ' 🚀'</textarea>
+      <p><button id="run" class="btn">Run</button></p>
+    </div>
+    <iframe id="preview"></iframe>
+  </div>
+</div>
+<script>
+  const prev = document.getElementById('preview');
+
+  const runnerHTML = [
+    '<!doctype html><html><head><meta charset="utf-8"><style id="u"></style></head><body>',
+    '<script>',
+    'window.addEventListener("message", function(e){',
+      'if(!e.data || e.data.type!=="render") return;',
+      'try{ document.getElementById("u").textContent = e.data.css || ""; document.body.innerHTML = e.data.html || ""; new Function(e.data.js || "")(); }',
+      'catch(err){ console.log("Error:", err.message); }',
+    '});',
+    'parent.postMessage({type:"ready-dom"}, "*");',
+    '<' + '/script></body></html>'
+  ].join("");
+
+  const blob = new Blob([runnerHTML], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  prev.src = url;
+
+  function render(){ prev.contentWindow.postMessage({type:"render", html: document.getElementById('html').value, css: document.getElementById('css').value, js: document.getElementById('js').value}, "*"); }
+  document.getElementById('run').onclick = render;
+  render();
+</script>
+</body></html>

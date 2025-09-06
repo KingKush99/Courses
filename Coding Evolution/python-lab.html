@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Web Coding Course — Embedded Runners</title>
+<title>Python Lab</title>
 <style>
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto;background:#0b1424;color:#e7ecf2;margin:0;padding:20px}
 a{color:#23a7ff}.container{max-width:1000px;margin:0 auto}
@@ -11,12 +11,20 @@ iframe{width:100%;min-height:240px;border:1px solid #1f2a44;border-radius:8px;ba
 hr{border:none;border-top:1px solid #1f2a44;margin:16px 0}
 </style>
 </head><body><div class="container">
-  <h1>Web Coding Course — Embedded Runners</h1>
-  <p>Runs locally with no server. Last updated September 06, 2025</p>
-  <p>
-    <a class="btn" href="js-lab.html">JavaScript Lab</a>
-    <a class="btn" href="html-lab.html">HTML/CSS/JS Lab</a>
-    <a class="btn" href="python-lab.html">Python Lab</a>
-    <a class="btn" href="module-01.html">Start Module 1</a>
-  </p>
-</div></body></html>
+  <p><a class="btn" href="index.html">← Home</a></p>
+  <h1>Python Lab (Pyodide)</h1>
+  <textarea id="py" rows="6">print("Hello from Python!")</textarea><br>
+  <button class="btn" id="run">Run</button>
+  <pre id="out"></pre>
+</div>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+<script>
+let pyReady=null;
+async function ensure(){ if(!pyReady) pyReady=loadPyodide(); return pyReady; }
+document.getElementById('run').onclick = async function(){ 
+  const py = await ensure();
+  try { const res = await py.runPythonAsync(document.getElementById('py').value); document.getElementById('out').textContent += (res!==undefined?res:"(OK)") + "\n"; }
+  catch(err) { document.getElementById('out').textContent += "Error: " + err.message + "\n"; }
+};
+</script>
+</body></html>
