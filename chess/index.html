@@ -88,8 +88,8 @@ html,body{overflow:hidden}
 
 <script>
 let board=[], whiteToMove=true, flipped=false;
-const W={{'P':'♙','R':'♖','N':'♘','B':'♗','Q':'♕','K':'♔'}};
-const B={{'p':'♟','r':'♜','n':'♞','b':'♝','q':'♛','k':'♚'}};
+const W={'P':'♙','R':'♖','N':'♘','B':'♗','Q':'♕','K':'♔'}};
+const B={'p':'♟','r':'♜','n':'♞','b':'♝','q':'♛','k':'♚'}};
 function start(){ board=[['r','n','b','q','k','b','n','r'],['p','p','p','p','p','p','p','p'],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],['P','P','P','P','P','P','P','P'],['R','N','B','Q','K','B','N','R']]; whiteToMove=true; }
 function inB(r,c){return r>=0&&r<8&&c>=0&&c<8} function isW(p){return p&&p===p.toUpperCase()} function isB(p){return p&&p===p.toLowerCase()}
 function gen(r,c){ const p=board[r][c]; if(!p)return[]; const me=isW(p); const M=[]; const add=(rr,cc)=>{ if(!inB(rr,cc))return; const t=board[rr][cc]; if(t===null||(me?isB(t):isW(t)))M.push([rr,cc]); };
