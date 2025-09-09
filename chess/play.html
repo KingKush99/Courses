@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Chess</title>
+<title>Chess • Play</title>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
 <style>
 :root{--fg:#fff;--bg1:#0b0b0f;--bg2:#1a0a07;--bg3:#350f06;--panel:#1a0f0a;--pill:linear-gradient(90deg,#ff6b00,#ff3b3b)}
@@ -32,12 +32,34 @@ background:radial-gradient(circle at 30% 30%,#ff9f1a,#ff6b00 60%,#3a0c00 100%);b
 <button class="round-btn chat-btn" id="chatBtn">💬</button>
 <a class="back-fab" href="#" id="backBtn">← Back</a>
 
-<main class="wrap"><div style="width:min(1100px,95vw)"><h1>Chess</h1>
-<div class="card"><p>Welcome to Chess. This demo structure avoids 404s (kebab-case folders).</p>
-<p><a class="btn" href="quiz.html">Final Quiz</a> <a class="btn" href="play.html">Play</a></p>
-<div class="progress"><div class="bar" id="bar"></div></div>
-</div></div></main>
-<script>const key='progress_chess'; document.getElementById('bar').style.width=(localStorage.getItem(key)||'0')+'%';</script>
+<style>html,body{overflow:hidden}.board-wrap{height:100vh;width:100vw;display:grid;place-items:center;padding:6vmin}
+.board{width:min(96vmin,96vw);height:min(96vmin,96vh);display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);border-radius:16px;overflow:hidden;box-shadow:0 10px 24px #000a,inset 0 0 0 2px #ffffff18}
+.square{display:grid;place-items:center;font-size:calc(min(96vmin,96vw)/8*.7)} .dark{background:#b58863}.light{background:#f0d9b5} .piece.white{color:#fff;text-shadow:0 0 3px #000}.piece.black{color:#111;text-shadow:0 0 2px #fff7}</style>
+<div class="board-wrap"><div id="board" class="board"></div></div>
+<script>
+let board=[], whiteToMove=true;
+const W={'P':'♙','R':'♖','N':'♘','B':'♗','Q':'♕','K':'♔'};
+const B={'p':'♟','r':'♜','n':'♞','b':'♝','q':'♛','k':'♚'};
+function start(){board=[['r','n','b','q','k','b','n','r'],['p','p','p','p','p','p','p','p'],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],['P','P','P','P','P','P','P','P'],['R','N','B','Q','K','B','N','R']];whiteToMove=true;}
+function inB(r,c){return r>=0&&r<8&&c>=0&&c<8} function isW(p){return p&&p===p.toUpperCase()} function isB(p){return p&&p===p.toLowerCase()}
+function gen(r,c){const p=board[r][c]; if(!p) return []; const me=isW(p); const M=[]; const add=(rr,cc)=>{if(!inB(rr,cc))return; const t=board[rr][cc]; if(t===null||(me?isB(t):isW(t)))M.push([rr,cc]);};
+  switch(p.toUpperCase()){
+    case 'P':{const d=me?-1:1,s=me?6:1; if(inB(r+d,c)&&board[r+d][c]==null){M.push([r+d,c]); if(r===s&&board[r+2*d][c]==null) M.push([r+2*d,c]);} [[d,-1],[d,1]].forEach(x=>{const rr=r+x[0],cc=c+x[1]; if(inB(rr,cc)){const t=board[rr][cc]; if(t&&(me?isB(t):isW(t)))M.push([rr,cc]);}}); break;}
+    case 'N':{[[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]].forEach(v=>add(r+v[0],c+v[1])); break;}
+    case 'B':{[[-1,-1],[-1,1],[1,-1],[1,1]].forEach(v=>{let rr=r+v[0],cc=c+v[1]; while(inB(rr,cc)){ if(board[rr][cc]==null)M.push([rr,cc]); else { if(me?isB(board[rr][cc]):isW(board[rr][cc]))M.push([rr,cc]); break;} rr+=v[0]; cc+=v[1]; }}); break;}
+    case 'R':{[[-1,0],[1,0],[0,-1],[0,1]].forEach(v=>{let rr=r+v[0],cc=c+v[1]; while(inB(rr,cc)){ if(board[rr][cc]==null)M.push([rr,cc]); else { if(me?isB(board[rr][cc]):isW(board[rr][cc]))M.push([rr,cc]); break;} rr+=v[0]; cc+=v[1]; }}); break;}
+    case 'Q':{[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[-1,1],[1,-1],[1,1]].forEach(v=>{let rr=r+v[0],cc=c+v[1]; while(inB(rr,cc)){ if(board[rr][cc]==null)M.push([rr,cc]); else { if(me?isB(board[rr][cc]):isW(board[rr][cc]))M.push([rr,cc]); break;} rr+=v[0]; cc+=v[1]; }}); break;}
+    case 'K':{for(let dr=-1;dr<=1;dr++) for(let dc=-1;dc<=1;dc++) if(dr||dc) add(r+dr,c+dc); break;}
+  } return M;
+}
+function render(){const el=document.getElementById('board'); el.innerHTML=''; for(let rr=7; rr>=0; rr--){ for(let cc=0; cc<8; cc++){ const d=document.createElement('div'); d.className='square '+((rr+cc)%2?'dark':'light'); d.dataset.r=rr; d.dataset.c=cc; const p=board[rr][cc]; if(p){const s=document.createElement('span'); s.className='piece '+(isW(p)?'white':'black'); s.textContent=(isW(p)?W[p]:B[p]); d.appendChild(s);} el.appendChild(d);} } }
+let sel=null; function clearH(){document.querySelectorAll('.highlight').forEach(el=>el.classList.remove('highlight'));}
+document.addEventListener('click',e=>{const sq=e.target.closest('.square'); if(!sq) return; const r=+sq.dataset.r,c=+sq.dataset.c; const p=board[r][c];
+  if(p && (whiteToMove? p===p.toUpperCase(): p===p.toLowerCase())){ sel=[r,c]; return; }
+  if(sel){ const [sr,sc]=sel; const legal=gen(sr,sc).some(m=>m[0]===r&&m[1]===c); if(legal){ const mv=board[sr][sc]; board[r][c]=mv; board[sr][sc]=null; if((mv==='P'&&r===0)||(mv==='p'&&r===7)) board[r][c]=(mv==='P')?'Q':'q'; whiteToMove=!whiteToMove; sel=null; render(); } else { sel=null; } }
+});
+start(); render();
+</script>
 
 <div class="popover" id="menuPanel"><h3>Menu</h3><div class="row"><strong>Music</strong><label style="margin-left:auto">On/Off <input type="checkbox" id="musicToggle"></label></div></div>
 <div class="popover" id="slotsPopover"><h3>Mini Slots</h3><div class="row"><strong>Reels</strong><select id="reelSelect"><option>3</option><option>4</option><option>5</option><option selected>6</option></select><strong>Bet</strong><select id="betSelect"><option>10</option><option selected>25</option><option>50</option><option>100</option></select></div><div class="row"><button class="btn">Spin</button></div></div>

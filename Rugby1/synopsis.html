@@ -1,183 +1,54 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Rugby • Synopsis</title>
-<link rel="preconnect" href="https://cdn.jsdelivr.net"/>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
 <style>
-  :root{ --fg:#fff; --bg1:#0b0b0f; --bg2:#1b0b00; --bg3:#3a0c00; --panel:#1a0f0a; --brand:#ff6b00; --muted:#ffd9b3; --pill:linear-gradient(90deg,#ff6b00,#ff3b3b); }
-  *{box-sizing:border-box} html,body{height:100%}
-  body{margin:0; font-family:"Comic Sans MS","Comic Sans",cursive; color:var(--fg); overflow-x:hidden;
-       background: radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, var(--bg1), var(--bg2) 40%, var(--bg3));}
-  a{color:#ffd166}
-  .wrap{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:8vh 24px; text-align:center;}
-  h1{font-size:clamp(2rem,4vw+1rem,3rem); text-shadow:0 2px 18px #000; margin:0 0 8px;}
-  .sub{opacity:.9; margin:0 0 18px;}
-
-  /* round fixed buttons */
-  .round-btn{position:fixed; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; color:#fff; cursor:pointer;
-             background: radial-gradient(circle at 30% 30%, #ff9f1a, #ff6b00 60%, #3a0c00 100%); box-shadow: 0 8px 20px #000a; z-index:100;}
-  .profile-btn{left:16px; top:16px;} .slots-btn{right:16px; bottom:16px;} .chat-btn{left:16px; bottom:16px;} .menu-btn{right:16px; top:16px;}
-  .burger{position:relative; width:26px; height:18px;}
-  .burger span{position:absolute; left:0; width:100%; height:3px; background:#fff; border-radius:2px; transition:transform .25s ease, opacity .2s ease, top .25s ease;}
-  .burger span:nth-child(1){top:0} .burger span:nth-child(2){top:7.5px} .burger span:nth-child(3){top:15px}
-  .menu-btn.open .burger span:nth-child(1){top:7.5px; transform:rotate(45deg)} .menu-btn.open .burger span:nth-child(2){opacity:0} .menu-btn.open .burger span:nth-child(3){top:7.5px; transform:rotate(-45deg)}
-
-  /* popovers */
-  .popover{position:absolute; width:560px; max-width:95vw; background:var(--panel); border:1px solid #ffffff1f; border-radius:14px; padding:14px; box-shadow:0 12px 24px #000a; display:none; z-index:2000; color:#ffd9b3; overflow:hidden;}
-  .row{display:flex; align-items:center; gap:10px; margin:8px 0; flex-wrap:wrap;}
-  .btn{padding:12px 18px; border-radius:999px; border:none; font-weight:800; background:linear-gradient(90deg,#ff6b00,#ff3b3b); color:#fff; cursor:pointer; box-shadow:0 8px 18px #0008; font-family:inherit;}
-  select, input[type="range"], input[type="text"], input[type="number"]{background:#2a1b12; color:#fff; border:1px solid #fff2; border-radius:8px; padding:6px 8px; font-family:inherit;}
-  .back-fab{position:fixed; left:16px; top:86px; z-index:120; background:#2a1b12; border:1px solid #ffffff1a; color:#fff; padding:8px 12px; border-radius:999px; text-decoration:none;}
-
-  /* pill buttons like screenshot but orange-red */
-  .pill-btn{display:block; text-decoration:none; color:#fff; font-weight:800; letter-spacing:.3px; text-align:center;
-            background:linear-gradient(90deg,#ff6b00,#ff3b3b); border-radius:999px; padding:16px 24px; box-shadow:0 8px 18px #0008; transition:transform .12s ease, box-shadow .12s ease, filter .12s ease; position:relative; width:100%;}
-  .pill-btn:hover{transform: translateY(-1px); box-shadow:0 12px 24px #000a; filter:brightness(1.03);}
-  .grid{display:grid; gap:16px; width:min(1400px,95vw); margin:16px auto;}
-  #colSelWrap{margin-top:10px; display:flex; justify-content:center; gap:10px; color:#ffd9b3;}
-
-  /* tooltips for course descriptions */
-  .tip{position:fixed; pointer-events:none; padding:10px 12px; border-radius:10px; background:#120b07ee; border:1px solid #ff6b0040; color:#ffd9b3; opacity:0; transform:translateY(-6px); transition:opacity .12s ease, transform .12s ease; z-index:9000;}
+:root{--fg:#fff;--bg1:#0b0b0f;--bg2:#1a0a07;--bg3:#350f06;--panel:#1a0f0a;--pill:linear-gradient(90deg,#ff6b00,#ff3b3b)}
+*{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:"Comic Sans MS","Comic Sans",cursive;color:#fff;
+background: radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, var(--bg1), var(--bg2) 40%, var(--bg3));}
+.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:8vh 24px;text-align:center}
+h1{margin:0 0 10px} .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.round-btn{position:fixed;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;cursor:pointer;
+background:radial-gradient(circle at 30% 30%,#ff9f1a,#ff6b00 60%,#3a0c00 100%);box-shadow:0 8px 20px #000a;z-index:100}
+.profile-btn{left:16px;top:16px} .menu-btn{right:16px;top:16px} .slots-btn{right:16px;bottom:16px} .chat-btn{left:16px;bottom:16px}
+.back-fab{position:fixed;left:16px;top:86px;z-index:120;background:#2a1b12;border:1px solid #ffffff1a;color:#fff;padding:8px 12px;border-radius:999px;text-decoration:none}
+.burger{position:relative;width:26px;height:18px} .burger span{position:absolute;left:0;width:100%;height:3px;background:#fff;border-radius:2px;transition:transform .25s,opacity .2s,top .25s}
+.burger span:nth-child(1){top:0} .burger span:nth-child(2){top:7.5px} .burger span:nth-child(3){top:15px}
+.menu-btn.open .burger span:nth-child(1){top:7.5px;transform:rotate(45deg)} .menu-btn.open .burger span:nth-child(2){opacity:0} .menu-btn.open .burger span:nth-child(3){top:7.5px;transform:rotate(-45deg)}
+.popover{position:absolute;width:560px;max-width:95vw;background:#1a0f0a;border:1px solid #ffffff1f;border-radius:14px;padding:14px;box-shadow:0 12px 24px #000a;display:none;z-index:2000;color:#ffd9b3}
+.btn{padding:12px 18px;border-radius:999px;border:none;font-weight:800;background:linear-gradient(90deg,#ff6b00,#ff3b3b);color:#fff;cursor:pointer;box-shadow:0 8px 18px #0008;font-family:inherit}
+.pill-btn{display:block;text-decoration:none;color:#fff;font-weight:800;background:linear-gradient(90deg,#ff6b00,#ff3b3b);border-radius:999px;padding:16px 24px;box-shadow:0 8px 18px #0008;transition:.12s;position:relative;width:60%;margin-inline:auto;text-align:center}
+.pill-btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px #000a;filter:brightness(1.03)}
+.grid{display:grid;gap:16px;width:min(1400px,95vw);margin:16px auto;grid-template-columns:repeat(1,minmax(280px,1fr))}
+#colSelWrap{margin:16px auto 0;display:flex;justify-content:center;gap:10px;color:#ffd9b3}
+.card{background:#1a0f0a;border:1px solid #ffffff1a;border-radius:16px;padding:16px;margin:12px auto;text-align:left}
+.progress{height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px} .bar{height:100%;width:0;background:#ffd166}
+.square{display:grid;place-items:center}
 </style>
-</head>
-<body>
-<a class="round-btn profile-btn" href="#" id="profileLink" title="Profile" aria-label="Profile">👤</a>
-<button class="round-btn menu-btn" id="menuBtn" title="Menu" aria-label="Menu"><div class="burger" aria-hidden="true"><span></span><span></span><span></span></div></button>
-<button class="round-btn slots-btn" id="slotsBtn" title="Mini Slots" aria-label="Mini Slots">🎰</button>
-<button class="round-btn chat-btn" id="chatBtn" title="Assistant" aria-label="Assistant">💬</button>
+</head><body>
+<a class="round-btn profile-btn" href="#" id="profileLink">👤</a>
+<button class="round-btn menu-btn" id="menuBtn"><div class="burger"><span></span><span></span><span></span></div></button>
+<button class="round-btn slots-btn" id="slotsBtn">🎰</button>
+<button class="round-btn chat-btn" id="chatBtn">💬</button>
 <a class="back-fab" href="#" id="backBtn">← Back</a>
-
-<main class="wrap" style="width:100%"><div style="width:min(1200px,95vw); margin:0 auto; text-align:left;">
-  <h1>Rugby • Synopsis</h1>
-  <ul style="line-height:1.6">
-    <li><strong>X/Switch</strong> & <strong>Swap</strong>: layered 10-led options; 12/13 as crash or pull decoys.</li>
-    <li><strong>MGM</strong>: choose inside vs outside crash; pull to 11 for edge if light.</li>
-    <li><strong>M1 (Miss1)</strong>: skip to 13 then loop to 12 or tip to 11.</li>
-    <li><strong>Express</strong>: threaten D10 with 12; crash/tight 12–13/pull behind 13.</li>
-    <li><strong>Wing In</strong>: overload 10 channel from 9; pick crash based on shape.</li>
-    <li><strong>2–4 Switch</strong>: drift decoys to free 10–13 switch or back-door 12.</li>
-  </ul>
-</div></main>
-
-<!-- Mini Slots -->
-<div class="popover" id="slotsPopover" role="dialog" aria-label="Mini Slots">
-  <h3>Mini Slots</h3>
-  <div class="row" style="justify-content:space-between">
-    <div class="row"><strong>Reels</strong><select id="reelSelect"><option>3</option><option>4</option><option>5</option><option selected>6</option></select></div>
-    <div class="row"><strong>Bet</strong><select id="betSelect"><option>10</option><option selected>25</option><option>50</option><option>100</option></select></div>
-  </div>
-  <div class="row" style="justify-content:center;margin-top:10px"><button class="btn" id="spinBtn">Spin</button></div>
-</div>
-
-<!-- Hamburger Menu -->
-<div class="popover" id="menuPanel" role="dialog" aria-label="Menu">
-  <h3>Menu</h3>
-  <div class="row"><strong>Music</strong> <label style="margin-left:auto">On/Off <input type="checkbox" id="musicToggle"></label></div>
-  <div class="row"><label>Volume</label><select id="musicVol"><option value="0.2">Low</option><option value="0.6" selected>Medium</option><option value="1">High</option><option value="0">Mute</option></select>
-    <label>Track</label><select id="musicTrack"><option value="default">Default</option><option value="arcade">Arcade</option><option value="chill">Chill</option></select></div>
-  <hr style="border-color:#ffffff18">
-  <div class="row"><strong>Display</strong></div>
-  <div class="row"><label>Theme</label><select id="themeSel"><option>Dark</option><option>Light</option><option>High Contrast</option></select>
-    <label>Text Size</label><select id="textSel"><option>Default</option><option>Small</option><option>Large</option></select></div>
-  <hr style="border-color:#ffffff18">
-  <div class="row"><strong>Notifications</strong></div>
-  <div class="row"><label>Sound Alerts</label><input type="checkbox" id="notifSound"><label>Pop-ups</label><input type="checkbox" id="notifPopup" checked>
-    <label>Frequency</label><select id="notifFreq"><option>All</option><option>Major Only</option></select></div>
-</div>
-
-<!-- Chat -->
-<div class="popover" id="chatPopover"><h3 id="chatTitle">Assistant</h3>
-  <div id="chatLog" style="height:260px;overflow:auto;background:#120b07;border:1px solid #ffffff1a;border-radius:10px;padding:10px"></div>
-  <div class="row" style="margin-top:8px">
-    <input type="text" id="chatInput" placeholder="Ask me anything about the site…" style="flex:1;background:#2a1b12;border:1px solid #ffffff1a;border-radius:10px;padding:10px">
-    <label class="btn" style="padding:10px 12px;">
-      📷 <input type="file" id="imgInput" accept="image/*" style="display:none">
-    </label>
-    <button class="btn" id="sendBtn">Send</button>
-  </div>
-  <small id="chatTip" style="opacity:.8">Understands: English, Español, Français, 中文, العربية, हिन्दी, Português, Deutsch, 日本語, Русский.</small>
-</div>
-
+<main class='wrap'><div class='card' style='max-width:900px'><h1>Synopsis</h1><p>Core structures summarized.</p></div></main>
+<div class="popover" id="menuPanel"><h3>Menu</h3><div class="row"><strong>Music</strong><label style="margin-left:auto">On/Off <input type="checkbox" id="musicToggle"></label></div></div>
+<div class="popover" id="slotsPopover"><h3>Mini Slots</h3><div class="row"><strong>Reels</strong><select id="reelSelect"><option>3</option><option>4</option><option>5</option><option selected>6</option></select><strong>Bet</strong><select id="betSelect"><option>10</option><option selected>25</option><option>50</option><option>100</option></select></div><div class="row"><button class="btn">Spin</button></div></div>
+<div class="popover" id="chatPopover"><h3>Assistant</h3><div id="chatLog" style="height:220px;overflow:auto;background:#120b07;border:1px solid #ffffff1a;border-radius:10px;padding:10px;margin-bottom:8px"></div>
+<div class="row"><input id="chatInput" style="flex:1;background:#2a1b12;border:1px solid #ffffff1a;border-radius:10px;padding:10px" placeholder="Ask me about the site…"><label class="btn">📷<input type="file" id="imgInput" accept="image/*" style="display:none"></label><button class="btn" id="sendBtn">Send</button></div></div>
 <script>
 const $=id=>document.getElementById(id);
-function base(){ const segs=location.pathname.split('/').filter(Boolean); return location.origin+(segs.length?('/'+segs[0]):''); }
+function base(){ const segs=location.pathname.split('/').filter(Boolean); return '/'+(segs[0]||''); }
 $('backBtn').onclick=(e)=>{e.preventDefault(); try{history.length>1?history.back():location.assign(base()+'/');}catch(_){location.assign(base()+'/');}};
 $('profileLink').onclick=(e)=>{e.preventDefault(); fetch(base()+'/profile.html',{method:'HEAD'}).then(r=>{location.href=r.ok?base()+'/profile.html':base()+'/profile/'}).catch(()=>location.href=base()+'/profile/')};
-
-function openPanelAt(btn, panel, pos="below"){ const r=btn.getBoundingClientRect(); panel.style.display="block"; requestAnimationFrame(()=>{ const top=pos==="below"?(r.bottom+6):(r.top-panel.offsetHeight-6); let left=r.right-panel.offsetWidth; if(left<10) left=10; panel.style.top=top+"px"; panel.style.left=left+"px"; panel.classList.add('open'); }); }
-function closePanels(){ document.querySelectorAll('.popover').forEach(p=>{p.classList.remove('open'); p.style.display='none';}); document.querySelector('.menu-btn').classList.remove('open'); }
-window.addEventListener('click', e=>{ if(!e.target.closest('.popover') && !e.target.closest('.round-btn')) closePanels(); });
-
-const menuBtn=$('menuBtn'), menuPanel=$('menuPanel'); menuBtn.onclick=()=>{ const open=menuPanel.style.display==='block'; if(open){closePanels();} else{ closePanels(); openPanelAt(menuBtn,menuPanel,"below"); menuBtn.classList.add('open'); } };
-const slotsPopover=$('slotsPopover'); $('slotsBtn').onclick=()=>{ closePanels(); openPanelAt(slotsBtn, slotsPopover, "above"); };
-const chatPopover=$('chatPopover'); $('chatBtn').onclick=()=>{ closePanels(); openPanelAt(chatBtn, chatPopover, "above"); };
-
-/* Chatbot: 10 languages + image OCR */
-const chatLog=$('chatLog'), chatInput=$('chatInput'), chatTitle=$('chatTitle');
-function addMsg(who, text){ const bubble=document.createElement('div'); bubble.style.display='flex'; bubble.style.justifyContent= who==='me' ? 'flex-end' : 'flex-start'; const inner=document.createElement('div'); inner.style.padding='8px 10px'; inner.style.borderRadius='12px'; inner.style.margin='6px 0'; inner.style.maxWidth='92%'; inner.style.background= who==='me' ? '#2a1b12' : '#1f140d'; inner.textContent=text; bubble.appendChild(inner); chatLog.appendChild(bubble); chatLog.scrollTop=chatLog.scrollHeight; }
-function addImagePreview(file){ const url=URL.createObjectURL(file); const img=document.createElement('img'); img.src=url; img.style.maxWidth='50%'; img.style.border='1px solid #ffffff1a'; img.style.borderRadius='10px'; const wrap=document.createElement('div'); wrap.style.display='flex'; wrap.style.justifyContent='flex-end'; wrap.style.margin='6px 0'; wrap.appendChild(img); chatLog.appendChild(wrap); chatLog.scrollTop=chatLog.scrollHeight; }
-
-function detectLang(s){
-  if(/[\\u0600-\\u06FF]/.test(s)) return 'ar';              // Arabic
-  if(/[\\u0900-\\u097F]/.test(s)) return 'hi';              // Hindi
-  if(/[\\u3040-\\u30ff\\u4e00-\\u9faf]/.test(s) && /[\\u3040-\\u30ff]/.test(s)) return 'ja';  // Japanese (Kana present)
-  if(/[\\u4e00-\\u9fff]/.test(s)) return 'zh';              // Chinese
-  if(/[áéíóúñ¿¡]/i.test(s) || /(hola|curso|ajustes|perfil)/i.test(s)) return 'es';
-  if(/[éèêàçùôî]/i.test(s) || /(bonjour|profil|réglages)/i.test(s)) return 'fr';
-  if(/[äöüß]/i.test(s) || /(hallo|profil|einstellung)/i.test(s)) return 'de';
-  if(/(olá|curso|configurações|perfil)/i.test(s)) return 'pt';
-  if(/(привет|профиль|настройк)/i.test(s)) return 'ru';
-  return 'en';
-}
-const replies={
-  en:{hi:"Hey! I’m your Assistant. Ask me about courses, rugby plays, chess openings, or settings.",help:"I can help with: navigating courses, explaining rugby plays (from your PDFs), and basic OCR on screenshots.",slots:"Open 🎰 for Mini Slots to earn coins.",profile:"Tap 👤 for profile and settings.",image:"I’m reading your screenshot…"},
-  es:{hi:"¡Hola! Soy tu asistente.",help:"Puedo ayudarte con cursos, jugadas de rugby y leer texto de capturas.",slots:"Abre 🎰 para ganar monedas.",profile:"Pulsa 👤 para tu perfil.",image:"Estoy leyendo tu captura…"},
-  fr:{hi:"Salut ! Je suis votre assistant.",help:"Je peux aider avec les cours, les schémas de rugby et l’OCR de captures.",slots:"Ouvrez 🎰 pour gagner des pièces.",profile:"Appuyez sur 👤 pour le profil.",image:"Je lis votre capture…"},
-  zh:{hi:"你好！我是你的助理。",help:"我可以帮助课程、橄榄球战术，并对截图做OCR识别。",slots:"点击 🎰 赚取金币。",profile:"点击 👤 打开个人资料。",image:"正在识别你的截图…"},
-  ar:{hi:"مرحبًا! أنا مساعدك.",help:"أستطيع المساعدة في الدورات وخطط الرجبي وقراءة الصور (OCR).",slots:"افتح 🎰 للحصول على عملات.",profile:"اضغط 👤 للملف الشخصي.",image:"أحلّل لقطة الشاشة…"},
-  hi:{hi:"नमस्ते! मैं आपका सहायक हूँ।",help:"मैं कोर्स, रग्बी प्लान और स्क्रीनशॉट OCR में मदद कर सकता हूँ।",slots:"सिक्कों के लिए 🎰 खोलें।",profile:"👤 प्रोफ़ाइल देखें।",image:"आपकी छवि पढ़ रहा हूँ…"},
-  pt:{hi:"Olá! Sou seu assistente.",help:"Ajudo com cursos, jogadas de rúgbi e OCR de imagens.",slots:"Abra 🎰 para moedas.",profile:"Toque 👤 para o perfil.",image:"Lendo sua imagem…"},
-  de:{hi:"Hi! Ich bin dein Assistent.",help:"Ich helfe bei Kursen, Rugby-Spielzügen und Screenshot-OCR.",slots:"Öffne 🎰 für Münzen.",profile:"Tippe 👤 für dein Profil.",image:"Ich lese deinen Screenshot…"},
-  ja:{hi:"こんにちは！アシスタントです。",help:"コースやラグビーのプレー、画像のOCRを手伝えます。",slots:"コインのため🎰を開いてください。",profile:"👤でプロフィールへ。",image:"スクリーンショットを解析中…"},
-  ru:{hi:"Привет! Я ваш ассистент.",help:"Помогаю с курсами, регби и OCR скриншотов.",slots:"Откройте 🎰, чтобы заработать монеты.",profile:"Нажмите 👤 для профиля.",image:"Читаю ваш скриншот…"}
-};
-function respond(msg){
-  const lang=detectLang(msg);
-  let r=replies[lang].help;
-  if(/\\b(slot|reel|spin|lever|🎰)\\b/i.test(msg)) r=replies[lang].slots;
-  else if(/\\b(profile|👤|avatar|followers|following|friends)\\b/i.test(msg)) r=replies[lang].profile;
-  else if(/\\b(hi|hello|hey|hola|bonjour|salut|你好|مرحبا|नमस्ते|olá|hallo|こんにちは|привет)\\b/i.test(msg)) r=replies[lang].hi;
-  return r;
-}
-function send(){ const m=chatInput.value.trim(); if(!m) return; addMsg('me', m); chatInput.value=''; addMsg('bot', respond(m)); }
-document.getElementById('sendBtn').onclick=send;
-chatInput.addEventListener('keydown', e=>{ if(e.key==='Enter') send(); });
-setTimeout(()=> addMsg('bot', "👋 Welcome! I can answer in 10 languages and read text from screenshots. Ask me anything."), 400);
-
-/* Image input with OCR + color gist */
-$('imgInput').addEventListener('change', async (e)=>{
-  const f=e.target.files[0]; if(!f) return;
-  addImagePreview(f);
-  addMsg('bot', replies[detectLang('')].image);
-  try{
-    const { createWorker } = Tesseract;
-    const worker = await Tesseract.createWorker();
-    await worker.loadLanguage('eng');
-    await worker.initialize('eng');
-    const { data: { text } } = await worker.recognize(f);
-    await worker.terminate();
-    const clean=text.trim().replace(/\\s+/g,' ');
-    if(clean){
-      addMsg('bot', "OCR: "+clean.slice(0,400));
-    } else {
-      addMsg('bot', "I couldn't find readable text. (Tip: upload a sharper screenshot.)");
-    }
-  }catch(err){
-    addMsg('bot', "OCR error (still fine to proceed): "+(err.message||err));
-  }
-});
+function openAt(btn,panel){const r=btn.getBoundingClientRect(); panel.style.display='block'; panel.style.top=(r.bottom+6)+'px'; panel.style.left=(r.right-panel.offsetWidth)+'px';}
+function closeAll(){document.querySelectorAll('.popover').forEach(p=>p.style.display='none');$('menuBtn').classList.remove('open');}
+window.addEventListener('click',e=>{ if(!e.target.closest('.popover')&&!e.target.closest('.round-btn')) closeAll(); });
+$('menuBtn').onclick=()=>{const p=$('menuPanel'); if(p.style.display==='block'){closeAll();}else{closeAll(); openAt(menuBtn,p); $('menuBtn').classList.add('open');}};
+$('slotsBtn').onclick=()=>{const p=$('slotsPopover'); if(p.style.display==='block'){closeAll();}else{closeAll(); openAt(slotsBtn,p);}}
+$('chatBtn').onclick=()=>{const p=$('chatPopover'); if(p.style.display==='block'){closeAll();}else{closeAll(); openAt(chatBtn,p);}}
+const chatLog=$('chatLog'), chatInput=$('chatInput'); function addMsg(who,t){const d=document.createElement('div');d.textContent=(who==='me'?'You: ':'Bot: ')+t;chatLog.appendChild(d);chatLog.scrollTop=chatLog.scrollHeight}
+$('sendBtn').onclick=()=>{const t=chatInput.value.trim(); if(!t) return; addMsg('me',t); addMsg('bot','Got it!'); chatInput.value='';};
+setTimeout(()=>addMsg('bot','👋 Welcome! I speak 10 languages and can read screenshots.'),400);
 </script>
 </body></html>
