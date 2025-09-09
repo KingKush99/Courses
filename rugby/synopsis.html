@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Offensive Coordinator</title>
+<title>Rugby • Synopsis</title>
 <style>
   :root{ --fg:#fff; --bg1:#0b0b0f; --bg2:#1b0b00; --bg3:#3a0c00; --panel:#1a0f0a; --brand:#ff6b00; --muted:#ffd9b3; }
   *{box-sizing:border-box} html,body{height:100%}
@@ -57,21 +57,20 @@
 <a class="back-fab" href="#" id="backBtn">← Back</a>
 
 <main class="wrap">
-  <div style="max-width:900px; margin:0 auto; text-align:left;">
-    <h1>Offensive Coordinator</h1>
-    <div style="background:var(--panel); border:1px solid #ffffff1a; border-radius:16px; padding:16px;">
-      <p>Welcome to the Offensive Coordinator course. Adjust your progress below; it will sync to your Profile.</p>
-      <div class="row"><label for="p">Progress</label><input id="p" type="range" min="0" max="100" value="0"><span id="pv">0%</span></div>
-      <div style="height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px;"><div id="bar" style="height:100%;width:0%;background:#ffd166"></div></div>
-    </div>
+  <div style="max-width:1000px; margin:0 auto; text-align:left;">
+    <h1>Rugby • Synopsis</h1>
+    <p>High‑level overview of your backline patterns and decision trees. Use this as a refresher before quizzes.</p>
+    <ul style="line-height:1.6">
+      <li><strong>X/Switch</strong> and <strong>Swap</strong> provide layered options off 10 with 12/13 acting as crash or pull decoys.</li>
+      <li><strong>MGM</strong> balances inside vs. outside crashes, with a pull to 11 to attack width when the edge is light.</li>
+      <li><strong>M1 (Miss 1)</strong> creates a seam via a skip to 13, then loop to 12 or an inside tip to 11.</li>
+      <li><strong>Express</strong> lets 12 threaten 10’s channel: crash, tight 12–13, or pull behind 13 to go wide.</li>
+      <li><strong>Wing In</strong> overloads the 10 channel from 9; adapt based on D shape (11, 10, or 13 crash).</li>
+      <li><strong>2–4 Switch</strong> uses drift decoys by 10/12 to free a 10–13 switch or go back-door to 12.</li>
+    </ul>
+    <p style="opacity:.85">These summaries are distilled from your documents and should reflect your team’s actual options.</p>
   </div>
 </main>
-<script>
-  const key='progress_offensive-coordinator'; function load(){ const v=parseInt(localStorage.getItem(key)||'0',10); p.value=v; pv.textContent=v+'%'; bar.style.width=v+'%'; }
-  function save(){ const v=parseInt(p.value,10); localStorage.setItem(key,String(v)); pv.textContent=v+'%'; bar.style.width=v+'%'; }
-  const p=document.getElementById('p'), pv=document.getElementById('pv'), bar=document.getElementById('bar');
-  p.addEventListener('input', save); load();
-</script>
 
 <!-- Mini Slots -->
 <div class="popover" id="slotsPopover" role="dialog" aria-label="Mini Slots">

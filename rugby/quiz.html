@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Offensive Coordinator</title>
+<title>Rugby • Quizzes</title>
 <style>
   :root{ --fg:#fff; --bg1:#0b0b0f; --bg2:#1b0b00; --bg3:#3a0c00; --panel:#1a0f0a; --brand:#ff6b00; --muted:#ffd9b3; }
   *{box-sizing:border-box} html,body{height:100%}
@@ -58,19 +58,46 @@
 
 <main class="wrap">
   <div style="max-width:900px; margin:0 auto; text-align:left;">
-    <h1>Offensive Coordinator</h1>
+    <h1>Rugby • Quizzes</h1>
     <div style="background:var(--panel); border:1px solid #ffffff1a; border-radius:16px; padding:16px;">
-      <p>Welcome to the Offensive Coordinator course. Adjust your progress below; it will sync to your Profile.</p>
-      <div class="row"><label for="p">Progress</label><input id="p" type="range" min="0" max="100" value="0"><span id="pv">0%</span></div>
-      <div style="height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px;"><div id="bar" style="height:100%;width:0%;background:#ffd166"></div></div>
+      <h3>Quick Check</h3>
+      <ol style="line-height:1.8">
+        <li>In <em>MGM</em>, which option attacks widest?
+          <div><label><input type="radio" name="q1" value="1"> 10–12 inside crash</label></div>
+          <div><label><input type="radio" name="q1" value="2"> 10–13 outside crash</label></div>
+          <div><label><input type="radio" name="q1" value="3"> 10–11 pull option</label></div>
+        </li>
+        <li>In <em>Swap</em>, which option is the 2nd‑level crash?
+          <div><label><input type="radio" name="q2" value="0"> 10–13 crash on D12</label></div>
+          <div><label><input type="radio" name="q2" value="1"> 10–12 pull behind 13</label></div>
+          <div><label><input type="radio" name="q2" value="2"> 12–14 crash</label></div>
+          <div><label><input type="radio" name="q2" value="3"> 12–15 wide option</label></div>
+        </li>
+        <li>In <em>Express</em>, which option goes wide via a pull?
+          <div><label><input type="radio" name="q3" value="0"> 12 crash on D10</label></div>
+          <div><label><input type="radio" name="q3" value="1"> 12–13 tight crash</label></div>
+          <div><label><input type="radio" name="q3" value="2"> 12–10 pull behind 13</label></div>
+        </li>
+      </ol>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <button class="btn" id="gradeBtn">Grade</button>
+        <div id="result"></div>
+      </div>
     </div>
   </div>
 </main>
 <script>
-  const key='progress_offensive-coordinator'; function load(){ const v=parseInt(localStorage.getItem(key)||'0',10); p.value=v; pv.textContent=v+'%'; bar.style.width=v+'%'; }
-  function save(){ const v=parseInt(p.value,10); localStorage.setItem(key,String(v)); pv.textContent=v+'%'; bar.style.width=v+'%'; }
-  const p=document.getElementById('p'), pv=document.getElementById('pv'), bar=document.getElementById('bar');
-  p.addEventListener('input', save); load();
+  function grade(){ 
+    const a1=document.querySelector('input[name="q1"]:checked')?.value;
+    const a2=document.querySelector('input[name="q2"]:checked')?.value;
+    const a3=document.querySelector('input[name="q3"]:checked')?.value;
+    let score=0; if(a1==='3')score++; if(a2==='2')score++; if(a3==='2')score++;
+    const pct=Math.round((score/3)*100);
+    document.getElementById('result').textContent=`Score: ${pct}%`;
+    const key='progress_rugby'; const prev=parseInt(localStorage.getItem(key)||'0',10);
+    const next=Math.max(prev, pct); localStorage.setItem(key, String(next));
+  }
+  document.getElementById('gradeBtn').addEventListener('click', grade);
 </script>
 
 <!-- Mini Slots -->
