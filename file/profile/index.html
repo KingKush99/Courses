@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Profile</title>
+<style>
+  :root{ --fg:#fffdf7; --panel:#1a0f0a; --accent:#ffd166; --fire:#ff6b00; }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{ margin:0; font-family: system-ui, Segoe UI, Roboto, Arial; color:var(--fg);
+        background: radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, #0b0b0f, #1b0b00 40%, #3a0c00);}
+  a{ color:var(--accent); }
+  .wrap{ max-width:1100px; margin:0 auto; padding:20px; }
+
+  .profile-top{ position:relative; display:grid; grid-template-columns: 110px 1fr auto; gap:16px; align-items:center; background:var(--panel); border:1px solid #ffffff1a; border-radius:16px; padding:14px; }
+  .avatar{ width:102px; height:102px; border-radius:50%; overflow:hidden; border:2px solid #ffffff3a; background:#2a1b12; display:grid; place-items:center; }
+  .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .editable{ display:flex; flex-direction:column; gap:8px; }
+  .username{ font-size:1.4rem; font-weight:800; border:none; background:transparent; color:#fff; }
+  .bio{ opacity:.9; background:#140e0a; border:1px solid #ffffff1f; border-radius:10px; padding:6px 8px; color:#ffd9b3; }
+  .gear{ font-size:22px; cursor:pointer; background:#2a1b12; border:1px solid #ffffff1a; border-radius:50%; width:40px; height:40px; display:grid; place-items:center; }
+
+  .stats{ display:flex; gap:16px; margin:14px 0; }
+  .stat{ background:var(--panel); border:1px solid #ffffff1a; border-radius:12px; padding:10px 12px; cursor:pointer; position:relative; min-width:160px; }
+  .stat .num{ font-size:1.2rem; font-weight:800; margin-right:6px; }
+  .dropdown{ position:absolute; top:calc(100% + 6px); left:0; right:0; background:#120b07; border:1px solid #ffffff1a; border-radius:12px; padding:8px; display:none; z-index:20; }
+  .dropdown input{ width:100%; margin-bottom:6px; border-radius:8px; border:1px solid #ffffff1a; background:#1a0f0a; color:#fff; padding:6px 8px; }
+  .dropdown .list{ max-height:220px; overflow:auto; }
+  .dropdown .item{ padding:6px 8px; border-radius:8px; }
+  .dropdown .item:hover{ background:#2a1b12; }
+
+  .card{ background:var(--panel); border:1px solid #ffffff1a; border-radius:16px; padding:14px; margin-top:16px; }
+
+  dialog{ width:min(640px, 94vw); border:none; border-radius:14px; padding:0; overflow:hidden; background:#1a0f0a; color:#ffd9b3; }
+  dialog::backdrop{ background:#0008; }
+  .modal-head{ display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #ffffff1a; }
+  .modal-body{ padding:12px; display:grid; gap:12px; grid-template-columns: 1fr; }
+  .section{ border:1px solid #ffffff1a; border-radius:10px; padding:10px; background:#140e0a; }
+  .section h4{ margin:0 0 6px; }
+  .opt-row{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin:6px 0; }
+  .opt-row select, .opt-row input[type="text"]{ width:60%; border-radius:8px; border:1px solid #ffffff1a; background:#1a0f0a; color:#fff; padding:6px 8px; }
+  .avatar-grid{ display:grid; grid-template-columns: repeat(5, 1fr); gap:8px; }
+  .avatar-grid button{ aspect-ratio:1/1; border-radius:50%; border:2px solid transparent; overflow:hidden; background:#2a1b12; cursor:pointer; }
+  .avatar-grid button.active{ border-color: #ff6b00; box-shadow:0 0 0 2px #ff6b0040; }
+  .close{ background:#2a1b12; border:1px solid #ffffff1a; padding:8px 12px; border-radius:10px; color:#fff; cursor:pointer; }
+
+  .small{ opacity:.85; }
+  .progress{ height:12px; background:#2a1b12; border-radius:999px; overflow:hidden; border:1px solid #ffffff1a; }
+  .bar{ height:100%; width:0%; transition:width .15s linear, background .15s linear; }
+  .bar.red{ background:#ff3b30; }
+  .bar.yellow{ background:#ffd166; }
+  .bar.green{ background:#1cc862; }
+
+  #fxCanvas{ position:fixed; inset:0; pointer-events:none; display:none; z-index:4000; }
+  #congrats{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:4100; }
+  #congrats dialog{ width:min(420px,90vw); }
+</style>
+</head>
+<body>
+  <canvas id="fxCanvas"></canvas>
+  <div id="congrats"><dialog open id="congratsDlg"><div style="padding:16px;">
+    <h3 id="congratsTitle">Congratulations!</h3>
+    <p id="congratsMsg">You completed 100%.</p>
+    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:10px;">
+      <button id="yesReset" class="close">Yes, reset</button>
+      <button id="noKeep" class="close">No, keep</button>
+    </div>
+  </div></dialog></div>
+
+  <div class="wrap">
+    <div class="profile-top">
+      <div class="avatar"><img id="avatarImg" alt="Avatar"></div>
+      <div class="editable">
+        <input id="username" class="username" value="New User">
+        <input id="bio" class="bio" placeholder="Bio/About (optional)" />
+      </div>
+      <button id="settingsBtn" class="gear" title="Settings">⚙️</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat" id="followersBox"><span class="num" id="followersNum">120</span>Followers
+        <div class="dropdown">
+          <input type="text" placeholder="Search…" class="search">
+          <div class="list" id="followersList"></div>
+        </div>
+      </div>
+      <div class="stat" id="followingBox"><span class="num" id="followingNum">75</span>Following
+        <div class="dropdown">
+          <input type="text" placeholder="Search…" class="search">
+          <div class="list" id="followingList"></div>
+        </div>
+      </div>
+      <div class="stat" id="friendsBox"><span class="num" id="friendsNum">32</span>Friends
+        <div class="dropdown">
+          <input type="text" placeholder="Search…" class="search">
+          <div class="list" id="friendsList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Course Progress</h3>
+      <div id="courses"></div>
+      <div class="small"><a href="../index.html">← Back to Courses</a></div>
+    </div>
+  </div>
+
+  <dialog id="settingsModal">
+    <div class="modal-head">
+      <h3>Profile Settings</h3>
+      <button class="close" id="closeModal">Close</button>
+    </div>
+    <div class="modal-body">
+      <div class="section">
+        <h4>Profile</h4>
+        <div class="opt-row"><label>Username</label><input type="text" id="uName"></div>
+        <div class="opt-row"><label>Bio</label><input type="text" id="uBio"></div>
+        <div class="opt-row"><label>Theme</label><select id="themeMode"><option>Dark</option><option>Light</option><option>High Contrast</option></select></div>
+        <div class="opt-row" style="align-items:flex-start;"><label>Avatar</label><div class="avatar-grid" id="avatarGrid"></div></div>
+      </div>
+      <div class="section">
+        <h4>Visibility</h4>
+        <div class="opt-row"><label>Followers list</label><select id="visFollowers"><option>Show</option><option>Hide</option></select></div>
+        <div class="opt-row"><label>Following list</label><select id="visFollowing"><option>Show</option><option>Hide</option></select></div>
+        <div class="opt-row"><label>Friends list</label><select id="visFriends"><option>Show</option><option>Hide</option></select></div>
+        <div class="opt-row"><label>Search within lists</label><select id="visSearch"><option>Enable</option><option>Disable</option></select></div>
+        <div class="opt-row"><label>Profile visibility</label><select id="profVis"><option>Public</option><option>Private</option></select></div>
+        <div class="opt-row"><label>Text size</label><select id="textSize"><option>Default</option><option>Small</option><option>Large</option></select></div>
+      </div>
+    </div>
+  </dialog>
+
+<script>
+const $ = (id)=>document.getElementById(id);
+function showDialog(d){ if(d.showModal){ d.showModal(); } else { d.setAttribute('open',''); d.style.display='block'; } }
+function closeDialog(d){ if(d.close){ d.close(); } else { d.style.display='none'; d.removeAttribute('open'); } }
+
+const ALL_AVATARS = Array.from({length:20}, (_,i)=>`https://api.dicebear.com/7.x/thumbs/svg?seed=${i+1}`);
+let currentAvatar = localStorage.getItem('pf_avatar') || ALL_AVATARS[0];
+$('avatarImg').src = currentAvatar;
+$('username').value = localStorage.getItem('pf_username') || 'New User';
+$('bio').value = localStorage.getItem('pf_bio') || '';
+$('username').addEventListener('input', ()=> localStorage.setItem('pf_username', $('username').value));
+$('bio').addEventListener('input', ()=> localStorage.setItem('pf_bio', $('bio').value));
+
+function defaultNames(n, prefix){ return Array.from({length:n}, (_,i)=> (prefix||'User')+' '+(i+1)); }
+let followers = JSON.parse(localStorage.getItem('followers_list')||'null') || defaultNames(120,'Follower');
+let following = JSON.parse(localStorage.getItem('following_list')||'null') || defaultNames(75,'Following');
+let friends   = JSON.parse(localStorage.getItem('friends_list')  ||'null') || defaultNames(32,'Friend');
+localStorage.setItem('followers_list', JSON.stringify(followers));
+localStorage.setItem('following_list', JSON.stringify(following));
+localStorage.setItem('friends_list',   JSON.stringify(friends));
+$('followersNum').textContent = followers.length;
+$('followingNum').textContent = following.length;
+$('friendsNum').textContent   = friends.length;
+
+function setupStat(boxId, dataArr, visKey){
+  const box = $(boxId);
+  const dd  = box.querySelector('.dropdown');
+  const search = dd.querySelector('.search');
+  const list   = dd.querySelector('.list');
+  function render(filter){
+    list.innerHTML='';
+    (dataArr.filter(n=> !filter || n.toLowerCase().includes(filter.toLowerCase()))).forEach(n=>{
+      const it=document.createElement('div'); it.className='item'; it.textContent=n; list.appendChild(it);
+    });
+  }
+  box.addEventListener('click', ()=>{
+    if(localStorage.getItem('vis_'+visKey)==='Hide') return;
+    const open = dd.style.display==='block';
+    document.querySelectorAll('.dropdown').forEach(el=> el.style.display='none');
+    if(!open){
+      dd.style.display='block';
+      search.style.display = (localStorage.getItem('vis_search')==='Disable') ? 'none' : 'block';
+      render('');
+    }
+  });
+  search.addEventListener('input', ()=> render(search.value));
+}
+setupStat('followersBox',followers,'followers');
+setupStat('followingBox',following,'following');
+setupStat('friendsBox',friends,'friends');
+
+const modal = $('settingsModal');
+$('settingsBtn').onclick = ()=>{
+  $('uName').value = $('username').value;
+  $('uBio').value  = $('bio').value;
+  ['visFollowers','visFollowing','visFriends','visSearch','profVis','textSize','themeMode'].forEach(id=>{
+    const val = localStorage.getItem(id) || $(id).value; $(id).value = val;
+  });
+  const grid = $('avatarGrid'); grid.innerHTML='';
+  ALL_AVATARS.forEach(url=>{
+    const b=document.createElement('button'); const img=new Image(); img.src=url; img.alt='avatar'; img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover'; b.appendChild(img);
+    if(url===currentAvatar) b.classList.add('active');
+    b.onclick=()=>{ currentAvatar=url; localStorage.setItem('pf_avatar', url); document.querySelectorAll('.avatar-grid button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); $('avatarImg').src=url; };
+    grid.appendChild(b);
+  });
+  showDialog(modal);
+};
+$('closeModal').onclick = ()=>{
+  $('username').value = $('uName').value;
+  $('bio').value = $('uBio').value;
+  localStorage.setItem('pf_username', $('username').value);
+  localStorage.setItem('pf_bio', $('bio').value);
+  ['visFollowers','visFollowing','visFriends','visSearch','profVis','textSize','themeMode'].forEach(id=> localStorage.setItem(id, $(id).value));
+  applyAppearance();
+  closeDialog(modal);
+};
+
+function applyAppearance(){
+  const theme = localStorage.getItem('themeMode') || 'Dark';
+  const size = localStorage.getItem('textSize') || 'Default';
+  if(theme==='Light'){ document.body.style.background='linear-gradient(120deg,#f6f6f6,#e8e8e8)'; document.body.style.color='#141414'; }
+  else if(theme==='High Contrast'){ document.body.style.filter='contrast(1.25)'; }
+  else { document.body.style.background='radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, #0b0b0f, #1b0b00 40%, #3a0c00)'; document.body.style.filter=''; document.body.style.color='#fff'; }
+  document.documentElement.style.fontSize = (size==='Small'?'14px': size==='Large'?'18px':'16px');
+}
+applyAppearance();
+
+const courses = ['Chess','Coding Evolution','Music Maker','Offensive Coordinator','Quantum','Rugby','Poker'];
+const coursesDiv = $('courses');
+function keyFor(name){ return 'progress_'+name.toLowerCase().replace(/\s+/g,'-'); }
+function loadProgress(name){ return parseInt(localStorage.getItem(keyFor(name)) || '0',10); }
+function saveProgress(name,val){ localStorage.setItem(keyFor(name), String(val)); }
+
+function barColorClass(v){ if(v>=100) return 'green'; if(v<=25) return 'red'; if(v<75) return 'yellow'; return 'yellow'; }
+
+let prevAll100 = courses.every(n=> loadProgress(n)===100);
+
+function renderProgress(){
+  coursesDiv.innerHTML='';
+  courses.forEach(name=>{
+    const val = loadProgress(name);
+    const remaining = 100 - val;
+    const wrap = document.createElement('div'); wrap.style.margin='12px 0';
+    wrap.innerHTML = `<div class="row"><strong>${name}</strong><span>${val}% complete • ${remaining}% to go</span></div>
+      <div class="progress"><div class="bar ${barColorClass(val)}" style="width:${val}%"></div></div>
+      <div class="row"><label class="small">Adjust</label><input type="range" min="0" max="100" value="${val}" data-name="${name}" /></div>`;
+    coursesDiv.appendChild(wrap);
+  });
+  coursesDiv.querySelectorAll('input[type="range"]').forEach(r=>{
+    r.addEventListener('input', onProgressInput);
+  });
+}
+renderProgress();
+
+const fxCanvas = $('fxCanvas'); const ctx = fxCanvas.getContext('2d');
+function fitCanvas(){ fxCanvas.width=innerWidth; fxCanvas.height=innerHeight; }
+addEventListener('resize', fitCanvas); fitCanvas();
+
+function confetti(durationSec){
+  fxCanvas.style.display='block'; const pieces=[]; const colors=['#ff4757','#ffa502','#2ed573','#1e90ff','#a55eea','#ff6b6b','#ffd166','#1cc862'];
+  const N=200;
+  for(let i=0;i<N;i++){ pieces.push({x:Math.random()*fxCanvas.width,y:-20-Math.random()*300,vy:2+Math.random()*3,vx:(Math.random()-0.5)*2,size:5+Math.random()*6,color:colors[i%colors.length],rot:Math.random()*Math.PI}); }
+  const t0=performance.now();
+  function step(t){
+    const elapsed=(t-t0)/1000; ctx.clearRect(0,0,fxCanvas.width,fxCanvas.height);
+    pieces.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=0.05; p.rot+=0.1; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=p.color; ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size); ctx.restore(); });
+    if(elapsed<durationSec){ requestAnimationFrame(step); } else { ctx.clearRect(0,0,fxCanvas.width,fxCanvas.height); fxCanvas.style.display='none'; }
+  }
+  requestAnimationFrame(step);
+}
+function fireworks(durationSec){
+  fxCanvas.style.display='block';
+  const rockets=[]; const particles=[];
+  const gravity=0.03; const friction=0.995;
+  function launch(){
+    const x = Math.random()*fxCanvas.width*0.9 + fxCanvas.width*0.05;
+    const y = fxCanvas.height + 10;
+    const targetY = Math.random()*fxCanvas.height*0.4 + fxCanvas.height*0.1;
+    const vy = -(4.0 + Math.random()*2.5);
+    const vx = (Math.random()-0.5)*0.6;
+    rockets.push({x,y,vx,vy,targetY});
+  }
+  function explode(x,y){
+    const N=90;
+    for(let i=0;i<N;i++){
+      const angle=Math.random()*Math.PI*2;
+      const speed=1.5+Math.random()*3.5;
+      const hue=Math.floor(Math.random()*360);
+      particles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:1,color:`hsl(${hue},100%,60%)`});
+    }
+  }
+  const t0=performance.now();
+  function step(t){
+    const elapsed=(t-t0)/1000;
+    if(Math.random()<0.12) launch();
+    ctx.fillStyle='rgba(0,0,0,0.2)'; ctx.fillRect(0,0,fxCanvas.width,fxCanvas.height);
+    for(let i=rockets.length-1;i>=0;i--){
+      const r=rockets[i]; r.x+=r.vx; r.y+=r.vy; r.vy+=gravity*0.4;
+      ctx.beginPath(); ctx.arc(r.x,r.y,2,0,Math.PI*2); ctx.fillStyle='#fff'; ctx.fill();
+      if(r.y<=r.targetY){ explode(r.x,r.y); rockets.splice(i,1); }
+    }
+    for(let i=particles.length-1;i>=0;i--){
+      const p=particles[i]; p.x+=p.vx; p.y+=p.vy; p.vy+=gravity; p.vx*=friction; p.vy*=friction; p.life-=0.01;
+      ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fillStyle=p.color; ctx.fill();
+      if(p.life<=0) particles.splice(i,1);
+    }
+    if(elapsed<durationSec){ requestAnimationFrame(step); } else { ctx.clearRect(0,0,fxCanvas.width,fxCanvas.height); fxCanvas.style.display='none'; }
+  }
+  requestAnimationFrame(step);
+}
+
+function onProgressInput(e){
+  const name = e.target.getAttribute('data-name');
+  const v = parseInt(e.target.value,10);
+  const bar = e.target.parentElement.previousElementSibling.querySelector('.bar');
+  bar.style.width = v + '%';
+  bar.className = 'bar ' + (v>=100? 'green' : v<=25 ? 'red' : 'yellow');
+  const infoSpan = e.target.parentElement.previousElementSibling.previousElementSibling.querySelector('span');
+  infoSpan.textContent = `${v}% complete • ${100-v}% to go`;
+  const was = loadProgress(name);
+  saveProgress(name, v);
+
+  if(v===100 && was<100){ celebrateCourse(name); }
+  const nowAll100 = courses.every(n=> loadProgress(n)===100);
+  if(nowAll100 && !prevAll100){ fireworks(15); } // 15 seconds
+  prevAll100 = nowAll100;
+}
+function celebrateCourse(courseName){
+  confetti(4);
+  $('congratsTitle').textContent = 'Congratulations!';
+  $('congratsMsg').textContent = `You completed 100% of the "${courseName}" course. Reset your progress?`;
+  document.getElementById('congrats').style.display='flex';
+  $('yesReset').onclick = ()=>{ localStorage.setItem(keyFor(courseName), '0'); document.getElementById('congrats').style.display='none'; renderProgress(); };
+  $('noKeep').onclick  = ()=>{ document.getElementById('congrats').style.display='none'; };
+}
+
+(function initModal(){
+  const grid = $('avatarGrid');
+  ALL_AVATARS.forEach(url=>{
+    const b=document.createElement('button'); const img=new Image(); img.src=url; img.alt='avatar'; img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover'; b.appendChild(img);
+    if(url===currentAvatar) b.classList.add('active');
+    b.onclick=()=>{ currentAvatar=url; localStorage.setItem('pf_avatar', url); document.querySelectorAll('.avatar-grid button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); $('avatarImg').src=url; };
+    grid.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>
