@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Poker Trainer — Quiz + Gameplay (Spaced Recall)</title>
+<style>
+  :root{
+    --bg:#0d4b3a; --panel:#0f5f4a; --accent:#ffd166; --ink:#f7fff7; --muted:#b8f2e6;
+    --good:#06d6a0; --bad:#ff6b6b; --ink2:#eefbf6;
+  }
+  *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+  body{margin:0;background:radial-gradient(100% 120% at 50% -10%, #198066 0%, var(--bg) 70%);color:var(--ink)}
+  header{padding:22px 16px;text-align:center}
+  h1{margin:0 0 6px;font-size:clamp(22px,4vw,34px)}
+  header p{margin:0;color:var(--muted)}
+  main{max-width:1020px;margin:18px auto 44px;padding:0 16px}
+  .wrap{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:16px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .tab{padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:#0a3e31;cursor:pointer;color:var(--ink)}
+  .tab.active{background:var(--accent);color:#1d1d1d;font-weight:700}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .pill{background:#0a3e31;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:6px 12px;font-size:12px;color:var(--muted)}
+  .card{background:var(--panel);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px;margin-top:12px}
+  .qnum{font-weight:700;color:var(--accent)}
+  .qtext{margin:.5rem 0 1rem;font-size:18px;line-height:1.35}
+  .choices{display:grid;gap:10px}
+  .choice{padding:12px 14px;background:#0b4a39;border:1px solid rgba(255,255,255,.14);border-radius:12px;cursor:pointer;text-align:left}
+  .choice:hover{filter:brightness(1.05)}
+  .choice.selected{outline:2px solid var(--accent);background:#0e5c48}
+  .controls{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap}
+  .btn{appearance:none;border:0;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer}
+  .btn.primary{background:var(--accent);color:#1c1c1c}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--ink)}
+  .btn:disabled{opacity:.6;cursor:not-allowed}
+  .feedback{margin-top:10px;padding:10px;border-radius:10px;display:none}
+  .good{background:rgba(6,214,160,.15);border:1px solid rgba(6,214,160,.7)}
+  .bad{background:rgba(255,107,107,.15);border:1px solid rgba(255,107,107,.7)}
+  .explain{color:var(--muted);margin-top:6px;font-size:14px}
+  .progress{height:10px;background:#0b3a2e;border-radius:999px;overflow:hidden}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,var(--good),#41e3b7);transition:width .25s ease}
+  footer{opacity:.75;font-size:12px;text-align:center;margin-top:12px}
+  .flex{display:flex;gap:12px;flex-wrap:wrap}
+  .chartArea{display:flex;gap:16px;flex-wrap:wrap}
+  .chartCard{background:#0b4a39;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px}
+  .chartCard h3{margin:0 0 6px;font-size:14px;color:var(--muted)}
+  .hint{font-size:13px;color:var(--muted);margin-top:6px}
+  .grid{display:grid;grid-template-columns:repeat(5, 60px);gap:8px;margin:6px 0}
+  .playingCard{width:60px;height:86px;border-radius:8px;background:#fff;color:#111;display:flex;align-items:center;justify-content:center;font-weight:700;position:relative}
+  .playingCard .suit{position:absolute;bottom:6px;right:6px;font-size:14px}
+  .red{color:#c2181a}
+  .greenPill{background:rgba(6,214,160,.15);border:1px solid rgba(6,214,160,.6);border-radius:999px;padding:6px 10px;color:#bff5e4;font-size:12px}
+  .share{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .tipbox{background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.25);padding:10px;border-radius:12px;margin-top:10px;color:var(--ink2)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Poker Trainer — Quiz + Gameplay</h1>
+  <p>Master hand rankings with spaced recall, visual charts, and playable practice hands.</p>
+</header>
+<main>
+  <div class="wrap">
+    <div class="tabs">
+      <button class="tab active" id="tabQuiz">Quiz</button>
+      <button class="tab" id="tabPlay">Gameplay</button>
+      <button class="tab" id="tabStats">Charts</button>
+    </div>
+
+    <!-- SHARE CONTROLS -->
+    <div class="card share">
+      <span class="greenPill">Single-file | No install</span>
+      <button class="btn ghost" id="shareBtn">Copy Share Link</button>
+      <small id="shareNote" class="hint">Tip: host this file on GitHub Pages / Netlify so friends can open it online.</small>
+    </div>
+
+    <!-- QUIZ MODE -->
+    <section id="quizSec">
+      <div class="row" style="margin-top:10px">
+        <span class="pill" id="leftPill">Remaining: —</span>
+        <span class="pill" id="scorePill">Score: 0</span>
+        <span class="pill" id="streakPill">Streak: 0</span>
+      </div>
+      <div class="card">
+        <div class="progress"><div class="bar" id="bar"></div></div>
+      </div>
+      <div class="card" id="qCard">
+        <div class="qnum" id="qnum">Question</div>
+        <div class="qtext" id="qtext">...</div>
+        <div id="qarea" class="choices"></div>
+        <div id="feedback" class="feedback"></div>
+        <div class="controls">
+          <button id="checkBtn" class="btn primary">Check</button>
+          <div>
+            <button id="skipBtn" class="btn ghost">Skip</button>
+            <button id="nextBtn" class="btn ghost" disabled>Next</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="done" style="display:none">
+        <h2 style="margin:0 0 8px">🎉 Completed!</h2>
+        <p>Final score: <b id="finalScore"></b></p>
+        <div class="flex">
+          <button class="btn primary" onclick="restart(true)">Play Again (reshuffle)</button>
+          <button class="btn ghost" onclick="switchTab('tabStats')">View Charts</button>
+          <button class="btn ghost" onclick="switchTab('tabPlay')">Practice Hands</button>
+        </div>
+        <details style="margin-top:12px">
+          <summary>Cheat sheet (rankings)</summary>
+          <ol>
+            <li>Royal Flush</li><li>Straight Flush</li><li>Four of a Kind</li><li>Full House</li><li>Flush</li>
+            <li>Straight</li><li>Three of a Kind</li><li>Two Pair</li><li>Pair</li><li>High Card</li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+    <!-- GAMEPLAY MODE -->
+    <section id="playSec" style="display:none">
+      <div class="card">
+        <h2 style="margin:0 0 8px">Deal a Hand — Identify the Category</h2>
+        <div class="grid" id="handGrid"></div>
+        <div class="choices" id="playChoices"></div>
+        <div class="controls">
+          <div class="flex">
+            <button class="btn primary" id="dealBtn">Deal / Next Hand</button>
+            <button class="btn ghost" id="hintBtn">Hint</button>
+          </div>
+          <span class="pill" id="playScore">Hands correct: 0</span>
+        </div>
+        <div class="tipbox" id="tipBox" style="display:none"></div>
+      </div>
+    </section>
+
+    <!-- STATS MODE -->
+    <section id="statsSec" style="display:none">
+      <div class="card">
+        <h2 style="margin:0 0 10px">Your Progress Charts</h2>
+        <div class="chartArea">
+          <div class="chartCard">
+            <h3>Accuracy by Topic</h3>
+            <svg id="topicChart" width="340" height="180" role="img" aria-label="Accuracy by topic"></svg>
+          </div>
+          <div class="chartCard">
+            <h3>Recent Streaks</h3>
+            <svg id="streakChart" width="340" height="180" role="img" aria-label="Recent streaks"></svg>
+          </div>
+        </div>
+        <div class="hint">Charts update live as you answer questions and play hands.</div>
+      </div>
+    </section>
+
+    <footer>Built for quick spaced-repetition practice + visual and hands-on learning.</footer>
+  </div>
+</main>
+
+<script>
+/* ----------------- Utilities & Seeded RNG (for share links) ----------------- */
+function $(id){ return document.getElementById(id); }
+function shuffle(arr, rng=Math.random){
+  for(let i=arr.length-1;i>0;i--){
+    const j = Math.floor(rng()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+// Seeded RNG (Mulberry32)
+function mulberry32(a){ return function(){ var t = a += 0x6D2B79F5; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; }}
+
+/* ----------------- Tabs & Share ----------------- */
+function switchTab(which){
+  ["tabQuiz","tabPlay","tabStats"].forEach(id=>$(id).classList.remove("active"));
+  ["quizSec","playSec","statsSec"].forEach(id=>$(id).style.display="none");
+  if(which==="tabQuiz"){ $("tabQuiz").classList.add("active"); $("quizSec").style.display="block"; }
+  if(which==="tabPlay"){ $("tabPlay").classList.add("active"); $("playSec").style.display="block"; }
+  if(which==="tabStats"){ $("tabStats").classList.add("active"); $("statsSec").style.display="block"; drawCharts(); }
+}
+$("tabQuiz").onclick = ()=>switchTab("tabQuiz");
+$("tabPlay").onclick = ()=>switchTab("tabPlay");
+$("tabStats").onclick = ()=>switchTab("tabStats");
+
+function copyShareLink(){
+  // encode seed + starting tab into URL hash for easy sharing
+  const data = {seed: state.seed, tab: document.querySelector(".tab.active")?.id || "tabQuiz"};
+  const hash = btoa(JSON.stringify(data));
+  const url = location.origin + location.pathname + "#" + hash;
+  navigator.clipboard.writeText(url).then(()=>{
+    $("shareNote").textContent = "Link copied! Share this URL. Host this file online so your friend can open it.";
+  }).catch(()=>{
+    $("shareNote").textContent = "Copy failed. You can still share this page URL with the hash.";
+  });
+}
+$("shareBtn").onclick = copyShareLink;
+
+function applyHash(){
+  try{
+    if(location.hash.length>1){
+      const decoded = JSON.parse(atob(location.hash.slice(1)));
+      if(decoded.seed) state.seed = decoded.seed|0;
+      if(decoded.tab) switchTab(decoded.tab);
+      reseed(state.seed);
+    }
+  }catch(e){ /* ignore */ }
+}
+
+/* ----------------- Question Bank (30 MC) ----------------- */
+function q(text, choices, answerIndex, explain, topic){
+  return {text, choices, answerIndex, explain, topic};
+}
+const QUESTIONS = [
+  // Definitions
+  q("Which hand is the best possible hand in poker?",
+    ["Straight Flush","Royal Flush","Four of a Kind","Full House"],1,
+    "Royal Flush = A‑K‑Q‑J‑10 all of one suit.","define"),
+  q("Five cards in sequence, all the same suit (non-royal).",
+    ["Flush","Straight Flush","Straight","High Card"],1,
+    "A straight that is also suited is a Straight Flush.","define"),
+  q("Hand with four cards of the same rank.",
+    ["Full House","Four of a Kind","Three of a Kind","Two Pair"],1,
+    "Also called quads.","define"),
+  q("Three of one rank plus two of another rank is a…",
+    ["Full House","Two Pair","Three of a Kind","Straight"],0,
+    "That's a Full House (a.k.a. boat).","define"),
+  q("Five cards same suit, not in sequence:",
+    ["Flush","Straight","Straight Flush","High Card"],0,
+    "Flush beats straight but loses to full house.","define"),
+  q("Five cards in sequence but not all the same suit:",
+    ["Straight","Flush","Straight Flush","High Card"],0,
+    "Sequence without same suit is a Straight.","define"),
+  q("Three cards of the same rank plus two unmatched kickers:",
+    ["Two Pair","Three of a Kind","Full House","Pair"],1,
+    "Three of a Kind (trips/set).","define"),
+  q("Two different pairs plus a fifth card:",
+    ["Two Pair","Pair","Full House","High Card"],0,
+    "Two Pair.","define"),
+  q("Exactly one pair with three kickers:",
+    ["Two Pair","Straight","Pair","High Card"],2,
+    "One Pair.","define"),
+  q("No pair, no straight, no flush:",
+    ["High Card","Pair","Straight","Two Pair"],0,
+    "High Card is the weakest category.","define"),
+
+  // Rankings & comparisons
+  q("Which beats a Straight but loses to Four of a Kind?",
+    ["Full House","Flush","Two Pair","Three of a Kind"],1,
+    "Straight < Flush < Full House < Four of a Kind.","rank"),
+  q("Pick the strongest among these:",
+    ["Two Pair","Straight","Three of a Kind","Flush"],3,
+    "Flush outranks Straight and Three of a Kind.","rank"),
+  q("Pick the weakest among these:",
+    ["Pair","High Card","Two Pair","Three of a Kind"],1,
+    "High Card is the lowest.","rank"),
+  q("Which beats Two Pair?",
+    ["Pair","High Card","Three of a Kind","None"],2,
+    "Trips beat Two Pair.","rank"),
+  q("Which loses to a Flush?",
+    ["Straight","Full House","Four of a Kind","Straight Flush"],0,
+    "Of these, only Straight is under Flush.","rank"),
+  q("Best choice on this list:",
+    ["Straight","Straight Flush","Four of a Kind","Full House"],1,
+    "Straight Flush outranks the rest.","rank"),
+  q("Full House is ranked…",
+    ["#2","#3","#4","#5"],2,
+    "RF #1, SF #2, Quads #3, Full House #4.","order"),
+  q("Flush is ranked…",
+    ["#4","#5","#6","#7"],1,
+    "Flush #5.","order"),
+  q("Straight is ranked…",
+    ["#4","#5","#6","#7"],2,
+    "Straight #6.","order"),
+  q("Pair is ranked…",
+    ["#7","#8","#9","#10"],2,
+    "Pair #9.","order"),
+
+  // Examples
+  q("Which example is a Straight Flush?",
+    ["J♠ 10♠ 9♠ 8♠ 7♠","K♦ K♣ K♥ K♠ 2♦","A♦ K♦ Q♦ J♦ 10♦","10♣ 10♦ 10♥ 7♦ 7♠"],0,
+    "All in order and same suit. (A♦K♦Q♦J♦10♦ is a Royal Flush).","example"),
+  q("Which example is a Royal Flush?",
+    ["A♦ K♦ Q♦ J♦ 10♦","A♣ A♦ A♥ K♣ K♥","5♣ 6♣ 7♣ 8♣ 9♣","A♠ A♦ 3♠ 3♥ 9♦"],0,
+    "Ace‑high straight flush.","example"),
+  q("Which example is a Full House?",
+    ["9♦ 9♥ 9♠ 9♣ K♥","Q♠ Q♥ Q♦ 7♣ 7♦","J♣ 10♣ 9♣ 8♣ 7♣","A♠ K♠ Q♠ J♠ 9♠"],1,
+    "Trips + pair.","example"),
+  q("Which example is a Flush?",
+    ["K♣ 10♣ 8♣ 7♣ 5♣","10♦ 9♣ 8♦ 7♣ 6♦","7♣ 7♦ 7♥ Q♠ 3♦","9♦ 9♥ 9♠ 9♣ K♥"],0,
+    "Same suit, not sequential.","example"),
+  q("Which example is a Straight (mixed suits)?",
+    ["10♥ 9♣ 8♦ 7♠ 6♥","A♠ K♠ Q♠ J♠ 10♠","J♦ J♥ 5♠ 5♥ 7♦","A♦ A♣ A♥ 3♠ 3♥"],0,
+    "Sequence without same suit.","example"),
+
+  // More order recall
+  q("What is the 3rd best hand?",
+    ["Full House","Four of a Kind","Straight Flush","Flush"],1,
+    "1 RF, 2 SF, 3 Four of a Kind.","order"),
+  q("What is the 4th best hand?",
+    ["Full House","Flush","Straight","Three of a Kind"],0,
+    "Quads > Full House > Flush.","order"),
+  q("What is the 5th best hand?",
+    ["Straight","Flush","Two Pair","Pair"],1,
+    "Flush is #5.","order"),
+  q("What is the 6th best hand?",
+    ["Two Pair","Straight","Three of a Kind","High Card"],1,
+    "Straight is #6.","order"),
+  q("What is the 9th best hand?",
+    ["High Card","Pair","Two Pair","Three of a Kind"],1,
+    "Pair is #9.","order")
+];
+
+/* ----------------- State & Stats ----------------- */
+const state = {
+  seed: Math.floor(Math.random()*2**31),
+  rng: Math.random,
+  queue: [],
+  score: 0, asked: 0, streak: 0,
+  current: null, answered:false,
+  topicStats: {},
+  streakHistory: []
+};
+function reseed(seed){
+  state.seed = seed|0;
+  state.rng = mulberry32(state.seed);
+}
+
+/* ----------------- Quiz Engine ----------------- */
+function startQuiz(reshuffle=false){
+  if(reshuffle){
+    reseed(Math.floor(Math.random()*2**31));
+  }
+  state.score=0; state.asked=0; state.streak=0; state.answered=false;
+  state.queue = shuffle([...QUESTIONS], state.rng);
+  $("done").style.display="none";
+  $("qCard").style.display="block";
+  renderQuiz();
+}
+function renderQuiz(){
+  if(state.queue.length===0){
+    $("qCard").style.display="none";
+    $("done").style.display="block";
+    $("finalScore").textContent = `${state.score}/${state.asked} (${Math.round(100*state.score/Math.max(1,state.asked))}%)`;
+    drawCharts(); // update charts at finish
+    return;
+  }
+  state.answered=false;
+  state.current = state.queue.shift();
+  $("qnum").textContent = `Question ${state.asked+1} of ${QUESTIONS.length}`;
+  $("qtext").textContent = state.current.text;
+  $("qarea").innerHTML = "";
+  state.current.choices.forEach((c,i)=>{
+    const b = document.createElement("button");
+    b.className = "choice"; b.textContent = c;
+    b.onclick = ()=>{
+      document.querySelectorAll(".choice").forEach(x=>x.classList.remove("selected"));
+      b.classList.add("selected");
+      b.dataset.sel = i;
+    };
+    $("qarea").appendChild(b);
+  });
+  $("feedback").style.display="none";
+  $("nextBtn").disabled=true;
+  updateMeta();
+}
+function updateMeta(){
+  $("leftPill").textContent = `Remaining: ${state.queue.length}`;
+  $("scorePill").textContent = `Score: ${state.score}`;
+  $("streakPill").textContent = `Streak: ${state.streak}`;
+  const doneFrac = (state.asked)/(QUESTIONS.length);
+  $("bar").style.width = `${Math.max(doneFrac*100,5)}%`;
+}
+function checkQuiz(){
+  if(state.answered) return;
+  const sel = [...document.querySelectorAll(".choice")].find(x=>x.classList.contains("selected"));
+  if(!sel){ showFeedback(false,"Select an option first."); return; }
+  state.asked++;
+  const pick = Number(sel.dataset.sel);
+  const ok = pick === state.current.answerIndex;
+  const topic = state.current.topic || "misc";
+  state.topicStats[topic] = state.topicStats[topic] || {ok:0, total:0};
+  state.topicStats[topic].total++;
+  if(ok){
+    state.score++; state.streak++;
+    state.topicStats[topic].ok++;
+    state.streakHistory.push(state.streak);
+    showFeedback(true, `Correct — ${state.current.explain}`);
+  }else{
+    state.streak = 0;
+    state.streakHistory.push(0);
+    const correctText = state.current.choices[state.current.answerIndex];
+    showFeedback(false, `Answer: ${correctText}. ${state.current.explain}`);
+    // spaced recall: requeue a few cards later
+    const offset = Math.min(state.queue.length, 4 + Math.floor(state.rng()*3));
+    state.queue.splice(offset,0,state.current);
+  }
+  $("nextBtn").disabled=false;
+  updateMeta();
+  state.answered=true;
+}
+function showFeedback(ok, msg){
+  const fb = $("feedback");
+  fb.className = "feedback " + (ok ? "good" : "bad");
+  fb.innerHTML = ok ? `<b>Nice!</b> <span class="explain">${msg}</span>`
+                    : `<b>Not quite.</b> <span class="explain">${msg}</span>`;
+  fb.style.display="block";
+}
+function skipQuiz(){
+  // Soft skip: schedule soon
+  state.queue.splice(Math.min(state.queue.length,2),0,state.current);
+  renderQuiz();
+}
+function restart(reshuffle=false){
+  startQuiz(reshuffle);
+}
+
+/* ----------------- Charts (SVG) ----------------- */
+function drawCharts(){
+  // Topic accuracy bar chart
+  const svg = $("topicChart");
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  const topics = Object.keys(state.topicStats);
+  const w = svg.viewBox.baseVal.width || svg.getAttribute("width");
+  const h = svg.viewBox.baseVal.height || svg.getAttribute("height");
+  const pad = 24;
+  const barW = topics.length? ( (w - pad*2) / topics.length * 0.7 ) : 20;
+  // axes
+  svg.appendChild(rect(0,0,w,h,"none"));
+  svg.appendChild(line(pad, h-pad, w-pad, h-pad, "#aee", 1));
+  svg.appendChild(line(pad, pad, pad, h-pad, "#aee", 1));
+  topics.forEach((t,i)=>{
+    const stat = state.topicStats[t];
+    const acc = stat ? (stat.ok / Math.max(1,stat.total)) : 0;
+    const x = pad + i * ((w-pad*2)/Math.max(1,topics.length)) + 8;
+    const bh = (h - pad*2) * acc;
+    const y = (h - pad) - bh;
+    svg.appendChild(rect(x, y, barW, bh, "url(#gradGood)"));
+    const lbl = makeText(t, x + barW/2, h - pad + 12, "middle", "10px");
+    svg.appendChild(lbl);
+    const pct = makeText(Math.round(acc*100)+"%", x + barW/2, y - 4, "middle", "10px");
+    svg.appendChild(pct);
+  });
+  // defs gradient
+  const defs = document.createElementNS("http://www.w3.org/2000/svg","defs");
+  const lg = document.createElementNS("http://www.w3.org/2000/svg","linearGradient");
+  lg.id = "gradGood"; lg.setAttribute("x1","0"); lg.setAttribute("x2","0"); lg.setAttribute("y1","1"); lg.setAttribute("y2","0");
+  const s1 = stop("0%","#1fbf93"), s2 = stop("100%","#06d6a0");
+  lg.appendChild(s1); lg.appendChild(s2); defs.appendChild(lg); svg.appendChild(defs);
+
+  // Streak chart: line of last up to 20 streak values
+  const svg2 = $("streakChart");
+  while(svg2.firstChild) svg2.removeChild(svg2.firstChild);
+  const data = state.streakHistory.slice(-20);
+  const ww = svg2.viewBox.baseVal.width || svg2.getAttribute("width");
+  const hh = svg2.viewBox.baseVal.height || svg2.getAttribute("height");
+  const pad2 = 24;
+  svg2.appendChild(line(pad2, hh-pad2, ww-pad2, hh-pad2, "#aee", 1));
+  svg2.appendChild(line(pad2, pad2, pad2, hh-pad2, "#aee", 1));
+  if(data.length){
+    const maxv = Math.max(1, ...data);
+    let pts="";
+    data.forEach((v,idx)=>{
+      const x = pad2 + idx * ((ww-pad2*2)/Math.max(1,data.length-1));
+      const y = (hh - pad2) - ( (hh-pad2*2) * (v/maxv) );
+      pts += (idx? " L ":"M ") + x + " " + y;
+      svg2.appendChild(circle(x,y,2,"#ffd166"));
+    });
+    const path = document.createElementNS("http://www.w3.org/2000/svg","path");
+    path.setAttribute("d", pts);
+    path.setAttribute("fill","none");
+    path.setAttribute("stroke","#ffd166");
+    path.setAttribute("stroke-width","2");
+    svg2.appendChild(path);
+  }
+}
+function rect(x,y,w,h,fill){ const r = document.createElementNS("http://www.w3.org/2000/svg","rect"); r.setAttribute("x",x);r.setAttribute("y",y);r.setAttribute("width",w);r.setAttribute("height",h); if(fill!=="none") r.setAttribute("fill",fill); else r.setAttribute("fill","none"); return r; }
+function line(x1,y1,x2,y2,stroke,w){ const l = document.createElementNS("http://www.w3.org/2000/svg","line"); l.setAttribute("x1",x1); l.setAttribute("y1",y1); l.setAttribute("x2",x2); l.setAttribute("y2",y2); l.setAttribute("stroke",stroke); l.setAttribute("stroke-width",w); return l; }
+function circle(cx,cy,r,fill){ const c = document.createElementNS("http://www.w3.org/2000/svg","circle"); c.setAttribute("cx",cx); c.setAttribute("cy",cy); c.setAttribute("r",r); c.setAttribute("fill",fill); return c; }
+function makeText(txt,x,y,anchor,size){ const t = document.createElementNS("http://www.w3.org/2000/svg","text"); t.textContent=txt; t.setAttribute("x",x); t.setAttribute("y",y); t.setAttribute("text-anchor",anchor); t.setAttribute("font-size",size); t.setAttribute("fill","#e9fff7"); return t; }
+function stop(off,color){ const s = document.createElementNS("http://www.w3.org/2000/svg","stop"); s.setAttribute("offset",off); s.setAttribute("stop-color",color); return s; }
+
+/* ----------------- Gameplay: Deal & Classify Hands ----------------- */
+const SUITS = ["♠","♥","♦","♣"];
+const RANKS = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
+function dealHand(rng=Math.random){
+  const deck=[];
+  for(const s of SUITS){ for(const r of RANKS){ deck.push({r,s}); } }
+  shuffle(deck, rng);
+  return deck.slice(0,5).sort((a,b)=>RANKS.indexOf(a.r)-RANKS.indexOf(b.r));
+}
+function handCategory(cards){
+  const counts = {};
+  const suits = {};
+  cards.forEach(c=>{ counts[c.r]=(counts[c.r]||0)+1; suits[c.s]=(suits[c.s]||0)+1; });
+  const ranksSorted = cards.map(c=>RANKS.indexOf(c.r)).sort((a,b)=>a-b);
+  // Straight (treat A low? We'll allow A-2-3-4-5 too)
+  function isStraight(vals){
+    let v=[...new Set(vals)];
+    // wheel straight
+    const wheel = [0,1,2,3,12];
+    if(v.length===5){
+      const consecutive = v.slice(1).every((n,i)=>n===v[i]+1);
+      const isWheel = JSON.stringify(v)===JSON.stringify(wheel);
+      return consecutive || isWheel;
+    }
+    return false;
+  }
+  const flush = Object.values(suits).some(n=>n===5);
+  const straight = isStraight(ranksSorted);
+  if(straight && flush){
+    // Royal?
+    const isRoyal = cards.map(c=>c.r).sort().join(",")==="10,A,J,K,Q".split(",").sort().join(",");
+    return isRoyal ? "Royal Flush" : "Straight Flush";
+  }
+  const groups = Object.values(counts).sort((a,b)=>b-a); // e.g., [4,1], [3,2], [3,1,1], [2,2,1], ...
+  if(groups[0]===4) return "Four of a Kind";
+  if(groups[0]===3 && groups[1]===2) return "Full House";
+  if(flush) return "Flush";
+  if(straight) return "Straight";
+  if(groups[0]===3) return "Three of a Kind";
+  if(groups[0]===2 && groups[1]===2) return "Two Pair";
+  if(groups[0]===2) return "Pair";
+  return "High Card";
+}
+function renderHand(cards){
+  const g = $("handGrid"); g.innerHTML="";
+  cards.forEach(c=>{
+    const card = document.createElement("div");
+    card.className="playingCard";
+    const red = (c.s==="♥"||c.s==="♦") ? " red" : "";
+    card.innerHTML = `<div class="rank${red}">${c.r}</div><div class="suit${red} suit">${c.s}</div>`;
+    g.appendChild(card);
+  });
+}
+const HAND_OPTIONS = ["Royal Flush","Straight Flush","Four of a Kind","Full House","Flush","Straight","Three of a Kind","Two Pair","Pair","High Card"];
+let playScore=0, currentHand=null;
+function newHand(){
+  $("tipBox").style.display="none";
+  currentHand = dealHand(state.rng);
+  renderHand(currentHand);
+  const area = $("playChoices"); area.innerHTML="";
+  HAND_OPTIONS.forEach((name,i)=>{
+    const b = document.createElement("button");
+    b.className="choice"; b.textContent=name;
+    b.onclick = ()=>{
+      const cat = handCategory(currentHand);
+      if(name===cat){
+        playScore++;
+        $("playScore").textContent = `Hands correct: ${playScore}`;
+        tip(`✅ Correct! This is <b>${cat}</b>.`);
+      }else{
+        const clue = giveTip(currentHand, cat);
+        tip(`❌ Not quite. Correct: <b>${cat}</b>.<div class="hint">${clue}</div>`);
+        // spaced-practice: keep same hand until correct
+      }
+    };
+    area.appendChild(b);
+  });
+}
+function tip(html){ const t=$("tipBox"); t.innerHTML=html; t.style.display="block"; }
+function giveTip(cards, cat){
+  const suits = cards.reduce((m,c)=>((m[c.s]=(m[c.s]||0)+1),m),{});
+  const counts = cards.reduce((m,c)=>(m[c.r]=(m[c.r]||0)+1,m),{});
+  const suitMax = Math.max(...Object.values(suits));
+  const kindMax = Math.max(...Object.values(counts));
+  const ranks = cards.map(c=>RANKS.indexOf(c.r)).sort((a,b)=>a-b);
+  const nearStraight = (()=>{
+    let v=[...new Set(ranks)];
+    if(v.length===5) return false;
+    // Look for 4-consecutive window
+    for(let i=0;i<v.length-3;i++){
+      if(v[i+1]===v[i]+1 && v[i+2]===v[i]+2 && v[i+3]===v[i]+3) return true;
+    }
+    return false;
+  })();
+  if(suitMax>=4) return "Notice the suits: do you have 4 or 5 of the same suit? That suggests a Flush (or Straight Flush).";
+  if(kindMax===4) return "You have four of the same rank — that screams Four of a Kind.";
+  if(kindMax===3){
+    const hasPair = Object.values(counts).includes(2);
+    return hasPair ? "Trips + a pair makes a Full House." : "Three of a kind — look for any additional pair to upgrade to a Full House.";
+  }
+  if(Object.values(counts).filter(n=>n===2).length===2) return "Two different pairs + one kicker = Two Pair.";
+  if(nearStraight) return "The ranks look nearly sequential. Are they exactly in order for a Straight?";
+  return "Check for pairs first, then look for sequences (Straight) and suits (Flush).";
+}
+$("dealBtn").onclick = newHand;
+$("hintBtn").onclick = ()=>{
+  if(!currentHand){ tip("Click Deal to start!"); return; }
+  const cat = handCategory(currentHand);
+  tip("Tip: " + giveTip(currentHand, cat));
+};
+
+/* ----------------- Wire up quiz buttons ----------------- */
+$("checkBtn").onclick = checkQuiz;
+$("nextBtn").onclick = renderQuiz;
+$("skipBtn").onclick = skipQuiz;
+
+/* ----------------- Boot ----------------- */
+function boot(){
+  reseed(state.seed);
+  applyHash();
+  startQuiz(false);
+  newHand();
+}
+boot();
+</script>
+</body>
+</html>
