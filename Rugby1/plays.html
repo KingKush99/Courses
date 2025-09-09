@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Quantum</title>
+<title>Rugby • Plays</title>
 <style>
   :root{ --fg:#fff; --bg1:#0b0b0f; --bg2:#1b0b00; --bg3:#3a0c00; --panel:#1a0f0a; --brand:#00d06c; --muted:#ffd9b3; --pill:#25d366; }
   *{box-sizing:border-box} html,body{height:100%}
@@ -48,20 +48,18 @@
 <button class="round-btn chat-btn" id="chatBtn" title="Assistant" aria-label="Assistant">💬</button>
 <a class="back-fab" href="#" id="backBtn">← Back</a>
 
-<main class="wrap"><div style="max-width:900px; margin:0 auto; text-align:left;">
-  <h1>Quantum</h1>
-  <div style="background:var(--panel); border:1px solid #ffffff1a; border-radius:16px; padding:16px;">
-    <p>Qubits, gates, circuits, and entanglement.</p>
-    <div class="row"><label for="p">Progress</label><input id="p" type="range" min="0" max="100" value="0"><span id="pv">0%</span></div>
-    <div style="height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px;"><div id="bar" style="height:100%;width:0%;background:#ffd166"></div></div>
+<main class="wrap"><div style="max-width:1100px; margin:0 auto; text-align:left;">
+  <h1>Rugby • Plays</h1>
+  <div style="display:grid; gap:12px;">
+    <div style="background:var(--panel);border:1px solid #ffffff1a;border-radius:16px;padding:16px"><h3>X / Switch</h3><ul><li>Option 1: 10–12 switch</li><li>Option 2: 10–13 crash</li><li>Option 3: 10–15 pull behind 13</li></ul></div>
+    <div style="background:var(--panel);border:1px solid #ffffff1a;border-radius:16px;padding:16px"><h3>Swap</h3><ul><li>Option 0: 10–13 crash on D12</li><li>Option 1: 10–12 pull behind 13</li><li>Option 2: 2nd level 12–14 crash</li><li>Option 3: 12–15 wide option</li></ul></div>
+    <div style="background:var(--panel);border:1px solid #ffffff1a;border-radius:16px;padding:16px"><h3>MGM</h3><ul><li>10–12 inside crash</li><li>10–13 outside crash</li><li>10–11 pull to go wide</li></ul></div>
+    <div style="background:var(--panel);border:1px solid #ffffff1a;border-radius:16px;padding:16px"><h3>M1 (Miss 1)</h3><ul><li>13–12 loop</li><li>13–11 tip line inside crash</li></ul></div>
+    <div style="background:var(--panel);border:1px solid #ffffff1a;border-radius:16px;padding:16px"><h3>Express</h3><ul><li>12 crash on D10</li><li>12–13 tight crash</li><li>12–10 pull behind 13</li></ul></div>
+    <div style="background:var(--panel);border:1px solid #ffffff1a;border-radius:16px;padding:16px"><h3>Wing In</h3><ul><li>9–11 overload D10 crash</li><li>9–10 crash</li><li>9–13 crash</li></ul></div>
+    <div style="background:var(--panel);border:1px solid #ffffff1a;border-radius:16px;padding:16px"><h3>2–4 Switch</h3><ul><li>Decoy drift by 10/12 → open 10–13 switch</li><li>Back-door 10–12</li></ul></div>
   </div>
 </div></main>
-<script>
-  const key='progress_quantum'; function load(){ const v=parseInt(localStorage.getItem(key)||'0',10); p.value=v; pv.textContent=v+'%'; bar.style.width=v+'%'; }
-  function save(){ const v=parseInt(p.value,10); localStorage.setItem(key,String(v)); pv.textContent=v+'%'; bar.style.width=v+'%'; }
-  const p=document.getElementById('p'), pv=document.getElementById('pv'), bar=document.getElementById('bar');
-  p.addEventListener('input', save); load();
-</script>
 
 <!-- Mini Slots -->
 <div class="popover" id="slotsPopover" role="dialog" aria-label="Mini Slots">

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Quantum</title>
+<title>Rugby</title>
 <style>
   :root{ --fg:#fff; --bg1:#0b0b0f; --bg2:#1b0b00; --bg3:#3a0c00; --panel:#1a0f0a; --brand:#00d06c; --muted:#ffd9b3; --pill:#25d366; }
   *{box-sizing:border-box} html,body{height:100%}
@@ -48,17 +48,22 @@
 <button class="round-btn chat-btn" id="chatBtn" title="Assistant" aria-label="Assistant">💬</button>
 <a class="back-fab" href="#" id="backBtn">← Back</a>
 
-<main class="wrap"><div style="max-width:900px; margin:0 auto; text-align:left;">
-  <h1>Quantum</h1>
+<main class="wrap"><div style="max-width:1000px; margin:0 auto; text-align:left;">
+  <h1>Rugby</h1>
+  <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px;">
+    <a class="btn" href="plays.html">Plays</a>
+    <a class="btn" href="synopsis.html">Synopsis</a>
+    <a class="btn" href="quiz.html">Quizzes</a>
+  </div>
   <div style="background:var(--panel); border:1px solid #ffffff1a; border-radius:16px; padding:16px;">
-    <p>Qubits, gates, circuits, and entanglement.</p>
-    <div class="row"><label for="p">Progress</label><input id="p" type="range" min="0" max="100" value="0"><span id="pv">0%</span></div>
+    <p>Use the tabs above to explore your team’s core structures. Adjust progress below; it syncs to your Profile.</p>
+    <div class="row"><label for="p">Course progress</label><input id="p" type="range" min="0" max="100" value="0"><span id="pv">0%</span></div>
     <div style="height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px;"><div id="bar" style="height:100%;width:0%;background:#ffd166"></div></div>
   </div>
 </div></main>
 <script>
-  const key='progress_quantum'; function load(){ const v=parseInt(localStorage.getItem(key)||'0',10); p.value=v; pv.textContent=v+'%'; bar.style.width=v+'%'; }
-  function save(){ const v=parseInt(p.value,10); localStorage.setItem(key,String(v)); pv.textContent=v+'%'; bar.style.width=v+'%'; }
+  const key='progress_rugby1'; function load(){{ const v=parseInt(localStorage.getItem(key)||'0',10); p.value=v; pv.textContent=v+'%'; bar.style.width=v+'%'; }}
+  function save(){{ const v=parseInt(p.value,10); localStorage.setItem(key,String(v)); pv.textContent=v+'%'; bar.style.width=v+'%'; }}
   const p=document.getElementById('p'), pv=document.getElementById('pv'), bar=document.getElementById('bar');
   p.addEventListener('input', save); load();
 </script>
