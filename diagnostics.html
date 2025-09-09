@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Diagnostics</title>
+<style>
+  body{font-family:system-ui; background:#0b0b0f; color:#fff; margin:0; padding:24px;}
+  table{border-collapse:collapse; width:100%; max-width:900px;}
+  th,td{border:1px solid #ffffff22; padding:8px 10px;}
+  th{background:#1a120d}
+  .ok{color:#1cc862; font-weight:600}
+  .fail{color:#ff4d4d; font-weight:600}
+  .hint{opacity:.8}
+  a{color:#ffd166}
+</style>
+</head>
+<body>
+<h1>Diagnostics</h1>
+<p class="hint">This page checks which course folders exist at your <b>repo root</b> and whether each contains an <code>index.html</code>. Use it to resolve 404s.</p>
+<table id="t">
+  <thead><tr><th>Course</th><th>Checked Paths</th><th>Status</th></tr></thead>
+  <tbody></tbody>
+</table>
+<p class="hint">If a course shows <span class="fail">Missing</span>, either rename the folder to one of the “Checked Paths” or create that folder with an <code>index.html</code> inside.</p>
+<script>
+function getBase(){
+  const segs = location.pathname.split('/').filter(Boolean);
+  const repo = segs.length ? segs[0] : '';
+  return location.origin + (repo ? '/' + repo : '');
+}
+const BASE = getBase();
+
+const COURSES = [
+  {name:'Chess', candidates:['chess/','Chess/']},
+  {name:'Coding Evolution', candidates:['Coding%20Evolution/','CodingEvolution/','coding-evolution/','Coding_Evolution/']},
+  {name:'Music Maker', candidates:['Music%20Maker/','MusicMaker/','music-maker/','Music_Maker/']},
+  {name:'Offensive Coordinator', candidates:['Offensive%20Coordinator/','OffensiveCoordinator/','offensive-coordinator/']},
+  {name:'Quantum', candidates:['Quantum/','quantum/']},
+  {name:'Rugby', candidates:['Rugby/','rugby/']},
+  {name:'Poker', candidates:['Poker/','poker/']},
+];
+
+async function probe(){
+  const tbody=document.querySelector('#t tbody');
+  for(const c of COURSES){
+    let hit=null, checked=[];
+    for(const rel of c.candidates){
+      const u = BASE + '/' + rel + 'index.html';
+      checked.push(rel+'index.html');
+      try{
+        const ok = await fetch(u, {method:'HEAD'}).then(r=>r.ok).catch(()=>false);
+        if(ok){ hit = rel; break; }
+      }catch(e){}
+    }
+    const tr=document.createElement('tr');
+    tr.innerHTML = `<td>${c.name}</td>
+                    <td style="font-family:ui-monospace, Menlo, monospace">${checked.join('<br>')}</td>
+                    <td>${hit? `<span class="ok">Found</span> → <a href="${BASE}/${hit}">${hit}</a>` : '<span class="fail">Missing</span>'}</td>`;
+    tbody.appendChild(tr);
+  }
+}
+probe();
+</script>
+</body></html>
