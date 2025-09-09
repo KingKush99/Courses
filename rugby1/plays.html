@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rugby • Plays</title>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+<style>
+:root{--fg:#fff;--bg1:#0b0b0f;--bg2:#1a0a07;--bg3:#350f06;--panel:#1a0f0a;--pill:linear-gradient(90deg,#ff6b00,#ff3b3b)}
+*{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:"Comic Sans MS","Comic Sans",cursive;color:#fff;
+background: radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, var(--bg1), var(--bg2) 40%, var(--bg3));}
+.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:8vh 24px;text-align:center}
+h1{margin:0 0 10px} .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.round-btn{position:fixed;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;cursor:pointer;
+background:radial-gradient(circle at 30% 30%,#ff9f1a,#ff6b00 60%,#3a0c00 100%);box-shadow:0 8px 20px #000a;z-index:100}
+.profile-btn{left:16px;top:16px} .menu-btn{right:16px;top:16px} .slots-btn{right:16px;bottom:16px} .chat-btn{left:16px;bottom:16px}
+.back-fab{position:fixed;left:16px;top:86px;z-index:120;background:#2a1b12;border:1px solid #ffffff1a;color:#fff;padding:8px 12px;border-radius:999px;text-decoration:none}
+.burger{position:relative;width:26px;height:18px} .burger span{position:absolute;left:0;width:100%;height:3px;background:#fff;border-radius:2px;transition:transform .25s,opacity .2s,top .25s}
+.burger span:nth-child(1){top:0} .burger span:nth-child(2){top:7.5px} .burger span:nth-child(3){top:15px}
+.menu-btn.open .burger span:nth-child(1){top:7.5px;transform:rotate(45deg)} .menu-btn.open .burger span:nth-child(2){opacity:0} .menu-btn.open .burger span:nth-child(3){top:7.5px;transform:rotate(-45deg)}
+.popover{position:absolute;width:560px;max-width:95vw;background:#1a0f0a;border:1px solid #ffffff1f;border-radius:14px;padding:14px;box-shadow:0 12px 24px #000a;display:none;z-index:2000;color:#ffd9b3}
+.btn{padding:12px 18px;border-radius:999px;border:none;font-weight:800;background:linear-gradient(90deg,#ff6b00,#ff3b3b);color:#fff;cursor:pointer;box-shadow:0 8px 18px #0008;font-family:inherit}
+.pill-btn{display:block;text-decoration:none;color:#fff;font-weight:800;background:linear-gradient(90deg,#ff6b00,#ff3b3b);border-radius:999px;padding:16px 24px;box-shadow:0 8px 18px #0008;transition:.12s;position:relative;width:60%;margin-inline:auto;text-align:center}
+.pill-btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px #000a;filter:brightness(1.03)}
+.grid{display:grid;gap:16px;width:min(1400px,95vw);margin:16px auto;grid-template-columns:repeat(1,minmax(280px,1fr))}
+#colSelWrap{margin:16px auto 0;display:flex;justify-content:center;gap:10px;color:#ffd9b3}
+.card{background:#1a0f0a;border:1px solid #ffffff1a;border-radius:16px;padding:16px;margin:12px auto;text-align:left}
+.progress{height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px} .bar{height:100%;width:0;background:#ffd166}
+.square{display:grid;place-items:center}
+</style>
+</head><body>
+<a class="round-btn profile-btn" href="#" id="profileLink">👤</a>
+<button class="round-btn menu-btn" id="menuBtn"><div class="burger"><span></span><span></span><span></span></div></button>
+<button class="round-btn slots-btn" id="slotsBtn">🎰</button>
+<button class="round-btn chat-btn" id="chatBtn">💬</button>
+<a class="back-fab" href="#" id="backBtn">← Back</a>
+<main class='wrap'><div class='card' style='max-width:900px'><h1>Plays</h1><ul><li>X / Switch</li><li>Swap</li><li>MGM</li></ul></div></main>
+<div class="popover" id="menuPanel"><h3>Menu</h3><div class="row"><strong>Music</strong><label style="margin-left:auto">On/Off <input type="checkbox" id="musicToggle"></label></div></div>
+<div class="popover" id="slotsPopover"><h3>Mini Slots</h3><div class="row"><strong>Reels</strong><select id="reelSelect"><option>3</option><option>4</option><option>5</option><option selected>6</option></select><strong>Bet</strong><select id="betSelect"><option>10</option><option selected>25</option><option>50</option><option>100</option></select></div><div class="row"><button class="btn">Spin</button></div></div>
+<div class="popover" id="chatPopover"><h3>Assistant</h3><div id="chatLog" style="height:220px;overflow:auto;background:#120b07;border:1px solid #ffffff1a;border-radius:10px;padding:10px;margin-bottom:8px"></div>
+<div class="row"><input id="chatInput" style="flex:1;background:#2a1b12;border:1px solid #ffffff1a;border-radius:10px;padding:10px" placeholder="Ask me about the site…"><label class="btn">📷<input type="file" id="imgInput" accept="image/*" style="display:none"></label><button class="btn" id="sendBtn">Send</button></div></div>
+<script>
+const $=id=>document.getElementById(id);
+function base(){ const segs=location.pathname.split('/').filter(Boolean); return '/'+(segs[0]||''); }
+$('backBtn').onclick=(e)=>{e.preventDefault(); try{history.length>1?history.back():location.assign(base()+'/');}catch(_){location.assign(base()+'/');}};
+$('profileLink').onclick=(e)=>{e.preventDefault(); fetch(base()+'/profile.html',{method:'HEAD'}).then(r=>{location.href=r.ok?base()+'/profile.html':base()+'/profile/'}).catch(()=>location.href=base()+'/profile/')};
+function openAt(btn,panel){const r=btn.getBoundingClientRect(); panel.style.display='block'; panel.style.top=(r.bottom+6)+'px'; panel.style.left=(r.right-panel.offsetWidth)+'px';}
+function closeAll(){document.querySelectorAll('.popover').forEach(p=>p.style.display='none');$('menuBtn').classList.remove('open');}
+window.addEventListener('click',e=>{ if(!e.target.closest('.popover')&&!e.target.closest('.round-btn')) closeAll(); });
+$('menuBtn').onclick=()=>{const p=$('menuPanel'); if(p.style.display==='block'){closeAll();}else{closeAll(); openAt(menuBtn,p); $('menuBtn').classList.add('open');}};
+$('slotsBtn').onclick=()=>{const p=$('slotsPopover'); if(p.style.display==='block'){closeAll();}else{closeAll(); openAt(slotsBtn,p);}}
+$('chatBtn').onclick=()=>{const p=$('chatPopover'); if(p.style.display==='block'){closeAll();}else{closeAll(); openAt(chatBtn,p);}}
+const chatLog=$('chatLog'), chatInput=$('chatInput'); function addMsg(who,t){const d=document.createElement('div');d.textContent=(who==='me'?'You: ':'Bot: ')+t;chatLog.appendChild(d);chatLog.scrollTop=chatLog.scrollHeight}
+$('sendBtn').onclick=()=>{const t=chatInput.value.trim(); if(!t) return; addMsg('me',t); addMsg('bot','Got it!'); chatInput.value='';};
+setTimeout(()=>addMsg('bot','👋 Welcome! I speak 10 languages and can read screenshots.'),400);
+</script>
+</body></html>
