@@ -1,498 +1,118 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Opening Trainer — Standalone (No CDNs)</title>
-  <style>
-    :root { color-scheme: dark; }
-    html, body, #root { height: 100%; }
-    body { margin: 0; background: var(--bg, linear-gradient(to bottom, #0f172a, #020617)); color: #e5e7eb; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'; }
-    button { cursor: pointer; }
-    .board { user-select: none; }
-    .square { display:flex; align-items:center; justify-content:center; font-size: 36px; line-height: 1; }
-    .light { background:#eed9b6; } .dark { background:#b58863; }
-    .piece { pointer-events:none; }
-    .sq-highlight { outline: 3px solid rgba(234,179,8,.9); }
-    .pill { padding: 4px 8px; border-radius: 999px; font-size: 12px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.08); }
-    @media (max-width: 640px){ .square{font-size:30px;} }
-    .caprow{min-height:32px;display:flex;gap:6px;align-items:center;justify-content:center;margin:6px 0;color:#e5e7eb;}
-    .caprow .w{color:#f8fafc;text-shadow:0 0 2px #000,0 0 4px #000;}
-    .caprow .b{color:#0b0f19;text-shadow:0 0 1px #fff;}
-    .wallet{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);}
-    .themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:10px;}
-    .theme{border-radius:12px;border:1px solid rgba(255,255,255,.18);height:70px;display:flex;align-items:end;justify-content:space-between;overflow:hidden;}
-    .theme>span{padding:6px 8px;background:rgba(0,0,0,.4);font-size:12px}
-    .ribbon{padding:6px 8px;background:rgba(255,255,255,.15);font-size:12px}
-    .error{margin:12px auto;max-width:900px;padding:12px;border:1px solid rgba(239,68,68,.4);background:rgba(239,68,68,.08);border-radius:8px;color:#fecaca}
-    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:50}
-    .modal{background:#0b1220;border:1px solid rgba(255,255,255,.12);border-radius:12px;max-width:720px;margin:16px;padding:16px}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chess</title>
+<style>
+  :root{ --fg:#fffdf7; --bg1:#0b0b0f; --bg2:#1b0b00; --bg3:#3a0c00; --panel:#1a0f0a; --brand:#ff6b00; }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{margin:0; font-family: system-ui, Segoe UI, Roboto, Arial; color:var(--fg); overflow-x:hidden;
+       background:radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%),linear-gradient(120deg, var(--bg1), var(--bg2) 40%, var(--bg3));}
+  a{color:#ffd166}
+  .round-btn{position:fixed; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; color:#fff; cursor:pointer; background: radial-gradient(circle at 30% 30%, #ff9f1a, #ff6b00 60%, #3a0c00 100%); box-shadow: 0 8px 20px #000a; z-index:100;}
+  .profile-btn{left:16px; top:16px;} .slots-btn{right:16px; bottom:16px;} .chat-btn{left:16px; bottom:16px;} .menu-btn{right:16px; top:16px;}
+  .burger{position:relative; width:26px; height:18px;}
+  .burger span{position:absolute; left:0; width:100%; height:3px; background:#fff; border-radius:2px; transition:transform .25s ease, opacity .2s ease, top .25s ease;}
+  .burger span:nth-child(1){top:0} .burger span:nth-child(2){top:7.5px} .burger span:nth-child(3){top:15px}
+  .menu-btn.open .burger span:nth-child(1){top:7.5px; transform:rotate(45deg)} .menu-btn.open .burger span:nth-child(2){opacity:0} .menu-btn.open .burger span:nth-child(3){top:7.5px; transform:rotate(-45deg)}
+  .wrap{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:8vh 24px; text-align:center;}
+  h1{font-size:clamp(2rem,4vw+1rem,3rem); text-shadow:0 2px 20px #ff6b00aa; margin:0 0 6px;} .sub{opacity:.9; margin:0 0 18px;}
+  .popover{position:absolute; width:520px; max-width:95vw; background:var(--panel); border:1px solid #ffffff1f; border-radius:14px; padding:14px; box-shadow:0 12px 24px #000a; display:none; z-index:2000; color:#ffd9b3; overflow:hidden;}
+  .row{display:flex; align-items:center; gap:10px; margin:8px 0; flex-wrap:wrap;}
+  .btn{padding:8px 12px; border-radius:8px; border:1px solid #fff2; background:#2a1b12; color:#fff; cursor:pointer;}
+  select, input[type="range"], input[type="file"], input[type="text"]{background:#2a1b12; color:#fff; border:1px solid #fff2; border-radius:8px; padding:6px 8px;}
+  .back-fab{position:fixed; left:16px; top:86px; z-index:120; background:#2a1b12; border:1px solid #ffffff1a; color:#fff; padding:8px 12px; border-radius:999px; text-decoration:none;}
+</style>
 </head>
 <body>
-  <div id="root"></div>
+<a class="round-btn profile-btn" href="#" id="profileLink" title="Profile" aria-label="Profile">👤</a>
+<button class="round-btn menu-btn" id="menuBtn" title="Menu" aria-label="Menu"><div class="burger" aria-hidden="true"><span></span><span></span><span></span></div></button>
+<button class="round-btn slots-btn" id="slotsBtn" title="Mini Slots" aria-label="Mini Slots">🎰</button>
+<button class="round-btn chat-btn" id="chatBtn" title="Assistant" aria-label="Assistant">💬</button>
+<a class="back-fab" href="#" id="backBtn">← Back</a>
+
+<style>
+.board{ width: 768px; max-width: 94vw; aspect-ratio: 1/1; margin: 0 auto 14px; display:grid; grid-template-columns: repeat(8, 1fr); border-radius: 16px; overflow:hidden; box-shadow: 0 10px 24px #000a, inset 0 0 0 2px #ffffff18; }
+.square{ display:grid; place-items:center; font-size:84px; user-select:none; }
+.dark{ background:#6a3d21; } .light{ background:#e7b47a; }
+.square.highlight{ outline:4px solid rgba(255,255,255,.6); outline-offset:-4px; }
+.piece{ cursor:pointer; transition: transform .08s ease; } .piece:active{ transform:scale(0.95); }
+</style>
+<main class="wrap"><div style="max-width:920px; margin:0 auto; text-align:center;">
+  <h1>Chess</h1><div class="board" id="board"></div><p id="turnBox">Turn: <strong>White</strong></p>
+</div></main>
 <script>
-/* ---------------- TinyReact (very small vDOM) ---------------- */
-(function(global){
-  function h(type, props){
-    var children = [].slice.call(arguments, 2).flat();
-    return { type: type, props: props||{}, children: children };
-  }
-  function setProps(dom, props){
-    for(var k in props){
-      if(k==='style' && typeof props[k]==='object'){
-        for(var s in props.style){ dom.style[s] = props.style[s]; }
-      } else if(k.startsWith('on') && typeof props[k]==='function'){
-        dom[k.toLowerCase()] = props[k];
-      } else if(k==='className'){
-        dom.setAttribute('class', props[k]);
-      } else if(k!=='children' && props[k]!=null){
-        dom.setAttribute(k, props[k]);
-      }
-    }
-  }
-  function createDom(node){
-    if(node==null || node===false) return document.createComment('');
-    if(typeof node === 'string' || typeof node === 'number'){
-      return document.createTextNode(String(node));
-    }
-    if(typeof node.type === 'function'){
-      var props = Object.assign({}, node.props, { children: node.children });
-      var rendered = node.type(props);
-      return createDom(rendered);
-    }
-    var el = document.createElement(node.type);
-    setProps(el, node.props||{});
-    (node.children||[]).forEach(function(c){ el.appendChild(createDom(c)); });
-    return el;
-  }
-  function render(vnode, container){
-    container.innerHTML='';
-    container.appendChild(createDom(vnode));
-  }
-  function createRoot(container){
-    return { render: function(v){ render(v, container); } };
-  }
-  global.React = { createElement: h };
-  global.ReactDOM = { createRoot: createRoot };
-})(window);
-
-/* ---------------- Minimal Chess Engine ---------------- */
-(function(global){
-  var FILES='abcdefgh', RANKS='12345678';
-  function inside(f,r){ return f>=0 && f<8 && r>=0 && r<8; }
-  function cloneBoard(b){ return b.map(function(row){ return row.map(function(p){ return p? {type:p.type, color:p.color, moved:p.moved} : null; }); }); }
-  function initialBoard(){
-    var e=null, w='w', b='b';
-    function P(c){ return {type:'p', color:c, moved:false}; }
-    function N(c){ return {type:'n', color:c, moved:false}; }
-    function B(c){ return {type:'b', color:c, moved:false}; }
-    function R(c){ return {type:'r', color:c, moved:false}; }
-    function Q(c){ return {type:'q', color:c, moved:false}; }
-    function K(c){ return {type:'k', color:c, moved:false}; }
-    return [
-      [R(b),N(b),B(b),Q(b),K(b),B(b),N(b),R(b)],
-      [P(b),P(b),P(b),P(b),P(b),P(b),P(b),P(b)],
-      [e,e,e,e,e,e,e,e],
-      [e,e,e,e,e,e,e,e],
-      [e,e,e,e,e,e,e,e],
-      [e,e,e,e,e,e,e,e],
-      [P(w),P(w),P(w),P(w),P(w),P(w),P(w),P(w)],
-      [R(w),N(w),B(w),Q(w),K(w),B(w),N(w),R(w)]
-    ];
-  }
-  function FRtoSquare(f,r){ return FILES[f] + RANKS[r]; }
-  function pieceLetter(t){ return {p:'',n:'N',b:'B',r:'R',q:'Q',k:'K'}[t] || ''; }
-  function simpleSAN(pieceType, src, dst, captured){
-    if(pieceType==='p'){
-      if(captured) return src[0] + 'x' + dst;
-      return dst;
-    }
-    return pieceLetter(pieceType) + (captured?'x':'') + dst;
-  }
-  function Game(){ this._board=initialBoard(); this._turn='w'; this._history=[]; }
-  Game.prototype.board=function(){ return this._board; };
-  Game.prototype.turn=function(){ return this._turn; };
-  Game.prototype.history=function(){ return this._history.slice(); };
-  Game.prototype.clone=function(){ var g=new Game(); g._board=cloneBoard(this._board); g._turn=this._turn; g._history=this._history.slice(); return g; };
-  Game.prototype.kingSquare=function(color){ for(var r=0;r<8;r++) for(var f=0;f<8;f++){ var p=this._board[r][f]; if(p&&p.type==='k'&&p.color===color) return {f:f,r:r}; } return null; };
-  Game.prototype.isSquareAttacked=function(f,r,byColor){
-    var b=this._board;
-    var KTS=[[1,2],[2,1],[-1,2],[-2,1],[1,-2],[2,-1],[-1,-2],[-2,-1]];
-    for(var i=0;i<KTS.length;i++){ var nf=f+KTS[i][0], nr=r+KTS[i][1]; if(inside(nf,nr)){ var p=b[nr][nf]; if(p&&p.color===byColor&&p.type==='n') return true; } }
-    var dir=(byColor==='w'?1:-1);
-    var pf=f-1, pr=r-dir; if(inside(pf,pr)){ var pp=b[pr][pf]; if(pp&&pp.color===byColor&&pp.type==='p') return true; }
-    pf=f+1; pr=r-dir; if(inside(pf,pr)){ var pp2=b[pr][pf]; if(pp2&&pp2.color===byColor&&pp2.type==='p') return true; }
-    for(var rf=-1;rf<=1;rf++) for(var ff=-1;ff<=1;ff++){ if(rf===0&&ff===0) continue; var kf=f+ff, kr=r+rf; if(inside(kf,kr)){ var kp=b[kr][kf]; if(kp&&kp.color===byColor&&kp.type==='k') return true; } }
-    function ray(dirs, types){ for(var d=0;d<dirs.length;d++){ var df=dirs[d][0], dr=dirs[d][1], nf=f+df, nr=r+dr; while(inside(nf,nr)){ var p=b[nr][nf]; if(p){ if(p.color===byColor && types.indexOf(p.type)!==-1) return true; break; } nf+=df; nr+=dr; } } return false; }
-    if(ray([[1,1],[1,-1],[-1,1],[-1,-1]],['b','q'])) return true;
-    if(ray([[1,0],[-1,0],[0,1],[0,-1]],['r','q'])) return true;
-    return false;
-  };
-  Game.prototype.in_check=function(){ var me=this._turn, opp=(me==='w'?'b':'w'); var k=this.kingSquare(me); if(!k) return false; return this.isSquareAttacked(k.f,k.r,opp); };
-  Game.prototype.in_checkmate=function(){ if(!this.in_check()) return false; return this.moves({}).length===0; };
-  Game.prototype.in_draw=function(){ if(this.in_check()) return false; return this.moves({}).length===0; };
-  Game.prototype.moves=function(opts){
-    var verbose=opts&&opts.verbose, list=[], b=this._board, me=this._turn, opp=(me==='w'?'b':'w');
-    function pushMove(from,to,captured,promotion,special){ var move={from:from,to:to,color:me}; if(captured) move.captured=captured; if(promotion) move.promotion=promotion; if(special) move.special=special; if(verbose) list.push(move); else list.push(from+to); }
-    for(var r=0;r<8;r++) for(var f=0;f<8;f++){
-      var p=b[r][f]; if(!p||p.color!==me) continue; var from=FRtoSquare(f,r);
-      if(p.type==='p'){ var dir=(me==='w'?-1:1), fr1=r+dir;
-        if(inside(f,fr1) && !b[fr1][f]){ pushMove(from,FRtoSquare(f,fr1)); var home=(me==='w'?6:1), fr2=r+2*dir; if(r===home && !b[fr2][f]) pushMove(from,FRtoSquare(f,fr2)); }
-        for(var k=-1;k<=1;k+=2){ var cf=f+k, cr=r+dir; if(inside(cf,cr)&&b[cr][cf]&&b[cr][cf].color===opp) pushMove(from,FRtoSquare(cf,cr), b[cr][cf].type); }
-      } else if(p.type==='n'){ var KTS=[[1,2],[2,1],[-1,2],[-2,1],[1,-2],[2,-1],[-1,-2],[-2,-1]]; for(var i=0;i<KTS.length;i++){ var nf=f+KTS[i][0], nr=r+KTS[i][1]; if(!inside(nf,nr)) continue; var t=b[nr][nf]; if(!t||t.color===opp) pushMove(from,FRtoSquare(nf,nr), t?t.type:undefined);} }
-      else if(p.type==='b'||p.type==='r'||p.type==='q'){ var dirs=[]; if(p.type!=='r') dirs=dirs.concat([[1,1],[1,-1],[-1,1],[-1,-1]]); if(p.type!=='b') dirs=dirs.concat([[1,0],[-1,0],[0,1],[0,-1]]);
-        for(var d=0;d<dirs.length;d++){ var df=dirs[d][0], dr=dirs[d][1], nf=f+df, nr=r+dr; while(inside(nf,nr)){ var t=b[nr][nf]; if(!t) pushMove(from,FRtoSquare(nf,nr)); else { if(t.color===opp) pushMove(from,FRtoSquare(nf,nr), t.type); break; } nf+=df; nr+=dr; } } }
-      else if(p.type==='k'){ for(var rf=-1;rf<=1;rf++) for(var ff=-1;ff<=1;ff++){ if(rf===0&&ff===0) continue; var nf=f+ff, nr=r+rf; if(!inside(nf,nr)) continue; var t=b[nr][nf]; if(!t||t.color===opp) pushMove(from,FRtoSquare(nf,nr), t?t.type:undefined); }
-        var homeRank=(me==='w'?7:0); if(r===homeRank && f===4 && !p.moved){ var rook=b[homeRank][7]; if(rook && rook.type==='r' && rook.color===me && !rook.moved){ if(!b[homeRank][5] && !b[homeRank][6]){ if(!this.isSquareAttacked(4,homeRank,opp) && !this.isSquareAttacked(5,homeRank,opp) && !this.isSquareAttacked(6,homeRank,opp)){ pushMove(from,FRtoSquare(6,homeRank), undefined, undefined, 'castleK'); } } } }
-      }
-    }
-    var legal=[];
-    for(var i=0;i<list.length;i++){
-      var m=verbose?list[i]:{from:list[i].slice(0,2), to:list[i].slice(2,4)};
-      var g=this.clone(); var mv=g._applyMove(m);
-      var ksq=g.kingSquare(this._turn); if(ksq && !g.isSquareAttacked(ksq.f, ksq.r, (this._turn==='w'?'b':'w'))){ legal.push(verbose?mv:m.from+m.to); }
-    }
-    return legal;
-  };
-  Game.prototype._applyMove=function(m){
-    var b=this._board, me=this._turn, opp=(me==='w'?'b':'w');
-    var a={f:'abcdefgh'.indexOf(m.from[0]), r:'12345678'.indexOf(m.from[1])};
-    var t={f:'abcdefgh'.indexOf(m.to[0]), r:'12345678'.indexOf(m.to[1])};
-    var p=b[a.r][a.f]; var captured=b[t.r][t.f]?b[t.r][t.f].type:undefined;
-    if(m.special==='castleK' && p && p.type==='k'){
-      b[a.r][a.f]=null; b[t.r][t.f]={type:'k',color:me,moved:true}; b[a.r][5]={type:'r',color:me,moved:true}; b[a.r][7]=null;
-    } else {
-      b[a.r][a.f]=null;
-      var promoteRank=(me==='w'?0:7); var pieceType=p.type; if(p.type==='p' && t.r===promoteRank) pieceType='q';
-      b[t.r][t.f]={type:pieceType,color:me,moved:true};
-    }
-    this._turn=opp;
-    var rec={from:m.from,to:m.to,color:me,piece:{type:p.type,color:p.color},captured:captured,special:m.special};
-    rec.san = simpleSAN(p.type, m.from, m.to, captured);
-    this._history.push(rec); return rec;
-  };
-  Game.prototype.move=function(m){ var legal=this.moves({verbose:true}); for(var i=0;i<legal.length;i++){ if(legal[i].from===m.from && legal[i].to===m.to){ return this._applyMove(legal[i]); } } return null; };
-  Game.prototype.undo=function(){
-    var last=this._history.pop(); if(!last) return null; var b=this._board, me=(this._turn==='w'?'b':'w');
-    var a={f:'abcdefgh'.indexOf(last.from[0]), r:'12345678'.indexOf(last.from[1])};
-    var t={f:'abcdefgh'.indexOf(last.to[0]), r:'12345678'.indexOf(last.to[1])};
-    if(last.special==='castleK' && last.piece.type==='k'){ b[a.r][a.f]={type:'k',color:me,moved:false}; b[t.r][t.f]=null; b[a.r][7]={type:'r',color:me,moved:false}; b[a.r][5]=null; }
-    else { b[a.r][a.f]={type:last.piece.type,color:me,moved:false}; b[t.r][t.f]= last.captured?{type:last.captured,color:(me==='w'?'b':'w'),moved:true}:null; }
-    this._turn=me; return last;
-  };
-  global.Chess = Game;
-})(window);
-
-/* ---------------- Opening Trainer App ---------------- */
-(function(){
-  var glyph = {wp:'\u2659', wn:'\u2658', wb:'\u2657', wr:'\u2656', wq:'\u2655', wk:'\u2654', bp:'\u265F', bn:'\u265E', bb:'\u265D', br:'\u265C', bq:'\u265B', bk:'\u265A'};
-  function pieceGlyph(p){ return glyph[(p.color==='w'?'w':'b')+p.type] || ''; }
-  function stripChecks(san){ return san ? san.replace(/[+#]/g,'') : san; }
-  function setBgCSS(css){ document.body.style.setProperty('--bg', css); }
-  function fmtMs(ms){ var s=Math.max(0,Math.floor(ms/1000)), m=Math.floor(s/60), r=s%60; return m+':'+String(r).padStart(2,'0'); }
-  var LS = { get:function(k,def){try{var v=localStorage.getItem(k); return v==null?def:JSON.parse(v);}catch(e){return def;}}, set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}} };
-  var SS = { get:function(k,def){try{var v=sessionStorage.getItem(k); return v==null?def:JSON.parse(v);}catch(e){return def;}}, set:function(k,v){try{sessionStorage.setItem(k,JSON.stringify(v));}catch(e){}} };
-
-  var themeDefs = [
-    {id:'classic', name:'Classic Night', css:'linear-gradient(to bottom, #0f172a, #020617)', cost:0},
-    {id:'bluegrid', name:'Blue Grid', css:'radial-gradient(circle at 20px 20px,#0ea5e955 1px,transparent 1px) 0 0/24px 24px,linear-gradient(#020617,#0b1220)', cost:0},
-    {id:'paperdots', name:'Paper Dots', css:'radial-gradient(#64748b 1px, transparent 1px) 0 0/12px 12px,linear-gradient(#0b1220,#0b1220)', cost:0},
-    {id:'nebula', name:'Nebula', css:'radial-gradient(circle at 30% 20%,#7c3aed55,transparent 40%), radial-gradient(circle at 70% 70%,#22d3ee55,transparent 40%), linear-gradient(#0b1220,#020617)', cost:100},
-    {id:'carbon', name:'Carbon Fiber', css:'repeating-linear-gradient(45deg, #111 0 6px, #151515 6px 12px)', cost:200},
-    {id:'purplewaves', name:'Purple Waves', css:'repeating-radial-gradient(circle at 50% 50%, #3b0764, #0f172a 100px)', cost:400},
-    {id:'forest', name:'Forest Mesh', css:'radial-gradient(circle at 20% 80%,#16a34a33,transparent 40%), radial-gradient(circle at 80% 20%,#22c55e33,transparent 40%), linear-gradient(#0b1220,#020617)', cost:800},
-    {id:'marble', name:'Marble', css:'repeating-linear-gradient(60deg, #1f2937 0 18px, #111827 18px 36px)', cost:1600},
-    {id:'sunset', name:'Sunset Lines', css:'linear-gradient(180deg,#fb923c22,#f43f5e22), linear-gradient(#0b1220,#020617)', cost:3200},
-    {id:'retro', name:'Retro Checker', css:'conic-gradient(#0ea5e9 25%, #a78bfa 0 50%, #f472b6 0 75%, #fde047 0) 0 0/40px 40px', cost:6400}
-  ];
-
-  var COINS_KEY='trainerCoins', PURCHASES_KEY='trainerPurchases', THEME_KEY='trainerTheme', INTRO_KEY='trainerIntroSkip', INTRO_SESSION_KEY='trainerIntroDismissed';
-  var coins = LS.get(COINS_KEY, 0);
-  var purchases = LS.get(PURCHASES_KEY, []);
-  var theme = LS.get(THEME_KEY, 'classic');
-  var skipIntroCheckbox = false;
-
-  function introFlags(){
-    return {
-      forever: LS.get(INTRO_KEY, false),
-      session: SS.get(INTRO_SESSION_KEY, false)
-    };
-  }
-
-  function addCoins(n){ coins += n; LS.set(COINS_KEY, coins); }
-  function chooseTheme(t){
-    if(theme===t.id) return;
-    if(purchases.indexOf(t.id)!==-1 || t.cost===0){ theme=t.id; LS.set(THEME_KEY, t.id); setBgCSS(t.css); render(); return; }
-    if(coins>=t.cost){
-      if(confirm('Buy \"'+t.name+'\" for '+t.cost+' coins?')){
-        coins -= t.cost; LS.set(COINS_KEY, coins);
-        purchases = purchases.concat([t.id]); LS.set(PURCHASES_KEY, purchases);
-        theme=t.id; LS.set(THEME_KEY, t.id); setBgCSS(t.css); render();
-      }
-    }else alert('Not enough coins.');
-  }
-  (function applyThemeOnce(){ var t=themeDefs.find(function(x){return x.id===theme;})||themeDefs[0]; setBgCSS(t.css); })();
-
-  var OPENINGS={
-    vienna:{label:'Vienna Gambit (You = White)', user:'w', book:['e4','e5','Nc3','Nf6','f4','d5','fxe5','Nxe4','Qf3','Nc6','Bb5','Nxc3','dxc3']},
-    dutch:{label:'Dutch Defense (You = Black)', user:'b', book:['d4','f5','c4','Nf6','Nc3','e6','Nf3','Be7','g3','O-O']}
-  };
-
-  var val = {p:100,n:320,b:330,r:500,q:900,k:0};
-  function evaluateBoard(g){
-    var score=0, b=g.board();
-    for(var r=0;r<8;r++){ for(var f=0;f<8;f++){ var p=b[r][f]; if(!p) continue; var s=val[p.type]||0; score += (p.color==='w'? s : -s); } }
-    try{ score += (g.moves({verbose:true}).length)*0.3 * (g.turn()==='w'?1:-1); }catch(e){}
-    return score;
-  }
-  function orderMoves(moves){ return moves.sort(function(a,b){ return (b.captured?1:0)-(a.captured?1:0); }); }
-  function minimaxRoot(depth, game, isWhite){
-    var moves = orderMoves(game.moves({verbose:true}));
-    var bestMove=null, bestValue = isWhite? -1e9 : 1e9;
-    for(var i=0;i<moves.length;i++){
-      var m=moves[i]; game.move(m);
-      var v = minimax(depth-1, game, !isWhite, -1e9, 1e9);
-      game.undo();
-      if(isWhite ? (v>bestValue) : (v<bestValue)){ bestValue = v; bestMove = m; }
-    }
-    return bestMove || moves[0] || null;
-  }
-  function minimax(depth, game, isWhite, alpha, beta){
-    if(depth===0) return evaluateBoard(game);
-    var best = isWhite? -1e9 : 1e9;
-    var moves = orderMoves(game.moves({verbose:true}));
-    for(var i=0;i<moves.length;i++){
-      var m=moves[i]; game.move(m);
-      var v = minimax(depth-1, game, !isWhite, alpha, beta);
-      game.undo();
-      if(isWhite){ if(v>best) best=v; if(v>alpha) alpha=v; } else { if(v<best) best=v; if(v<beta) beta=v; }
-      if(beta<=alpha) break;
-    }
-    return best;
-  }
-
-  var mode='ai', openingKey='vienna', opening = OPENINGS[openingKey];
-  var orientation = (opening.user==='w'?'white':'black');
-  var selected = null;
-  var status = 'Click your piece, then the target square.';
-  var showHint = false;
-  var aiDepth = 2;
-  var capBlack = [], capWhite = [];
-  var game = new Chess();
-  var aiThinking = false;
-  var baseMin = 5, incSec = 3;
-  var whiteMs = baseMin*60*1000, blackMs = baseMin*60*1000;
-  var running = false, active = 'w', tickRef = null;
-
-  function resetAll(){
-    game = new Chess(); selected=null; capBlack=[]; capWhite=[];
-    status='New game.'; aiThinking=false; running=false;
-    whiteMs=baseMin*60*1000; blackMs=baseMin*60*1000; active='w';
-    render();
-  }
-  function expectedBookAtPly(ply){ return opening.book[ply] || null; }
-  function insideBookForPly(ply){ return ply < opening.book.length; }
-  function applyMove(g,m){
-    if(!m) return;
-    if(m.captured){ if(m.color==='w'){ capBlack=capBlack.concat([glyph['b'+m.captured]]); addCoins(2); } else { capWhite=capWhite.concat([glyph['w'+m.captured]]); addCoins(2); } }
-    if(g.in_checkmate()){ status='Checkmate!'; addCoins(50); running=false; }
-    else if(g.in_draw()){ status='Draw.'; running=false; }
-    else if(g.in_check()){ status='Check!'; addCoins(1); }
-    else status=(g.turn()===(opening.user)?'Your move.':'AI to move…');
-  }
-  function handleSquareClick(sq){
-    var userColor = opening.user;
-    if(mode!=='free' && game.turn()!==userColor){ status='Wait for AI...'; renderStatus(); return; }
-    if(!selected){
-      var b=game.board(), f=sq.charCodeAt(0)-97, r=parseInt(sq[1],10), p=b[8-r][f];
-      if(!p || (mode!=='free' && p.color!==userColor)){ status='Select one of your pieces.'; renderStatus(); return; }
-      selected=sq; render(); return;
-    }
-    if(selected===sq){ selected=null; render(); return; }
-    var g = game.clone();
-    var move = g.move({from:selected,to:sq,promotion:'q'});
-    if(!move){ status='Illegal move.'; selected=null; renderStatus(); return; }
-    if(mode!=='free'){
-      var plyAfterUser = g.history().length - 1;
-      var expected = expectedBookAtPly(plyAfterUser);
-      if(expected && stripChecks(move.san)!==stripChecks(expected)){
-        status='Book enforced: follow the '+(openingKey==='vienna'?'Vienna Gambit':'Dutch Defense')+'. Switch to Free for All to explore.';
-        selected=null; renderStatus(); return;
-      }
-    }
-    game=g; selected=null; applyMove(g, move); render();
-    if(mode==='timed-ai'){ var inc = incSec*1000; if(move.color==='w') whiteMs+=inc; else blackMs+=inc; active=(active==='w'?'b':'w'); }
-    if(!game.in_checkmate() && !game.in_draw()){
-      aiThinking=true; render();
-      setTimeout(function(){
-        var gg = game.clone();
-        var ply = gg.history().length;
-        var aiMove = null;
-        if(insideBookForPly(ply)){
-          var expected2 = expectedBookAtPly(ply);
-          var list = gg.moves({verbose:true});
-          // simulate each to compute SAN
-          for(var i=0;i<list.length;i++){
-            var sim = gg.clone(); var rec = sim.move(list[i]);
-            if(rec && stripChecks(rec.san)===stripChecks(expected2)){ aiMove=list[i]; break; }
-          }
-        }
-        if(!aiMove){
-          try{ var isWhite = gg.turn()==='w'; aiMove = minimaxRoot(Math.max(1,Math.min(3,aiDepth)), gg, isWhite); }
-          catch(e){ var list2 = gg.moves({verbose:true}); aiMove = list2[Math.floor(Math.random()*list2.length)] || null; }
-        }
-        if(aiMove){
-          gg.move(aiMove); game=gg; applyMove(gg, aiMove);
-          if(mode==='timed-ai'){ var inc2 = incSec*1000; if(aiMove.color==='w') whiteMs+=inc2; else blackMs+=inc2; active=(active==='w'?'b':'w'); }
-        } else {
-          status='AI has no legal moves.';
-        }
-        aiThinking=false; render();
-      }, 150);
-    }
-  }
-  function hintSquares(){
-    var hintFrom=null, hintTo=null;
-    if(mode!=='free' && game.turn()===opening.user){
-      var plyHint = game.history().length;
-      var expectedHint = expectedBookAtPly(plyHint);
-      if(expectedHint){
-        try{
-          var clone = game.clone();
-          var listH = clone.moves({verbose:true});
-          for(var hi=0;hi<listH.length;hi++){
-            var sim=clone.clone(); var rec=sim.move(listH[hi]);
-            if(rec && stripChecks(rec.san)===stripChecks(expectedHint)){ hintFrom=listH[hi].from; hintTo=listH[hi].to; break; }
-          }
-        }catch(e){}
-      }
-    }
-    return {hintFrom:hintFrom, hintTo:hintTo};
-  }
-  function SimpleBoard(props){
-    var files=['a','b','c','d','e','f','g','h'];
-    var ranksTop=['8','7','6','5','4','3','2','1'];
-    var fileOrder = (props.orientation==='white') ? files : files.slice().reverse();
-    var rankOrder = (props.orientation==='white') ? ranksTop : ranksTop.slice().reverse();
-    var board = props.game.board();
-    var children = [];
-    for(var ri=0;ri<rankOrder.length;ri++){
-      for(var fi=0;fi<fileOrder.length;fi++){
-        var r = rankOrder[ri], f = fileOrder[fi];
-        var sq = f + r;
-        var p = board[8-parseInt(r)][f.charCodeAt(0)-97];
-        var isHi = (sq===props.selected || sq===props.highlightFrom || sq===props.highlightTo);
-        var color = p ? (p.color==='w' ? '#f8fafc' : '#0b0f19') : undefined;
-        var shadow = p ? (p.color==='w' ? '0 0 2px #000, 0 0 4px #000' : '0 0 1px #fff') : undefined;
-        var squareClass = ((fi+ri)%2===1)?'dark':'light';
-        children.push(
-          React.createElement('div',{key:sq,className:'square '+squareClass+(isHi?' sq-highlight':''),style:{aspectRatio:'1 / 1'},onClick:(function(s){return function(){ handleSquareClick(s); };})(sq)},
-            p ? React.createElement('div',{className:'piece',style:{color:color,textShadow:shadow}}, pieceGlyph(p)) : null
-          )
-        );
-      }
-    }
-    return React.createElement('div',{className:'board',style:{width:560,maxWidth:'100%',margin:'0 auto',display:'grid',gridTemplateColumns:'repeat(8,1fr)',borderRadius:12,overflow:'hidden',boxShadow:'0 8px 30px rgba(0,0,0,0.5)'}}, children);
-  }
-  function ThemeGrid(){
-    return React.createElement('section',{style:{marginTop:18,padding:12,borderRadius:12,border:'1px solid rgba(255,255,255,.12)',background:'rgba(255,255,255,.05)'}},
-      React.createElement('div',{style:{display:'flex',justifyContent:'space-between',alignItems:'center',gap:8,flexWrap:'wrap'}},
-        React.createElement('strong',null,'Background themes'),
-        React.createElement('span',{style:{opacity:.8,fontSize:12}},'Three are free; others cost coins you earn while playing.')
-      ),
-      React.createElement('div',{className:'themes'},
-        themeDefs.map(function(t){
-          return React.createElement('div',{key:t.id,className:'theme',onClick:function(){ chooseTheme(t); },style:{background:t.css,cursor:'pointer',outline:(theme===t.id?'3px solid #22c55e':'none')}},
-            React.createElement('span',null,t.name),
-            React.createElement('span',{className:'ribbon'}, (t.cost ? ('\ud83e\ude99 '+t.cost) : 'Free'))
-          );
-        })
-      )
-    );
-  }
-  function Controls(){
-    return React.createElement('div',{},
-      React.createElement('header',{style:{display:'flex',gap:10,justifyContent:'space-between',alignItems:'center',flexWrap:'wrap'}},
-        React.createElement('div',{style:{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}},
-          React.createElement('strong',null,'Mode:'),
-          ['free','ai','timed-ai'].map(function(m){
-            return React.createElement('button',{
-              key:m,onClick:function(){ mode=m; status=(m==='free'?'Free for All: any moves allowed.':'AI mode: opening is enforced.'); render(); },
-              style:{padding:'6px 10px',borderRadius:8,border:'1px solid',borderColor:(mode===m?'#22c55e':'rgba(255,255,255,.18)'),background:(mode===m?'#16a34a':'rgba(255,255,255,.08)')}
-            }, m==='ai'?'AI':(m==='timed-ai'?'Timed AI':'Free for All'));
-          }),
-          React.createElement('span',null,'Opening:'),
-          React.createElement('select',{value:openingKey,onChange:function(e){ openingKey=e.target.value; opening=OPENINGS[openingKey]; orientation=(opening.user==='w'?'white':'black'); resetAll(); }},
-            Object.keys(OPENINGS).map(function(k){ return React.createElement('option',{key:k,value:k},OPENINGS[k].label); })
-          ),
-          React.createElement('label',{style:{marginLeft:8}},'AI strength ',
-            React.createElement('input',{type:'range',min:1,max:3,value:aiDepth,onChange:function(e){ aiDepth=Number(e.target.value); render(); }})
-          )
-        ),
-        React.createElement('div',{className:'wallet'},'\ud83e\ude99 ', coins, ' coins'),
-        React.createElement('button',{onClick:function(){ orientation=(orientation==='white'?'black':'white'); render(); },style:{padding:'6px 10px',borderRadius:8,border:'1px solid rgba(255,255,255,.18)',background:'rgba(255,255,255,.08)'}},'Flip Board')
-      ),
-      React.createElement('div',{style:{display:(mode==='timed-ai'?'grid':'none'),gridTemplateColumns:'1fr auto 1fr',alignItems:'center',gap:12,margin:'8px 0 16px'}},
-        React.createElement('div',{style:{textAlign:'left',fontFamily:'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas',fontSize:24}},'White: ',fmtMs(whiteMs)),
-        React.createElement('div',{style:{textAlign:'center'}},
-          React.createElement('label',null,'Base (min): ', React.createElement('input',{type:'number',min:1,max:60,value:baseMin,onChange:function(e){ baseMin=Number(e.target.value)||1; whiteMs=baseMin*60*1000; blackMs=baseMin*60*1000; running=false; active='w'; render(); },style:{width:70,marginRight:8}})),
-          React.createElement('label',null,'Increment (s): ', React.createElement('input',{type:'number',min:0,max:60,value:incSec,onChange:function(e){ incSec=Number(e.target.value)||0; render(); },style:{width:70}})),
-          React.createElement('div',{style:{marginTop:4,fontSize:12,opacity:.8}},'Fischer increment: time added to the mover after each move.')
-        ),
-        React.createElement('div',{style:{textAlign:'right',fontFamily:'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas',fontSize:24}},'Black: ',fmtMs(blackMs))
-      ),
-      React.createElement('div',{style:{display:(mode==='timed-ai'?'flex':'none'),gap:8,justifyContent:'center',marginBottom:8}},
-        React.createElement('button',{onClick:function(){ resetAll(); running=true; status='Timed AI game started.'; if(tickRef) clearInterval(tickRef); tickRef=setInterval(function(){ if(!running) return; if(active==='w') whiteMs=Math.max(0,whiteMs-200); else blackMs=Math.max(0,blackMs-200); if(whiteMs===0||blackMs===0){ running=false; clearInterval(tickRef); } renderStatus(); },200); render(); },style:{padding:'8px 12px',borderRadius:10,background:'#0ea5e9',border:'1px solid #0ea5e9',color:'white'}},'Start Game'),
-        React.createElement('button',{onClick:function(){ running=!running; render(); },style:{padding:'8px 10px',borderRadius:10,background:'rgba(255,255,255,.08)',border:'1px solid rgba(255,255,255,.18)'}}, (running ? 'Pause' : 'Resume')),
-        React.createElement('button',{onClick:function(){ resetAll(); },style:{padding:'8px 12px',borderRadius:10,background:'rgba(255,255,255,.08)',border:'1px solid rgba(255,255,255,.18)'}},'Reset')
-      ),
-      React.createElement('div',{className:'caprow'}, capBlack.map(function(g,i){ return React.createElement('span',{className:'b',key:i},g); }) ),
-      React.createElement(SimpleBoard, { game:game, orientation:orientation, selected:selected,
-        highlightFrom: (showHint? hintSquares().hintFrom : null),
-        highlightTo: (showHint? hintSquares().hintTo : null)
-      }),
-      React.createElement('div',{className:'caprow'}, capWhite.map(function(g,i){ return React.createElement('span',{className:'w',key:i},g); }) ),
-      React.createElement('div',{style:{marginTop:10,display:'flex',gap:10,alignItems:'center',justifyContent:'center',flexWrap:'wrap'}},
-        React.createElement('button',{onClick:function(){ showHint=!showHint; render(); },style:{padding:'6px 10px',borderRadius:8,border:'1px solid rgba(255,255,255,.18)',background:(showHint?'#f59e0b':'rgba(255,255,255,.08)'),color:(showHint?'#000':'inherit')}}, (showHint?'Hide Hint':'Show Hint')),
-        React.createElement('button',{onClick:function(){ resetAll(); },style:{padding:'6px 10px',borderRadius:8,border:'1px solid rgba(255,255,255,.18)',background:'rgba(255,255,255,.08)'}},'New Game'),
-        (aiThinking ? React.createElement('span',{className:'pill'},'AI thinking...') : null)
-      ),
-      React.createElement('div',{id:'statusLine',style:{marginTop:8,textAlign:'center'}},status),
-      ThemeGrid(),
-      React.createElement('footer',{style:{marginTop:24,textAlign:'center',fontSize:12,opacity:.7}}, 'Book enforced in AI modes: ', OPENINGS[openingKey].label, '. Switch to Free for All to explore.')
-    );
-  }
-  function IntroModal(){
-    return React.createElement('div',{className:'modal-backdrop'},
-      React.createElement('div',{className:'modal'},
-        React.createElement('h2',null,'How to play'),
-        React.createElement('p',null,'• Click your piece, then the target square.  • AI modes enforce the Vienna Gambit (White) or Dutch Defense (Black).  • Use Free for All to explore any moves.  • Timed AI lets you set base time and per-move increment.'),
-        React.createElement('label', {style:{display:'flex',alignItems:'center',gap:8,marginTop:8}},
-          React.createElement('input',{type:'checkbox',onChange:function(e){ skipIntroCheckbox = e.target.checked; }}),
-          'Do not show again'
-        ),
-        React.createElement('div',{style:{display:'flex',gap:8,justifyContent:'flex-end',marginTop:12}},
-          React.createElement('button',{onClick:function(){
-              if(skipIntroCheckbox){ LS.set(INTRO_KEY, true); }
-              else { SS.set(INTRO_SESSION_KEY, true); }
-              render(); // re-render; render() will read flags freshly
-            },style:{padding:'8px 12px',borderRadius:10,background:'#0ea5e9',border:'1px solid #0ea5e9',color:'white'}},'OK')
-        )
-      )
-    );
-  }
-  function render(){
-    var root = document.getElementById('root');
-    var children = [ React.createElement('div',{style:{maxWidth:1200,margin:'0 auto'}}, React.createElement(Controls,null)) ];
-    var flags = introFlags();
-    var shouldShowIntro = !(flags.forever || flags.session);
-    if(shouldShowIntro){ children.unshift(React.createElement(IntroModal,null)); }
-    ReactDOM.createRoot(root).render(React.createElement('div',{style:{minHeight:'100vh',padding:24}}, children));
-  }
-  function renderStatus(){ var el = document.getElementById('statusLine'); if(el) el.textContent = status; }
-  render();
-})();
+let board=[], whiteToMove=true, flipped=false;
+const PIECES={{'P':'♙','R':'♖','N':'♘','B':'♗','Q':'♕','K':'♔','p':'♟︎','r':'♜','n':'♞','b':'♝','q':'♛','k':'♚'}};
+function start(){{ board=[['r','n','b','q','k','b','n','r'],['p','p','p','p','p','p','p','p'],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],['P','P','P','P','P','P','P','P'],['R','N','B','Q','K','B','N','R']]; whiteToMove=true; }}
+function inB(r,c){{return r>=0&&r<8&&c>=0&&c<8}} function isW(p){{return p&&p===p.toUpperCase()}} function isB(p){{return p&&p===p.toLowerCase()}}
+function gen(r,c){{ const p=board[r][c]; if(!p)return[]; const me=isW(p); const M=[]; const add=(rr,cc)=>{{ if(!inB(rr,cc))return; const t=board[rr][cc]; if(t===null||(me?isB(t):isW(t)))M.push([rr,cc]); }};
+  switch(p.toUpperCase()){{ case'P':{{ const d=me?-1:1, s=me?6:1; if(inB(r+d,c)&&board[r+d][c]==null){{M.push([r+d,c]); if(r===s&&board[r+2*d][c]==null)M.push([r+2*d,c]);}} [[d,-1],[d,1]].forEach(([dr,dc])=>{{const rr=r+dr,cc=c+dc;if(inB(rr,cc)){{const t=board[rr][cc]; if(t&&(me?isB(t):isW(t)))M.push([rr,cc]);}}}}); break;}} case'N':{{[[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]].forEach(([dr,dc])=>add(r+dr,c+dc));break;}} case'B':{{[[-1,-1],[-1,1],[1,-1],[1,1]].forEach(([dr,dc])=>{{let rr=r+dr,cc=c+dc;while(inB(rr,cc)){{if(board[rr][cc]==null)M.push([rr,cc]);else{{if(me?isB(board[rr][cc]):isW(board[rr][cc]))M.push([rr,cc]);break;}} rr+=dr;cc+=dc;}}}});break;}} case'R':{{[[-1,0],[1,0],[0,-1],[0,1]].forEach(([dr,dc])=>{{let rr=r+dr,cc=c+dc;while(inB(rr,cc)){{if(board[rr][cc]==null)M.push([rr,cc]);else{{if(me?isB(board[rr][cc]):isW(board[rr][cc]))M.push([rr,cc]);break;}} rr+=dr;cc+=dc;}}}});break;}} case'Q':{{[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[-1,1],[1,-1],[1,1]].forEach(([dr,dc])=>{{let rr=r+dr,cc=c+dc;while(inB(rr,cc)){{if(board[rr][cc]==null)M.push([rr,cc]);else{{if(me?isB(board[rr][cc]):isW(board[rr][cc]))M.push([rr,cc]);break;}} rr+=dr;cc+=dc;}}}});break;}} case'K':{{for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++)if(dr||dc)add(r+dr,c+dc);break;}} }} return M; }}
+function render(){{ const el=document.getElementById('board'); el.innerHTML=''; const order=[0,1,2,3,4,5,6,7]; const rows=flipped?order:order.slice().reverse(); const cols=flipped?order.slice().reverse():order;
+  rows.forEach(rr=>{{ cols.forEach(cc=>{{ const d=document.createElement('div'); d.className='square '+((rr+cc)%2?'dark':'light'); d.dataset.r=rr; d.dataset.c=cc; const p=board[rr][cc]; if(p){{const s=document.createElement('span'); s.className='piece'; s.textContent=PIECES[p]; d.appendChild(s);}} el.appendChild(d); }}); }});
+  document.getElementById('turnBox')?.innerHTML='Turn: <strong>'+(whiteToMove?'White':'Black')+'</strong>';
+}}
+let sel=null; function clearH(){{ document.querySelectorAll('.square.highlight').forEach(s=>s.classList.remove('highlight')); }}
+document.addEventListener('click', e=>{{ const sq=e.target.closest('.square'); if(!sq)return; const r=+sq.dataset.r, c=+sq.dataset.c; const p=board[r][c];
+  if(p && (whiteToMove? p===p.toUpperCase(): p===p.toLowerCase())){{ sel=[r,c]; clearH(); gen(r,c).forEach(([rr,cc])=>{{ const idx=rr*8+cc; const t=document.querySelectorAll('#board .square')[idx]; t.classList.add('highlight'); }}); return; }}
+  if(sel){{ const [sr,sc]=sel; const legal=gen(sr,sc).some(([rr,cc])=>rr===r&&cc===c); if(legal){{ const mv=board[sr][sc]; board[r][c]=mv; board[sr][sc]=null; if((mv==='P'&&r===0)||(mv==='p'&&r===7)) board[r][c]=(mv==='P')?'Q':'q'; whiteToMove=!whiteToMove; sel=null; clearH(); render(); }} else {{ sel=null; clearH(); }} }}
+}});
+start(); render();
 </script>
-</body>
-</html>
+
+<!-- Slots popover -->
+<div class="popover" id="slotsPopover" role="dialog" aria-label="Mini Slots">
+  <h3>Mini Slots</h3>
+  <div class="row" style="justify-content:space-between">
+    <div class="row"><strong>Reels</strong><select id="reelSelect"><option>3</option><option>4</option><option>5</option><option selected>6</option></select></div>
+    <div class="row"><strong>Bet</strong><select id="betSelect"><option>10</option><option selected>25</option><option>50</option><option>100</option></select></div>
+  </div>
+  <div class="row" style="justify-content:center;margin-top:10px"><button class="btn" id="spinBtn">Spin</button></div>
+</div>
+
+<!-- Menu popover -->
+<div class="popover" id="menuPanel" role="dialog" aria-label="Menu">
+  <h3>Menu</h3>
+  <div class="row"><strong>Music</strong> <label style="margin-left:auto">On/Off <input type="checkbox" id="musicToggle"></label></div>
+  <div class="row"><label>Volume</label><select id="musicVol"><option value="0.2">Low</option><option value="0.6" selected>Medium</option><option value="1">High</option><option value="0">Mute</option></select>
+    <label>Track</label><select id="musicTrack"><option value="default">Default</option><option value="arcade">Arcade</option><option value="chill">Chill</option></select></div>
+  <hr style="border-color:#ffffff18">
+  <div class="row"><strong>Display</strong></div>
+  <div class="row"><label>Theme</label><select id="themeSel"><option>Dark</option><option>Light</option><option>High Contrast</option></select>
+    <label>Text Size</label><select id="textSel"><option>Default</option><option>Small</option><option>Large</option></select></div>
+  <hr style="border-color:#ffffff18">
+  <div class="row"><strong>Notifications</strong></div>
+  <div class="row"><label>Sound Alerts</label><input type="checkbox" id="notifSound"><label>Pop-ups</label><input type="checkbox" id="notifPopup" checked>
+    <label>Frequency</label><select id="notifFreq"><option>All</option><option>Major Only</option></select></div>
+</div>
+
+<!-- Chat popover -->
+<div class="popover" id="chatPopover"><h3>Assistant</h3>
+  <div id="chatLog" style="height:220px;overflow:auto;background:#120b07;border:1px solid #ffffff1a;border-radius:10px;padding:10px"></div>
+  <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+    <input type="text" id="chatInput" placeholder="Ask me anything about the site…" style="flex:1;background:#2a1b12;border:1px solid #ffffff1a;border-radius:10px;padding:10px">
+    <button class="btn" id="sendBtn">Send</button>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+function base(){ const segs=location.pathname.split('/').filter(Boolean); return location.origin+(segs.length?('/'+segs[0]):''); }
+$('backBtn').onclick=(e)=>{e.preventDefault(); try{history.length>1?history.back():location.assign(base()+'/');}catch(_){location.assign(base()+'/');}};
+$('profileLink').onclick=(e)=>{e.preventDefault(); fetch(base()+'/profile.html',{method:'HEAD'}).then(r=>{location.href=r.ok?base()+'/profile.html':base()+'/profile/'}).catch(()=>location.href=base()+'/profile/')};
+
+function openPanelAt(btn, panel, pos="below"){ const r=btn.getBoundingClientRect(); panel.style.display="block"; requestAnimationFrame(()=>{ const top=pos==="below"?(r.bottom+6):(r.top-panel.offsetHeight-6); let left=r.right-panel.offsetWidth; if(left<10) left=10; panel.style.top=top+"px"; panel.style.left=left+"px"; panel.classList.add('open'); }); }
+function closePanels(){ document.querySelectorAll('.popover').forEach(p=>{p.classList.remove('open'); p.style.display='none';}); document.querySelector('.menu-btn').classList.remove('open'); }
+window.addEventListener('click', e=>{ if(!e.target.closest('.popover') && !e.target.closest('.round-btn')) closePanels(); });
+
+const menuBtn=$('menuBtn'), menuPanel=$('menuPanel'); menuBtn.onclick=()=>{ const open=menuPanel.style.display==='block'; if(open){closePanels();} else{ closePanels(); openPanelAt(menuBtn,menuPanel,"below"); menuBtn.classList.add('open'); } };
+const slotsPopover=$('slotsPopover'); $('slotsBtn').onclick=()=>{ closePanels(); openPanelAt(slotsBtn, slotsPopover, "above"); };
+const chatPopover=$('chatPopover'); $('chatBtn').onclick=()=>{ closePanels(); openPanelAt(chatBtn, chatPopover, "above"); };
+
+const chatLog=$('chatLog'), chatInput=$('chatInput'); function addMsg(who,txt){ const d=document.createElement('div'); d.innerHTML=`<div style="padding:8px 10px;border-radius:12px;background:${{who==='me'?'#2a1b12':'#1f140d'}};margin:6px 0;max-width:90%">${{txt}}</div>`; d.style.display='flex'; d.style.justifyContent=who==='me'?'flex-end':'flex-start'; chatLog.appendChild(d); chatLog.scrollTop=chatLog.scrollHeight; }
+function detectLang(s){ if(/[你好谢谢再见]/.test(s))return'zh'; if(/[áéíóúñ¿¡]/i.test(s)||/\b(hola|ayuda|curso|ajustes|perfil)\b/i.test(s))return'es'; if(/[éèêàçù]/i.test(s)||/\b(bonjour|salut|profil|réglages)\b/i.test(s))return'fr'; return'en'; }
+function replyFor(lang, msg){ const t={{en:{{hi:"Hey! How can I help?",help:"I can answer questions about courses, slots, settings, or your profile.",slots:"Use 🎰 to open Mini Slots.",profile:"Tap 👤 for profile.",settings:"Open ☰ for theme, text size, music & notifications."}}, es:{{hi:"¡Hola! ¿En qué puedo ayudarte?",help:"Puedo responder sobre cursos, tragamonedas, ajustes o tu perfil.",slots:"Usa 🎰 para Mini Slots.",profile:"Toca 👤 para tu perfil.",settings:"Abre ☰ para tema, texto, música y notificaciones."}}, fr:{{hi:"Salut !",help:"Je peux répondre sur les cours, slots, réglages ou votre profil.",slots:"Utilisez 🎰 pour Mini Slots.",profile:"Appuyez sur 👤 pour le profil.",settings:"Ouvrez ☰ pour thème, texte, musique, notifications."}}, zh:{{hi:"你好！",help:"我可以回答课程、老虎机、设置或个人资料的问题。",slots:"点击 🎰 打开小游戏。",profile:"点击 👤 打开个人主页。",settings:"点击 ☰ 更改主题、字体、音乐、通知。"}}}}; if(/\b(slot|reel|spin|lever|🎰)\b/i.test(msg)) return t[lang].slots; if(/\b(profile|👤|avatar|followers|following)\b/i.test(msg)) return t[lang].profile; if(/\b(setting|theme|contrast|text|☰|notification)\b/i.test(msg)) return t[lang].settings; if(/\b(hi|hello|hey|hola|bonjour|salut|你好)\b/i.test(msg)) return t[lang].hi; return t[lang].help; }
+$('sendBtn').onclick=()=>{ const m=chatInput.value.trim(); if(!m) return; addMsg('me',m); chatInput.value=''; const lang=detectLang(m); addMsg('bot', replyFor(lang,m)); };
+setTimeout(()=> addMsg('bot', "👋 Welcome! I’m your Assistant. Ask me anything about the site."), 300);
+</script>

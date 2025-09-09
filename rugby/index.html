@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Coding Evolution</title>
+<title>Rugby</title>
 <style>
   :root{ --fg:#fffdf7; --bg1:#0b0b0f; --bg2:#1b0b00; --bg3:#3a0c00; --panel:#1a0f0a; --brand:#ff6b00; }
   *{box-sizing:border-box} html,body{height:100%}
@@ -33,15 +33,15 @@
 <a class="back-fab" href="#" id="backBtn">← Back</a>
 
 <main class="wrap"><div style="max-width:900px; margin:0 auto; text-align:left;">
-  <h1>Coding Evolution</h1>
+  <h1>Rugby</h1>
   <div style="background:var(--panel); border:1px solid #ffffff1a; border-radius:16px; padding:16px;">
-    <p>Welcome to the Coding Evolution course. Adjust your progress below; it will sync to your Profile.</p>
+    <p>Welcome to the Rugby course. Adjust your progress below; it will sync to your Profile.</p>
     <div class="row"><label for="p">Progress</label><input id="p" type="range" min="0" max="100" value="0"><span id="pv">0%</span></div>
     <div style="height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px;"><div id="bar" style="height:100%;width:0%;background:#ffd166"></div></div>
   </div>
 </div></main>
 <script>
-  const key='progress_coding-evolution'; function load(){ const v=parseInt(localStorage.getItem(key)||'0',10); p.value=v; pv.textContent=v+'%'; bar.style.width=v+'%'; }
+  const key='progress_rugby'; function load(){ const v=parseInt(localStorage.getItem(key)||'0',10); p.value=v; pv.textContent=v+'%'; bar.style.width=v+'%'; }
   function save(){ const v=parseInt(p.value,10); localStorage.setItem(key,String(v)); pv.textContent=v+'%'; bar.style.width=v+'%'; }
   const p=document.getElementById('p'), pv=document.getElementById('pv'), bar=document.getElementById('bar');
   p.addEventListener('input', save); load();

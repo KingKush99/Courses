@@ -1,271 +1,104 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>OC Mastery Trainer — Single File (Fixed v4)</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <style>html,body,#root{height:100%}body{margin:0;background:#060913;color:#e7ecff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell;font-size:20px}</style>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="text/babel" data-presets="env,react">
-const { useEffect, useMemo, useState, useRef } = React;
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Offensive Coordinator</title>
+<style>
+  :root{ --fg:#fffdf7; --bg1:#0b0b0f; --bg2:#1b0b00; --bg3:#3a0c00; --panel:#1a0f0a; --brand:#ff6b00; }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{margin:0; font-family: system-ui, Segoe UI, Roboto, Arial; color:var(--fg); overflow-x:hidden;
+       background:radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%),linear-gradient(120deg, var(--bg1), var(--bg2) 40%, var(--bg3));}
+  a{color:#ffd166}
+  .round-btn{position:fixed; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; color:#fff; cursor:pointer; background: radial-gradient(circle at 30% 30%, #ff9f1a, #ff6b00 60%, #3a0c00 100%); box-shadow: 0 8px 20px #000a; z-index:100;}
+  .profile-btn{left:16px; top:16px;} .slots-btn{right:16px; bottom:16px;} .chat-btn{left:16px; bottom:16px;} .menu-btn{right:16px; top:16px;}
+  .burger{position:relative; width:26px; height:18px;}
+  .burger span{position:absolute; left:0; width:100%; height:3px; background:#fff; border-radius:2px; transition:transform .25s ease, opacity .2s ease, top .25s ease;}
+  .burger span:nth-child(1){top:0} .burger span:nth-child(2){top:7.5px} .burger span:nth-child(3){top:15px}
+  .menu-btn.open .burger span:nth-child(1){top:7.5px; transform:rotate(45deg)} .menu-btn.open .burger span:nth-child(2){opacity:0} .menu-btn.open .burger span:nth-child(3){top:7.5px; transform:rotate(-45deg)}
+  .wrap{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:8vh 24px; text-align:center;}
+  h1{font-size:clamp(2rem,4vw+1rem,3rem); text-shadow:0 2px 20px #ff6b00aa; margin:0 0 6px;} .sub{opacity:.9; margin:0 0 18px;}
+  .popover{position:absolute; width:520px; max-width:95vw; background:var(--panel); border:1px solid #ffffff1f; border-radius:14px; padding:14px; box-shadow:0 12px 24px #000a; display:none; z-index:2000; color:#ffd9b3; overflow:hidden;}
+  .row{display:flex; align-items:center; gap:10px; margin:8px 0; flex-wrap:wrap;}
+  .btn{padding:8px 12px; border-radius:8px; border:1px solid #fff2; background:#2a1b12; color:#fff; cursor:pointer;}
+  select, input[type="range"], input[type="file"], input[type="text"]{background:#2a1b12; color:#fff; border:1px solid #fff2; border-radius:8px; padding:6px 8px;}
+  .back-fab{position:fixed; left:16px; top:86px; z-index:120; background:#2a1b12; border:1px solid #ffffff1a; color:#fff; padding:8px 12px; border-radius:999px; text-decoration:none;}
+</style>
+</head>
+<body>
+<a class="round-btn profile-btn" href="#" id="profileLink" title="Profile" aria-label="Profile">👤</a>
+<button class="round-btn menu-btn" id="menuBtn" title="Menu" aria-label="Menu"><div class="burger" aria-hidden="true"><span></span><span></span><span></span></div></button>
+<button class="round-btn slots-btn" id="slotsBtn" title="Mini Slots" aria-label="Mini Slots">🎰</button>
+<button class="round-btn chat-btn" id="chatBtn" title="Assistant" aria-label="Assistant">💬</button>
+<a class="back-fab" href="#" id="backBtn">← Back</a>
 
-/* ===== Styles & helpers ===== */
-function StyleTag(){return(<style>{`
-  :root { --bg: #060913; --card: #0d1324; --ok: #22c55e; --bad: #ff5c7a; }
-  *{box-sizing:border-box} html,body,#root{height:100%} body{margin:0;background:var(--bg);color:#e7ecff;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell;font-size:20px}
-  h1,h2,h3,h4{line-height:1.25}
-  .nav-btn{background:#1b233b;color:#fff;padding:12px 16px;border:0;border-radius:12px;cursor:pointer;font-size:18px}
-  .nav-btn.active{background:linear-gradient(135deg,#16a34a,#22c55e)}
-  .panel{background:#0d1324;padding:20px;border-radius:18px;box-shadow:0 12px 28px rgba(0,0,0,.35);width:100%}
-  .panel.full{width:100%}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-  .tab{padding:10px 14px;border-radius:12px;border:1px solid #1b233b;background:#0e152b;color:#fff;cursor:pointer;font-size:18px}
-  .tab.active{background:rgba(34,197,94,0.15);outline:2px solid var(--ok);color:#eafff3}
-  .section{background:#0a1020;padding:14px;border-radius:14px;margin-bottom:12px;border:1px solid #1b233b;font-size:18px}
-  .tip{background:#062916;color:#d9ffe9;padding:12px 14px;border-left:4px solid #22c55e;border-radius:8px;font-size:16px}
-  .quiz-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-  .pill{background:#0a1020;padding:8px 12px;border-radius:999px;border:1px solid #1b233b;color:#b9c4ff;font-size:14px}
-  .question{background:#0a1020;padding:18px;border-radius:14px;border:1px solid #1b233b}.qtext{font-size:24px;margin-bottom:12px}
-  .choices{list-style:none;padding:0;display:grid;gap:10px}.choice{background:#1b233b;color:#eaf2ff;border:0;text-align:left;padding:12px;border-radius:10px;cursor:pointer;font-size:18px}
-  .choice.correct{outline:2px solid var(--ok)} .choice.wrong{outline:2px solid #ff5c7a;opacity:0.9} .choice.dim{opacity:0.55}
-  .flashcard{background:#0a1020;border:1px solid #1b233b;height:300px;border-radius:16px;display:grid;place-items:center;font-size:26px;cursor:pointer;margin:12px 0;position:relative;perspective:1000px}
-  .flashcard .front,.flashcard .back{position:absolute;inset:0;display:grid;place-items:center;padding:16px;backface-visibility:hidden;transition:transform .5s ease;overflow:auto;text-align:center}
-  .flashcard .front{transform:rotateY(0deg)} .flashcard.flipped .front{transform:rotateY(180deg)}
-  .flashcard .back{transform:rotateY(180deg);background:#071e14;color:#d0ffea} .flashcard.flipped .back{transform:rotateY(360deg)}
-  .field{position:relative;border-radius:18px;border:1px solid #1b233b;height:70vh;background:repeating-linear-gradient(to bottom, rgba(255,255,255,0.05) 0 2px, transparent 2px 40px),linear-gradient(90deg, rgba(255,255,255,0.04) 1px, rgba(0,0,0,0) 1px);background-color:#0a1020}
-  .piece{position:absolute;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;user-select:none;font-weight:800;font-size:16px}
-  .piece.off{background:#14532d;color:#eafff3;border:1px solid #22c55e}.piece.def{background:#3f1d2b;color:#ffe3ea;border:1px solid #ff5c7a;border-radius:8px}
-  .def-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
-  .def-search{flex:1;min-width:260px;padding:12px;border-radius:12px;background:#0a1020;color:#e7ecff;border:1px solid #1b233b;font-size:18px}
-  .defs-table{display:grid;gap:8px}.defs-head,.defs-row{display:grid;grid-template-columns:1.2fr 3fr 0.8fr;gap:10px}.defs-head{font-weight:800;color:#cfe4ff;border-bottom:1px solid #16325a;padding-bottom:8px}
-  .defs-row{background:#0a1020;padding:10px;border-radius:12px;border:1px solid #1b233b;font-size:18px}
-`}</style>)}
-function loadProgress(){try{const raw=localStorage.getItem("oc-mastery-v1");return raw?JSON.parse(raw):{}}catch{return{}}}
-function saveProgress(p){try{localStorage.setItem("oc-mastery-v1",JSON.stringify(p))}catch{}}
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v))}
-
-/* ===== Data ===== */
-function buildDefinitions(){const D=[];const add=(t,d,c)=>D.push({term:t,definition:d,category:c});
-  // Personnel
-  add("11 personnel","1 RB, 1 TE, 3 WR. NFL base spread; balances run threats with three wideouts.","Personnel");
-  add("12 personnel","1 RB, 2 TEs, 2 WR. Helps edges in run/boot; good for play-action shots.","Personnel");
-  add("21 personnel","2 RB (often FB), 1 TE, 2 WR. Under-center run game & play-action.","Personnel");
-  // Formations
-  add("Trips","Three receivers to one side.","Formation");
-  add("Bunch","Three receivers in a tight triangle; creates picks/rubs vs man.","Formation");
-  add("Condensed/Tight","WR splits reduced; promotes two-way releases and motion leverage.","Formation");
-  add("3x1","Three eligibles to one side, one to the other (often TE).","Formation");
-  add("2x2","Two eligibles per side; balanced spread.","Formation");
-  add("Empty","No RB in backfield; QB with 5 eligibles out.","Formation");
-  add("Stack","Two WRs aligned one behind the other; helps vs press.","Formation");
-  // Run
-  add("Inside Zone (IZ)","Zone run on vertical combos. RB reads first down lineman play-side to backside.","Run");
-  add("Wide/Outside Zone (OZ)","Lateral tracks; aiming point outside leg of TE; stresses edges.","Run");
-  add("Duo","Power without a puller: vertical doubles to LBs; RB presses A-gap and bends.","Run");
-  add("Power","Gap run with backside guard pull to kick or wrap.","Run");
-  add("Counter GT","Backside guard kicks, tackle wraps; misdirection vs flow.","Run");
-  add("Pin & Pull","Frontside down blocks (pin) with uncovered linemen pulling to edge.","Run");
-  add("Toss Crack","WR crack on force; OL pull to perimeter; stress CB tackling.","Run");
-  add("Split Zone","Zone run with backside TE slicing across to seal EMLOS.","Run");
-  add("Trap","Quick-hitting gap run: kick-out on penetrating DL with a puller.","Run");
-  // Pass
-  add("Stick","Inside hitch (or option) with flat; horizontal stretch of flat defender.","Pass");
-  add("Spacing","Three short routes settling to spaced landmarks vs zone.","Pass");
-  add("Slant-Flat","Slant paired with flat to stretch curl/flat.","Pass");
-  add("Smash","Corner route over short hitch; high-low on corner.","Pass");
-  add("Dagger","Clearout vertical with deep dig behind.","Pass");
-  add("Drive","Shallow cross with dig behind; Hi-Lo on hooks.","Pass");
-  add("Mesh","Two crossing routes ~6 yds with sit/rail; man-beater with rubs.","Pass");
-  add("Y-Cross","TE/slot deep cross; stresses safeties.","Pass");
-  add("Sail/Flood","Three-level stretch to sideline (go/corner/flat).","Pass");
-  add("Yankee","Deep post + deep over off play-action; single-high shot.","Pass");
-  add("Four Verts","Four verticals with benders/choice vs two-high.","Pass");
-  add("Levels","Staggered in-breakers at multiple depths.","Pass");
-  // Protections
-  add("Slide protection","OL slides one direction; back handles opposite edge or insert.","Protection");
-  add("Half-slide","Slide to one side; man/BOB rules on the other.","Protection");
-  add("BOB/Man","Big-on-Big: OL on DL; RB/TE on LBs/DBs.","Protection");
-  add("Max protect (7-man)","Keep TE/RB in to protect for shot plays.","Protection");
-  add("Green dog","Second-level defender who adds if his coverage assignment blocks.","Protection");
-  add("Hot route","Immediate throw replacing an unblocked blitzer.","Protection");
-  // Fronts
-  add("Even front","Four down linemen (4-2 or 4-3 spacing).","Front");
-  add("Odd front","Three down linemen (3-3-5/3-4).","Front");
-  add("Over front","4-down with 3-tech to TE strength.","Front");
-  add("Under front","4-down with 3-tech away from TE.","Front");
-  add("Tite/Mint","3-down 4i-0-4i; squeezes zone, protects B-gaps.","Front");
-  add("Bear/46","Five on LOS covering center and both guards; chokes interior.","Front");
-  // Coverages
-  add("Cover 0","All-man, no middle help; pressure-heavy.","Coverage");
-  add("Cover 1","Man-free with deep post safety.","Coverage");
-  add("Cover 1 Robber","Man-free with robber in intermediate middle.","Coverage");
-  add("Cover 2","Two deep safeties, five underneath zones.","Coverage");
-  add("Tampa 2","Cover 2 variant with MLB running deep middle.","Coverage");
-  add("2-Man","Man under with two deep safeties.","Coverage");
-  add("Cover 3","Three deep, four under; MOF closed.","Coverage");
-  add("Quarters","Four deep defenders reading #2; pattern-match.","Coverage");
-  add("Palms/2-Read","Quarters variant reading #2; plays like Cover 2 vs out/flat.","Coverage");
-  // Pressure
-  add("Fire Zone (3-under, 3-deep)","Five rushers with three deep, three under; zone blitz family.","Pressure");
-  add("Sim/Creeper","Four-man rush simulated; 2nd-level replaces dropping DL.","Pressure");
-  // RPO
-  add("Glance RPO","Skinny post behind 2nd-level conflict vs two-high.","RPO");
-  add("Bubble RPO","Perimeter screen read off overhang.","RPO");
-  add("Now screen","Immediate WR screen to punish cushion.","RPO");
-  // Analytics & field
-  add("EPA per play","Expected Points Added relative to down/distance/field.","Analytics");
-  add("Success Rate","40/60/100 rule by down for many teams.","Analytics");
-  add("Explosive play","~10+ rush or 20+ pass (team varies).","Analytics");
-  add("MOF open/closed","Middle of field open (two-high) vs closed (single-high).","Field");
-  add("Apex/Overhang","Defender between box and slot; common RPO read key.","Field");
-  add("Force/Spill","Force sets edge; spill pushes run inside to help.","Field");
-  add("Boundary/Field","Short vs wide side of field based on hash.","Field");
-  return D;}
-function buildQuizBank(){return [
-  {prompt:'Which point distinguishes Duo from IZ?',choices:['Duo = vertical doubles; IZ = landmark reads.','IZ uses pullers while Duo never double teams.','Duo is weakside only.','IZ requires unbalanced.'],correct:0,explain:'Duo is power w/out a puller; IZ is track/landmark based.'},
-  {prompt:'Two-high shell, apex outside slot, CBs at 7. Expect?',choices:['Quarters/Match or Cover 2','Cover 1','Cover 0','Tampa 2 only'],correct:0,explain:'Two-high → Quarters or C2 until rotation.'},
-]}
-function buildFlashcards(){const defs=buildDefinitions().map(d=>({term:d.term,coachPoint:`${d.definition} — [${d.category}]`,type:'def'}));return defs}
-
-function Header(){return(<div style={{padding:12,marginBottom:10,display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-  <div style={{display:'flex',alignItems:'center',gap:12}}>
-    <svg width='34' height='34' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><path d='M21 7l-9 4-9-4 9-4 9 4z'/><path d='M3 7v10l9 4 9-4V7'/></svg>
-    <h1 style={{margin:0,fontSize:34}}>OC Mastery Trainer</h1>
+<main class="wrap"><div style="max-width:900px; margin:0 auto; text-align:left;">
+  <h1>Offensive Coordinator</h1>
+  <div style="background:var(--panel); border:1px solid #ffffff1a; border-radius:16px; padding:16px;">
+    <p>Welcome to the Offensive Coordinator course. Adjust your progress below; it will sync to your Profile.</p>
+    <div class="row"><label for="p">Progress</label><input id="p" type="range" min="0" max="100" value="0"><span id="pv">0%</span></div>
+    <div style="height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px;"><div id="bar" style="height:100%;width:0%;background:#ffd166"></div></div>
   </div>
-  <p style={{margin:0,opacity:.85,fontSize:18}}>Hands-on installs, quizzes, SRS & X&O board</p>
-</div>)}
-function NavBar({tab,setTab}){
-  const items=[{id:'defs',label:'Definitions'},{id:'quiz',label:'Quiz'},{id:'flash',label:'Flashcards'},{id:'board',label:'Board'},{id:'progress',label:'Progress'}];
-  return (<div style={{display:'flex',gap:10,flexWrap:'wrap',margin:'8px 0 16px'}}>{items.map(it=>(
-    <button key={it.id} onClick={()=>setTab(it.id)} className={'nav-btn'+(tab===it.id?' active':'')}>{it.label}</button>
-  ))}</div>)
-}
+</div></main>
+<script>
+  const key='progress_offensive-coordinator'; function load(){ const v=parseInt(localStorage.getItem(key)||'0',10); p.value=v; pv.textContent=v+'%'; bar.style.width=v+'%'; }
+  function save(){ const v=parseInt(p.value,10); localStorage.setItem(key,String(v)); pv.textContent=v+'%'; bar.style.width=v+'%'; }
+  const p=document.getElementById('p'), pv=document.getElementById('pv'), bar=document.getElementById('bar');
+  p.addEventListener('input', save); load();
+</script>
 
-function DefsView({defs,progress,setProgress}){
-  const [query,setQuery]=useState('');const [mode,setMode]=useState('study');const s=progress.srs||{};
-  useEffect(()=>{let changed=false;defs.forEach(d=>{if(!s[d.term]){s[d.term]={dueAt:Date.now()};changed=true}});if(changed)setProgress({...progress,srs:s})},[]);
-  const filtered=defs.filter(d=>(d.term+' '+d.definition+' '+d.category).toLowerCase().includes(query.toLowerCase()));
-  function formatMs(ms){const s=Math.round(ms/1000);if(s<60)return s+'s';const m=Math.round(s/60);if(m<60)return m+'m';const h=Math.round(m/60);if(h<48)return h+'h';const d=Math.round(h/24);return d+'d'}
-  function SRS(){const now=Date.now();const due=defs.slice().sort((a,b)=>(((s[a.term]&&s[a.term].dueAt)||0)-((s[b.term]&&s[b.term].dueAt)||0)));const cur=due[0]||defs[0];const dueAt=(s[cur.term]&&s[cur.term].dueAt)||now;const wait=Math.max(0,dueAt-now);
-    function rate(term,r){const ns={...(progress.srs||{})};const ms=r==='really-bad'?60*1000:r==='good'?10*60*1000:r==='really-good'?24*60*60*1000:4*24*60*60*1000;ns[term]={dueAt:Date.now()+ms};
-      const stats=progress.srsStats||{again:0,good:0,great:0,mastered:0};if(r==='really-bad')stats.again++;else if(r==='good')stats.good++;else if(r==='really-good')stats.great++;else stats.mastered++;
-      setProgress({...progress,srs:ns,srsStats:stats});}
-    return (<div className='srs'>
-      <div className='quiz-head'><div><h3 style={{margin:0}}>SRS (Anki-style)</h3><small>Highlight is always green</small></div><div className='pill'>{wait===0?'Due now':'Next in '+formatMs(wait)}</div></div>
-      <div className='flashcard big'><div className='front'>{cur.term}</div><div className='back'>{cur.definition} <div className='mini'><span className='pill'>{cur.category}</span></div></div></div>
-      <div style={{display:'flex',gap:8,justifyContent:'center'}}>
-        <button className='nav-btn' onClick={()=>rate(cur.term,'really-bad')}>Really Bad (1m)</button>
-        <button className='nav-btn' onClick={()=>rate(cur.term,'good')}>Good (10m)</button>
-        <button className='nav-btn' onClick={()=>rate(cur.term,'really-good')}>Really Good (1d)</button>
-        <button className='nav-btn' onClick={()=>rate(cur.term,'mastered')}>Mastered (4d)</button>
-      </div></div>)}
-  return (<div className='panel full'>
-    <div className='quiz-head'><div><h3 style={{margin:0}}>Definitions</h3><small>Study table or SRS drill (green highlight)</small></div>
-      <div className='pill'>Defs Score: {(progress.defsTrain&&progress.defsTrain.correct)||0} / {(progress.defsTrain&&progress.defsTrain.attempts)||0}</div></div>
-    <div className='def-controls'>
-      <input className='def-search' placeholder='Search terms, categories, definitions…' value={query} onChange={e=>setQuery(e.target.value)} />
-      <div className='modebar'>
-        <button className={'nav-btn'+(mode==='study'?' active':'')} onClick={()=>setMode('study')}>Study Table</button>
-        <button className={'nav-btn'+(mode==='srs'?' active':'')} onClick={()=>setMode('srs')}>SRS (Anki)</button>
-      </div>
-    </div>
-    {mode==='study'?(<div className='defs-table'>
-      <div className='defs-head'><div>Term</div><div>Definition</div><div>Category</div></div>
-      {filtered.map((d,i)=>(<div className='defs-row' key={i}><div className='term'>{d.term}</div><div className='def'>{d.definition}</div><div className='cat'><span className='pill'>{d.category}</span></div></div>))}
-    </div>):(<SRS/>)}
-  </div>)
-}
+<!-- Slots popover -->
+<div class="popover" id="slotsPopover" role="dialog" aria-label="Mini Slots">
+  <h3>Mini Slots</h3>
+  <div class="row" style="justify-content:space-between">
+    <div class="row"><strong>Reels</strong><select id="reelSelect"><option>3</option><option>4</option><option>5</option><option selected>6</option></select></div>
+    <div class="row"><strong>Bet</strong><select id="betSelect"><option>10</option><option selected>25</option><option>50</option><option>100</option></select></div>
+  </div>
+  <div class="row" style="justify-content:center;margin-top:10px"><button class="btn" id="spinBtn">Spin</button></div>
+</div>
 
-function QuizView({quizBank,progress,setProgress}){
-  const bank = Array.isArray(quizBank) ? quizBank : [];
-  const [i,setI]=useState(0);
-  const [sel,setSel]=useState(null);
-  const q = bank.length ? bank[Math.min(i, bank.length-1)] : null;
+<!-- Menu popover -->
+<div class="popover" id="menuPanel" role="dialog" aria-label="Menu">
+  <h3>Menu</h3>
+  <div class="row"><strong>Music</strong> <label style="margin-left:auto">On/Off <input type="checkbox" id="musicToggle"></label></div>
+  <div class="row"><label>Volume</label><select id="musicVol"><option value="0.2">Low</option><option value="0.6" selected>Medium</option><option value="1">High</option><option value="0">Mute</option></select>
+    <label>Track</label><select id="musicTrack"><option value="default">Default</option><option value="arcade">Arcade</option><option value="chill">Chill</option></select></div>
+  <hr style="border-color:#ffffff18">
+  <div class="row"><strong>Display</strong></div>
+  <div class="row"><label>Theme</label><select id="themeSel"><option>Dark</option><option>Light</option><option>High Contrast</option></select>
+    <label>Text Size</label><select id="textSel"><option>Default</option><option>Small</option><option>Large</option></select></div>
+  <hr style="border-color:#ffffff18">
+  <div class="row"><strong>Notifications</strong></div>
+  <div class="row"><label>Sound Alerts</label><input type="checkbox" id="notifSound"><label>Pop-ups</label><input type="checkbox" id="notifPopup" checked>
+    <label>Frequency</label><select id="notifFreq"><option>All</option><option>Major Only</option></select></div>
+</div>
 
-  if (!q) {
-    return (<div className='panel full'>
-      <div className='quiz-head'><div><h3 style={{margin:0}}>Coordinator Quiz</h3><small>No questions available.</small></div>
-      <div className='pill'>Score: {(progress.quiz&&progress.quiz.correct)||0} / {(progress.quiz&&progress.quiz.attempts)||0}</div></div>
-      <div className='section'>The quiz bank appears empty. Try refreshing the page.</div>
-    </div>);
-  }
+<!-- Chat popover -->
+<div class="popover" id="chatPopover"><h3>Assistant</h3>
+  <div id="chatLog" style="height:220px;overflow:auto;background:#120b07;border:1px solid #ffffff1a;border-radius:10px;padding:10px"></div>
+  <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+    <input type="text" id="chatInput" placeholder="Ask me anything about the site…" style="flex:1;background:#2a1b12;border:1px solid #ffffff1a;border-radius:10px;padding:10px">
+    <button class="btn" id="sendBtn">Send</button>
+  </div>
+</div>
 
-  function answer(idx){
-    if(sel!==null) return;
-    setSel(idx);
-    const ok = idx === q.correct;
-    const entry = progress.quiz || { attempts: 0, correct: 0 };
-    entry.attempts += 1;
-    if (ok) entry.correct += 1;
-    setProgress({ ...progress, quiz: entry });
-  }
-  function next(){
-    setSel(null);
-    if (bank.length) setI((i+1) % bank.length);
-  }
-  return (<div className='panel full'>
-    <div className='quiz-head'><div><h3 style={{margin:0}}>Coordinator Quiz</h3><small>Missed ones will come back.</small></div>
-      <div className='pill'>Score: {(progress.quiz&&progress.quiz.correct)||0} / {(progress.quiz&&progress.quiz.attempts)||0}</div></div>
-    <div className='question'><div className='qtext'>{q.prompt}</div><ul className='choices'>{q.choices.map((c,idx)=>(
-      <li key={idx}><button className={'choice '+(sel==null?'':(idx===q.correct?'correct':(idx===sel?'wrong':'dim')))} onClick={()=>answer(idx)}>{c}</button></li>
-    ))}</ul>
-    <div style={{display:'flex',justifyContent:'flex-end'}}><button className='nav-btn' onClick={next}>Next</button></div></div>
-  </div>)
-}
+<script>
+const $=id=>document.getElementById(id);
+function base(){ const segs=location.pathname.split('/').filter(Boolean); return location.origin+(segs.length?('/'+segs[0]):''); }
+$('backBtn').onclick=(e)=>{e.preventDefault(); try{history.length>1?history.back():location.assign(base()+'/');}catch(_){location.assign(base()+'/');}};
+$('profileLink').onclick=(e)=>{e.preventDefault(); fetch(base()+'/profile.html',{method:'HEAD'}).then(r=>{location.href=r.ok?base()+'/profile.html':base()+'/profile/'}).catch(()=>location.href=base()+'/profile/')};
 
-function FlashcardsView({cards,progress,setProgress}){
-  const [idx,setIdx]=useState(0);const [flip,setFlip]=useState(false);const card=cards[idx]||{term:'',coachPoint:''};
-  function mark(ok){const e=progress.flash||{seen:0,known:0};e.seen+=1;if(ok)e.known+=1;setProgress({...progress,flash:e});if(cards.length) setIdx((idx+1)%cards.length);setFlip(false)}
-  return (<div className='panel full'><div className='quiz-head'><div><h3 style={{margin:0}}>Flashcards</h3><small>Tap to flip, then mark.</small></div><div className='pill'>Known: {(progress.flash&&progress.flash.known)||0} / {(progress.flash&&progress.flash.seen)||0}</div></div>
-    <div className={'flashcard big'+(flip?' flipped':'')} onClick={()=>setFlip(!flip)}><div className='front'>{card.term}</div><div className='back'>{card.coachPoint}</div></div>
-    <div style={{display:'flex',gap:8,justifyContent:'center'}}><button className='nav-btn' onClick={()=>mark(false)}>Missed</button><button className='nav-btn' onClick={()=>mark(true)}>Got it</button></div>
-  </div>)
-}
+function openPanelAt(btn, panel, pos="below"){ const r=btn.getBoundingClientRect(); panel.style.display="block"; requestAnimationFrame(()=>{ const top=pos==="below"?(r.bottom+6):(r.top-panel.offsetHeight-6); let left=r.right-panel.offsetWidth; if(left<10) left=10; panel.style.top=top+"px"; panel.style.left=left+"px"; panel.classList.add('open'); }); }
+function closePanels(){ document.querySelectorAll('.popover').forEach(p=>{p.classList.remove('open'); p.style.display='none';}); document.querySelector('.menu-btn').classList.remove('open'); }
+window.addEventListener('click', e=>{ if(!e.target.closest('.popover') && !e.target.closest('.round-btn')) closePanels(); });
 
-function BoardView({progress,setProgress}){
-  const ref=useRef(null);const [pieces,setPieces]=useState(((progress.board&&progress.board.pieces)||[]));const [drag,setDrag]=useState(null);
-  useEffect(()=>{setProgress({...progress,board:{pieces}})},[pieces]);
-  function add(t){const id=Math.random().toString(36).slice(2);setPieces([...pieces,{id,t,x:100+pieces.length*20,y:100}])}
-  function clear(){setPieces([])}
-  function onDown(e,id){const r=ref.current.getBoundingClientRect();const p=pieces.find(p=>p.id===id);setDrag({id,offX:e.clientX-r.left-p.x,offY:e.clientY-r.top-p.y})}
-  function onMove(e){if(!drag)return;const r=ref.current.getBoundingClientRect();const x=e.clientX-r.left-drag.offX;const y=e.clientY-r.top-drag.offY;setPieces(arr=>arr.map(p=>p.id===drag.id?{...p,x:clamp(x,0,r.width-28),y:clamp(y,0,r.height-28)}:p))}
-  function onUp(){if(drag)setDrag(null)}
-  return (<div className='panel full' style={{padding:0}}>
-    <div className='quiz-head' style={{padding:16}}><div><h3 style={{margin:0}}>X's & O's Board</h3><small>Drag O (offense) and X (defense).</small></div>
-    <div className='modebar'><button className='nav-btn' onClick={()=>add('O')}>Add O</button><button className='nav-btn' onClick={()=>add('X')}>Add X</button><button className='nav-btn' onClick={clear}>Clear</button></div></div>
-    <div className='field' ref={ref} onMouseMove={onMove} onMouseUp={onUp}>{pieces.map(p=>(<div key={p.id} className={'piece '+(p.t==='O'?'off':'def')} style={{left:p.x,top:p.y}} onMouseDown={(e)=>onDown(e,p.id)}>{p.t}</div>))}</div>
-  </div>)
-}
+const menuBtn=$('menuBtn'), menuPanel=$('menuPanel'); menuBtn.onclick=()=>{ const open=menuPanel.style.display==='block'; if(open){closePanels();} else{ closePanels(); openPanelAt(menuBtn,menuPanel,"below"); menuBtn.classList.add('open'); } };
+const slotsPopover=$('slotsPopover'); $('slotsBtn').onclick=()=>{ closePanels(); openPanelAt(slotsBtn, slotsPopover, "above"); };
+const chatPopover=$('chatPopover'); $('chatBtn').onclick=()=>{ closePanels(); openPanelAt(chatBtn, chatPopover, "above"); };
 
-function ProgressView({progress}){
-  const s=progress.srsStats||{};return(<div className='panel full'><h3 style={{marginTop:0}}>Your Progress</h3><ul>
-    <li><b>Quiz:</b> {(progress.quiz&&progress.quiz.correct)||0} / {(progress.quiz&&progress.quiz.attempts)||0}</li>
-    <li><b>Flash:</b> {(progress.flash&&progress.flash.known)||0} / {(progress.flash&&progress.flash.seen)||0}</li>
-    <li><b>SRS Ratings:</b> Again {s.again||0} · Good {s.good||0} · Really Good {s.great||0} · Mastered {s.mastered||0}</li>
-  </ul><button className='nav-btn' onClick={()=>{localStorage.removeItem('oc-mastery-v1');location.reload()}}>Reset Progress</button></div>)
-}
-
-/* ===== App ===== */
-function OCMasteryTrainer(){
-  const [tab,setTab]=useState('defs');const [progress,setProgress]=useState(()=>loadProgress());
-  useEffect(()=>{saveProgress(progress)},[progress]);
-  const defs=useMemo(()=>buildDefinitions(),[]);const quizBank=useMemo(()=>buildQuizBank(),[]);const cards=useMemo(()=>buildFlashcards(),[]);
-  return (<div style={{width:'100%',margin:0,padding:16,color:'#e7ecff',background:'#060913',minHeight:'100vh'}}>
-    <StyleTag/><Header/><NavBar tab={tab} setTab={setTab}/>
-    {tab==='defs' && <DefsView defs={defs} progress={progress} setProgress={setProgress} />}
-    {tab==='quiz' && <QuizView quizBank={quizBank} progress={progress} setProgress={setProgress} />}
-    {tab==='flash' && <FlashcardsView cards={cards} progress={progress} setProgress={setProgress} />}
-    {tab==='board' && <BoardView progress={progress} setProgress={setProgress} />}
-    {tab==='progress' && <ProgressView progress={progress} />}
-  </div>)
-}
-ReactDOM.createRoot(document.getElementById('root')).render(<OCMasteryTrainer/>);
-    </script>
-  </body>
-</html>
-
+const chatLog=$('chatLog'), chatInput=$('chatInput'); function addMsg(who,txt){ const d=document.createElement('div'); d.innerHTML=`<div style="padding:8px 10px;border-radius:12px;background:${{who==='me'?'#2a1b12':'#1f140d'}};margin:6px 0;max-width:90%">${{txt}}</div>`; d.style.display='flex'; d.style.justifyContent=who==='me'?'flex-end':'flex-start'; chatLog.appendChild(d); chatLog.scrollTop=chatLog.scrollHeight; }
+function detectLang(s){ if(/[你好谢谢再见]/.test(s))return'zh'; if(/[áéíóúñ¿¡]/i.test(s)||/\b(hola|ayuda|curso|ajustes|perfil)\b/i.test(s))return'es'; if(/[éèêàçù]/i.test(s)||/\b(bonjour|salut|profil|réglages)\b/i.test(s))return'fr'; return'en'; }
+function replyFor(lang, msg){ const t={{en:{{hi:"Hey! How can I help?",help:"I can answer questions about courses, slots, settings, or your profile.",slots:"Use 🎰 to open Mini Slots.",profile:"Tap 👤 for profile.",settings:"Open ☰ for theme, text size, music & notifications."}}, es:{{hi:"¡Hola! ¿En qué puedo ayudarte?",help:"Puedo responder sobre cursos, tragamonedas, ajustes o tu perfil.",slots:"Usa 🎰 para Mini Slots.",profile:"Toca 👤 para tu perfil.",settings:"Abre ☰ para tema, texto, música y notificaciones."}}, fr:{{hi:"Salut !",help:"Je peux répondre sur les cours, slots, réglages ou votre profil.",slots:"Utilisez 🎰 pour Mini Slots.",profile:"Appuyez sur 👤 pour le profil.",settings:"Ouvrez ☰ pour thème, texte, musique, notifications."}}, zh:{{hi:"你好！",help:"我可以回答课程、老虎机、设置或个人资料的问题。",slots:"点击 🎰 打开小游戏。",profile:"点击 👤 打开个人主页。",settings:"点击 ☰ 更改主题、字体、音乐、通知。"}}}}; if(/\b(slot|reel|spin|lever|🎰)\b/i.test(msg)) return t[lang].slots; if(/\b(profile|👤|avatar|followers|following)\b/i.test(msg)) return t[lang].profile; if(/\b(setting|theme|contrast|text|☰|notification)\b/i.test(msg)) return t[lang].settings; if(/\b(hi|hello|hey|hola|bonjour|salut|你好)\b/i.test(msg)) return t[lang].hi; return t[lang].help; }
+$('sendBtn').onclick=()=>{ const m=chatInput.value.trim(); if(!m) return; addMsg('me',m); chatInput.value=''; const lang=detectLang(m); addMsg('bot', replyFor(lang,m)); };
+setTimeout(()=> addMsg('bot', "👋 Welcome! I’m your Assistant. Ask me anything about the site."), 300);
+</script>

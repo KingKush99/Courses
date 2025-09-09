@@ -6,63 +6,28 @@
 <title>Choose Your Course</title>
 <style>
   :root{ --fg:#fffdf7; --bg1:#0b0b0f; --bg2:#1b0b00; --bg3:#3a0c00; --panel:#1a0f0a; --brand:#ff6b00; }
-  *{box-sizing:border-box}
-  html,body{height:100%}
+  *{box-sizing:border-box} html,body{height:100%}
   body{margin:0; font-family: system-ui, Segoe UI, Roboto, Arial; color:var(--fg); overflow-x:hidden;
        background:radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%),linear-gradient(120deg, var(--bg1), var(--bg2) 40%, var(--bg3));}
   a{color:#ffd166}
-  .fire-bg{position:fixed; inset:0; z-index:-3;}
   .round-btn{position:fixed; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; color:#fff; cursor:pointer; background: radial-gradient(circle at 30% 30%, #ff9f1a, #ff6b00 60%, #3a0c00 100%); box-shadow: 0 8px 20px #000a; z-index:100;}
-  .profile-btn{left:16px; top:16px;}
-  .slots-btn{right:16px; bottom:16px;}
-  .chat-btn{left:16px; bottom:16px;}
-  .menu-btn{right:16px; top:16px; display:grid; place-items:center; cursor:pointer;}
+  .profile-btn{left:16px; top:16px;} .slots-btn{right:16px; bottom:16px;} .chat-btn{left:16px; bottom:16px;} .menu-btn{right:16px; top:16px;}
   .burger{position:relative; width:26px; height:18px;}
   .burger span{position:absolute; left:0; width:100%; height:3px; background:#fff; border-radius:2px; transition:transform .25s ease, opacity .2s ease, top .25s ease;}
   .burger span:nth-child(1){top:0} .burger span:nth-child(2){top:7.5px} .burger span:nth-child(3){top:15px}
-  .menu-btn.open .burger span:nth-child(1){top:7.5px; transform:rotate(45deg)}
-  .menu-btn.open .burger span:nth-child(2){opacity:0}
-  .menu-btn.open .burger span:nth-child(3){top:7.5px; transform:rotate(-45deg)}
+  .menu-btn.open .burger span:nth-child(1){top:7.5px; transform:rotate(45deg)} .menu-btn.open .burger span:nth-child(2){opacity:0} .menu-btn.open .burger span:nth-child(3){top:7.5px; transform:rotate(-45deg)}
   .wrap{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:8vh 24px; text-align:center;}
-  h1{font-size:clamp(2rem,4vw+1rem,3rem); text-shadow:0 2px 20px #ff6b00aa; margin:0 0 6px;}
-  .sub{opacity:.9; margin:0 0 18px;}
-
-  /* Panels */
+  h1{font-size:clamp(2rem,4vw+1rem,3rem); text-shadow:0 2px 20px #ff6b00aa; margin:0 0 6px;} .sub{opacity:.9; margin:0 0 18px;}
   .popover{position:absolute; width:520px; max-width:95vw; background:var(--panel); border:1px solid #ffffff1f; border-radius:14px; padding:14px; box-shadow:0 12px 24px #000a; display:none; z-index:2000; color:#ffd9b3; overflow:hidden;}
-  .popover h3{margin:6px 0 10px}
   .row{display:flex; align-items:center; gap:10px; margin:8px 0; flex-wrap:wrap;}
-  .row.space{justify-content:space-between;}
-  .btn{padding:8px 12px; border-radius:8px; border:1px solid #fff2; background:#2a1b12; color:#fff; cursor:pointer; white-space:nowrap;}
-  .btn:hover{background:#3a2416;}
+  .btn{padding:8px 12px; border-radius:8px; border:1px solid #fff2; background:#2a1b12; color:#fff; cursor:pointer;}
   select, input[type="range"], input[type="file"], input[type="text"]{background:#2a1b12; color:#fff; border:1px solid #fff2; border-radius:8px; padding:6px 8px;}
-  input[type="range"]{width:200px}
-  .menu-panel{transform-origin: top right; transform: translateY(-10px) scale(.98); opacity:0; pointer-events:none; transition:transform .22s ease, opacity .22s ease;}
-  .menu-panel.open{opacity:1; transform: translateY(0) scale(1); pointer-events:auto;}
-
-  /* Slots */
-  .slots-body{position:relative; padding:6px 10px 52px 10px;}
-  .reels-wrap{position:relative; width:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; }
-  .reels{display:flex; gap:10px; flex-wrap:nowrap; align-items:center; justify-content:center; width:100%;}
-  .reel{height:60px; background:#2a1b12; display:grid; place-items:center; border-radius:10px; font-size:28px; border:1px solid #ffffff22; box-shadow:inset 0 0 14px #000; transition:transform .2s ease;}
-  .reel.enter{animation:pop .15s ease;}
-  @keyframes pop{from{transform:scale(.6); opacity:.2} to{transform:scale(1); opacity:1}}
-  .slot-info{position:absolute; left:10px; bottom:10px; font-size:.9rem; opacity:.95; background:#140e0a; padding:4px 8px; border-radius:8px; border:1px solid #ffffff1a;}
-  .lever3d{position:absolute; right:14px; bottom:10px; width:50px; height:120px; perspective:700px;}
-  .lever-arm{position:absolute; right:22px; bottom:40px; width:6px; height:80px; background:linear-gradient(#e0e0e0,#a9a9a9); transform-origin:50% 0%; transform: rotateX(0deg); border-radius:4px; box-shadow: inset 0 0 6px #0006;}
-  .lever-knob{position:absolute; right:10px; bottom:120px; width:30px; height:30px; border-radius:50%; background:#ff4d00; box-shadow:0 0 14px #ff4d00aa; transform: translateZ(24px); cursor:grab;}
-  .dragging .lever-knob{cursor:grabbing;}
-
-  /* Back button */
   .back-fab{position:fixed; left:16px; top:86px; z-index:120; background:#2a1b12; border:1px solid #ffffff1a; color:#fff; padding:8px 12px; border-radius:999px; text-decoration:none;}
 </style>
 </head>
 <body>
-<div class="fire-bg"></div>
-
 <a class="round-btn profile-btn" href="#" id="profileLink" title="Profile" aria-label="Profile">👤</a>
-<button class="round-btn menu-btn" id="menuBtn" title="Menu" aria-label="Menu">
-  <div class="burger" aria-hidden="true"><span></span><span></span><span></span></div>
-</button>
+<button class="round-btn menu-btn" id="menuBtn" title="Menu" aria-label="Menu"><div class="burger" aria-hidden="true"><span></span><span></span><span></span></div></button>
 <button class="round-btn slots-btn" id="slotsBtn" title="Mini Slots" aria-label="Mini Slots">🎰</button>
 <button class="round-btn chat-btn" id="chatBtn" title="Assistant" aria-label="Assistant">💬</button>
 <a class="back-fab" href="#" id="backBtn">← Back</a>
@@ -70,204 +35,88 @@
 <main class="wrap">
   <div>
     <h1>🔥 Choose Your Course</h1>
-    <p class="sub">Hover a course to see a tooltip on the right of your cursor.</p>
-    <ul class="courses" id="courseList" style="list-style:none; padding:0; margin:18px auto 0; display:grid; gap:14px; width:min(540px,90vw);">
-      <li><a class="course" data-key="chess" href="chess/" data-candidates='["chess/","Chess/"]' data-desc="Play chess in the browser with larger pieces and drag-free taps.">Chess</a></li>
+    <p class="sub">Hover a course to see a tooltip.</p>
+    <ul id="courseList" style="list-style:none; padding:0; margin:18px auto 0; display:grid; gap:14px; width:min(540px,90vw); text-align:left;">
+      <li><a class="course" data-key="chess" href="chess/" data-candidates='["chess/","Chess/"]' data-desc="Play chess in the browser with larger pieces.">Chess</a></li>
       <li><a class="course" data-key="coding-evolution" href="Coding%20Evolution/" data-candidates='["Coding%20Evolution/","CodingEvolution/","coding-evolution/"]' data-desc="From fundamentals to modern full‑stack projects.">Coding Evolution</a></li>
       <li><a class="course" data-key="music-maker" href="Music%20Maker/" data-candidates='["Music%20Maker/","MusicMaker/","music-maker/"]' data-desc="Compose beats and melodies in the browser.">Music Maker</a></li>
       <li><a class="course" data-key="offensive-coordinator" href="Offensive%20Coordinator/" data-candidates='["Offensive%20Coordinator/","OffensiveCoordinator/","offensive-coordinator/"]' data-desc="Design plays and simulate drives.">Offensive Coordinator</a></li>
       <li><a class="course" data-key="quantum" href="Quantum/" data-candidates='["Quantum/","quantum/"]' data-desc="Qubits, gates, circuits, and entanglement.">Quantum</a></li>
       <li><a class="course" data-key="rugby" href="Rugby/" data-candidates='["Rugby/","rugby/"]' data-desc="Tactics, formations, and drills.">Rugby</a></li>
       <li><a class="course" data-key="poker" href="Poker/" data-candidates='["Poker/","poker/"]' data-desc="Hands, odds, bankroll management.">Poker</a></li>
-      <li><a class="course" data-key="bugbee" href="Bugbee/" data-candidates='["Bugbee/","bugbee/"]' data-desc="Bugbee sandbox and experiments.">Bugbee</a></li>
     </ul>
   </div>
 </main>
 
-<div id="hoverTip" style="position:fixed; max-width:min(70vw, 420px); padding:10px 12px; border-radius:10px; font-weight:500; font-size:.95rem; line-height:1.25; background:#120b07ee; color:#ffd9b3; border:1px solid #ff6b0040; pointer-events:none; opacity:0; transform: translateY(-6px); transition: opacity .12s ease, transform .12s ease; filter: drop-shadow(0 12px 18px #000a); z-index:9999;"></div>
+<div id="hoverTip" style="position:fixed; max-width:min(70vw, 420px); padding:10px 12px; border-radius:10px; background:#120b07ee; color:#ffd9b3; border:1px solid #ff6b0040; pointer-events:none; opacity:0; transform: translateY(-6px); transition: opacity .12s ease, transform .12s ease; filter: drop-shadow(0 12px 18px #000a); z-index:9999;"></div>
 
 <script>
-/* Tooltip */
+const $=id=>document.getElementById(id);
 (function(){ const tip=$('hoverTip'); const list=document.getElementById('courseList');
   function show(text,x,y){ tip.textContent=text; tip.style.left=(x+16)+'px'; tip.style.top=(y-12)+'px'; tip.style.opacity=1; tip.style.transform='translateY(0)'; }
   function hide(){ tip.style.opacity=0; tip.style.transform='translateY(-6px)'; }
   list.addEventListener('mousemove', e=>{ const a=e.target.closest('a.course'); if(a) show(a.getAttribute('data-desc'),e.clientX,e.clientY); else hide(); }); list.addEventListener('mouseleave', hide);
 })();
-
-/* Robust link router: tries multiple folder names per course */
+function getBase(){ const segs=location.pathname.split('/').filter(Boolean); const repo=segs.length?segs[0]:''; return location.origin+(repo?'/'+repo:''); }
 document.querySelectorAll('a.course').forEach(a=>{
-  a.addEventListener('click', async (e)=>{
-    e.preventDefault();
-    const candidates = JSON.parse(a.dataset.candidates || '[]');
-    for (const rel of candidates){
-      const url = base() + '/' + rel;
-      try{ const ok = await fetch(url + 'index.html', {method:'HEAD'}).then(r=>r.ok).catch(()=>false);
-           if(ok){ location.href = url; return; } }
-      catch(_){}
-    }
-    location.href = a.getAttribute('href'); // fallback
-  });
+  a.addEventListener('click', async (e)=>{ e.preventDefault(); const BASE=getBase(); const candidates=JSON.parse(a.dataset.candidates||'[]');
+    for(const rel of candidates){ const url=BASE+'/'+rel; try{ const ok = await fetch(url+'index.html',{method:'HEAD'}).then(r=>r.ok).catch(()=>false); if(ok){ location.href=url; return; } }catch(_){}
+    } location.href=a.getAttribute('href'); });
 });
 </script>
 
 <!-- Slots popover -->
 <div class="popover" id="slotsPopover" role="dialog" aria-label="Mini Slots">
   <h3>Mini Slots</h3>
-  <div class="row space">
-    <div class="row"><strong>Reels</strong>
-      <select id="reelSelect"><option>3</option><option>4</option><option>5</option><option selected>6</option></select>
-    </div>
-    <div class="row"><strong>Bet</strong>
-      <select id="betSelect"><option>10</option><option selected>25</option><option>50</option><option>100</option></select>
-    </div>
+  <div class="row" style="justify-content:space-between">
+    <div class="row"><strong>Reels</strong><select id="reelSelect"><option>3</option><option>4</option><option>5</option><option selected>6</option></select></div>
+    <div class="row"><strong>Bet</strong><select id="betSelect"><option>10</option><option selected>25</option><option>50</option><option>100</option></select></div>
   </div>
-  <div class="slots-body">
-    <div class="reels-wrap"><div class="reels" id="reels"></div></div>
-    <div class="row" style="justify-content:center; margin-top:10px;">
-      <button class="btn" id="spinBtn">Spin</button>
-    </div>
-    <div class="slot-info" id="slotInfo">Reels: <span id="reelNum">6</span> • Bet: <span id="betNum">25</span></div>
-    <div class="lever3d" id="lever3d" title="Pull the handle">
-      <div class="lever-arm" id="leverArm"></div>
-      <div class="lever-knob" id="leverKnob"></div>
-    </div>
-  </div>
+  <div class="row" style="justify-content:center;margin-top:10px"><button class="btn" id="spinBtn">Spin</button></div>
 </div>
 
-<!-- Hamburger (Navigation & Quick Access) -->
-<div class="popover menu-panel" id="menuPanel" role="dialog" aria-label="Menu">
+<!-- Menu popover -->
+<div class="popover" id="menuPanel" role="dialog" aria-label="Menu">
   <h3>Menu</h3>
-  <div class="row"><strong>Music</strong>
-    <label style="margin-left:auto">On/Off <input type="checkbox" id="musicToggle"></label>
-  </div>
-  <div class="row">
-    <label>Volume</label>
-    <select id="musicVol">
-      <option value="0.2">Low</option>
-      <option value="0.6" selected>Medium</option>
-      <option value="1">High</option>
-      <option value="0">Mute</option>
-    </select>
-    <label>Track</label>
-    <select id="musicTrack">
-      <option value="default">Default</option>
-      <option value="arcade">Arcade</option>
-      <option value="chill">Chill</option>
-    </select>
-  </div>
+  <div class="row"><strong>Music</strong> <label style="margin-left:auto">On/Off <input type="checkbox" id="musicToggle"></label></div>
+  <div class="row"><label>Volume</label><select id="musicVol"><option value="0.2">Low</option><option value="0.6" selected>Medium</option><option value="1">High</option><option value="0">Mute</option></select>
+    <label>Track</label><select id="musicTrack"><option value="default">Default</option><option value="arcade">Arcade</option><option value="chill">Chill</option></select></div>
   <hr style="border-color:#ffffff18">
   <div class="row"><strong>Display</strong></div>
-  <div class="row">
-    <label>Theme</label>
-    <select id="themeSel"><option>Dark</option><option>Light</option><option>High Contrast</option></select>
-    <label>Text Size</label>
-    <select id="textSel"><option>Default</option><option>Small</option><option>Large</option></select>
-  </div>
+  <div class="row"><label>Theme</label><select id="themeSel"><option>Dark</option><option>Light</option><option>High Contrast</option></select>
+    <label>Text Size</label><select id="textSel"><option>Default</option><option>Small</option><option>Large</option></select></div>
   <hr style="border-color:#ffffff18">
   <div class="row"><strong>Notifications</strong></div>
-  <div class="row">
-    <label>Sound Alerts</label><input type="checkbox" id="notifSound">
-    <label>Pop-ups</label><input type="checkbox" id="notifPopup" checked>
-    <label>Frequency</label>
-    <select id="notifFreq"><option>All</option><option>Major Only</option></select>
-  </div>
+  <div class="row"><label>Sound Alerts</label><input type="checkbox" id="notifSound"><label>Pop-ups</label><input type="checkbox" id="notifPopup" checked>
+    <label>Frequency</label><select id="notifFreq"><option>All</option><option>Major Only</option></select></div>
 </div>
 
-<!-- Chat -->
-<div class="popover" id="chatPopover">
-  <h3>Assistant</h3>
-  <div class="chat-wrap">
-    <div class="chat-log" id="chatLog" style="height:220px; overflow:auto; background:#120b07; border:1px solid #ffffff1a; border-radius:10px; padding:10px;"></div>
-    <div class="chat-input" style="display:flex; gap:8px; align-items:center;">
-      <input type="text" id="chatInput" placeholder="Ask me anything about the site…" style="flex:1; background:#2a1b12; border:1px solid #ffffff1a; border-radius:10px; padding:10px;">
-      <button class="btn" id="sendBtn">Send</button>
-      <label class="btn" for="imgUp" title="Send an image">🖼️</label><input type="file" id="imgUp" accept="image/*" hidden>
-      <button class="btn" id="micBtn" title="Voice input">🎤</button>
-    </div>
+<!-- Chat popover -->
+<div class="popover" id="chatPopover"><h3>Assistant</h3>
+  <div id="chatLog" style="height:220px;overflow:auto;background:#120b07;border:1px solid #ffffff1a;border-radius:10px;padding:10px"></div>
+  <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+    <input type="text" id="chatInput" placeholder="Ask me anything about the site…" style="flex:1;background:#2a1b12;border:1px solid #ffffff1a;border-radius:10px;padding:10px">
+    <button class="btn" id="sendBtn">Send</button>
   </div>
 </div>
 
 <script>
-/* Helper */
-const $ = (id)=>document.getElementById(id);
-const base = ()=> (location.origin + (location.pathname.includes('/Courses')? '/Courses' : ''));
+const $=id=>document.getElementById(id);
+function base(){ const segs=location.pathname.split('/').filter(Boolean); return location.origin+(segs.length?('/'+segs[0]):''); }
+$('backBtn').onclick=(e)=>{e.preventDefault(); try{history.length>1?history.back():location.assign(base()+'/');}catch(_){location.assign(base()+'/');}};
+$('profileLink').onclick=(e)=>{e.preventDefault(); fetch(base()+'/profile.html',{method:'HEAD'}).then(r=>{location.href=r.ok?base()+'/profile.html':base()+'/profile/'}).catch(()=>location.href=base()+'/profile/')};
 
-/* Back button */
-$('backBtn').addEventListener('click', (e)=>{ e.preventDefault(); const url = base() + '/'; try{history.length>1 ? history.back() : location.assign(url);}catch(_){ location.assign(url); } });
+function openPanelAt(btn, panel, pos="below"){ const r=btn.getBoundingClientRect(); panel.style.display="block"; requestAnimationFrame(()=>{ const top=pos==="below"?(r.bottom+6):(r.top-panel.offsetHeight-6); let left=r.right-panel.offsetWidth; if(left<10) left=10; panel.style.top=top+"px"; panel.style.left=left+"px"; panel.classList.add('open'); }); }
+function closePanels(){ document.querySelectorAll('.popover').forEach(p=>{p.classList.remove('open'); p.style.display='none';}); document.querySelector('.menu-btn').classList.remove('open'); }
+window.addEventListener('click', e=>{ if(!e.target.closest('.popover') && !e.target.closest('.round-btn')) closePanels(); });
 
-/* Profile link robust */
-$('profileLink').addEventListener('click', (e)=>{
-  e.preventDefault();
-  fetch(base() + '/profile.html', {method:'HEAD'}).then(r=>{
-    location.href = r.ok ? (base() + '/profile.html') : (base() + '/profile/');
-  }).catch(()=> location.href = base() + '/profile/');
-});
+const menuBtn=$('menuBtn'), menuPanel=$('menuPanel'); menuBtn.onclick=()=>{ const open=menuPanel.style.display==='block'; if(open){closePanels();} else{ closePanels(); openPanelAt(menuBtn,menuPanel,"below"); menuBtn.classList.add('open'); } };
+const slotsPopover=$('slotsPopover'); $('slotsBtn').onclick=()=>{ closePanels(); openPanelAt(slotsBtn, slotsPopover, "above"); };
+const chatPopover=$('chatPopover'); $('chatBtn').onclick=()=>{ closePanels(); openPanelAt(chatBtn, chatPopover, "above"); };
 
-/* Generic popover toggle + positioning */
-function openPanelAt(btn, panel, position="below"){
-  const rect = btn.getBoundingClientRect();
-  panel.style.display="block";
-  requestAnimationFrame(()=>{
-    const top = position==="below" ? (rect.bottom + 6) : (rect.top - panel.offsetHeight - 6);
-    let left = rect.right - panel.offsetWidth; if(left < 10) left = 10;
-    panel.style.top = top + "px"; panel.style.left = left + "px";
-    panel.classList.add('open');
-  });
-}
-function closeAllPanels(){ document.querySelectorAll('.popover').forEach(p=>{ p.classList.remove('open'); p.style.display='none'; }); document.querySelector('.menu-btn').classList.remove('open'); }
-window.addEventListener('click',(e)=>{ if(!e.target.closest('.popover') && !e.target.closest('.round-btn')) closeAllPanels(); });
-
-/* Buttons -> panels */
-const slotsPopover = $('slotsPopover');
-$('slotsBtn').onclick = ()=>{ closeAllPanels(); openPanelAt(slotsBtn, slotsPopover, "above"); };
-const chatPopover = $('chatPopover');
-$('chatBtn').onclick  = ()=>{ closeAllPanels(); openPanelAt(chatBtn,  chatPopover,  "above"); };
-
-/* Hamburger: animate icon and open/close */
-const menuBtn = $('menuBtn'); const menuPanel = $('menuPanel');
-menuBtn.addEventListener('click', ()=>{
-  const isOpen = menuPanel.style.display === 'block';
-  if(isOpen){ closeAllPanels(); }
-  else{ closeAllPanels(); openPanelAt(menuBtn, menuPanel, "below"); menuBtn.classList.add('open'); }
-});
-
-/* Slots logic */
-const symbols = ['🍒','🍋','⭐','7️⃣','🔔','🍀','💎'];
-const reelsDiv = $('reels');
-const wrap = document.querySelector('.reels-wrap');
-const reelSelect = $('reelSelect');
-const betSelect  = $('betSelect');
-const reelNum = $('reelNum');
-const betNum  = $('betNum');
-let reelsCount = parseInt(reelSelect.value,10);
-let bet = parseInt(betSelect.value,10);
-function layoutReels(){ const gap=10; const usable = wrap.clientWidth - gap*(reelsCount-1); const w = Math.min(70, Math.floor(usable / reelsCount)); [...reelsDiv.children].forEach(el => { el.style.width = w + 'px'; }); }
-function renderReels(){ reelsDiv.innerHTML=''; for(let i=0;i<reelsCount;i++){ const d=document.createElement('div'); d.className='reel enter'; d.textContent=symbols[(Math.random()*symbols.length)|0]; reelsDiv.appendChild(d);} layoutReels(); }
-renderReels(); window.addEventListener('resize', layoutReels);
-reelSelect.onchange = ()=>{ reelsCount = parseInt(reelSelect.value,10); reelNum.textContent = reelsCount; renderReels(); };
-betSelect.onchange  = ()=>{ bet = parseInt(betSelect.value,10); betNum.textContent = bet; };
-function spin(){ const cells = reelsDiv.children; let i=0; const timer=setInterval(()=>{ for(const c of cells){ c.textContent = symbols[(Math.random()*symbols.length)|0]; } if(++i>22){ clearInterval(timer); } },60); }
-$('spinBtn').onclick = spin;
-/* Handle */
-(function(){ const knob=$('leverKnob'), arm=$('leverArm'); let dragging=false,startY=0,curr=0; function setPos(y){{ curr=Math.max(0,Math.min(80,y)); arm.style.transform=`rotateX(${{curr/2}}deg)`; knob.style.bottom=(120-curr)+'px'; }} function down(e){{ dragging=true; document.body.classList.add('dragging'); startY=(e.touches?e.touches[0].clientY:e.clientY)-curr; }} function move(e){{ if(!dragging) return; const y=(e.touches?e.touches[0].clientY:e.clientY)-startY; setPos(y); }} function up(){{ if(!dragging) return; dragging=false; document.body.classList.remove('dragging'); if(curr>60) spin(); const start=curr, dur=280, t0=performance.now(); function anim(t){{ const p=Math.min(1,(t-t0)/dur); setPos(start*(1-p)); if(p<1) requestAnimationFrame(anim); }} requestAnimationFrame(anim); }} knob.addEventListener('mousedown',down); knob.addEventListener('touchstart',down); window.addEventListener('mousemove',move); window.addEventListener('touchmove',move,{passive:false}); window.addEventListener('mouseup',up); window.addEventListener('touchend',up); })();
-
-/* Menu settings (sync via localStorage) */
-function save(key,val){ localStorage.setItem(key,val); } function load(key,def){ const v=localStorage.getItem(key); return v===null? def : v; }
-$('themeSel').value = load('themeMode','Dark'); $('textSel').value  = load('textSize','Default'); $('notifFreq').value = load('notif_freq','All'); $('notifSound').checked = load('notif_sound','0')==='1'; $('notifPopup').checked = load('notif_popup','1')==='1'; $('musicVol').value   = load('music_vol','0.6'); $('musicTrack').value = load('music_track','default'); $('musicToggle').checked = load('music_on','0')==='1';
-function applyAppearance(){ const theme=$('themeSel').value, size=$('textSel').value; if(theme==='Light'){{ document.body.style.background='linear-gradient(120deg,#f6f6f6,#e8e8e8)'; document.body.style.color='#141414'; document.body.style.filter=''; }} else if(theme==='High Contrast'){{ document.body.style.background='radial-gradient(1200px 700px at 50% 110%, #ffd70040, transparent 60%), linear-gradient(120deg, #000, #000)'; document.body.style.color='#fff'; document.body.style.filter='contrast(1.35)'; }} else {{ document.body.style.background='radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, #0b0b0f, #1b0b00 40%, #3a0c00)'; document.body.style.color='#fff'; document.body.style.filter=''; }} document.documentElement.style.fontSize = (size==='Small'?'14px': size==='Large'?'18px':'16px'); }
-applyAppearance();
-['themeSel','textSel'].forEach(id=> $(id).addEventListener('change', ()=>{{ save(id==='themeSel'?'themeMode':'textSize', $(id).value); applyAppearance(); }}));
-$('notifFreq').addEventListener('change', ()=> save('notif_freq', $('notifFreq').value));
-$('notifSound').addEventListener('change', ()=> save('notif_sound', $('notifSound').checked?'1':'0'));
-$('notifPopup').addEventListener('change', ()=> save('notif_popup', $('notifPopup').checked?'1':'0'));
-let ctx, osc, gain, bgm=false; function startMusic(){{ if(bgm) return; ctx = new (window.AudioContext||window.webkitAudioContext)(); gain = ctx.createGain(); gain.gain.value = parseFloat($('musicVol').value); gain.connect(ctx.destination); osc = ctx.createOscillator(); const type = $('musicTrack').value; osc.type='sine'; const base = type==='arcade'?220:type==='chill'?140:180; osc.frequency.value=base; osc.connect(gain); osc.start(); bgm=true; }} function stopMusic(){{ if(!bgm) return; try{{osc.stop();}}catch(e){{}} try{{ctx.close();}}catch(e){{}} bgm=false; }} $('musicToggle').addEventListener('change', ()=>{{ save('music_on', $('musicToggle').checked?'1':'0'); if($('musicToggle').checked) startMusic(); else stopMusic(); }}); $('musicVol').addEventListener('change', ()=>{{ save('music_vol', $('musicVol').value); if(gain) gain.gain.value=parseFloat($('musicVol').value); }}); $('musicTrack').addEventListener('change', ()=>{{ save('music_track', $('musicTrack').value); if(bgm){{ stopMusic(); startMusic(); }} }}); if($('musicToggle').checked) startMusic();
-
-/* Chatbot */
-const chatLog = $('chatLog'); const chatInput = $('chatInput');
-function addMsg(who, text){ const row=document.createElement('div'); row.className='msg '+who; row.innerHTML=`<div class="bubble" style="padding:8px 10px; border-radius:12px; background:${{who==='me'?'#2a1b12':'#1f140d'}}">${{text}}</div>`; chatLog.appendChild(row); chatLog.scrollTop = chatLog.scrollHeight; }
-function t(lang, key){ const dict={{ en:{{hi:"Hey! How can I help?",help:"I can answer questions about courses, slots, settings, or your profile.",slots:"Use 🎰 to open Mini Slots. Pull the handle or tap Spin.",profile:"Tap the 👤 button to open your profile.",settings:"Open ☰ to change theme, text size, music and notifications."}}, es:{{hi:"¡Hola! ¿En qué puedo ayudarte?",help:"Puedo responder sobre cursos, tragamonedas, ajustes o tu perfil.",slots:"Usa 🎰 para abrir Mini Slots. Tira de la palanca o pulsa Spin.",profile:"Toca el botón 👤 para abrir tu perfil.",settings:"Abre ☰ para cambiar tema, tamaño de texto, música y notificaciones."}}, fr:{{hi:"Salut ! Comment puis-je aider ?",help:"Je peux répondre sur les cours, les slots, les réglages ou votre profil.",slots:"Utilisez 🎰 pour ouvrir Mini Slots. Tirez la poignée ou appuyez sur Spin.",profile:"Appuyez sur 👤 pour ouvrir votre profil.",settings:"Ouvrez ☰ pour changer le thème, la taille du texte, la musique et les notifications."}}, zh:{{hi:"你好！我可以帮你什么？",help:"我可以回答关于课程、老虎机、设置或个人资料的问题。",slots:"点击 🎰 打开小游戏，拉动手柄或点击 Spin。",profile:"点击 👤 打开你的个人主页。",settings:"点击 ☰ 修改主题、文字大小、音乐和通知。"}} }}; return (dict[lang]||dict.en)[key]; }
-function detectLang(s){ if(/[你好谢谢再见]/.test(s)) return 'zh'; if(/[áéíóúñ¿¡]/i.test(s) || /\b(hola|ayuda|curso|ajustes|perfil)\b/i.test(s)) return 'es'; if(/[éèêàçù]/i.test(s) || /\b(bonjour|salut|profil|réglages)\b/i.test(s)) return 'fr'; return 'en'; }
-function sendMessage(){ const msg=chatInput.value.trim(); if(!msg) return; addMsg('me',msg); chatInput.value=''; const lang=detectLang(msg); let reply=t(lang,'help'); if(/\b(slot|reel|spin|lever|🎰)\b/i.test(msg)) reply=t(lang,'slots'); if(/\b(profile|👤|avatar|followers|following)\b/i.test(msg)) reply=t(lang,'profile'); if(/\b(setting|theme|contrast|text|☰|notification)\b/i.test(msg)) reply=t(lang,'settings'); if(/\b(hi|hello|hey|hola|bonjour|salut|你好)\b/i.test(msg)) reply=t(lang,'hi'); addMsg('bot',reply); }
-$('sendBtn').onclick = sendMessage; $('micBtn').onclick=()=> addMsg('bot','🎙️ Voice capture is not available in this demo, but text works great!'); $('imgUp').addEventListener('change', (e)=>{{ const f = e.target.files[0]; if(!f) return; addMsg('me', `📷 Sent an image: ${{f.name}}`); addMsg('bot','I can store images for later reference, but I don’t analyze them in this demo.'); }});
-setTimeout(()=> addMsg('bot', "👋 Welcome! I’m your Assistant. Ask me anything about the site, games, or settings. I can also chat in your language of choice!"), 200);
+const chatLog=$('chatLog'), chatInput=$('chatInput'); function addMsg(who,txt){ const d=document.createElement('div'); d.innerHTML=`<div style="padding:8px 10px;border-radius:12px;background:${{who==='me'?'#2a1b12':'#1f140d'}};margin:6px 0;max-width:90%">${{txt}}</div>`; d.style.display='flex'; d.style.justifyContent=who==='me'?'flex-end':'flex-start'; chatLog.appendChild(d); chatLog.scrollTop=chatLog.scrollHeight; }
+function detectLang(s){ if(/[你好谢谢再见]/.test(s))return'zh'; if(/[áéíóúñ¿¡]/i.test(s)||/\b(hola|ayuda|curso|ajustes|perfil)\b/i.test(s))return'es'; if(/[éèêàçù]/i.test(s)||/\b(bonjour|salut|profil|réglages)\b/i.test(s))return'fr'; return'en'; }
+function replyFor(lang, msg){ const t={{en:{{hi:"Hey! How can I help?",help:"I can answer questions about courses, slots, settings, or your profile.",slots:"Use 🎰 to open Mini Slots.",profile:"Tap 👤 for profile.",settings:"Open ☰ for theme, text size, music & notifications."}}, es:{{hi:"¡Hola! ¿En qué puedo ayudarte?",help:"Puedo responder sobre cursos, tragamonedas, ajustes o tu perfil.",slots:"Usa 🎰 para Mini Slots.",profile:"Toca 👤 para tu perfil.",settings:"Abre ☰ para tema, texto, música y notificaciones."}}, fr:{{hi:"Salut !",help:"Je peux répondre sur les cours, slots, réglages ou votre profil.",slots:"Utilisez 🎰 pour Mini Slots.",profile:"Appuyez sur 👤 pour le profil.",settings:"Ouvrez ☰ pour thème, texte, musique, notifications."}}, zh:{{hi:"你好！",help:"我可以回答课程、老虎机、设置或个人资料的问题。",slots:"点击 🎰 打开小游戏。",profile:"点击 👤 打开个人主页。",settings:"点击 ☰ 更改主题、字体、音乐、通知。"}}}}; if(/\b(slot|reel|spin|lever|🎰)\b/i.test(msg)) return t[lang].slots; if(/\b(profile|👤|avatar|followers|following)\b/i.test(msg)) return t[lang].profile; if(/\b(setting|theme|contrast|text|☰|notification)\b/i.test(msg)) return t[lang].settings; if(/\b(hi|hello|hey|hola|bonjour|salut|你好)\b/i.test(msg)) return t[lang].hi; return t[lang].help; }
+$('sendBtn').onclick=()=>{ const m=chatInput.value.trim(); if(!m) return; addMsg('me',m); chatInput.value=''; const lang=detectLang(m); addMsg('bot', replyFor(lang,m)); };
+setTimeout(()=> addMsg('bot', "👋 Welcome! I’m your Assistant. Ask me anything about the site."), 300);
 </script>
