@@ -5,337 +5,254 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Profile</title>
 <style>
-  :root{ --fg:#fffdf7; --panel:#1a0f0a; --accent:#ffd166; --fire:#ff6b00; }
+  :root{ --fg:#fffdf7; --bg1:#0b0b0f; --bg2:#1b0b00; --bg3:#3a0c00; --panel:#1a0f0a; --brand:#ff6b00; }
   *{box-sizing:border-box}
   html,body{height:100%}
-  body{ margin:0; font-family: system-ui, Segoe UI, Roboto, Arial; color:var(--fg);
-        background: radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, #0b0b0f, #1b0b00 40%, #3a0c00);}
-  a{ color:var(--accent); }
-  .wrap{ max-width:1100px; margin:0 auto; padding:20px; }
+  body{margin:0; font-family: system-ui, Segoe UI, Roboto, Arial; color:var(--fg); overflow-x:hidden;
+       background:radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%),linear-gradient(120deg, var(--bg1), var(--bg2) 40%, var(--bg3));}
+  a{color:#ffd166}
+  .fire-bg{position:fixed; inset:0; z-index:-3;}
+  .round-btn{position:fixed; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; color:#fff; cursor:pointer; background: radial-gradient(circle at 30% 30%, #ff9f1a, #ff6b00 60%, #3a0c00 100%); box-shadow: 0 8px 20px #000a; z-index:100;}
+  .profile-btn{left:16px; top:16px;}
+  .slots-btn{right:16px; bottom:16px;}
+  .chat-btn{left:16px; bottom:16px;}
+  .menu-btn{right:16px; top:16px; display:grid; place-items:center; cursor:pointer;}
+  .burger{position:relative; width:26px; height:18px;}
+  .burger span{position:absolute; left:0; width:100%; height:3px; background:#fff; border-radius:2px; transition:transform .25s ease, opacity .2s ease, top .25s ease;}
+  .burger span:nth-child(1){top:0} .burger span:nth-child(2){top:7.5px} .burger span:nth-child(3){top:15px}
+  .menu-btn.open .burger span:nth-child(1){top:7.5px; transform:rotate(45deg)}
+  .menu-btn.open .burger span:nth-child(2){opacity:0}
+  .menu-btn.open .burger span:nth-child(3){top:7.5px; transform:rotate(-45deg)}
+  .wrap{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:8vh 24px; text-align:center;}
+  h1{font-size:clamp(2rem,4vw+1rem,3rem); text-shadow:0 2px 20px #ff6b00aa; margin:0 0 6px;}
+  .sub{opacity:.9; margin:0 0 18px;}
 
-  .profile-top{ position:relative; display:grid; grid-template-columns: 110px 1fr auto; gap:16px; align-items:center; background:var(--panel); border:1px solid #ffffff1a; border-radius:16px; padding:14px; }
-  .avatar{ width:102px; height:102px; border-radius:50%; overflow:hidden; border:2px solid #ffffff3a; background:#2a1b12; display:grid; place-items:center; }
-  .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .editable{ display:flex; flex-direction:column; gap:8px; }
-  .username{ font-size:1.4rem; font-weight:800; border:none; background:transparent; color:#fff; }
-  .bio{ opacity:.9; background:#140e0a; border:1px solid #ffffff1f; border-radius:10px; padding:6px 8px; color:#ffd9b3; }
-  .gear{ font-size:22px; cursor:pointer; background:#2a1b12; border:1px solid #ffffff1a; border-radius:50%; width:40px; height:40px; display:grid; place-items:center; }
+  /* Panels */
+  .popover{position:absolute; width:520px; max-width:95vw; background:var(--panel); border:1px solid #ffffff1f; border-radius:14px; padding:14px; box-shadow:0 12px 24px #000a; display:none; z-index:2000; color:#ffd9b3; overflow:hidden;}
+  .popover h3{margin:6px 0 10px}
+  .row{display:flex; align-items:center; gap:10px; margin:8px 0; flex-wrap:wrap;}
+  .row.space{justify-content:space-between;}
+  .btn{padding:8px 12px; border-radius:8px; border:1px solid #fff2; background:#2a1b12; color:#fff; cursor:pointer; white-space:nowrap;}
+  .btn:hover{background:#3a2416;}
+  select, input[type="range"], input[type="file"], input[type="text"]{background:#2a1b12; color:#fff; border:1px solid #fff2; border-radius:8px; padding:6px 8px;}
+  input[type="range"]{width:200px}
+  .menu-panel{transform-origin: top right; transform: translateY(-10px) scale(.98); opacity:0; pointer-events:none; transition:transform .22s ease, opacity .22s ease;}
+  .menu-panel.open{opacity:1; transform: translateY(0) scale(1); pointer-events:auto;}
 
-  .stats{ display:flex; gap:16px; margin:14px 0; }
-  .stat{ background:var(--panel); border:1px solid #ffffff1a; border-radius:12px; padding:10px 12px; cursor:pointer; position:relative; min-width:160px; }
-  .stat .num{ font-size:1.2rem; font-weight:800; margin-right:6px; }
-  .dropdown{ position:absolute; top:calc(100% + 6px); left:0; right:0; background:#120b07; border:1px solid #ffffff1a; border-radius:12px; padding:8px; display:none; z-index:20; }
-  .dropdown input{ width:100%; margin-bottom:6px; border-radius:8px; border:1px solid #ffffff1a; background:#1a0f0a; color:#fff; padding:6px 8px; }
-  .dropdown .list{ max-height:220px; overflow:auto; }
-  .dropdown .item{ padding:6px 8px; border-radius:8px; }
-  .dropdown .item:hover{ background:#2a1b12; }
+  /* Slots */
+  .slots-body{position:relative; padding:6px 10px 52px 10px;}
+  .reels-wrap{position:relative; width:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; }
+  .reels{display:flex; gap:10px; flex-wrap:nowrap; align-items:center; justify-content:center; width:100%;}
+  .reel{height:60px; background:#2a1b12; display:grid; place-items:center; border-radius:10px; font-size:28px; border:1px solid #ffffff22; box-shadow:inset 0 0 14px #000; transition:transform .2s ease;}
+  .reel.enter{animation:pop .15s ease;}
+  @keyframes pop{from{transform:scale(.6); opacity:.2} to{transform:scale(1); opacity:1}}
+  .slot-info{position:absolute; left:10px; bottom:10px; font-size:.9rem; opacity:.95; background:#140e0a; padding:4px 8px; border-radius:8px; border:1px solid #ffffff1a;}
+  .lever3d{position:absolute; right:14px; bottom:10px; width:50px; height:120px; perspective:700px;}
+  .lever-arm{position:absolute; right:22px; bottom:40px; width:6px; height:80px; background:linear-gradient(#e0e0e0,#a9a9a9); transform-origin:50% 0%; transform: rotateX(0deg); border-radius:4px; box-shadow: inset 0 0 6px #0006;}
+  .lever-knob{position:absolute; right:10px; bottom:120px; width:30px; height:30px; border-radius:50%; background:#ff4d00; box-shadow:0 0 14px #ff4d00aa; transform: translateZ(24px); cursor:grab;}
+  .dragging .lever-knob{cursor:grabbing;}
 
-  .card{ background:var(--panel); border:1px solid #ffffff1a; border-radius:16px; padding:14px; margin-top:16px; }
-
-  dialog{ width:min(640px, 94vw); border:none; border-radius:14px; padding:0; overflow:hidden; background:#1a0f0a; color:#ffd9b3; }
-  dialog::backdrop{ background:#0008; }
-  .modal-head{ display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #ffffff1a; }
-  .modal-body{ padding:12px; display:grid; gap:12px; grid-template-columns: 1fr; }
-  .section{ border:1px solid #ffffff1a; border-radius:10px; padding:10px; background:#140e0a; }
-  .section h4{ margin:0 0 6px; }
-  .opt-row{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin:6px 0; }
-  .opt-row select, .opt-row input[type="text"]{ width:60%; border-radius:8px; border:1px solid #ffffff1a; background:#1a0f0a; color:#fff; padding:6px 8px; }
-  .avatar-grid{ display:grid; grid-template-columns: repeat(5, 1fr); gap:8px; }
-  .avatar-grid button{ aspect-ratio:1/1; border-radius:50%; border:2px solid transparent; overflow:hidden; background:#2a1b12; cursor:pointer; }
-  .avatar-grid button.active{ border-color: #ff6b00; box-shadow:0 0 0 2px #ff6b0040; }
-  .close{ background:#2a1b12; border:1px solid #ffffff1a; padding:8px 12px; border-radius:10px; color:#fff; cursor:pointer; }
-
-  .small{ opacity:.85; }
-  .progress{ height:12px; background:#2a1b12; border-radius:999px; overflow:hidden; border:1px solid #ffffff1a; }
-  .bar{ height:100%; width:0%; transition:width .15s linear, background .15s linear; }
-  .bar.red{ background:#ff3b30; }
-  .bar.yellow{ background:#ffd166; }
-  .bar.green{ background:#1cc862; }
-
-  #fxCanvas{ position:fixed; inset:0; pointer-events:none; display:none; z-index:4000; }
-  #congrats{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:4100; }
-  #congrats dialog{ width:min(420px,90vw); }
+  /* Back button */
+  .back-fab{position:fixed; left:16px; top:86px; z-index:120; background:#2a1b12; border:1px solid #ffffff1a; color:#fff; padding:8px 12px; border-radius:999px; text-decoration:none;}
 </style>
 </head>
 <body>
-  <canvas id="fxCanvas"></canvas>
-  <div id="congrats"><dialog open id="congratsDlg"><div style="padding:16px;">
-    <h3 id="congratsTitle">Congratulations!</h3>
-    <p id="congratsMsg">You completed 100%.</p>
-    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:10px;">
-      <button id="yesReset" class="close">Yes, reset</button>
-      <button id="noKeep" class="close">No, keep</button>
-    </div>
-  </div></dialog></div>
+<div class="fire-bg"></div>
 
-  <div class="wrap">
-    <div class="profile-top">
-      <div class="avatar"><img id="avatarImg" alt="Avatar"></div>
-      <div class="editable">
-        <input id="username" class="username" value="New User">
-        <input id="bio" class="bio" placeholder="Bio/About (optional)" />
-      </div>
-      <button id="settingsBtn" class="gear" title="Settings">⚙️</button>
-    </div>
+<a class="round-btn profile-btn" href="#" id="profileLink" title="Profile" aria-label="Profile">👤</a>
+<button class="round-btn menu-btn" id="menuBtn" title="Menu" aria-label="Menu">
+  <div class="burger" aria-hidden="true"><span></span><span></span><span></span></div>
+</button>
+<button class="round-btn slots-btn" id="slotsBtn" title="Mini Slots" aria-label="Mini Slots">🎰</button>
+<button class="round-btn chat-btn" id="chatBtn" title="Assistant" aria-label="Assistant">💬</button>
+<a class="back-fab" href="#" id="backBtn">← Back</a>
 
-    <div class="stats">
-      <div class="stat" id="followersBox"><span class="num" id="followersNum">120</span>Followers
-        <div class="dropdown">
-          <input type="text" placeholder="Search…" class="search">
-          <div class="list" id="followersList"></div>
-        </div>
-      </div>
-      <div class="stat" id="followingBox"><span class="num" id="followingNum">75</span>Following
-        <div class="dropdown">
-          <input type="text" placeholder="Search…" class="search">
-          <div class="list" id="followingList"></div>
-        </div>
-      </div>
-      <div class="stat" id="friendsBox"><span class="num" id="friendsNum">32</span>Friends
-        <div class="dropdown">
-          <input type="text" placeholder="Search…" class="search">
-          <div class="list" id="friendsList"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
+<main class="wrap">
+  <div style="max-width:1000px; margin:0 auto; text-align:left;">
+    <h1>Profile</h1>
+    <div class="card" style="background:var(--panel); border:1px solid #ffffff1a; border-radius:16px; padding:16px;">
       <h3>Course Progress</h3>
       <div id="courses"></div>
-      <div class="small"><a href="../index.html">← Back to Courses</a></div>
+      <p style="opacity:.8">Adjust inside each course page; values persist automatically.</p>
     </div>
   </div>
-
-  <dialog id="settingsModal">
-    <div class="modal-head">
-      <h3>Profile Settings</h3>
-      <button class="close" id="closeModal">Close</button>
-    </div>
-    <div class="modal-body">
-      <div class="section">
-        <h4>Profile</h4>
-        <div class="opt-row"><label>Username</label><input type="text" id="uName"></div>
-        <div class="opt-row"><label>Bio</label><input type="text" id="uBio"></div>
-        <div class="opt-row"><label>Theme</label><select id="themeMode"><option>Dark</option><option>Light</option><option>High Contrast</option></select></div>
-        <div class="opt-row" style="align-items:flex-start;"><label>Avatar</label><div class="avatar-grid" id="avatarGrid"></div></div>
-      </div>
-      <div class="section">
-        <h4>Visibility</h4>
-        <div class="opt-row"><label>Followers list</label><select id="visFollowers"><option>Show</option><option>Hide</option></select></div>
-        <div class="opt-row"><label>Following list</label><select id="visFollowing"><option>Show</option><option>Hide</option></select></div>
-        <div class="opt-row"><label>Friends list</label><select id="visFriends"><option>Show</option><option>Hide</option></select></div>
-        <div class="opt-row"><label>Search within lists</label><select id="visSearch"><option>Enable</option><option>Disable</option></select></div>
-        <div class="opt-row"><label>Profile visibility</label><select id="profVis"><option>Public</option><option>Private</option></select></div>
-        <div class="opt-row"><label>Text size</label><select id="textSize"><option>Default</option><option>Small</option><option>Large</option></select></div>
-      </div>
-    </div>
-  </dialog>
+</main>
 
 <script>
-const $ = (id)=>document.getElementById(id);
-function showDialog(d){ if(d.showModal){ d.showModal(); } else { d.setAttribute('open',''); d.style.display='block'; } }
-function closeDialog(d){ if(d.close){ d.close(); } else { d.style.display='none'; d.removeAttribute('open'); } }
-
-const ALL_AVATARS = Array.from({length:20}, (_,i)=>`https://api.dicebear.com/7.x/thumbs/svg?seed=${i+1}`);
-let currentAvatar = localStorage.getItem('pf_avatar') || ALL_AVATARS[0];
-$('avatarImg').src = currentAvatar;
-$('username').value = localStorage.getItem('pf_username') || 'New User';
-$('bio').value = localStorage.getItem('pf_bio') || '';
-$('username').addEventListener('input', ()=> localStorage.setItem('pf_username', $('username').value));
-$('bio').addEventListener('input', ()=> localStorage.setItem('pf_bio', $('bio').value));
-
-function defaultNames(n, prefix){ return Array.from({length:n}, (_,i)=> (prefix||'User')+' '+(i+1)); }
-let followers = JSON.parse(localStorage.getItem('followers_list')||'null') || defaultNames(120,'Follower');
-let following = JSON.parse(localStorage.getItem('following_list')||'null') || defaultNames(75,'Following');
-let friends   = JSON.parse(localStorage.getItem('friends_list')  ||'null') || defaultNames(32,'Friend');
-localStorage.setItem('followers_list', JSON.stringify(followers));
-localStorage.setItem('following_list', JSON.stringify(following));
-localStorage.setItem('friends_list',   JSON.stringify(friends));
-$('followersNum').textContent = followers.length;
-$('followingNum').textContent = following.length;
-$('friendsNum').textContent   = friends.length;
-
-function setupStat(boxId, dataArr, visKey){
-  const box = $(boxId);
-  const dd  = box.querySelector('.dropdown');
-  const search = dd.querySelector('.search');
-  const list   = dd.querySelector('.list');
-  function render(filter){
-    list.innerHTML='';
-    (dataArr.filter(n=> !filter || n.toLowerCase().includes(filter.toLowerCase()))).forEach(n=>{
-      const it=document.createElement('div'); it.className='item'; it.textContent=n; list.appendChild(it);
-    });
-  }
-  box.addEventListener('click', ()=>{
-    if(localStorage.getItem('vis_'+visKey)==='Hide') return;
-    const open = dd.style.display==='block';
-    document.querySelectorAll('.dropdown').forEach(el=> el.style.display='none');
-    if(!open){
-      dd.style.display='block';
-      search.style.display = (localStorage.getItem('vis_search')==='Disable') ? 'none' : 'block';
-      render('');
-    }
-  });
-  search.addEventListener('input', ()=> render(search.value));
-}
-setupStat('followersBox',followers,'followers');
-setupStat('followingBox',following,'following');
-setupStat('friendsBox',friends,'friends');
-
-const modal = $('settingsModal');
-$('settingsBtn').onclick = ()=>{
-  $('uName').value = $('username').value;
-  $('uBio').value  = $('bio').value;
-  ['visFollowers','visFollowing','visFriends','visSearch','profVis','textSize','themeMode'].forEach(id=>{
-    const val = localStorage.getItem(id) || $(id).value; $(id).value = val;
-  });
-  const grid = $('avatarGrid'); grid.innerHTML='';
-  ALL_AVATARS.forEach(url=>{
-    const b=document.createElement('button'); const img=new Image(); img.src=url; img.alt='avatar'; img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover'; b.appendChild(img);
-    if(url===currentAvatar) b.classList.add('active');
-    b.onclick=()=>{ currentAvatar=url; localStorage.setItem('pf_avatar', url); document.querySelectorAll('.avatar-grid button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); $('avatarImg').src=url; };
-    grid.appendChild(b);
-  });
-  showDialog(modal);
-};
-$('closeModal').onclick = ()=>{
-  $('username').value = $('uName').value;
-  $('bio').value = $('uBio').value;
-  localStorage.setItem('pf_username', $('username').value);
-  localStorage.setItem('pf_bio', $('bio').value);
-  ['visFollowers','visFollowing','visFriends','visSearch','profVis','textSize','themeMode'].forEach(id=> localStorage.setItem(id, $(id).value));
-  applyAppearance();
-  closeDialog(modal);
-};
-
-function applyAppearance(){
-  const theme = localStorage.getItem('themeMode') || 'Dark';
-  const size = localStorage.getItem('textSize') || 'Default';
-  if(theme==='Light'){ document.body.style.background='linear-gradient(120deg,#f6f6f6,#e8e8e8)'; document.body.style.color='#141414'; }
-  else if(theme==='High Contrast'){ document.body.style.filter='contrast(1.25)'; }
-  else { document.body.style.background='radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, #0b0b0f, #1b0b00 40%, #3a0c00)'; document.body.style.filter=''; document.body.style.color='#fff'; }
-  document.documentElement.style.fontSize = (size==='Small'?'14px': size==='Large'?'18px':'16px');
-}
-applyAppearance();
-
-const courses = ['Chess','Coding Evolution','Music Maker','Offensive Coordinator','Quantum','Rugby'];
-const coursesDiv = $('courses');
-function keyFor(name){ return 'progress_'+name.toLowerCase().replace(/\s+/g,'-'); }
-function loadProgress(name){ return parseInt(localStorage.getItem(keyFor(name)) || '0',10); }
-function saveProgress(name,val){ localStorage.setItem(keyFor(name), String(val)); }
-
-function barColorClass(v){ if(v>=100) return 'green'; if(v<=25) return 'red'; if(v<75) return 'yellow'; return 'yellow'; }
-
-let prevAll100 = courses.every(n=> loadProgress(n)===100);
-
-function renderProgress(){
-  coursesDiv.innerHTML='';
+  const courses = ['Chess','Coding Evolution','Music Maker','Offensive Coordinator','Quantum','Rugby','Poker','Bugbee'];
+  function keyFor(name){ return 'progress_'+name.toLowerCase().replace(/[^a-z0-9]+/g,'-'); }
+  function loadProgress(name){ return parseInt(localStorage.getItem(keyFor(name)) || '0',10); }
+  const wrap = document.getElementById('courses');
   courses.forEach(name=>{
-    const val = loadProgress(name);
-    const remaining = 100 - val;
-    const wrap = document.createElement('div'); wrap.style.margin='12px 0';
-    wrap.innerHTML = `<div class="row"><strong>${name}</strong><span>${val}% complete • ${remaining}% to go</span></div>
-      <div class="progress"><div class="bar ${barColorClass(val)}" style="width:${val}%"></div></div>
-      <div class="row"><label class="small">Adjust</label><input type="range" min="0" max="100" value="${val}" data-name="${name}" /></div>`;
-    coursesDiv.appendChild(wrap);
+    const v = loadProgress(name); const remaining = 100 - v;
+    const div=document.createElement('div'); div.style.margin='12px 0';
+    const color = v>=100?'#1cc862': v<=25?'#ff3b30':'#ffd166';
+    div.innerHTML = `<div class="row"><strong>${name}</strong><span>${v}% complete • ${remaining}% to go</span></div>
+      <div class="progress" style="height:12px; background:#2a1b12; border-radius:999px; overflow:hidden; border:1px solid #ffffff1a;">
+        <div class="bar" style="height:100%; width:${v}%; background:${color}"></div>
+      </div>`;
+    wrap.appendChild(div);
   });
-  coursesDiv.querySelectorAll('input[type="range"]').forEach(r=>{
-    r.addEventListener('input', onProgressInput);
-  });
-}
-renderProgress();
-
-const fxCanvas = $('fxCanvas'); const ctx = fxCanvas.getContext('2d');
-function fitCanvas(){ fxCanvas.width=innerWidth; fxCanvas.height=innerHeight; }
-addEventListener('resize', fitCanvas); fitCanvas();
-
-function confetti(durationSec){
-  fxCanvas.style.display='block'; const pieces=[]; const colors=['#ff4757','#ffa502','#2ed573','#1e90ff','#a55eea','#ff6b6b','#ffd166','#1cc862'];
-  const N=200;
-  for(let i=0;i<N;i++){ pieces.push({x:Math.random()*fxCanvas.width,y:-20-Math.random()*300,vy:2+Math.random()*3,vx:(Math.random()-0.5)*2,size:5+Math.random()*6,color:colors[i%colors.length],rot:Math.random()*Math.PI}); }
-  const t0=performance.now();
-  function step(t){
-    const elapsed=(t-t0)/1000; ctx.clearRect(0,0,fxCanvas.width,fxCanvas.height);
-    pieces.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=0.05; p.rot+=0.1; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=p.color; ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size); ctx.restore(); });
-    if(elapsed<durationSec){ requestAnimationFrame(step); } else { ctx.clearRect(0,0,fxCanvas.width,fxCanvas.height); fxCanvas.style.display='none'; }
-  }
-  requestAnimationFrame(step);
-}
-function fireworks(durationSec){
-  fxCanvas.style.display='block';
-  const rockets=[]; const particles=[];
-  const gravity=0.03; const friction=0.995;
-  function launch(){
-    const x = Math.random()*fxCanvas.width*0.9 + fxCanvas.width*0.05;
-    const y = fxCanvas.height + 10;
-    const targetY = Math.random()*fxCanvas.height*0.4 + fxCanvas.height*0.1;
-    const vy = -(4.0 + Math.random()*2.5);
-    const vx = (Math.random()-0.5)*0.6;
-    rockets.push({x,y,vx,vy,targetY});
-  }
-  function explode(x,y){
-    const N=90;
-    for(let i=0;i<N;i++){
-      const angle=Math.random()*Math.PI*2;
-      const speed=1.5+Math.random()*3.5;
-      const hue=Math.floor(Math.random()*360);
-      particles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:1,color:`hsl(${hue},100%,60%)`});
-    }
-  }
-  const t0=performance.now();
-  function step(t){
-    const elapsed=(t-t0)/1000;
-    if(Math.random()<0.12) launch();
-    ctx.fillStyle='rgba(0,0,0,0.2)'; ctx.fillRect(0,0,fxCanvas.width,fxCanvas.height);
-    for(let i=rockets.length-1;i>=0;i--){
-      const r=rockets[i]; r.x+=r.vx; r.y+=r.vy; r.vy+=gravity*0.4;
-      ctx.beginPath(); ctx.arc(r.x,r.y,2,0,Math.PI*2); ctx.fillStyle='#fff'; ctx.fill();
-      if(r.y<=r.targetY){ explode(r.x,r.y); rockets.splice(i,1); }
-    }
-    for(let i=particles.length-1;i>=0;i--){
-      const p=particles[i]; p.x+=p.vx; p.y+=p.vy; p.vy+=gravity; p.vx*=friction; p.vy*=friction; p.life-=0.01;
-      ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fillStyle=p.color; ctx.fill();
-      if(p.life<=0) particles.splice(i,1);
-    }
-    if(elapsed<durationSec){ requestAnimationFrame(step); } else { ctx.clearRect(0,0,fxCanvas.width,fxCanvas.height); fxCanvas.style.display='none'; }
-  }
-  requestAnimationFrame(step);
-}
-
-function onProgressInput(e){
-  const name = e.target.getAttribute('data-name');
-  const v = parseInt(e.target.value,10);
-  const bar = e.target.parentElement.previousElementSibling.querySelector('.bar');
-  bar.style.width = v + '%';
-  bar.className = 'bar ' + (v>=100? 'green' : v<=25 ? 'red' : 'yellow');
-  const infoSpan = e.target.parentElement.previousElementSibling.previousElementSibling.querySelector('span');
-  infoSpan.textContent = `${v}% complete • ${100-v}% to go`;
-  const was = loadProgress(name);
-  saveProgress(name, v);
-
-  if(v===100 && was<100){ celebrateCourse(name); }
-  const nowAll100 = courses.every(n=> loadProgress(n)===100);
-  if(nowAll100 && !prevAll100){ fireworks(15); } // 15 seconds
-  prevAll100 = nowAll100;
-}
-function celebrateCourse(courseName){
-  confetti(4);
-  $('congratsTitle').textContent = 'Congratulations!';
-  $('congratsMsg').textContent = `You completed 100% of the "${courseName}" course. Reset your progress?`;
-  document.getElementById('congrats').style.display='flex';
-  $('yesReset').onclick = ()=>{ localStorage.setItem(keyFor(courseName), '0'); document.getElementById('congrats').style.display='none'; renderProgress(); };
-  $('noKeep').onclick  = ()=>{ document.getElementById('congrats').style.display='none'; };
-}
-
-(function initModal(){
-  const grid = $('avatarGrid');
-  ALL_AVATARS.forEach(url=>{
-    const b=document.createElement('button'); const img=new Image(); img.src=url; img.alt='avatar'; img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover'; b.appendChild(img);
-    if(url===currentAvatar) b.classList.add('active');
-    b.onclick=()=>{ currentAvatar=url; localStorage.setItem('pf_avatar', url); document.querySelectorAll('.avatar-grid button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); $('avatarImg').src=url; };
-    grid.appendChild(b);
-  });
-})();
 </script>
-</body>
-</html>
+
+<!-- Slots popover -->
+<div class="popover" id="slotsPopover" role="dialog" aria-label="Mini Slots">
+  <h3>Mini Slots</h3>
+  <div class="row space">
+    <div class="row"><strong>Reels</strong>
+      <select id="reelSelect"><option>3</option><option>4</option><option>5</option><option selected>6</option></select>
+    </div>
+    <div class="row"><strong>Bet</strong>
+      <select id="betSelect"><option>10</option><option selected>25</option><option>50</option><option>100</option></select>
+    </div>
+  </div>
+  <div class="slots-body">
+    <div class="reels-wrap"><div class="reels" id="reels"></div></div>
+    <div class="row" style="justify-content:center; margin-top:10px;">
+      <button class="btn" id="spinBtn">Spin</button>
+    </div>
+    <div class="slot-info" id="slotInfo">Reels: <span id="reelNum">6</span> • Bet: <span id="betNum">25</span></div>
+    <div class="lever3d" id="lever3d" title="Pull the handle">
+      <div class="lever-arm" id="leverArm"></div>
+      <div class="lever-knob" id="leverKnob"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Hamburger (Navigation & Quick Access) -->
+<div class="popover menu-panel" id="menuPanel" role="dialog" aria-label="Menu">
+  <h3>Menu</h3>
+  <div class="row"><strong>Music</strong>
+    <label style="margin-left:auto">On/Off <input type="checkbox" id="musicToggle"></label>
+  </div>
+  <div class="row">
+    <label>Volume</label>
+    <select id="musicVol">
+      <option value="0.2">Low</option>
+      <option value="0.6" selected>Medium</option>
+      <option value="1">High</option>
+      <option value="0">Mute</option>
+    </select>
+    <label>Track</label>
+    <select id="musicTrack">
+      <option value="default">Default</option>
+      <option value="arcade">Arcade</option>
+      <option value="chill">Chill</option>
+    </select>
+  </div>
+  <hr style="border-color:#ffffff18">
+  <div class="row"><strong>Display</strong></div>
+  <div class="row">
+    <label>Theme</label>
+    <select id="themeSel"><option>Dark</option><option>Light</option><option>High Contrast</option></select>
+    <label>Text Size</label>
+    <select id="textSel"><option>Default</option><option>Small</option><option>Large</option></select>
+  </div>
+  <hr style="border-color:#ffffff18">
+  <div class="row"><strong>Notifications</strong></div>
+  <div class="row">
+    <label>Sound Alerts</label><input type="checkbox" id="notifSound">
+    <label>Pop-ups</label><input type="checkbox" id="notifPopup" checked>
+    <label>Frequency</label>
+    <select id="notifFreq"><option>All</option><option>Major Only</option></select>
+  </div>
+</div>
+
+<!-- Chat -->
+<div class="popover" id="chatPopover">
+  <h3>Assistant</h3>
+  <div class="chat-wrap">
+    <div class="chat-log" id="chatLog" style="height:220px; overflow:auto; background:#120b07; border:1px solid #ffffff1a; border-radius:10px; padding:10px;"></div>
+    <div class="chat-input" style="display:flex; gap:8px; align-items:center;">
+      <input type="text" id="chatInput" placeholder="Ask me anything about the site…" style="flex:1; background:#2a1b12; border:1px solid #ffffff1a; border-radius:10px; padding:10px;">
+      <button class="btn" id="sendBtn">Send</button>
+      <label class="btn" for="imgUp" title="Send an image">🖼️</label><input type="file" id="imgUp" accept="image/*" hidden>
+      <button class="btn" id="micBtn" title="Voice input">🎤</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Helper */
+const $ = (id)=>document.getElementById(id);
+const base = ()=> (location.origin + (location.pathname.includes('/Courses')? '/Courses' : ''));
+
+/* Back button */
+$('backBtn').addEventListener('click', (e)=>{ e.preventDefault(); const url = base() + '/'; try{history.length>1 ? history.back() : location.assign(url);}catch(_){ location.assign(url); } });
+
+/* Profile link robust */
+$('profileLink').addEventListener('click', (e)=>{
+  e.preventDefault();
+  fetch(base() + '/profile.html', {method:'HEAD'}).then(r=>{
+    location.href = r.ok ? (base() + '/profile.html') : (base() + '/profile/');
+  }).catch(()=> location.href = base() + '/profile/');
+});
+
+/* Generic popover toggle + positioning */
+function openPanelAt(btn, panel, position="below"){
+  const rect = btn.getBoundingClientRect();
+  panel.style.display="block";
+  requestAnimationFrame(()=>{
+    const top = position==="below" ? (rect.bottom + 6) : (rect.top - panel.offsetHeight - 6);
+    let left = rect.right - panel.offsetWidth; if(left < 10) left = 10;
+    panel.style.top = top + "px"; panel.style.left = left + "px";
+    panel.classList.add('open');
+  });
+}
+function closeAllPanels(){ document.querySelectorAll('.popover').forEach(p=>{ p.classList.remove('open'); p.style.display='none'; }); document.querySelector('.menu-btn').classList.remove('open'); }
+window.addEventListener('click',(e)=>{ if(!e.target.closest('.popover') && !e.target.closest('.round-btn')) closeAllPanels(); });
+
+/* Buttons -> panels */
+const slotsPopover = $('slotsPopover');
+$('slotsBtn').onclick = ()=>{ closeAllPanels(); openPanelAt(slotsBtn, slotsPopover, "above"); };
+const chatPopover = $('chatPopover');
+$('chatBtn').onclick  = ()=>{ closeAllPanels(); openPanelAt(chatBtn,  chatPopover,  "above"); };
+
+/* Hamburger: animate icon and open/close */
+const menuBtn = $('menuBtn'); const menuPanel = $('menuPanel');
+menuBtn.addEventListener('click', ()=>{
+  const isOpen = menuPanel.style.display === 'block';
+  if(isOpen){ closeAllPanels(); }
+  else{ closeAllPanels(); openPanelAt(menuBtn, menuPanel, "below"); menuBtn.classList.add('open'); }
+});
+
+/* Slots logic */
+const symbols = ['🍒','🍋','⭐','7️⃣','🔔','🍀','💎'];
+const reelsDiv = $('reels');
+const wrap = document.querySelector('.reels-wrap');
+const reelSelect = $('reelSelect');
+const betSelect  = $('betSelect');
+const reelNum = $('reelNum');
+const betNum  = $('betNum');
+let reelsCount = parseInt(reelSelect.value,10);
+let bet = parseInt(betSelect.value,10);
+function layoutReels(){ const gap=10; const usable = wrap.clientWidth - gap*(reelsCount-1); const w = Math.min(70, Math.floor(usable / reelsCount)); [...reelsDiv.children].forEach(el => { el.style.width = w + 'px'; }); }
+function renderReels(){ reelsDiv.innerHTML=''; for(let i=0;i<reelsCount;i++){ const d=document.createElement('div'); d.className='reel enter'; d.textContent=symbols[(Math.random()*symbols.length)|0]; reelsDiv.appendChild(d);} layoutReels(); }
+renderReels(); window.addEventListener('resize', layoutReels);
+reelSelect.onchange = ()=>{ reelsCount = parseInt(reelSelect.value,10); reelNum.textContent = reelsCount; renderReels(); };
+betSelect.onchange  = ()=>{ bet = parseInt(betSelect.value,10); betNum.textContent = bet; };
+function spin(){ const cells = reelsDiv.children; let i=0; const timer=setInterval(()=>{ for(const c of cells){ c.textContent = symbols[(Math.random()*symbols.length)|0]; } if(++i>22){ clearInterval(timer); } },60); }
+$('spinBtn').onclick = spin;
+/* Handle */
+(function(){ const knob=$('leverKnob'), arm=$('leverArm'); let dragging=false,startY=0,curr=0; function setPos(y){{ curr=Math.max(0,Math.min(80,y)); arm.style.transform=`rotateX(${{curr/2}}deg)`; knob.style.bottom=(120-curr)+'px'; }} function down(e){{ dragging=true; document.body.classList.add('dragging'); startY=(e.touches?e.touches[0].clientY:e.clientY)-curr; }} function move(e){{ if(!dragging) return; const y=(e.touches?e.touches[0].clientY:e.clientY)-startY; setPos(y); }} function up(){{ if(!dragging) return; dragging=false; document.body.classList.remove('dragging'); if(curr>60) spin(); const start=curr, dur=280, t0=performance.now(); function anim(t){{ const p=Math.min(1,(t-t0)/dur); setPos(start*(1-p)); if(p<1) requestAnimationFrame(anim); }} requestAnimationFrame(anim); }} knob.addEventListener('mousedown',down); knob.addEventListener('touchstart',down); window.addEventListener('mousemove',move); window.addEventListener('touchmove',move,{passive:false}); window.addEventListener('mouseup',up); window.addEventListener('touchend',up); })();
+
+/* Menu settings (sync via localStorage) */
+function save(key,val){ localStorage.setItem(key,val); } function load(key,def){ const v=localStorage.getItem(key); return v===null? def : v; }
+$('themeSel').value = load('themeMode','Dark'); $('textSel').value  = load('textSize','Default'); $('notifFreq').value = load('notif_freq','All'); $('notifSound').checked = load('notif_sound','0')==='1'; $('notifPopup').checked = load('notif_popup','1')==='1'; $('musicVol').value   = load('music_vol','0.6'); $('musicTrack').value = load('music_track','default'); $('musicToggle').checked = load('music_on','0')==='1';
+function applyAppearance(){ const theme=$('themeSel').value, size=$('textSel').value; if(theme==='Light'){{ document.body.style.background='linear-gradient(120deg,#f6f6f6,#e8e8e8)'; document.body.style.color='#141414'; document.body.style.filter=''; }} else if(theme==='High Contrast'){{ document.body.style.background='radial-gradient(1200px 700px at 50% 110%, #ffd70040, transparent 60%), linear-gradient(120deg, #000, #000)'; document.body.style.color='#fff'; document.body.style.filter='contrast(1.35)'; }} else {{ document.body.style.background='radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, #0b0b0f, #1b0b00 40%, #3a0c00)'; document.body.style.color='#fff'; document.body.style.filter=''; }} document.documentElement.style.fontSize = (size==='Small'?'14px': size==='Large'?'18px':'16px'); }
+applyAppearance();
+['themeSel','textSel'].forEach(id=> $(id).addEventListener('change', ()=>{{ save(id==='themeSel'?'themeMode':'textSize', $(id).value); applyAppearance(); }}));
+$('notifFreq').addEventListener('change', ()=> save('notif_freq', $('notifFreq').value));
+$('notifSound').addEventListener('change', ()=> save('notif_sound', $('notifSound').checked?'1':'0'));
+$('notifPopup').addEventListener('change', ()=> save('notif_popup', $('notifPopup').checked?'1':'0'));
+let ctx, osc, gain, bgm=false; function startMusic(){{ if(bgm) return; ctx = new (window.AudioContext||window.webkitAudioContext)(); gain = ctx.createGain(); gain.gain.value = parseFloat($('musicVol').value); gain.connect(ctx.destination); osc = ctx.createOscillator(); const type = $('musicTrack').value; osc.type='sine'; const base = type==='arcade'?220:type==='chill'?140:180; osc.frequency.value=base; osc.connect(gain); osc.start(); bgm=true; }} function stopMusic(){{ if(!bgm) return; try{{osc.stop();}}catch(e){{}} try{{ctx.close();}}catch(e){{}} bgm=false; }} $('musicToggle').addEventListener('change', ()=>{{ save('music_on', $('musicToggle').checked?'1':'0'); if($('musicToggle').checked) startMusic(); else stopMusic(); }}); $('musicVol').addEventListener('change', ()=>{{ save('music_vol', $('musicVol').value); if(gain) gain.gain.value=parseFloat($('musicVol').value); }}); $('musicTrack').addEventListener('change', ()=>{{ save('music_track', $('musicTrack').value); if(bgm){{ stopMusic(); startMusic(); }} }}); if($('musicToggle').checked) startMusic();
+
+/* Chatbot */
+const chatLog = $('chatLog'); const chatInput = $('chatInput');
+function addMsg(who, text){ const row=document.createElement('div'); row.className='msg '+who; row.innerHTML=`<div class="bubble" style="padding:8px 10px; border-radius:12px; background:${{who==='me'?'#2a1b12':'#1f140d'}}">${{text}}</div>`; chatLog.appendChild(row); chatLog.scrollTop = chatLog.scrollHeight; }
+function t(lang, key){ const dict={{ en:{{hi:"Hey! How can I help?",help:"I can answer questions about courses, slots, settings, or your profile.",slots:"Use 🎰 to open Mini Slots. Pull the handle or tap Spin.",profile:"Tap the 👤 button to open your profile.",settings:"Open ☰ to change theme, text size, music and notifications."}}, es:{{hi:"¡Hola! ¿En qué puedo ayudarte?",help:"Puedo responder sobre cursos, tragamonedas, ajustes o tu perfil.",slots:"Usa 🎰 para abrir Mini Slots. Tira de la palanca o pulsa Spin.",profile:"Toca el botón 👤 para abrir tu perfil.",settings:"Abre ☰ para cambiar tema, tamaño de texto, música y notificaciones."}}, fr:{{hi:"Salut ! Comment puis-je aider ?",help:"Je peux répondre sur les cours, les slots, les réglages ou votre profil.",slots:"Utilisez 🎰 pour ouvrir Mini Slots. Tirez la poignée ou appuyez sur Spin.",profile:"Appuyez sur 👤 pour ouvrir votre profil.",settings:"Ouvrez ☰ pour changer le thème, la taille du texte, la musique et les notifications."}}, zh:{{hi:"你好！我可以帮你什么？",help:"我可以回答关于课程、老虎机、设置或个人资料的问题。",slots:"点击 🎰 打开小游戏，拉动手柄或点击 Spin。",profile:"点击 👤 打开你的个人主页。",settings:"点击 ☰ 修改主题、文字大小、音乐和通知。"}} }}; return (dict[lang]||dict.en)[key]; }
+function detectLang(s){ if(/[你好谢谢再见]/.test(s)) return 'zh'; if(/[áéíóúñ¿¡]/i.test(s) || /\b(hola|ayuda|curso|ajustes|perfil)\b/i.test(s)) return 'es'; if(/[éèêàçù]/i.test(s) || /\b(bonjour|salut|profil|réglages)\b/i.test(s)) return 'fr'; return 'en'; }
+function sendMessage(){ const msg=chatInput.value.trim(); if(!msg) return; addMsg('me',msg); chatInput.value=''; const lang=detectLang(msg); let reply=t(lang,'help'); if(/\b(slot|reel|spin|lever|🎰)\b/i.test(msg)) reply=t(lang,'slots'); if(/\b(profile|👤|avatar|followers|following)\b/i.test(msg)) reply=t(lang,'profile'); if(/\b(setting|theme|contrast|text|☰|notification)\b/i.test(msg)) reply=t(lang,'settings'); if(/\b(hi|hello|hey|hola|bonjour|salut|你好)\b/i.test(msg)) reply=t(lang,'hi'); addMsg('bot',reply); }
+$('sendBtn').onclick = sendMessage; $('micBtn').onclick=()=> addMsg('bot','🎙️ Voice capture is not available in this demo, but text works great!'); $('imgUp').addEventListener('change', (e)=>{{ const f = e.target.files[0]; if(!f) return; addMsg('me', `📷 Sent an image: ${{f.name}}`); addMsg('bot','I can store images for later reference, but I don’t analyze them in this demo.'); }});
+setTimeout(()=> addMsg('bot', "👋 Welcome! I’m your Assistant. Ask me anything about the site, games, or settings. I can also chat in your language of choice!"), 200);
+</script>
