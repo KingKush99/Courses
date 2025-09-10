@@ -1,29 +1,31 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Diagnostics</title>
-<style>
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Diagnostics</title><style>
 :root{--pill:linear-gradient(90deg,#ff6b00,#ff3b3b);--bg1:#0b0b0f;--bg2:#1a0a07;--bg3:#350f06}
-*{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:"Comic Sans MS","Comic Sans",cursive;color:#fff;
+*{box-sizing:border-box} html,body{height:100%}
+body{margin:0;font-family:"Comic Sans MS","Comic Sans",cursive;color:#fff;
 background: radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, var(--bg1), var(--bg2) 40%, var(--bg3));}
 .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6vh 24px;text-align:center}
 .grid{display:grid;gap:16px;width:min(1400px,95vw);margin:16px auto;grid-template-columns:repeat(1,minmax(280px,1fr))}
-.pill-btn{display:block;text-decoration:none;color:#fff;font-weight:800;background:var(--pill);border-radius:999px;padding:16px 24px;box-shadow:0 8px 18px #0008;transition:.12s;width:60%;margin-inline:auto;text-align:center}
+.pill-btn{display:block;text-decoration:none;color:#fff;font-weight:800;background:var(--pill);border-radius:999px;padding:16px 24px;box-shadow:0 8px 18px #0008;transition:.12s;width:60%;margin-inline:auto;text-align:center;cursor:pointer;border:none}
 .pill-btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px #000a;filter:brightness(1.03)}
 .back{position:fixed;left:16px;top:16px;background:#2a1b12;border:1px solid #ffffff1a;color:#fff;padding:8px 12px;border-radius:999px;text-decoration:none}
 .card{background:#1a0f0a;border:1px solid #ffffff1a;border-radius:16px;padding:16px;margin:12px auto;text-align:left}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.progress{height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px} .bar{height:100%;width:0;background:#ffd166}
+.progress{height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px}
+.bar{height:100%;width:0;background:#ffd166}
 small.hint{opacity:.8;color:#ffd9b3}
-</style></head><body>
+</style></head><body><a class='back' href='./'>← Back</a>
 <main class="wrap"><div style="width:min(1000px,95vw)"><h1>Diagnostics</h1><div id="list" class="card"></div></div></main>
 <script>
-const routes=['/','/chess/','/coding-evolution/','/music-maker/','/offensive-coordinator/','/quantum/','/rugby1/','/poker/','/books/','/profile.html'];
-const base='/' + (location.pathname.split('/').filter(Boolean)[0] || '');
-(async()=>{
-  for(const r of routes){
-    const href=base + r;
-    let ok=false; try{ const res=await fetch(href,{cache:'no-store'}); ok=res.ok; }catch(_){ ok=false; }
-    const row=document.createElement('div'); row.innerHTML=(ok?'✅ ':'❌ ')+`<a href="${href}">${href}</a>`; document.getElementById('list').appendChild(row);
-  }
+var routes=['/','/chess/','/coding-evolution/','/music-maker/','/offensive-coordinator/','/quantum/','/rugby1/','/poker/','/books/','/profile.html'];
+var base='/' + (location.pathname.split('/').filter(Boolean)[0] || '');
+(function(){
+  for(var i=0;i<routes.length;i++){ (function(r){
+    var href=base + r;
+    var row=document.createElement('div');
+    row.innerHTML='⏳ '+'<a href="'+href+'">'+href+'</a>';
+    document.getElementById('list').appendChild(row);
+    var x=new XMLHttpRequest(); x.onreadystatechange=function(){ if(x.readyState==4){ row.innerHTML=(x.status===200?'✅ ':'❌ ')+'<a href="'+href+'">'+href+'</a>'; } };
+    x.open('GET', href, true); x.send();
+  })(routes[i]); }
 })();
 </script></body></html>

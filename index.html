@@ -1,18 +1,17 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Choose Your Course</title>
-<style>
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Choose Your Course</title><style>
 :root{--pill:linear-gradient(90deg,#ff6b00,#ff3b3b);--bg1:#0b0b0f;--bg2:#1a0a07;--bg3:#350f06}
-*{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:"Comic Sans MS","Comic Sans",cursive;color:#fff;
+*{box-sizing:border-box} html,body{height:100%}
+body{margin:0;font-family:"Comic Sans MS","Comic Sans",cursive;color:#fff;
 background: radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, var(--bg1), var(--bg2) 40%, var(--bg3));}
 .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6vh 24px;text-align:center}
 .grid{display:grid;gap:16px;width:min(1400px,95vw);margin:16px auto;grid-template-columns:repeat(1,minmax(280px,1fr))}
-.pill-btn{display:block;text-decoration:none;color:#fff;font-weight:800;background:var(--pill);border-radius:999px;padding:16px 24px;box-shadow:0 8px 18px #0008;transition:.12s;width:60%;margin-inline:auto;text-align:center}
+.pill-btn{display:block;text-decoration:none;color:#fff;font-weight:800;background:var(--pill);border-radius:999px;padding:16px 24px;box-shadow:0 8px 18px #0008;transition:.12s;width:60%;margin-inline:auto;text-align:center;cursor:pointer;border:none}
 .pill-btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px #000a;filter:brightness(1.03)}
 .back{position:fixed;left:16px;top:16px;background:#2a1b12;border:1px solid #ffffff1a;color:#fff;padding:8px 12px;border-radius:999px;text-decoration:none}
 .card{background:#1a0f0a;border:1px solid #ffffff1a;border-radius:16px;padding:16px;margin:12px auto;text-align:left}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.progress{height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px} .bar{height:100%;width:0;background:#ffd166}
+.progress{height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px}
+.bar{height:100%;width:0;background:#ffd166}
 small.hint{opacity:.8;color:#ffd9b3}
 </style></head><body>
 <main class="wrap"><div style="width:100%">
@@ -32,9 +31,11 @@ small.hint{opacity:.8;color:#ffd9b3}
   </div>
 </div></main>
 <script>
-const grid=document.getElementById('courseGrid'); const colSel=document.getElementById('colSel');
-let dragEl=null; grid.addEventListener('dragstart',e=>{if(e.target.classList.contains('pill-btn')){dragEl=e.target;e.dataTransfer.effectAllowed='move';}});
-grid.addEventListener('dragover',e=>{e.preventDefault();const t=e.target.closest('.pill-btn'); if(!t||t===dragEl) return; const r=t.getBoundingClientRect(); grid.insertBefore(dragEl,(e.clientY-r.top)>r.height/2? t.nextSibling: t);});
-colSel.addEventListener('change',()=>{grid.style.gridTemplateColumns=`repeat(${parseInt(colSel.value,10)}, minmax(280px,1fr))`;});
+var grid=document.getElementById('courseGrid'); var colSel=document.getElementById('colSel'); var dragEl=null;
+grid.addEventListener('dragstart',function(e){ if(e.target.classList.contains('pill-btn')){ dragEl=e.target; e.dataTransfer.effectAllowed='move'; } });
+grid.addEventListener('dragover',function(e){ e.preventDefault(); var t=e.target.closest? e.target.closest('.pill-btn') : null; if(!t||t===dragEl) return;
+  var r=t.getBoundingClientRect(); grid.insertBefore(dragEl,(e.clientY-r.top)>r.height/2? t.nextSibling: t);
+});
+colSel.addEventListener('change',function(){ grid.style.gridTemplateColumns='repeat('+parseInt(colSel.value,10)+', minmax(280px,1fr))'; });
 </script>
 </body></html>

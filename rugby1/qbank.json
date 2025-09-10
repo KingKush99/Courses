@@ -98,10 +98,10 @@
     "type": "mc",
     "q": "2-4 Switch: Which option widens the attack?",
     "options": [
-      "10/12 decoy drift lines -> 10-13 switch",
+      "10/12 decoy drift -> 10-13 switch",
       "10-12 option"
     ],
-    "a": "10/12 decoy drift lines -> 10-13 switch"
+    "a": "10/12 decoy drift -> 10-13 switch"
   },
   {
     "type": "mc",
