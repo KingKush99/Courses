@@ -1,16 +1,38 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Profile</title><style>
-:root{--pill:linear-gradient(90deg,#ff6b00,#ff3b3b);--bg1:#0b0b0f;--bg2:#1a0a07;--bg3:#350f06}
-*{box-sizing:border-box} html,body{height:100%}
-body{margin:0;font-family:"Comic Sans MS","Comic Sans",cursive;color:#fff;
-background: radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, var(--bg1), var(--bg2) 40%, var(--bg3));}
-.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6vh 24px;text-align:center}
-.grid{display:grid;gap:16px;width:min(1400px,95vw);margin:16px auto;grid-template-columns:repeat(1,minmax(280px,1fr))}
-.pill-btn{display:block;text-decoration:none;color:#fff;font-weight:800;background:var(--pill);border-radius:999px;padding:16px 24px;box-shadow:0 8px 18px #0008;transition:.12s;width:60%;margin-inline:auto;text-align:center;cursor:pointer;border:none}
-.pill-btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px #000a;filter:brightness(1.03)}
-.back{position:fixed;left:16px;top:16px;background:#2a1b12;border:1px solid #ffffff1a;color:#fff;padding:8px 12px;border-radius:999px;text-decoration:none}
-.card{background:#1a0f0a;border:1px solid #ffffff1a;border-radius:16px;padding:16px;margin:12px auto;text-align:left;max-width:1100px}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.progress{height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px}
-.bar{height:100%;width:0;background:#ffd166}
-small.hint{opacity:.8;color:#ffd9b3}
-</style></head><body><a class='back' href='./'>← Back</a><main class='wrap'><div class='card'><h1>Profile</h1><p>Stats & progress here.</p></div></main></body></html>
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Profile</title><link rel='stylesheet' href='assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='assets/app.js'></script>
+<main class="wrap"><div class="card">
+  <h1>Profile</h1>
+  <div class="row">
+    <div style="width:96px;height:96px;border-radius:999px;background:#222;display:grid;place-items:center;font-size:36px">🐶</div>
+    <div>
+      <div><strong id="uname">Player</strong></div>
+      <div id="bio" contenteditable="true" style="opacity:.8">Bio: Loves learning.</div>
+      <button id="gear" class="pill-btn">⚙️ Settings</button>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div><strong>Followers:</strong> <span id="foll">0</span></div>
+    <div><strong>Following:</strong> <span id="wing">0</span></div>
+    <div><strong>Friends:</strong> <span id="frs">0</span></div>
+  </div>
+  <hr>
+  <h3>Course Progress</h3>
+  <div id="prog"></div>
+</div></main>
+<div id="setModal" class="ham-panel" style="left:50%;transform:translateX(-50%);top:20vh;display:none">
+  <div class="ham-head">Profile Settings</div>
+  <div class="ham-body">
+    <label>Username: <input id="nameInp"></label><br>
+    <label><input type="checkbox" id="notif"> Notifications</label><br>
+    <button id="saveSet" class="pill-btn">Save</button>
+  </div>
+</div>
+<script>
+function loadCounts(){ var f=localStorage.getItem('followers')||'0', w=localStorage.getItem('following')||'0', r=localStorage.getItem('friends')||'0'; document.getElementById('foll').textContent=f; document.getElementById('wing').textContent=w; document.getElementById('frs').textContent=r; }
+function loadProg(){ var keys=['chess','coding-evolution','music-maker','offensive-coordinator','quantum','rugby1','poker','books','driving']; var box=document.getElementById('prog'); box.innerHTML=''; for(var i=0;i<keys.length;i++){ var k=keys[i]; var v=parseInt(localStorage.getItem('progress_'+k)||'0',10)||0; var row=document.createElement('div'); row.innerHTML='<div style="margin:6px 0"><strong>'+k+'</strong><div class="progress"><div class="bar" style="width:'+v+'%;background:'+(v>=100?'#2ecc71':(v>25&&v<75?'#f1c40f':'#ff3b3b'))+'"></div></div></div>'; box.appendChild(row); } }
+loadCounts(); loadProg();
+document.getElementById('gear').onclick=function(){ document.getElementById('setModal').style.display='flex'; document.getElementById('nameInp').value=document.getElementById('uname').textContent; };
+document.getElementById('saveSet').onclick=function(){ document.getElementById('uname').textContent=document.getElementById('nameInp').value||'Player'; localStorage.setItem('notif', document.getElementById('notif').checked?'1':'0'); document.getElementById('setModal').style.display='none'; };
+document.addEventListener('click',function(e){ var m=document.getElementById('setModal'); if(m.style.display==='flex' && !e.target.closest('#setModal') && e.target.id!=='gear'){ m.style.display='none'; } });
+</script>
+</body></html>

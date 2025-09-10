@@ -1,25 +1,5 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Rugby • Plays</title><style>
-:root{--pill:linear-gradient(90deg,#ff6b00,#ff3b3b);--bg1:#0b0b0f;--bg2:#1a0a07;--bg3:#350f06}
-*{box-sizing:border-box} html,body{height:100%}
-body{margin:0;font-family:"Comic Sans MS","Comic Sans",cursive;color:#fff;
-background: radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%), linear-gradient(120deg, var(--bg1), var(--bg2) 40%, var(--bg3));}
-.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6vh 24px;text-align:center}
-.grid{display:grid;gap:16px;width:min(1400px,95vw);margin:16px auto;grid-template-columns:repeat(1,minmax(280px,1fr))}
-.pill-btn{display:block;text-decoration:none;color:#fff;font-weight:800;background:var(--pill);border-radius:999px;padding:16px 24px;box-shadow:0 8px 18px #0008;transition:.12s;width:60%;margin-inline:auto;text-align:center;cursor:pointer;border:none}
-.pill-btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px #000a;filter:brightness(1.03)}
-.back{position:fixed;left:16px;top:16px;background:#2a1b12;border:1px solid #ffffff1a;color:#fff;padding:8px 12px;border-radius:999px;text-decoration:none}
-.card{background:#1a0f0a;border:1px solid #ffffff1a;border-radius:16px;padding:16px;margin:12px auto;text-align:left;max-width:1100px}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.progress{height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px}
-.bar{height:100%;width:0;background:#ffd166}
-small.hint{opacity:.8;color:#ffd9b3}
-</style></head><body><a class='back' href='./'>← Back</a>
-<main class="wrap"><div class="card">
-  <h1>Plays (PDF Viewer)</h1>
-  <div class="row" style="justify-content:center">
-    <a class="pill-btn" href="pdfs/Irish Plays.pdf" target="_blank">Open Irish Plays (PDF)</a>
-    <a class="pill-btn" href="pdfs/OIRC Back Plays.pdf" target="_blank">Open OIRC Back Plays (PDF)</a>
-  </div>
-  <embed src="pdfs/Irish Plays.pdf#toolbar=0&navpanes=0&view=Fit" type="application/pdf" style="width:100%;height:70vh;border-radius:12px;"/>
-  <div class="card"><strong>Tip:</strong> Replace the placeholder PDFs in <code>rugby1/pdfs/</code> with your real files using the exact same names.</div>
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Rugby • Plays</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
+<main class="wrap"><div class="card"><h1>Plays (PDFs)</h1>
+  <div class="row"><a class="pill-btn" target="_blank" href="pdfs/Irish Plays.pdf">Open Irish Plays</a><a class="pill-btn" target="_blank" href="pdfs/OIRC Back Plays.pdf">Open OIRC Back Plays</a></div>
+  <embed src="pdfs/Irish Plays.pdf#toolbar=0&view=Fit" type="application/pdf" style="width:100%;height:70vh;border-radius:12px"/>
 </div></main></body></html>

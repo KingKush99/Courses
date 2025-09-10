@@ -1,552 +1,552 @@
 [
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "In PlaysX/SwitchOption, which pairing tends to attack wider channels?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "10-12",
+      "13-12",
+      "9-11",
+      "12-13"
     ],
-    "a": "A"
+    "a": "12-13"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "For PlaysX/SwitchOption, which option is most direct?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Crash",
+      "Pull behind",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Crash"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   },
   {
     "type": "mc",
-    "q": "Sample question for Rugby?",
+    "q": "Which backline call pulls the ball behind a crashing runner?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Pull behind",
+      "Crash",
+      "Loop",
+      "Skip"
     ],
-    "a": "A"
+    "a": "Pull behind"
   }
 ]
