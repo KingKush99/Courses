@@ -8,42 +8,34 @@ background: radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%
 .pill-btn{display:block;text-decoration:none;color:#fff;font-weight:800;background:var(--pill);border-radius:999px;padding:16px 24px;box-shadow:0 8px 18px #0008;transition:.12s;width:60%;margin-inline:auto;text-align:center;cursor:pointer;border:none}
 .pill-btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px #000a;filter:brightness(1.03)}
 .back{position:fixed;left:16px;top:16px;background:#2a1b12;border:1px solid #ffffff1a;color:#fff;padding:8px 12px;border-radius:999px;text-decoration:none}
-.card{background:#1a0f0a;border:1px solid #ffffff1a;border-radius:16px;padding:16px;margin:12px auto;text-align:left}
+.card{background:#1a0f0a;border:1px solid #ffffff1a;border-radius:16px;padding:16px;margin:12px auto;text-align:left;max-width:1100px}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .progress{height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px}
 .bar{height:100%;width:0;background:#ffd166}
 small.hint{opacity:.8;color:#ffd9b3}
 </style></head><body><a class='back' href='./'>← Back</a>
-<main class="wrap"><div style="width:min(1000px,95vw)">
+<main class="wrap"><div class="card">
   <h1>Coding Evolution — Spaced Repetition</h1>
-  <div class="card">
-    <div id="qa"></div>
-    <div class="row" style="margin-top:12px">
-      <button id="show" class="pill-btn">Show Answer</button>
-      <button id="again" class="pill-btn">Again</button>
-      <button id="good" class="pill-btn">Good</button>
-      <button id="easy" class="pill-btn">Easy</button>
-    </div>
-    <small class="hint">Due cards first. Correct answers advance the card’s box.</small>
+  <div id="qa"></div>
+  <div class="row" style="margin-top:12px">
+    <button id="show" class="pill-btn">Show Answer</button>
+    <button id="again" class="pill-btn">Again</button>
+    <button id="good" class="pill-btn">Good</button>
+    <button id="easy" class="pill-btn">Easy</button>
   </div>
 </div></main>
 <script>
-var KEY = 'leitner_coding-evolution';
-var raw = localStorage.getItem(KEY); var state = raw ? JSON.parse(raw) : {boxes:{}, index:0};
+var KEY='leitner_coding-evolution'; var raw=localStorage.getItem(KEY); var state=raw?JSON.parse(raw):{boxes:{}};
 function loadQ(cb){ var x=new XMLHttpRequest(); x.onreadystatechange=function(){ if(x.readyState==4){ cb(JSON.parse(x.responseText)); } }; x.open('GET','qbank.json',true); x.send(); }
 function now(){ return new Date().getTime(); }
-function dueAt(box){ var mins=[0,10,60,360,1440]; return now() + mins[Math.max(0,Math.min(4,box-1))]*60000; }
-function pick(qs){ var due=[]; for(var i=0;i<qs.length;i++){ var s=state.boxes[i]; if(!s || s.due<=now()) due.push(qs[i]); } var pool=due.length? due:qs; return pool[Math.floor(Math.random()*pool.length)]; }
-function render(q){ var qa=document.getElementById('qa'); var html='<div><strong>Q:</strong> '+q.q+'</div>'; if(q.type==='mc'){ html+='<ol>'; for(var i=0;i<q.options.length;i++) html+='<li>'+q.options[i]+'</li>'; html+='</ol>'; } html+='<div id="ans" style="margin-top:8px;display:none"><strong>A:</strong> '+(q.a.join? q.a.join(', '): q.a)+'</div>'; qa.innerHTML=html; }
-var all=[], cur=null; loadQ(function(qs){ all=qs; next(); });
-function next(){ cur = pick(all); render(cur); document.getElementById('ans').style.display='none'; }
+function dueAt(box){ var mins=[0,10,60,360,1440]; return now()+mins[Math.max(0,Math.min(4,box-1))]*60000; }
+function pick(qs){ var due=[]; for(var i=0;i<qs.length;i++){ var s=state.boxes[i]; if(!s||s.due<=now()) due.push(qs[i]); } var pool=due.length?due:qs; var idx=qs.indexOf(pool[Math.floor(Math.random()*pool.length)]); return {q:qs[idx],i:idx}; }
+function render(q){ var qa=document.getElementById('qa'); var html='<div><strong>Q:</strong> '+q.q.q+'</div>'; if(q.q.type==='mc'){ html+='<ol>'; for(var i=0;i<q.q.options.length;i++) html+='<li>'+q.q.options[i]+'</li>'; html+='</ol>'; } html+='<div id="ans" style="margin-top:8px;display:none"><strong>A:</strong> '+(q.q.a.join? q.q.a.join(", "): q.q.a)+'</div>'; qa.innerHTML=html; }
+var all=[],cur=null; loadQ(function(qs){ all=qs; next(); });
+function next(){ cur=pick(all); render(cur); document.getElementById('ans').style.display='none'; }
 document.getElementById('show').onclick=function(){ document.getElementById('ans').style.display='block'; };
-function grade(delta){ var idx=all.indexOf(cur); var prev = state.boxes[idx]? state.boxes[idx].box : 1; var nb = Math.max(1, Math.min(5, prev + delta)); state.boxes[idx] = {box: nb, due: dueAt(nb)};
-  localStorage.setItem(KEY, JSON.stringify(state));
-  var mastered=0; for(var k in state.boxes){ if(state.boxes[k].box>=5) mastered++; }
-  var prog = Math.round(100 * mastered / all.length);
-  localStorage.setItem('progress_coding-evolution', String(prog)); next();
-}
+function grade(delta){ var s=state.boxes[cur.i]?state.boxes[cur.i].box:1; var nb=Math.max(1,Math.min(5,s+delta)); state.boxes[cur.i]={box:nb,due:dueAt(nb)}; localStorage.setItem(KEY,JSON.stringify(state));
+  var mastered=0; for(var k in state.boxes){ if(state.boxes[k].box>=5) mastered++; } var prog=Math.round(100*mastered/all.length); localStorage.setItem('progress_coding-evolution',String(prog)); next(); }
 document.getElementById('again').onclick=function(){ grade(-1); };
 document.getElementById('good').onclick=function(){ grade(+1); };
 document.getElementById('easy').onclick=function(){ grade(+2); };

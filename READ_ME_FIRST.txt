@@ -1,0 +1,1 @@
+Upload ALL folders and files in this zip to the repo root. Then open /diagnostics.html and make sure every route is green. Lowercase folders hold the real pages; capitalized folders are redirects and must NOT be nested inside the lowercase ones.

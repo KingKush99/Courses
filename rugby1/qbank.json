@@ -1,10 +1,5 @@
 [
   {
-    "type": "tf",
-    "q": "True/False: X/Switch can include an inside crash.",
-    "a": "False"
-  },
-  {
     "type": "mc",
     "q": "X/Switch: Which option widens the attack?",
     "options": [
@@ -13,11 +8,6 @@
       "10-15 pull behind 13"
     ],
     "a": "10-15 pull behind 13"
-  },
-  {
-    "type": "tf",
-    "q": "True/False: Swap can include an inside crash.",
-    "a": "False"
   },
   {
     "type": "mc",
@@ -31,11 +21,6 @@
     "a": "10-12 pull behind 13"
   },
   {
-    "type": "tf",
-    "q": "True/False: MGM can include an inside crash.",
-    "a": "True"
-  },
-  {
     "type": "mc",
     "q": "MGM: Which option widens the attack?",
     "options": [
@@ -46,11 +31,6 @@
     "a": "10-11 pull option to go wide"
   },
   {
-    "type": "tf",
-    "q": "True/False: M1 (miss 1) can include an inside crash.",
-    "a": "True"
-  },
-  {
     "type": "mc",
     "q": "M1 (miss 1): Which option widens the attack?",
     "options": [
@@ -58,11 +38,6 @@
       "13-11 tip line inside crash"
     ],
     "a": "13-12 float loop"
-  },
-  {
-    "type": "tf",
-    "q": "True/False: Express can include an inside crash.",
-    "a": "False"
   },
   {
     "type": "mc",
@@ -75,11 +50,6 @@
     "a": "12-10 pull behind 13 to go wide"
   },
   {
-    "type": "tf",
-    "q": "True/False: Wing In can include an inside crash.",
-    "a": "False"
-  },
-  {
     "type": "mc",
     "q": "Wing In: Which option widens the attack?",
     "options": [
@@ -90,11 +60,6 @@
     "a": "9-11 overload D10 crash"
   },
   {
-    "type": "tf",
-    "q": "True/False: 2-4 Switch can include an inside crash.",
-    "a": "False"
-  },
-  {
     "type": "mc",
     "q": "2-4 Switch: Which option widens the attack?",
     "options": [
@@ -102,6 +67,83 @@
       "10-12 option"
     ],
     "a": "10/12 decoy drift -> 10-13 switch"
+  },
+  {
+    "type": "mc",
+    "q": "Which option tends to be most direct?",
+    "options": [
+      "Crash",
+      "Pull behind",
+      "Loop",
+      "Skip"
+    ],
+    "a": "Crash"
+  },
+  {
+    "type": "mc",
+    "q": "Which option tends to be most direct?",
+    "options": [
+      "Crash",
+      "Pull behind",
+      "Loop",
+      "Skip"
+    ],
+    "a": "Crash"
+  },
+  {
+    "type": "mc",
+    "q": "Which option tends to be most direct?",
+    "options": [
+      "Crash",
+      "Pull behind",
+      "Loop",
+      "Skip"
+    ],
+    "a": "Crash"
+  },
+  {
+    "type": "mc",
+    "q": "Which option tends to be most direct?",
+    "options": [
+      "Crash",
+      "Pull behind",
+      "Loop",
+      "Skip"
+    ],
+    "a": "Crash"
+  },
+  {
+    "type": "mc",
+    "q": "Which option tends to be most direct?",
+    "options": [
+      "Crash",
+      "Pull behind",
+      "Loop",
+      "Skip"
+    ],
+    "a": "Crash"
+  },
+  {
+    "type": "mc",
+    "q": "Which option tends to be most direct?",
+    "options": [
+      "Crash",
+      "Pull behind",
+      "Loop",
+      "Skip"
+    ],
+    "a": "Crash"
+  },
+  {
+    "type": "mc",
+    "q": "Which option tends to be most direct?",
+    "options": [
+      "Crash",
+      "Pull behind",
+      "Loop",
+      "Skip"
+    ],
+    "a": "Crash"
   },
   {
     "type": "mc",

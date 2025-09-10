@@ -8,20 +8,18 @@ background: radial-gradient(1200px 700px at 50% 110%, #ff9f1a40, transparent 60%
 .pill-btn{display:block;text-decoration:none;color:#fff;font-weight:800;background:var(--pill);border-radius:999px;padding:16px 24px;box-shadow:0 8px 18px #0008;transition:.12s;width:60%;margin-inline:auto;text-align:center;cursor:pointer;border:none}
 .pill-btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px #000a;filter:brightness(1.03)}
 .back{position:fixed;left:16px;top:16px;background:#2a1b12;border:1px solid #ffffff1a;color:#fff;padding:8px 12px;border-radius:999px;text-decoration:none}
-.card{background:#1a0f0a;border:1px solid #ffffff1a;border-radius:16px;padding:16px;margin:12px auto;text-align:left}
+.card{background:#1a0f0a;border:1px solid #ffffff1a;border-radius:16px;padding:16px;margin:12px auto;text-align:left;max-width:1100px}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .progress{height:10px;background:#2a1b12;border-radius:999px;overflow:hidden;border:1px solid #ffffff1a;margin-top:8px}
 .bar{height:100%;width:0;background:#ffd166}
 small.hint{opacity:.8;color:#ffd9b3}
 </style></head><body><a class='back' href='./'>← Back</a>
-<main class="wrap"><div style="width:min(1200px,95vw)">
+<main class="wrap"><div class="card">
   <h1>Plays (PDF Viewer)</h1>
   <div class="row" style="justify-content:center">
     <a class="pill-btn" href="pdfs/Irish Plays.pdf" target="_blank">Open Irish Plays (PDF)</a>
     <a class="pill-btn" href="pdfs/OIRC Back Plays.pdf" target="_blank">Open OIRC Back Plays (PDF)</a>
   </div>
-  <div class="card">
-    <embed src="pdfs/Irish Plays.pdf#toolbar=0&navpanes=0&view=Fit" type="application/pdf" style="width:100%;height:70vh;border-radius:12px;"/>
-  </div>
-  <div class="card"><strong>Tip:</strong> If the PDFs don’t open on GitHub Pages, upload your actual files into <code>rugby1/pdfs/</code> keeping the same names.</div>
+  <embed src="pdfs/Irish Plays.pdf#toolbar=0&navpanes=0&view=Fit" type="application/pdf" style="width:100%;height:70vh;border-radius:12px;"/>
+  <div class="card"><strong>Tip:</strong> Replace the placeholder PDFs in <code>rugby1/pdfs/</code> with your real files using the exact same names.</div>
 </div></main></body></html>

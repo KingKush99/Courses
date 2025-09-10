@@ -11,11 +11,6 @@
     "a": "Knight"
   },
   {
-    "type": "tf",
-    "q": "Pawns capture straight ahead.",
-    "a": "False"
-  },
-  {
     "type": "mc",
     "q": "Dutch Defence starts with which move for Black?",
     "options": [
@@ -193,80 +188,91 @@
   },
   {
     "type": "mc",
-    "q": "Vienna Gambit after 1.e4 e5 2.?",
+    "q": "Dutch Defence starts with which move for Black?",
     "options": [
-      "Nc3",
-      "Nf3",
-      "Bc4",
-      "d4"
+      "...f5",
+      "...e5",
+      "...c5",
+      "...d5"
     ],
-    "a": "Nc3"
+    "a": "...f5"
   },
   {
     "type": "mc",
-    "q": "Vienna Gambit after 1.e4 e5 2.?",
+    "q": "Dutch Defence starts with which move for Black?",
     "options": [
-      "Nc3",
-      "Nf3",
-      "Bc4",
-      "d4"
+      "...f5",
+      "...e5",
+      "...c5",
+      "...d5"
     ],
-    "a": "Nc3"
+    "a": "...f5"
   },
   {
     "type": "mc",
-    "q": "Vienna Gambit after 1.e4 e5 2.?",
+    "q": "Dutch Defence starts with which move for Black?",
     "options": [
-      "Nc3",
-      "Nf3",
-      "Bc4",
-      "d4"
+      "...f5",
+      "...e5",
+      "...c5",
+      "...d5"
     ],
-    "a": "Nc3"
+    "a": "...f5"
   },
   {
     "type": "mc",
-    "q": "Vienna Gambit after 1.e4 e5 2.?",
+    "q": "Dutch Defence starts with which move for Black?",
     "options": [
-      "Nc3",
-      "Nf3",
-      "Bc4",
-      "d4"
+      "...f5",
+      "...e5",
+      "...c5",
+      "...d5"
     ],
-    "a": "Nc3"
+    "a": "...f5"
   },
   {
     "type": "mc",
-    "q": "Vienna Gambit after 1.e4 e5 2.?",
+    "q": "Dutch Defence starts with which move for Black?",
     "options": [
-      "Nc3",
-      "Nf3",
-      "Bc4",
-      "d4"
+      "...f5",
+      "...e5",
+      "...c5",
+      "...d5"
     ],
-    "a": "Nc3"
+    "a": "...f5"
   },
   {
     "type": "mc",
-    "q": "Vienna Gambit after 1.e4 e5 2.?",
+    "q": "Dutch Defence starts with which move for Black?",
     "options": [
-      "Nc3",
-      "Nf3",
-      "Bc4",
-      "d4"
+      "...f5",
+      "...e5",
+      "...c5",
+      "...d5"
     ],
-    "a": "Nc3"
+    "a": "...f5"
   },
   {
     "type": "mc",
-    "q": "Vienna Gambit after 1.e4 e5 2.?",
+    "q": "Dutch Defence starts with which move for Black?",
     "options": [
-      "Nc3",
-      "Nf3",
-      "Bc4",
-      "d4"
+      "...f5",
+      "...e5",
+      "...c5",
+      "...d5"
     ],
-    "a": "Nc3"
+    "a": "...f5"
+  },
+  {
+    "type": "mc",
+    "q": "Dutch Defence starts with which move for Black?",
+    "options": [
+      "...f5",
+      "...e5",
+      "...c5",
+      "...d5"
+    ],
+    "a": "...f5"
   },
   {
     "type": "mc",
