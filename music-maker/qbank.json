@@ -1,552 +1,552 @@
 [
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "Tempo measured in:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "BPM",
+      "Hz",
+      "dB",
+      "ms"
     ],
-    "a": "A"
+    "a": "BPM"
   },
   {
     "type": "mc",
-    "q": "Sample question for Music Maker?",
+    "q": "A triad has how many notes?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3",
+      "2",
+      "4",
+      "5"
     ],
-    "a": "A"
+    "a": "3"
   }
 ]

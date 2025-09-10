@@ -1,4 +1,4 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Chess • Study</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/widget.js'></script>
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Chess • Study</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='../'>← Back</a><script src='../assets/app.js'></script>
 <main class="wrap"><div class="card">
   <h1>Chess — Spaced Repetition</h1>
   <div id="qa"></div>
@@ -14,8 +14,8 @@ var KEY='leitner_chess'; var raw=localStorage.getItem(KEY); var state=raw?JSON.p
 function loadQ(cb){ var x=new XMLHttpRequest(); x.onreadystatechange=function(){ if(x.readyState==4){ cb(JSON.parse(x.responseText)); } }; x.open('GET','qbank.json',true); x.send(); }
 function now(){ return new Date().getTime(); }
 function dueAt(box){ var mins=[0,10,60,360,1440]; return now()+mins[Math.max(0,Math.min(4,box-1))]*60000; }
-function pick(qs){ var due=[]; for(var i=0;i<qs.length;i++){ var s=state.boxes[i]; if(!s||s.due<=now()) due.push(qs[i]); } var pool=due.length?due:qs; var idx=Math.floor(Math.random()*pool.length); var q=pool[idx]; return {q:q,i:qs.indexOf(q)}; }
-function render(cur){ var qa=document.getElementById('qa'); var q=cur.q; var html='<div><strong>Q:</strong> '+q.q.q+'</div>'; if(q.q.type==='mc'){ html+='<ol>'; for(var i=0;i<q.q.options.length;i++) html+='<li>'+q.q.options[i]+'</li>'; html+='</ol>'; } html+='<div id="ans" style="margin-top:8px;display:none"><strong>A:</strong> '+(q.q.a.join? q.q.a.join(", "): q.q.a)+'</div>'; qa.innerHTML=html; }
+function pick(qs){ var due=[]; for(var i=0;i<qs.length;i++){ var s=state.boxes[i]; if(!s||s.due<=now()) due.push({q:qs[i],i:i}); } var pool=due.length?due:qs.map(function(q,i){return {q:q,i:i};}); return pool[Math.floor(Math.random()*pool.length)]; }
+function render(cur){ var qa=document.getElementById('qa'); var item=cur.q; var html='<div><strong>Q:</strong> '+item.q+'</div>'; if((item.type==='mc'||item.options)&&item.options){ html+='<ol>'; for(var i=0;i<item.options.length;i++) html+='<li>'+item.options[i]+'</li>'; html+='</ol>'; } var ans=item.a; var ansText=Array.isArray(ans)? ans.join(', ') : (ans!=null? ans : ''); html+='<div id="ans" style="margin-top:8px;display:none"><strong>A:</strong> '+ansText+'</div>'; qa.innerHTML=html; }
 var all=[],cur=null; loadQ(function(qs){ all=qs; next(); });
 function next(){ cur=pick(all); render(cur); document.getElementById('ans').style.display='none'; }
 document.getElementById('show').onclick=function(){ document.getElementById('ans').style.display='block'; };

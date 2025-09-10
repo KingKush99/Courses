@@ -1,552 +1,552 @@
 [
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Rookie: identify personnel",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "11 personnel = 1 RB, 1 TE",
+      "12 personnel = 2 RB, 1 TE",
+      "21 personnel = 1 RB, 2 TE",
+      "10 personnel = 1 RB, 0 WR"
     ],
-    "a": "A"
+    "a": "11 personnel = 1 RB, 1 TE"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Rookie: down & distance tendency",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3rd & 1 = short yardage",
+      "3rd & 1 = Hail Mary",
+      "1st & 10 = punt",
+      "2nd & 10 = spike"
     ],
-    "a": "A"
+    "a": "3rd & 1 = short yardage"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Varsity: coverage ID",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Cover 2 has two deep safeties",
+      "Cover 0 has two deep safeties",
+      "Cover 3 has two deep corners only",
+      "Tampa 2 is man blitz"
     ],
-    "a": "A"
+    "a": "Cover 2 has two deep safeties"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Varsity: RPO read key",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Conflicted apex defender",
+      "Boundary corner only",
+      "Nose tackle",
+      "Free safety only"
     ],
-    "a": "A"
+    "a": "Conflicted apex defender"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "College: route combo vs Cover 3",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Flood 3-level",
+      "Smash vs Cover 2",
+      "Four verts vs 2-man",
+      "Mesh vs 0"
     ],
-    "a": "A"
+    "a": "Flood 3-level"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "College: run fit ID",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Mike fits A/B inside",
+      "Corner fits C gap",
+      "FS fits A",
+      "LT fits B"
     ],
-    "a": "A"
+    "a": "Mike fits A/B inside"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: protection call",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Slide weak vs overload",
+      "No ID",
+      "Always full slide",
+      "Back blocks edge every time"
     ],
-    "a": "A"
+    "a": "Slide weak vs overload"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: 3rd & long concept",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Y-cross",
+      "QB sneak",
+      "Fullback dive",
+      "Trick punt"
     ],
-    "a": "A"
+    "a": "Y-cross"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: red-zone staple",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Sprint-out rub",
+      "FB draw",
+      "Max protect goalline fade every down",
+      "Only inside zone"
     ],
-    "a": "A"
+    "a": "Sprint-out rub"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: motion usage",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "ID coverage / leverage",
+      "Just aesthetics",
+      "Always illegal",
+      "Stops clock"
     ],
-    "a": "A"
+    "a": "ID coverage / leverage"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Rookie: identify personnel",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "11 personnel = 1 RB, 1 TE",
+      "12 personnel = 2 RB, 1 TE",
+      "21 personnel = 1 RB, 2 TE",
+      "10 personnel = 1 RB, 0 WR"
     ],
-    "a": "A"
+    "a": "11 personnel = 1 RB, 1 TE"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Rookie: down & distance tendency",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3rd & 1 = short yardage",
+      "3rd & 1 = Hail Mary",
+      "1st & 10 = punt",
+      "2nd & 10 = spike"
     ],
-    "a": "A"
+    "a": "3rd & 1 = short yardage"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Varsity: coverage ID",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Cover 2 has two deep safeties",
+      "Cover 0 has two deep safeties",
+      "Cover 3 has two deep corners only",
+      "Tampa 2 is man blitz"
     ],
-    "a": "A"
+    "a": "Cover 2 has two deep safeties"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Varsity: RPO read key",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Conflicted apex defender",
+      "Boundary corner only",
+      "Nose tackle",
+      "Free safety only"
     ],
-    "a": "A"
+    "a": "Conflicted apex defender"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "College: route combo vs Cover 3",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Flood 3-level",
+      "Smash vs Cover 2",
+      "Four verts vs 2-man",
+      "Mesh vs 0"
     ],
-    "a": "A"
+    "a": "Flood 3-level"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "College: run fit ID",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Mike fits A/B inside",
+      "Corner fits C gap",
+      "FS fits A",
+      "LT fits B"
     ],
-    "a": "A"
+    "a": "Mike fits A/B inside"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: protection call",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Slide weak vs overload",
+      "No ID",
+      "Always full slide",
+      "Back blocks edge every time"
     ],
-    "a": "A"
+    "a": "Slide weak vs overload"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: 3rd & long concept",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Y-cross",
+      "QB sneak",
+      "Fullback dive",
+      "Trick punt"
     ],
-    "a": "A"
+    "a": "Y-cross"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: red-zone staple",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Sprint-out rub",
+      "FB draw",
+      "Max protect goalline fade every down",
+      "Only inside zone"
     ],
-    "a": "A"
+    "a": "Sprint-out rub"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: motion usage",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "ID coverage / leverage",
+      "Just aesthetics",
+      "Always illegal",
+      "Stops clock"
     ],
-    "a": "A"
+    "a": "ID coverage / leverage"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Rookie: identify personnel",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "11 personnel = 1 RB, 1 TE",
+      "12 personnel = 2 RB, 1 TE",
+      "21 personnel = 1 RB, 2 TE",
+      "10 personnel = 1 RB, 0 WR"
     ],
-    "a": "A"
+    "a": "11 personnel = 1 RB, 1 TE"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Rookie: down & distance tendency",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3rd & 1 = short yardage",
+      "3rd & 1 = Hail Mary",
+      "1st & 10 = punt",
+      "2nd & 10 = spike"
     ],
-    "a": "A"
+    "a": "3rd & 1 = short yardage"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Varsity: coverage ID",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Cover 2 has two deep safeties",
+      "Cover 0 has two deep safeties",
+      "Cover 3 has two deep corners only",
+      "Tampa 2 is man blitz"
     ],
-    "a": "A"
+    "a": "Cover 2 has two deep safeties"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Varsity: RPO read key",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Conflicted apex defender",
+      "Boundary corner only",
+      "Nose tackle",
+      "Free safety only"
     ],
-    "a": "A"
+    "a": "Conflicted apex defender"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "College: route combo vs Cover 3",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Flood 3-level",
+      "Smash vs Cover 2",
+      "Four verts vs 2-man",
+      "Mesh vs 0"
     ],
-    "a": "A"
+    "a": "Flood 3-level"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "College: run fit ID",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Mike fits A/B inside",
+      "Corner fits C gap",
+      "FS fits A",
+      "LT fits B"
     ],
-    "a": "A"
+    "a": "Mike fits A/B inside"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: protection call",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Slide weak vs overload",
+      "No ID",
+      "Always full slide",
+      "Back blocks edge every time"
     ],
-    "a": "A"
+    "a": "Slide weak vs overload"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: 3rd & long concept",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Y-cross",
+      "QB sneak",
+      "Fullback dive",
+      "Trick punt"
     ],
-    "a": "A"
+    "a": "Y-cross"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: red-zone staple",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Sprint-out rub",
+      "FB draw",
+      "Max protect goalline fade every down",
+      "Only inside zone"
     ],
-    "a": "A"
+    "a": "Sprint-out rub"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: motion usage",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "ID coverage / leverage",
+      "Just aesthetics",
+      "Always illegal",
+      "Stops clock"
     ],
-    "a": "A"
+    "a": "ID coverage / leverage"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Rookie: identify personnel",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "11 personnel = 1 RB, 1 TE",
+      "12 personnel = 2 RB, 1 TE",
+      "21 personnel = 1 RB, 2 TE",
+      "10 personnel = 1 RB, 0 WR"
     ],
-    "a": "A"
+    "a": "11 personnel = 1 RB, 1 TE"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Rookie: down & distance tendency",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3rd & 1 = short yardage",
+      "3rd & 1 = Hail Mary",
+      "1st & 10 = punt",
+      "2nd & 10 = spike"
     ],
-    "a": "A"
+    "a": "3rd & 1 = short yardage"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Varsity: coverage ID",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Cover 2 has two deep safeties",
+      "Cover 0 has two deep safeties",
+      "Cover 3 has two deep corners only",
+      "Tampa 2 is man blitz"
     ],
-    "a": "A"
+    "a": "Cover 2 has two deep safeties"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Varsity: RPO read key",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Conflicted apex defender",
+      "Boundary corner only",
+      "Nose tackle",
+      "Free safety only"
     ],
-    "a": "A"
+    "a": "Conflicted apex defender"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "College: route combo vs Cover 3",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Flood 3-level",
+      "Smash vs Cover 2",
+      "Four verts vs 2-man",
+      "Mesh vs 0"
     ],
-    "a": "A"
+    "a": "Flood 3-level"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "College: run fit ID",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Mike fits A/B inside",
+      "Corner fits C gap",
+      "FS fits A",
+      "LT fits B"
     ],
-    "a": "A"
+    "a": "Mike fits A/B inside"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: protection call",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Slide weak vs overload",
+      "No ID",
+      "Always full slide",
+      "Back blocks edge every time"
     ],
-    "a": "A"
+    "a": "Slide weak vs overload"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: 3rd & long concept",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Y-cross",
+      "QB sneak",
+      "Fullback dive",
+      "Trick punt"
     ],
-    "a": "A"
+    "a": "Y-cross"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: red-zone staple",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Sprint-out rub",
+      "FB draw",
+      "Max protect goalline fade every down",
+      "Only inside zone"
     ],
-    "a": "A"
+    "a": "Sprint-out rub"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: motion usage",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "ID coverage / leverage",
+      "Just aesthetics",
+      "Always illegal",
+      "Stops clock"
     ],
-    "a": "A"
+    "a": "ID coverage / leverage"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Rookie: identify personnel",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "11 personnel = 1 RB, 1 TE",
+      "12 personnel = 2 RB, 1 TE",
+      "21 personnel = 1 RB, 2 TE",
+      "10 personnel = 1 RB, 0 WR"
     ],
-    "a": "A"
+    "a": "11 personnel = 1 RB, 1 TE"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Rookie: down & distance tendency",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "3rd & 1 = short yardage",
+      "3rd & 1 = Hail Mary",
+      "1st & 10 = punt",
+      "2nd & 10 = spike"
     ],
-    "a": "A"
+    "a": "3rd & 1 = short yardage"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Varsity: coverage ID",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Cover 2 has two deep safeties",
+      "Cover 0 has two deep safeties",
+      "Cover 3 has two deep corners only",
+      "Tampa 2 is man blitz"
     ],
-    "a": "A"
+    "a": "Cover 2 has two deep safeties"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Varsity: RPO read key",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Conflicted apex defender",
+      "Boundary corner only",
+      "Nose tackle",
+      "Free safety only"
     ],
-    "a": "A"
+    "a": "Conflicted apex defender"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "College: route combo vs Cover 3",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Flood 3-level",
+      "Smash vs Cover 2",
+      "Four verts vs 2-man",
+      "Mesh vs 0"
     ],
-    "a": "A"
+    "a": "Flood 3-level"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "College: run fit ID",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Mike fits A/B inside",
+      "Corner fits C gap",
+      "FS fits A",
+      "LT fits B"
     ],
-    "a": "A"
+    "a": "Mike fits A/B inside"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: protection call",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Slide weak vs overload",
+      "No ID",
+      "Always full slide",
+      "Back blocks edge every time"
     ],
-    "a": "A"
+    "a": "Slide weak vs overload"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: 3rd & long concept",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Y-cross",
+      "QB sneak",
+      "Fullback dive",
+      "Trick punt"
     ],
-    "a": "A"
+    "a": "Y-cross"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: red-zone staple",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Sprint-out rub",
+      "FB draw",
+      "Max protect goalline fade every down",
+      "Only inside zone"
     ],
-    "a": "A"
+    "a": "Sprint-out rub"
   },
   {
     "type": "mc",
-    "q": "Sample question for Offensive Coordinator?",
+    "q": "Pro: motion usage",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "ID coverage / leverage",
+      "Just aesthetics",
+      "Always illegal",
+      "Stops clock"
     ],
-    "a": "A"
+    "a": "ID coverage / leverage"
   }
 ]

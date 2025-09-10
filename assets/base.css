@@ -24,3 +24,39 @@ td,th{border:1px solid #ffffff22;padding:8px}
 .badge-red{background:#ff3b3b33;border:1px solid #ff3b3b66}
 .badge-green{background:#2ecc7133;border:1px solid #2ecc7166}
 .badge-yellow{background:#f1c40f33;border:1px solid #f1c40f66}
+
+/* Corner buttons */
+.corner{position:fixed;z-index:4000;display:grid;place-items:center;width:56px;height:56px;border-radius:999px;background:#2a1b12;border:1px solid #ffffff33;box-shadow:0 8px 18px #0008;cursor:pointer}
+.corner:hover{filter:brightness(1.05)}
+#profileBtn{left:16px;top:16px}
+#hamBtn{right:16px;top:16px}
+#chatBtn{left:16px;bottom:16px}
+#slotsBtn{right:16px;bottom:16px}
+
+/* Hamburger panel */
+.ham-panel{position:fixed;right:16px;top:80px;width:min(360px,92vw);background:#100b08;border:1px solid #ffffff22;border-radius:16px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 12px 26px #000c;z-index:4500}
+.ham-head{padding:10px 12px;background:#1c120c;border-bottom:1px solid #ffffff22;font-weight:700}
+.ham-body{padding:10px 12px}
+.ham-section{margin-bottom:12px}
+.ham-sub{padding-left:12px;opacity:.9}
+
+/* Chatbot */
+.cb-panel{position:fixed;left:16px;bottom:80px;width:min(380px,92vw);height:60vh;background:#100b08;border:1px solid #ffffff22;border-radius:16px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 12px 26px #000c;z-index:4500}
+.cb-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#1c120c;border-bottom:1px solid #ffffff22}
+.cb-log{flex:1;overflow:auto;padding:10px 12px}
+.cb-input{display:flex;gap:6px;padding:10px;background:#140b07;border-top:1px solid #ffffff22}
+.cb-msg{margin:6px 0} .cb-user{color:#ffd9b3} .cb-bot{color:#d6eaff} .cb-img{max-width:100%;border-radius:8px;border:1px solid #ffffff22;margin-top:4px}
+
+/* Slots modal */
+.slots-panel{position:fixed;right:16px;bottom:80px;width:min(420px,95vw);background:#100b08;border:1px solid #ffffff22;border-radius:16px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 12px 26px #000c;z-index:4500}
+.slots-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#1c120c;border-bottom:1px solid #ffffff22}
+.slots-body{padding:12px}
+.machine{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.reels{flex:1;display:flex;gap:6px;height:160px;border:1px solid #ffffff22;border-radius:12px;overflow:hidden;background:#0e0e11;padding:6px}
+.reel{flex:1;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;font-size:28px}
+.lever{width:44px;height:140px;border-left:4px solid #ddd;border-right:4px solid #888;border-radius:12px;position:relative;display:flex;justify-content:flex-start;align-items:center}
+.lever .knob{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:30px;height:30px;border-radius:999px;background:#ff3b3b;box-shadow:0 4px 8px #0008;cursor:pointer}
+.lever .knob:active{transform:translateX(-50%) translateY(3px)}
+.slots-controls{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.sel{display:flex;gap:8px;align-items:center}
+.sel select{min-width:80px}

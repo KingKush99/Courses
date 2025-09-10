@@ -1,502 +1,402 @@
 [
   {
-    "type": "mc",
-    "q": "A qubit can be in a ________ of states.",
+    "q": "Qubit is a basic unit of quantum information.",
     "options": [
-      "superposition",
-      "classical mix",
-      "only one"
+      "True",
+      "False"
     ],
-    "a": "superposition"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   },
   {
-    "type": "mc",
-    "q": "Measurement causes ________ of the state.",
+    "q": "Entanglement enables non-classical correlations.",
     "options": [
-      "collapse",
-      "amplification",
-      "teleportation"
+      "True",
+      "False"
     ],
-    "a": "collapse"
+    "a": "True"
   }
 ]

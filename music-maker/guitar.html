@@ -1,1 +1,18 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Guitar</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/widget.js'></script><main class='wrap'><div class='card'><h1>🎸 Guitar</h1><p>Chords & strumming patterns. (Placeholder module)</p></div></main></body></html>
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Guitar</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
+<main class="wrap"><div class="card">
+  <h1>Guitar — Synthesia Practice</h1>
+  <canvas id="fall" width="1000" height="400" style="background:#0e0e11;border:1px solid #ffffff22;border-radius:12px;width:100%"></canvas>
+  <p>Press keys on your Mac keyboard: z, x, c, v, b, n</p>
+</div></main>
+<script>
+var c=document.getElementById('fall'), ctx=c.getContext('2d'); var W=c.width, H=c.height;
+var cols={"z": 0, "x": 1, "c": 2, "v": 3, "b": 4, "n": 5};
+var notes=[];
+function spawn(){ var ks=Object.keys(cols); var k=ks[Math.floor(Math.random()*ks.length)]; notes.push({k:k,y:0}); }
+setInterval(spawn, 600);
+function draw(){ ctx.clearRect(0,0,W,H); for(var i=0;i<notes.length;i++){ var n=notes[i]; var x=cols[n.k]* (W/6); ctx.fillStyle="#ff9f1a"; ctx.fillRect(x+8, n.y, (W/6)-16, 14); n.y+=3; } requestAnimationFrame(draw); }
+draw();
+document.addEventListener('keydown',function(e){ var k=e.key.toLowerCase(); if(cols[k]!=null){ // hit detection near bottom
+  for(var i=0;i<notes.length;i++){ if(notes[i].k===k && notes[i].y>H-40){ notes.splice(i,1); break; } }
+}});
+</script></body></html>

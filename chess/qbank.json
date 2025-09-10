@@ -1,552 +1,552 @@
 [
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna Gambit arises after 1.e4 e5 2.Nc3 followed by which pawn thrust?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f4",
+      "d4",
+      "c3",
+      "g3"
     ],
-    "a": "A"
+    "a": "f4"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "After 1.e4 e5 2.Nc3 Nf6 3.f4 d5?! is considered:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Sharp counter",
+      "Quiet",
+      "Endgame line",
+      "Forced draw"
     ],
-    "a": "A"
+    "a": "Sharp counter"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Main Vienna Gambit idea for White is to:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Open f-file and attack king",
+      "Win pawn on a6",
+      "Force endgame",
+      "Trade queens early"
     ],
-    "a": "A"
+    "a": "Open f-file and attack king"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Typical Vienna piece development squares are:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Bc4, Qf3, 0-0",
+      "Bd3, Qa4, Kd1",
+      "Ba6, Qh5, Kf1",
+      "Bd2, Qe2, Ke2"
     ],
-    "a": "A"
+    "a": "Bc4, Qf3, 0-0"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Against ...Nc6 in Vienna, which bishop square pressures f7?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "c4",
+      "b5",
+      "d3",
+      "e2"
     ],
-    "a": "A"
+    "a": "c4"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Dutch Defense starts with Black playing:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "...f5",
+      "...e5",
+      "...c5",
+      "...d5"
     ],
-    "a": "A"
+    "a": "...f5"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "In the Leningrad Dutch Black often fianchettos which bishop?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Kingside bishop (g7)",
+      "Queenside bishop (b7)",
+      "Both bishops",
+      "Neither"
     ],
-    "a": "A"
+    "a": "Kingside bishop (g7)"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Classical Dutch structure aims for pawns on:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f5-e6-d6",
+      "f5-e5-d5",
+      "f7-e6-d5",
+      "f6-e6-d6"
     ],
-    "a": "A"
+    "a": "f5-e6-d6"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "A common plan for White vs Dutch is:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "e4 break",
+      "h4 early",
+      "b4 pawn storm",
+      "Rf1-f3-f7 sacrifice"
     ],
-    "a": "A"
+    "a": "e4 break"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Weak square Black must watch in Dutch setups:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "e6",
+      "h6",
+      "a6",
+      "b6"
     ],
-    "a": "A"
+    "a": "e6"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "What is the tactical theme when a knight lands on e5 vs the Dutch?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Attack on f7/h7",
+      "Endgame zugzwang",
+      "Opposite-wing pawn storm",
+      "Exchange sacrifice"
     ],
-    "a": "A"
+    "a": "Attack on f7/h7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Which file often opens in the Vienna Gambit?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f-file",
+      "a-file",
+      "c-file",
+      "h-file"
     ],
-    "a": "A"
+    "a": "f-file"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Good square for White's queen in Vienna attack is:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f3",
+      "a4",
+      "d2",
+      "h5"
     ],
-    "a": "A"
+    "a": "f3"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Against the Stonewall Dutch, which outpost is key for White?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "e5",
+      "b5",
+      "h5",
+      "a5"
     ],
-    "a": "A"
+    "a": "e5"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "In Dutch, what move supports e4 break for White?",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "d3 then e4",
+      "a3",
+      "h3",
+      "g3"
     ],
-    "a": "A"
+    "a": "d3 then e4"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Typical sacrifice motif in Vienna on f7 is:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Bxf7+",
+      "Qxa7",
+      "Rxa8",
+      "Bxh7+"
     ],
-    "a": "A"
+    "a": "Bxf7+"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "After ...f5, Black weakens:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "e6",
+      "c6",
+      "a6",
+      "h6"
     ],
-    "a": "A"
+    "a": "e6"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna idea: castle:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Kingside",
+      "Queenside",
+      "Don't castle",
+      "Long then short"
     ],
-    "a": "A"
+    "a": "Kingside"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Best minor piece vs Stonewall dark squares:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Light-squared bishop",
+      "Knight",
+      "Rook",
+      "Queen"
     ],
-    "a": "A"
+    "a": "Light-squared bishop"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna trap often targets:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f7",
+      "a7",
+      "b2",
+      "c2"
     ],
-    "a": "A"
+    "a": "f7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Dutch Leningrad pawn structure includes:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f5-g6-h7",
+      "f5-g7-h6",
+      "f6-g5-h5",
+      "f7-g6-h6"
     ],
-    "a": "A"
+    "a": "f5-g6-h7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "After ...f5, Black weakens:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "e6",
+      "c6",
+      "a6",
+      "h6"
     ],
-    "a": "A"
+    "a": "e6"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna idea: castle:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Kingside",
+      "Queenside",
+      "Don't castle",
+      "Long then short"
     ],
-    "a": "A"
+    "a": "Kingside"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Best minor piece vs Stonewall dark squares:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Light-squared bishop",
+      "Knight",
+      "Rook",
+      "Queen"
     ],
-    "a": "A"
+    "a": "Light-squared bishop"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna trap often targets:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f7",
+      "a7",
+      "b2",
+      "c2"
     ],
-    "a": "A"
+    "a": "f7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Dutch Leningrad pawn structure includes:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f5-g6-h7",
+      "f5-g7-h6",
+      "f6-g5-h5",
+      "f7-g6-h6"
     ],
-    "a": "A"
+    "a": "f5-g6-h7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "After ...f5, Black weakens:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "e6",
+      "c6",
+      "a6",
+      "h6"
     ],
-    "a": "A"
+    "a": "e6"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna idea: castle:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Kingside",
+      "Queenside",
+      "Don't castle",
+      "Long then short"
     ],
-    "a": "A"
+    "a": "Kingside"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Best minor piece vs Stonewall dark squares:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Light-squared bishop",
+      "Knight",
+      "Rook",
+      "Queen"
     ],
-    "a": "A"
+    "a": "Light-squared bishop"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna trap often targets:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f7",
+      "a7",
+      "b2",
+      "c2"
     ],
-    "a": "A"
+    "a": "f7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Dutch Leningrad pawn structure includes:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f5-g6-h7",
+      "f5-g7-h6",
+      "f6-g5-h5",
+      "f7-g6-h6"
     ],
-    "a": "A"
+    "a": "f5-g6-h7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "After ...f5, Black weakens:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "e6",
+      "c6",
+      "a6",
+      "h6"
     ],
-    "a": "A"
+    "a": "e6"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna idea: castle:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Kingside",
+      "Queenside",
+      "Don't castle",
+      "Long then short"
     ],
-    "a": "A"
+    "a": "Kingside"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Best minor piece vs Stonewall dark squares:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Light-squared bishop",
+      "Knight",
+      "Rook",
+      "Queen"
     ],
-    "a": "A"
+    "a": "Light-squared bishop"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna trap often targets:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f7",
+      "a7",
+      "b2",
+      "c2"
     ],
-    "a": "A"
+    "a": "f7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Dutch Leningrad pawn structure includes:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f5-g6-h7",
+      "f5-g7-h6",
+      "f6-g5-h5",
+      "f7-g6-h6"
     ],
-    "a": "A"
+    "a": "f5-g6-h7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "After ...f5, Black weakens:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "e6",
+      "c6",
+      "a6",
+      "h6"
     ],
-    "a": "A"
+    "a": "e6"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna idea: castle:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Kingside",
+      "Queenside",
+      "Don't castle",
+      "Long then short"
     ],
-    "a": "A"
+    "a": "Kingside"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Best minor piece vs Stonewall dark squares:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Light-squared bishop",
+      "Knight",
+      "Rook",
+      "Queen"
     ],
-    "a": "A"
+    "a": "Light-squared bishop"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna trap often targets:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f7",
+      "a7",
+      "b2",
+      "c2"
     ],
-    "a": "A"
+    "a": "f7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Dutch Leningrad pawn structure includes:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f5-g6-h7",
+      "f5-g7-h6",
+      "f6-g5-h5",
+      "f7-g6-h6"
     ],
-    "a": "A"
+    "a": "f5-g6-h7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "After ...f5, Black weakens:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "e6",
+      "c6",
+      "a6",
+      "h6"
     ],
-    "a": "A"
+    "a": "e6"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna idea: castle:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Kingside",
+      "Queenside",
+      "Don't castle",
+      "Long then short"
     ],
-    "a": "A"
+    "a": "Kingside"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Best minor piece vs Stonewall dark squares:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Light-squared bishop",
+      "Knight",
+      "Rook",
+      "Queen"
     ],
-    "a": "A"
+    "a": "Light-squared bishop"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna trap often targets:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f7",
+      "a7",
+      "b2",
+      "c2"
     ],
-    "a": "A"
+    "a": "f7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Dutch Leningrad pawn structure includes:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f5-g6-h7",
+      "f5-g7-h6",
+      "f6-g5-h5",
+      "f7-g6-h6"
     ],
-    "a": "A"
+    "a": "f5-g6-h7"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "After ...f5, Black weakens:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "e6",
+      "c6",
+      "a6",
+      "h6"
     ],
-    "a": "A"
+    "a": "e6"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna idea: castle:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Kingside",
+      "Queenside",
+      "Don't castle",
+      "Long then short"
     ],
-    "a": "A"
+    "a": "Kingside"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Best minor piece vs Stonewall dark squares:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "Light-squared bishop",
+      "Knight",
+      "Rook",
+      "Queen"
     ],
-    "a": "A"
+    "a": "Light-squared bishop"
   },
   {
     "type": "mc",
-    "q": "Sample question for Chess?",
+    "q": "Vienna trap often targets:",
     "options": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "f7",
+      "a7",
+      "b2",
+      "c2"
     ],
-    "a": "A"
+    "a": "f7"
   }
 ]
