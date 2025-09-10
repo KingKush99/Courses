@@ -1,0 +1,21 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Puzzle Lab</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/widget.js'></script>
+<main class="wrap"><div class="card">
+  <h1>Puzzle Lab</h1>
+  <h3>Order the steps of a basic quantum algorithm</h3>
+  <ol id="steps" style="list-style:decimal;margin-left:18px">
+    <li draggable="true">Prepare |0⟩ state</li>
+    <li draggable="true">Apply Hadamard (H)</li>
+    <li draggable="true">Apply Oracle / Unitary</li>
+    <li draggable="true">Apply Hadamard (H) again</li>
+    <li draggable="true">Measure</li>
+  </ol>
+  <button id="check" class="pill-btn">Check Order</button>
+  <div id="res"></div>
+</div></main>
+<script>
+var list=document.getElementById('steps'); var drag=null;
+list.addEventListener('dragstart',function(e){ drag=e.target; });
+list.addEventListener('dragover',function(e){ e.preventDefault(); var t=e.target.closest('li'); if(!t||t===drag) return; var r=t.getBoundingClientRect(); list.insertBefore(drag, (e.clientY-r.top)>r.height/2? t.nextSibling : t); });
+document.getElementById('check').onclick=function(){ var items=list.querySelectorAll('li'); var ok=0; var sol=['Prepare |0⟩ state','Apply Hadamard (H)','Apply Oracle / Unitary','Apply Hadamard (H) again','Measure']; for(var i=0;i<items.length;i++){ if(items[i].textContent===sol[i]) ok++; }
+  var pct=Math.round(100*ok/items.length); document.getElementById('res').innerHTML='Order score: '+ok+'/'+items.length+' ('+pct+'%)'; var key='progress_chess'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; if(pct>prev) localStorage.setItem(key, String(pct)); };
+</script></body></html>

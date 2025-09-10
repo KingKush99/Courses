@@ -1,0 +1,22 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Drawing Exercises</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/widget.js'></script>
+<main class="wrap"><div class="card">
+  <h1>Drawing Exercises</h1>
+  <p>Sketch circuits, vectors, or plays. Save when done.</p>
+  <canvas id="c" width="1000" height="600" style="background:#0e0e11;border:1px solid #ffffff22;border-radius:12px;width:100%"></canvas>
+  <div class="row" style="margin-top:10px">
+    <button class="pill-btn" id="pen">Pen</button>
+    <button class="pill-btn" id="line">Line</button>
+    <button class="pill-btn" id="rect">Rect</button>
+    <button class="pill-btn" id="clear">Clear</button>
+    <a id="save" class="pill-btn" download="drawing.png">Save PNG</a>
+  </div>
+</div></main>
+<script>
+var c=document.getElementById('c'), ctx=c.getContext('2d'); var mode='pen', start=null; ctx.strokeStyle='#fff';
+c.addEventListener('mousedown',function(e){ var r=c.getBoundingClientRect(); start=[e.clientX-r.left,e.clientY-r.top]; if(mode==='pen'){ ctx.beginPath(); ctx.moveTo(start[0],start[1]); } });
+c.addEventListener('mousemove',function(e){ if(!start) return; var r=c.getBoundingClientRect(); var x=e.clientX-r.left,y=e.clientY-r.top; if(mode==='pen'){ ctx.lineTo(x,y); ctx.stroke(); } });
+document.addEventListener('mouseup',function(e){ if(!start) return; var r=c.getBoundingClientRect(); var x=e.clientX-r.left,y=e.clientY-r.top; if(mode==='line'){ ctx.beginPath(); ctx.moveTo(start[0],start[1]); ctx.lineTo(x,y); ctx.stroke(); } if(mode==='rect'){ ctx.strokeRect(Math.min(start[0],x),Math.min(start[1],y),Math.abs(x-start[0]),Math.abs(y-start[1])); } start=null; });
+document.getElementById('pen').onclick=function(){mode='pen'}; document.getElementById('line').onclick=function(){mode='line'}; document.getElementById('rect').onclick=function(){mode='rect'};
+document.getElementById('clear').onclick=function(){ ctx.clearRect(0,0,c.width,c.height); };
+document.getElementById('save').onclick=function(e){ e.target.href=c.toDataURL('image/png'); var key='progress_offensive-coordinator'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; if(prev<60) localStorage.setItem(key, '60'); };
+</script></body></html>

@@ -1,0 +1,18 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Fill in the Blanks</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/widget.js'></script>
+<main class="wrap"><div class="card">
+  <h1>Fill in the Blanks</h1>
+  <p>Complete the sentences about key ideas.</p>
+  <div id="fb"></div>
+  <button id="check" class="pill-btn">Check</button>
+  <div id="out" style="margin-top:10px"></div>
+</div></main>
+<script>
+var items=[
+  {t:"A qubit can be in a superposition of |0⟩ and |1⟩ states.", b:["qubit","superposition"]},
+  {t:"Measurement collapses the quantum state to a basis state.", b:["Measurement","quantum","basis"]},
+  {t:"Entanglement creates strong correlations between particles.", b:["Entanglement","correlations","particles"]}
+];
+function build(){ var fb=document.getElementById('fb'); for(var i=0;i<items.length;i++){ var parts=items[i].t.split(' '); for(var j=0;j<parts.length;j++){ var w=parts[j].replace(/[^A-Za-z0-9⟩⟨|]/g,''); if(items[i].b.indexOf(w)>=0){ var inp=document.createElement('input'); inp.setAttribute('data-ans',w); inp.size=Math.max(4,w.length); fb.appendChild(inp); fb.appendChild(document.createTextNode(' ')); } else { fb.appendChild(document.createTextNode(parts[j]+' ')); } } var br=document.createElement('br'); fb.appendChild(br);} }
+build();
+document.getElementById('check').onclick=function(){ var nodes=document.querySelectorAll('#fb input'); var ok=0; for(var i=0;i<nodes.length;i++){ var v=nodes[i].value.trim(); var a=nodes[i].getAttribute('data-ans'); if(v.toLowerCase()==a.toLowerCase()){ nodes[i].style.borderColor='#2ecc71'; ok++; } else nodes[i].style.borderColor='#ff3b3b'; } var pct=Math.round(100*ok/nodes.length); document.getElementById('out').innerHTML='<span class="badge '+(pct>=75?'badge-green':(pct>=40?'badge-yellow':'badge-red'))+'">Correct: '+ok+'/'+nodes.length+' ('+pct+'%)</span>'; var key='progress_books'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; if(pct>prev) localStorage.setItem(key, String(pct)); };
+</script></body></html>

@@ -1,0 +1,29 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Books • Study</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/widget.js'></script>
+<main class="wrap"><div class="card">
+  <h1>Books — Spaced Repetition</h1>
+  <div id="qa"></div>
+  <div class="row" style="margin-top:12px">
+    <button id="show" class="pill-btn">Show Answer</button>
+    <button id="again" class="pill-btn">Again</button>
+    <button id="good" class="pill-btn">Good</button>
+    <button id="easy" class="pill-btn">Easy</button>
+  </div>
+</div></main>
+<script>
+var KEY='leitner_books'; var raw=localStorage.getItem(KEY); var state=raw?JSON.parse(raw):{boxes:{}};
+function loadQ(cb){ var x=new XMLHttpRequest(); x.onreadystatechange=function(){ if(x.readyState==4){ cb(JSON.parse(x.responseText)); } }; x.open('GET','qbank.json',true); x.send(); }
+function now(){ return new Date().getTime(); }
+function dueAt(box){ var mins=[0,10,60,360,1440]; return now()+mins[Math.max(0,Math.min(4,box-1))]*60000; }
+function pick(qs){ var due=[]; for(var i=0;i<qs.length;i++){ var s=state.boxes[i]; if(!s||s.due<=now()) due.push(qs[i]); } var pool=due.length?due:qs; var idx=Math.floor(Math.random()*pool.length); var q=pool[idx]; return {q:q,i:qs.indexOf(q)}; }
+function render(cur){ var qa=document.getElementById('qa'); var q=cur.q; var html='<div><strong>Q:</strong> '+q.q.q+'</div>'; if(q.q.type==='mc'){ html+='<ol>'; for(var i=0;i<q.q.options.length;i++) html+='<li>'+q.q.options[i]+'</li>'; html+='</ol>'; } html+='<div id="ans" style="margin-top:8px;display:none"><strong>A:</strong> '+(q.q.a.join? q.q.a.join(", "): q.q.a)+'</div>'; qa.innerHTML=html; }
+var all=[],cur=null; loadQ(function(qs){ all=qs; next(); });
+function next(){ cur=pick(all); render(cur); document.getElementById('ans').style.display='none'; }
+document.getElementById('show').onclick=function(){ document.getElementById('ans').style.display='block'; };
+function grade(delta){ var s=state.boxes[cur.i]?state.boxes[cur.i].box:1; var nb=Math.max(1,Math.min(5,s+delta)); state.boxes[cur.i]={box:nb,due:dueAt(nb)}; localStorage.setItem(KEY,JSON.stringify(state));
+  var mastered=0; for(var k in state.boxes){ if(state.boxes[k].box>=5) mastered++; } var prog=Math.round(100*mastered/all.length);
+  var keyP='progress_books'; var prev=parseInt(localStorage.getItem(keyP)||'0',10)||0; if(prog>prev) localStorage.setItem(keyP, String(prog));
+  next(); }
+document.getElementById('again').onclick=function(){ grade(-1); };
+document.getElementById('good').onclick=function(){ grade(+1); };
+document.getElementById('easy').onclick=function(){ grade(+2); };
+</script></body></html>

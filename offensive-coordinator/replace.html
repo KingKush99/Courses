@@ -1,0 +1,12 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Replace & Search Words</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/widget.js'></script>
+<main class="wrap"><div class="card">
+  <h1>Replace & Search Words</h1>
+  <p>Replace jargon with simpler language, then search to verify.</p>
+  <textarea id="text" rows="6" style="width:100%">Quantum decoherence reduces superposition due to environmental interactions. Entanglement enables non-classical correlations.</textarea>
+  <div class="row"><label>Find:</label><input id="find" size="14"><label>Replace:</label><input id="repl" size="14"><button id="do" class="pill-btn">Replace</button><button id="count" class="pill-btn">Search Count</button></div>
+  <div id="out"></div>
+</div></main>
+<script>
+document.getElementById('do').onclick=function(){ var t=document.getElementById('text'); var f=document.getElementById('find').value; var r=document.getElementById('repl').value; if(!f){return} var re=new RegExp(f,'gi'); t.value=t.value.replace(re,r); };
+document.getElementById('count').onclick=function(){ var t=document.getElementById('text').value; var f=document.getElementById('find').value; if(!f){return} var m=t.match(new RegExp(f,'gi'))||[]; var pct=Math.min(100, m.length*10); document.getElementById('out').innerHTML='Matches: '+m.length+' → progress +'+pct+'%'; var key='progress_offensive-coordinator'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; var nv=Math.max(prev, pct); localStorage.setItem(key, String(nv)); };
+</script></body></html>

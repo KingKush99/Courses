@@ -1,502 +1,502 @@
 [
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "A qubit can be in a ________ of states.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "superposition",
+      "classical mix",
+      "only one"
     ],
-    "a": "Negative"
+    "a": "superposition"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   },
   {
     "type": "mc",
-    "q": "Electron charge is:",
+    "q": "Measurement causes ________ of the state.",
     "options": [
-      "Negative",
-      "Positive",
-      "Neutral"
+      "collapse",
+      "amplification",
+      "teleportation"
     ],
-    "a": "Negative"
+    "a": "collapse"
   }
 ]
