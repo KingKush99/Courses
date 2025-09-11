@@ -1,5 +1,8 @@
 (function(){
+  // Local storage helpers
   const store={get:(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
+
+  // Coins + themes
   const coins=(function(){let v=store.get('coins',300); return {get:()=>v, set:(n)=>{v=n;store.set('coins',v);hud()}, add:(d)=>{v=Math.max(0,v+d);store.set('coins',v);hud();}}})();
   const themes=[
     {id:1,name:'Ember',class:'theme-1',cost:0},{id:2,name:'Sunset',class:'theme-2',cost:0},{id:3,name:'Cinder',class:'theme-3',cost:0},
@@ -9,14 +12,18 @@
   let owned=store.get('themes_owned',[1,2,3]); let active=store.get('theme_active',1);
   function applyTheme(){document.body.classList.remove(...themes.map(t=>t.class)); const t=themes.find(x=>x.id===active); if(t) document.body.classList.add(t.class);} applyTheme();
 
+  // Corners
   function addCorner(text,cls,title){const b=document.createElement('button'); b.className='pill-btn corner '+cls; b.textContent=text; b.title=title||''; document.body.appendChild(b); return b;}
-  function hud(){document.querySelectorAll('#coin-count,#coins-hud').forEach(el=>el.textContent=coins.get());}
-  function outsideClose(panel,btn){document.addEventListener('click',e=>{if(!panel.contains(e.target)&&e.target!==btn)panel.classList.remove('open')});}
+  function hud(){document.querySelectorAll('#coin-count,#coins-hud').forEach(el=>el&& (el.textContent=coins.get()));}
 
-  const profileBtn=addCorner('👤','top-left','Profile'); const backBtn=addCorner('←','top-left','Back'); backBtn.style.top='60px';
+  addCorner('👤','top-left','Profile'); // (Hook your profile link if needed)
+  const backBtn=addCorner('←','top-left back','Back');
   backBtn.onclick=()=>{history.length>1?history.back():location.href=(window.siteHome||'../index.html')};
-  const menuBtn=addCorner('☰','top-right','Menu'); const chatBtn=addCorner('💬','bot-left','Chat'); const slotsBtn=addCorner('🎰','bot-right','Mini Slots');
+  const menuBtn=addCorner('☰','top-right','Menu');
+  const chatBtn=addCorner('💬','bot-left','Chat');
+  const slotsBtn=addCorner('🎰','bot-right','Mini Slots');
 
+  // Drawer
   const drawer=document.createElement('div'); drawer.className='drawer'; drawer.innerHTML=`
     <div class="section"><h3>Quick Access</h3>
       <div class="menu-grid">
@@ -26,10 +33,15 @@
         <a class="btn-tile" id="contrast">🌓 High Contrast</a>
       </div>
     </div>`; document.body.appendChild(drawer);
-  menuBtn.onclick=()=>drawer.classList.toggle('open'); outsideClose(drawer,menuBtn); hud();
 
+  function closeAll(){drawer.classList.remove('open'); slots.classList.remove('open'); chat.classList.remove('open');}
+  menuBtn.onclick=()=>{const on=drawer.classList.toggle('open'); if(on){slots.classList.remove('open'); chat.classList.remove('open');} };
+  document.addEventListener('click',e=>{ if(!drawer.contains(e.target) && e.target!==menuBtn){ drawer.classList.remove('open'); }});
+  hud();
+
+  // Theme store
   function openThemeStore(){
-    const m=document.createElement('div'); m.className='drawer open'; m.style.width='520px'; m.style.right='340px';
+    const m=document.createElement('div'); m.className='drawer open'; m.style.width='520px'; m.style.right='360px';
     let html=`<div class="section"><h3>Theme Store</h3><div class="menu-grid" style="grid-template-columns:repeat(2,1fr)">`;
     themes.forEach(t=>{const own=owned.includes(t.id), act=(active===t.id);
       html+=`<div class="btn-tile"><div><b>${t.name}</b></div><div class="badge" style="margin:6px 0">${own?(act?'Active':'Owned'):(t.cost? t.cost+' coins':'Free')}</div><button data-id="${t.id}" class="pill-btn">${own?(act?'Using':'Equip'):(t.cost?'Buy':'Get')}</button></div>`;
@@ -43,14 +55,15 @@
   }
   document.getElementById('theme-store').onclick=openThemeStore;
 
+  // Mini-slots
   const slots=document.createElement('div'); slots.id='slots-modal'; slots.innerHTML=`
-    <div class="row" style="padding:10px 12px; border-bottom:1px solid var(--muted)"><b>Mini Slots</b><span class="dim" style="margin-left:auto">Coins: <span id="coins-hud">0</span></span><button id="slots-close" class="pill-btn" style="border-radius:999px">✖</button></div>
+    <div class="row" style="padding:10px 12px; border-bottom:1px solid var(--muted)"><b>Mini Slots</b><span class="badge" style="margin-left:auto">Coins: <span id="coins-hud">0</span></span><button id="slots-close" class="pill-btn" style="border-radius:999px">✖</button></div>
     <div class="config"><label>Reels</label><select id="reels" class="select"><option>3</option><option>4</option><option>5</option><option>6</option></select>
     <label>Bet</label><select id="bet" class="select"><option>10</option><option>25</option><option>50</option><option>100</option></select></div>
     <div class="reels" id="reel-row"></div><div class="spin-wrap" id="spin-wrap"></div>
     <div class="lever-wrap"><div class="lever-stick lever-pull" id="lever"></div><div class="lever-knob lever-pull" id="knob"></div></div>`;
   document.body.appendChild(slots); document.getElementById('slots-close').onclick=()=>slots.classList.remove('open');
-  slotsBtn.onclick=()=>{slots.classList.add('open'); buildReels(); hud();};
+  slotsBtn.onclick=()=>{ const on=!slots.classList.contains('open'); closeAll(); if(on){ slots.classList.add('open'); buildReels(); hud(); } };
   const symbols=['🍒','🍋','🔔','⭐','💎','7️⃣'];
   function reelEl(){const d=document.createElement('div'); d.className='reel'; d.textContent=symbols[Math.floor(Math.random()*symbols.length)]; return d;}
   function buildReels(){const row=document.getElementById('reel-row'); row.innerHTML=''; const n=parseInt(document.getElementById('reels').value,10);
@@ -65,21 +78,23 @@
     function setAngle(y){const dy=Math.min(80,Math.max(0,y-startY)); const ang=dy*0.9; lever.style.transform=`translateZ(0) rotateX(${ang}deg)`; knob.style.transform=`translateZ(0) translateY(${dy}px)`;}
     function reset(){lever.style.transform='translateZ(0) rotateX(0deg)'; knob.style.transform='translateZ(0) translateY(0)';}
     function down(e){pulling=true; startY=(e.touches?e.touches[0].clientY:e.clientY); setAngle(startY+70);} function move(e){if(!pulling) return; setAngle(e.touches?e.touches[0].clientY:e.clientY);} function up(){if(!pulling) return; pulling=false; spin(); setTimeout(reset,300);}
-    [lever,knob].forEach(el=>{el.addEventListener('mousedown',down); el.addEventListener('touchstart',down);}); window.addEventListener('mousemove',move,{passive:true}); window.addEventListener('touchmove',move,{passive:true}); window.addEventListener('mouseup',up); window.addEventListener('touchend',up);
+    [lever,knob].forEach(el=>{el.addEventListener('mousedown',down); el.addEventListener('touchstart',down);}); window.addEventListener('mousemove',move,{passive:true}); window.addEventListener('touchend',up); window.addEventListener('mouseup',up);
   })();
 
+  // Chatbot (lightweight)
   const chat=document.createElement('div'); chat.className='chat'; chat.innerHTML=`<div class="head"><b>Assistant</b><button id="chat-close" class="pill-btn" style="border-radius:999px">✖</button></div>
     <div class="log" id="chat-log"><div class="msg">👋 Welcome! I’m your Assistant. Ask me anything about the site, games, or settings. I can also chat in your language of choice!</div></div>
     <div class="entry"><input id="chat-input" class="pill-btn" style="flex:1; background:#211611; box-shadow:none; text-align:left" placeholder="Type here...">
       <select id="lang" class="select lang"><option>EN</option><option>ES</option><option>FR</option><option>DE</option><option>PT</option><option>ZH</option><option>JA</option><option>KO</option><option>AR</option><option>HI</option></select>
       <button id="cap" class="pill-btn cam-btn">📸</button><button id="send" class="pill-btn">Send</button></div>`;
-  document.body.appendChild(chat); chatBtn.onclick=()=>chat.classList.toggle('open'); document.getElementById('chat-close').onclick=()=>chat.classList.remove('open');
+  document.body.appendChild(chat); chatBtn.onclick=()=>{ const on=!chat.classList.contains('open'); closeAll(); if(on){ chat.classList.add('open'); }}; document.getElementById('chat-close').onclick=()=>chat.classList.remove('open');
   function pushMsg(t,you){const d=document.createElement('div'); d.className='msg'+(you?' you':''); d.textContent=t; document.getElementById('chat-log').appendChild(d); d.scrollIntoView({behavior:'smooth',block:'end'});}
   function reply(q){if(/coin|theme/i.test(q)){pushMsg("Use ☰ → Themes to buy/apply backgrounds. Earn coins in 🎰.",false);return;} pushMsg("Got it! I’ll remember that while you browse.",false);}
   document.getElementById('send').onclick=function(){const v=document.getElementById('chat-input').value.trim(); if(!v)return; pushMsg(v,true); document.getElementById('chat-input').value=''; reply(v);};
   document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('send').click()});
   document.getElementById('cap').onclick=function(){const stage=document.getElementById('stage'); if(!stage){pushMsg("📸 Screenshots are only allowed in‑game.",false); return;} if(!window.html2canvas){const s=document.createElement('script'); s.src='https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js'; s.onload=()=>document.getElementById('cap').click(); s.onerror=()=>pushMsg("Screenshot library unavailable.",false); document.head.appendChild(s); return;} window.html2canvas(stage).then(c=>{const a=document.createElement('a'); a.href=c.toDataURL(); a.download='screenshot.png'; a.click(); pushMsg("📸 Screenshot captured from the game area.",false);});};
 
+  // Helpers
   window.updateCoins=(d)=>coins.add(d);
   window.siteHome=(document.querySelector('a.back')?document.querySelector('a.back').getAttribute('href'):'../index.html');
   hud();
