@@ -1,1 +1,56 @@
-<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><link rel='stylesheet' href='assets/base.css'><script src='assets/app.js'></script><a class='back' href='./'>← Back</a><main class='wrap'><div class='card'><h1>Profile</h1></div></main>
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'><title>Profile</title>
+<link rel='stylesheet' href='assets/base.css'></head>
+<body><a class='back' href='./'>← Back</a><script src='assets/app.js'></script>
+<main class="wrap"><div class="card">
+  <h1>Profile</h1>
+  <div class="stat-row">
+    <div class="stat">Followers: <span id="pf_followers">0</span></div>
+    <div class="stat">Following: <span id="pf_following">0</span></div>
+    <div class="stat">Friends: <span id="pf_friends">0</span></div>
+    <button id="pf_settings" class="pill-btn">⚙️ Settings</button>
+  </div>
+  <h3 style="margin-top:16px">Course Progress</h3>
+  <div id="prog"></div>
+</div></main>
+<div class="panel ham" id="pf_modal" style="display:none">
+  <div class="head"><strong>Profile Settings</strong><button id="pfX" class="pill-btn">×</button></div>
+  <div class="body">
+    <div class="group"><strong>Visibility</strong>
+      <label><input id="vis_followers" type="checkbox" checked> Show Followers</label>
+      <label><input id="vis_following" type="checkbox" checked> Show Following</label>
+      <label><input id="vis_friends" type="checkbox" checked> Show Friends</label>
+    </div>
+    <div class="group"><strong>Notifications</strong>
+      <label><input id="pf_notif" type="checkbox" checked> Profile Activity</label>
+      <label><input id="pf_sound" type="checkbox"> Sound Effects</label>
+    </div>
+    <div class="group"><strong>Accessibility</strong>
+      <label>Text Size <select id="pf_text"><option>Default</option><option>Large</option><option>Small</option></select></label>
+      <label>High Contrast <input id="pf_hc" type="checkbox"></label>
+    </div>
+  </div>
+</div>
+<script>
+// Dummy counts remembered across site (user can set elsewhere; here we default to random once)
+var fkey='profile_counts';
+var counts = JSON.parse(localStorage.getItem(fkey) || 'null');
+if(!counts){ counts={followers:128, following:76, friends:42}; localStorage.setItem(fkey, JSON.stringify(counts)); }
+document.getElementById('pf_followers').textContent=counts.followers;
+document.getElementById('pf_following').textContent=counts.following;
+document.getElementById('pf_friends').textContent=counts.friends;
+// Progress bars per course (reads progress_* keys)
+var courses=['chess','coding-evolution','music-maker','offensive-coordinator','quantum','rugby1','poker','books','driving','dna','complex-analysis'];
+var wrap=document.getElementById('prog');
+courses.forEach(function(k){
+  var pct=parseInt(localStorage.getItem('progress_'+k)||'0',10)||0;
+  var row=document.createElement('div'); row.style.margin='8px 0';
+  row.innerHTML='<div style="margin-bottom:4px"><strong>'+k+'</strong> <span>'+pct+'%</span></div><div class="progress"><div class="bar" style="width:'+pct+'%"></div></div>';
+  wrap.appendChild(row);
+});
+// Simple settings modal
+var modal=document.getElementById('pf_modal');
+document.getElementById('pf_settings').onclick=function(){ modal.style.display='flex'; };
+document.getElementById('pfX').onclick=function(){ modal.style.display='none'; };
+</script>
+</body></html>
