@@ -1,0 +1,541 @@
+[
+  {
+    "type": "mc",
+    "q": "DNA overall shape is a:",
+    "options": [
+      "Double helix",
+      "Beta sheet",
+      "Alpha helix",
+      "Triple helix"
+    ],
+    "a": "Double helix"
+  },
+  {
+    "type": "mc",
+    "q": "Base pairing rules are:",
+    "options": [
+      "A\u2013T and C\u2013G",
+      "A\u2013C and T\u2013G",
+      "A\u2013G and T\u2013C",
+      "A\u2013U and C\u2013G"
+    ],
+    "a": "A\u2013T and C\u2013G"
+  },
+  {
+    "type": "mc",
+    "q": "The DNA backbone is made of:",
+    "options": [
+      "Sugar\u2011phosphate",
+      "Amino acids",
+      "Lipids",
+      "Polysaccharides"
+    ],
+    "a": "Sugar\u2011phosphate"
+  },
+  {
+    "type": "mc",
+    "q": "Which enzyme unwinds DNA?",
+    "options": [
+      "Helicase",
+      "Ligase",
+      "Primase",
+      "Amylase"
+    ],
+    "a": "Helicase"
+  },
+  {
+    "type": "mc",
+    "q": "Which enzyme extends a DNA strand?",
+    "options": [
+      "DNA polymerase",
+      "RNA polymerase",
+      "Kinase",
+      "Lipase"
+    ],
+    "a": "DNA polymerase"
+  },
+  {
+    "type": "mc",
+    "q": "Short fragments on the lagging strand are called:",
+    "options": [
+      "Okazaki fragments",
+      "Telomeres",
+      "Centromeres",
+      "Exons"
+    ],
+    "a": "Okazaki fragments"
+  },
+  {
+    "type": "mc",
+    "q": "Which enzyme joins DNA fragments?",
+    "options": [
+      "Ligase",
+      "Helicase",
+      "Topoisomerase",
+      "Protease"
+    ],
+    "a": "Ligase"
+  },
+  {
+    "type": "mc",
+    "q": "Central dogma describes flow:",
+    "options": [
+      "DNA\u2192RNA\u2192Protein",
+      "Protein\u2192RNA\u2192DNA",
+      "RNA\u2192DNA\u2192Protein",
+      "Protein\u2192DNA\u2192RNA"
+    ],
+    "a": "DNA\u2192RNA\u2192Protein"
+  },
+  {
+    "type": "mc",
+    "q": "Transcription produces:",
+    "options": [
+      "mRNA",
+      "Protein",
+      "tRNA only",
+      "Ribosome"
+    ],
+    "a": "mRNA"
+  },
+  {
+    "type": "mc",
+    "q": "Translation occurs at the:",
+    "options": [
+      "Ribosome",
+      "Nucleus",
+      "Lysosome",
+      "Golgi"
+    ],
+    "a": "Ribosome"
+  },
+  {
+    "type": "mc",
+    "q": "tRNA\u2019s job is to carry:",
+    "options": [
+      "Amino acids",
+      "mRNA",
+      "Lipids",
+      "Carbohydrates"
+    ],
+    "a": "Amino acids"
+  },
+  {
+    "type": "mc",
+    "q": "A three\u2011base unit on mRNA is a:",
+    "options": [
+      "Codon",
+      "Exon",
+      "Intron",
+      "Promoter"
+    ],
+    "a": "Codon"
+  },
+  {
+    "type": "mc",
+    "q": "Typical start codon is:",
+    "options": [
+      "AUG",
+      "UAA",
+      "UGA",
+      "UAG"
+    ],
+    "a": "AUG"
+  },
+  {
+    "type": "mc",
+    "q": "An example of a stop codon:",
+    "options": [
+      "UAA",
+      "GAA",
+      "AAA",
+      "AUA"
+    ],
+    "a": "UAA"
+  },
+  {
+    "type": "mc",
+    "q": "Replication style is:",
+    "options": [
+      "Semi\u2011conservative",
+      "Conservative",
+      "Random",
+      "Circular\u2011only"
+    ],
+    "a": "Semi\u2011conservative"
+  },
+  {
+    "type": "mc",
+    "q": "Which enzyme relieves supercoiling?",
+    "options": [
+      "Topoisomerase",
+      "Ligase",
+      "Helicase",
+      "Polymerase"
+    ],
+    "a": "Topoisomerase"
+  },
+  {
+    "type": "mc",
+    "q": "RNA uses which base instead of T?",
+    "options": [
+      "Uracil (U)",
+      "Guanine (G)",
+      "Cytosine (C)",
+      "Adenine (A)"
+    ],
+    "a": "Uracil (U)"
+  },
+  {
+    "type": "mc",
+    "q": "PCR is primarily used to:",
+    "options": [
+      "Amplify DNA",
+      "Cut proteins",
+      "Measure pH",
+      "Weigh cells"
+    ],
+    "a": "Amplify DNA"
+  },
+  {
+    "type": "mc",
+    "q": "CRISPR commonly uses:",
+    "options": [
+      "Cas9 nuclease",
+      "Ligase",
+      "Helicase",
+      "RNase P"
+    ],
+    "a": "Cas9 nuclease"
+  },
+  {
+    "type": "mc",
+    "q": "Gel electrophoresis separates fragments by:",
+    "options": [
+      "Size",
+      "Color",
+      "pH",
+      "Origin"
+    ],
+    "a": "Size"
+  },
+  {
+    "type": "mc",
+    "q": "Exons are:",
+    "options": [
+      "Expressed sequences",
+      "Removed introns",
+      "Promoters",
+      "Repeat ends"
+    ],
+    "a": "Expressed sequences"
+  },
+  {
+    "type": "mc",
+    "q": "Introns are:",
+    "options": [
+      "Removed sequences",
+      "Ribosomal RNA",
+      "Operator sites",
+      "Telomeres"
+    ],
+    "a": "Removed sequences"
+  },
+  {
+    "type": "mc",
+    "q": "Promoter is:",
+    "options": [
+      "DNA region where transcription starts",
+      "Protein complex",
+      "mRNA cap",
+      "tRNA loop"
+    ],
+    "a": "DNA region where transcription starts"
+  },
+  {
+    "type": "mc",
+    "q": "Primase synthesizes:",
+    "options": [
+      "RNA primers",
+      "Amino acids",
+      "Okazaki fragments",
+      "5' caps"
+    ],
+    "a": "RNA primers"
+  },
+  {
+    "type": "mc",
+    "q": "Leading strand synthesis is:",
+    "options": [
+      "Continuous",
+      "Discontinuous",
+      "Error\u2011prone",
+      "Reverse"
+    ],
+    "a": "Continuous"
+  },
+  {
+    "type": "mc",
+    "q": "Lagging strand synthesis is:",
+    "options": [
+      "Discontinuous",
+      "Continuous",
+      "Nuclear only",
+      "Mitochondrial only"
+    ],
+    "a": "Discontinuous"
+  },
+  {
+    "type": "mc",
+    "q": "Which base pairs form two H\u2011bonds?",
+    "options": [
+      "A\u2011T",
+      "C\u2011G",
+      "G\u2011C",
+      "C\u2011U"
+    ],
+    "a": "A\u2011T"
+  },
+  {
+    "type": "mc",
+    "q": "Which base pairs form three H\u2011bonds?",
+    "options": [
+      "C\u2011G",
+      "A\u2011T",
+      "A\u2011U",
+      "G\u2011U"
+    ],
+    "a": "C\u2011G"
+  },
+  {
+    "type": "mc",
+    "q": "DNA sugar is:",
+    "options": [
+      "Deoxyribose",
+      "Ribose",
+      "Glucose",
+      "Lactose"
+    ],
+    "a": "Deoxyribose"
+  },
+  {
+    "type": "mc",
+    "q": "RNA sugar is:",
+    "options": [
+      "Ribose",
+      "Deoxyribose",
+      "Galactose",
+      "Sucrose"
+    ],
+    "a": "Ribose"
+  },
+  {
+    "type": "mc",
+    "q": "Nonsense mutation results in:",
+    "options": [
+      "Early stop codon",
+      "No change",
+      "Frameshift",
+      "Missense"
+    ],
+    "a": "Early stop codon"
+  },
+  {
+    "type": "mc",
+    "q": "Missense mutation results in:",
+    "options": [
+      "Amino\u2011acid change",
+      "Stop codon",
+      "No change",
+      "Exon removal"
+    ],
+    "a": "Amino\u2011acid change"
+  },
+  {
+    "type": "mc",
+    "q": "Silent mutation results in:",
+    "options": [
+      "No amino\u2011acid change",
+      "Frameshift",
+      "Protein deletion",
+      "Extra intron"
+    ],
+    "a": "No amino\u2011acid change"
+  },
+  {
+    "type": "mc",
+    "q": "tRNA anticodon pairs with:",
+    "options": [
+      "mRNA codon",
+      "DNA promoter",
+      "rRNA loop",
+      "miRNA"
+    ],
+    "a": "mRNA codon"
+  },
+  {
+    "type": "mc",
+    "q": "Mitochondrial DNA is inherited:",
+    "options": [
+      "Maternally",
+      "Paternally",
+      "Randomly",
+      "Biparentally by rule"
+    ],
+    "a": "Maternally"
+  },
+  {
+    "type": "mc",
+    "q": "Restriction enzymes cut at:",
+    "options": [
+      "Specific sequences",
+      "Random sites",
+      "Chromosome ends",
+      "Telomeres"
+    ],
+    "a": "Specific sequences"
+  },
+  {
+    "type": "mc",
+    "q": "cDNA is synthesized from:",
+    "options": [
+      "mRNA",
+      "tRNA",
+      "Genomic DNA directly",
+      "Protein"
+    ],
+    "a": "mRNA"
+  },
+  {
+    "type": "mc",
+    "q": "Splicing removes:",
+    "options": [
+      "Introns",
+      "Exons",
+      "Promoters",
+      "Enhancers"
+    ],
+    "a": "Introns"
+  },
+  {
+    "type": "mc",
+    "q": "Karyotype visualizes:",
+    "options": [
+      "Chromosomes",
+      "Proteins",
+      "Lipids",
+      "Carbs"
+    ],
+    "a": "Chromosomes"
+  },
+  {
+    "type": "mc",
+    "q": "Telomeres are:",
+    "options": [
+      "Chromosome end caps",
+      "Promoters",
+      "Plasmids",
+      "Okazaki pieces"
+    ],
+    "a": "Chromosome end caps"
+  },
+  {
+    "type": "mc",
+    "q": "Epigenetic mark example:",
+    "options": [
+      "DNA methylation",
+      "Protein glycation",
+      "RNA splicing",
+      "Krebs cycle"
+    ],
+    "a": "DNA methylation"
+  },
+  {
+    "type": "mc",
+    "q": "Proofreading function reduces:",
+    "options": [
+      "Replication errors",
+      "Ribosome speed",
+      "ATP use",
+      "Lipid synthesis"
+    ],
+    "a": "Replication errors"
+  },
+  {
+    "type": "mc",
+    "q": "Zygote has:",
+    "options": [
+      "Two chromosome sets",
+      "One set",
+      "Haploid only",
+      "No DNA"
+    ],
+    "a": "Two chromosome sets"
+  },
+  {
+    "type": "mc",
+    "q": "Operons are common in:",
+    "options": [
+      "Prokaryotes",
+      "Eukaryotes",
+      "Viruses only",
+      "Plants only"
+    ],
+    "a": "Prokaryotes"
+  },
+  {
+    "type": "mc",
+    "q": "Transcription occurs in:",
+    "options": [
+      "Nucleus (eukaryotes)",
+      "Cytosol (eukaryotes)",
+      "Mitochondrial IMS",
+      "Ribosome"
+    ],
+    "a": "Nucleus (eukaryotes)"
+  },
+  {
+    "type": "mc",
+    "q": "Translation occurs in:",
+    "options": [
+      "Cytosol/ribosome",
+      "Nucleus",
+      "Nucleolus",
+      "Lysosome"
+    ],
+    "a": "Cytosol/ribosome"
+  },
+  {
+    "type": "mc",
+    "q": "The genetic code is:",
+    "options": [
+      "Nearly universal",
+      "Species\u2011unique",
+      "Random",
+      "Ambiguous"
+    ],
+    "a": "Nearly universal"
+  },
+  {
+    "type": "mc",
+    "q": "Replication begins at:",
+    "options": [
+      "Origins of replication",
+      "Promoters",
+      "Telomeres",
+      "Centromeres"
+    ],
+    "a": "Origins of replication"
+  },
+  {
+    "type": "mc",
+    "q": "S phase of cell cycle is for:",
+    "options": [
+      "DNA synthesis",
+      "Mitosis",
+      "Cytokinesis",
+      "G0 rest"
+    ],
+    "a": "DNA synthesis"
+  }
+]

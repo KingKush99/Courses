@@ -1,0 +1,573 @@
+[
+  {
+    "type": "mc",
+    "q": "f is analytic if it is complex differentiable on an:",
+    "options": [
+      "Open set",
+      "Finite set",
+      "Closed segment",
+      "Single point only"
+    ],
+    "a": "Open set"
+  },
+  {
+    "type": "mc",
+    "q": "Cauchy\u2013Riemann equations for f=u+iv:",
+    "options": [
+      "u_x=v_y and u_y=-v_x",
+      "u_x=-v_y and u_y=v_x",
+      "u_x=u_y and v_x=v_y",
+      "u_x=v_x and u_y=v_y"
+    ],
+    "a": "u_x=v_y and u_y=-v_x"
+  },
+  {
+    "type": "mc",
+    "q": "If f is entire and bounded, then f is constant. This is:",
+    "options": [
+      "Liouville\u2019s theorem",
+      "Morera\u2019s theorem",
+      "Maximum modulus",
+      "Open mapping"
+    ],
+    "a": "Liouville\u2019s theorem"
+  },
+  {
+    "type": "mc",
+    "q": "\u222e_C f'(z) dz equals:",
+    "options": [
+      "0",
+      "f(C)",
+      "Depends on C",
+      "2\u03c0i"
+    ],
+    "a": "0"
+  },
+  {
+    "type": "mc",
+    "q": "Cauchy Integral Formula: f(a) =",
+    "options": [
+      "(1/2\u03c0i)\u222e f(z)/(z\u2212a) dz",
+      "\u222e f'(z) dz",
+      "\u222e z f(z) dz",
+      "(1/\u03c0)\u222e f(z) dz"
+    ],
+    "a": "(1/2\u03c0i)\u222e f(z)/(z\u2212a) dz"
+  },
+  {
+    "type": "mc",
+    "q": "A simple pole at z0 has principal part:",
+    "options": [
+      "A/(z\u2212z0)",
+      "A/(z\u2212z0)^2",
+      "A (constant)",
+      "A(z\u2212z0)"
+    ],
+    "a": "A/(z\u2212z0)"
+  },
+  {
+    "type": "mc",
+    "q": "Residue at simple pole z0 of g(z)/h(z) with h(z0)=0,h'(z0)\u22600:",
+    "options": [
+      "g(z0)/h'(z0)",
+      "g'(z0)/h(z0)",
+      "0",
+      "h'(z0)/g(z0)"
+    ],
+    "a": "g(z0)/h'(z0)"
+  },
+  {
+    "type": "mc",
+    "q": "Laurent series converges in:",
+    "options": [
+      "An annulus",
+      "A disk only",
+      "All complex plane",
+      "A line"
+    ],
+    "a": "An annulus"
+  },
+  {
+    "type": "mc",
+    "q": "The integral of analytic f around closed contour in simply connected domain:",
+    "options": [
+      "0",
+      "2\u03c0i",
+      "Depends on path length",
+      "Real number"
+    ],
+    "a": "0"
+  },
+  {
+    "type": "mc",
+    "q": "Maximum Modulus Principle says |f| attains maximum on:",
+    "options": [
+      "Boundary",
+      "Interior",
+      "Anywhere",
+      "Zeros"
+    ],
+    "a": "Boundary"
+  },
+  {
+    "type": "mc",
+    "q": "If f is non-constant analytic, it maps open sets to:",
+    "options": [
+      "Open sets",
+      "Closed sets",
+      "Lines",
+      "Points"
+    ],
+    "a": "Open sets"
+  },
+  {
+    "type": "mc",
+    "q": "Harmonic functions satisfy:",
+    "options": [
+      "Laplace\u2019s equation",
+      "Wave equation",
+      "Heat equation",
+      "Poisson\u2019s eq with charge"
+    ],
+    "a": "Laplace\u2019s equation"
+  },
+  {
+    "type": "mc",
+    "q": "The real and imaginary parts of analytic f are:",
+    "options": [
+      "Harmonic",
+      "Linear",
+      "Constant",
+      "Quadratic"
+    ],
+    "a": "Harmonic"
+  },
+  {
+    "type": "mc",
+    "q": "A branch cut is used to:",
+    "options": [
+      "Make a single-valued branch",
+      "Create poles",
+      "Zero the function",
+      "Remove continuity"
+    ],
+    "a": "Make a single-valued branch"
+  },
+  {
+    "type": "mc",
+    "q": "Principal value of log z typically cuts along:",
+    "options": [
+      "Negative real axis",
+      "Positive real axis",
+      "Imag axis",
+      "Unit circle"
+    ],
+    "a": "Negative real axis"
+  },
+  {
+    "type": "mc",
+    "q": "Argument principle relates change of arg f around contour to:",
+    "options": [
+      "Zeros minus poles inside",
+      "Sum residues",
+      "Line integral length",
+      "Area"
+    ],
+    "a": "Zeros minus poles inside"
+  },
+  {
+    "type": "mc",
+    "q": "Rouche\u2019s theorem compares:",
+    "options": [
+      "Zeros of two functions",
+      "Poles orders",
+      "Integrals",
+      "Real parts"
+    ],
+    "a": "Zeros of two functions"
+  },
+  {
+    "type": "mc",
+    "q": "Morera\u2019s theorem states that if \u222e f dz = 0 on all triangles, then f is:",
+    "options": [
+      "Analytic",
+      "Constant",
+      "Zero",
+      "Real"
+    ],
+    "a": "Analytic"
+  },
+  {
+    "type": "mc",
+    "q": "If f has an essential singularity at z0, then near z0 its image is:",
+    "options": [
+      "Dense in C",
+      "A line",
+      "A circle",
+      "Empty"
+    ],
+    "a": "Dense in C"
+  },
+  {
+    "type": "mc",
+    "q": "Order of zero at a is:",
+    "options": [
+      "Smallest n with f^(n)(a)\u22600",
+      "Degree of polynomial",
+      "1 always",
+      "Infinity"
+    ],
+    "a": "Smallest n with f^(n)(a)\u22600"
+  },
+  {
+    "type": "mc",
+    "q": "Simple connected set has:",
+    "options": [
+      "No holes",
+      "At least one hole",
+      "Only straight boundaries",
+      "Only circles"
+    ],
+    "a": "No holes"
+  },
+  {
+    "type": "mc",
+    "q": "Conformal map preserves:",
+    "options": [
+      "Angles",
+      "Lengths",
+      "Areas",
+      "All distances"
+    ],
+    "a": "Angles"
+  },
+  {
+    "type": "mc",
+    "q": "Map w=z^2 sends rays to:",
+    "options": [
+      "Rays doubled angle",
+      "Circles",
+      "Lines shifted",
+      "Ellipses"
+    ],
+    "a": "Rays doubled angle"
+  },
+  {
+    "type": "mc",
+    "q": "Residue theorem: \u222e f dz =",
+    "options": [
+      "2\u03c0i \u00d7 (sum of residues inside)",
+      "0 always",
+      "\u03c0 \u00d7 sum residues",
+      "Depends only on endpoints"
+    ],
+    "a": "2\u03c0i \u00d7 (sum of residues inside)"
+  },
+  {
+    "type": "mc",
+    "q": "Cauchy estimate bounds coefficients of:",
+    "options": [
+      "Taylor series",
+      "Laurent tail only",
+      "Fourier series",
+      "Power mean"
+    ],
+    "a": "Taylor series"
+  },
+  {
+    "type": "mc",
+    "q": "If f is analytic and f'=0 on connected domain, then f is:",
+    "options": [
+      "Constant",
+      "Zero",
+      "Linear",
+      "Periodic"
+    ],
+    "a": "Constant"
+  },
+  {
+    "type": "mc",
+    "q": "A removable singularity occurs when:",
+    "options": [
+      "f is bounded near point",
+      "Pole of order 1",
+      "Essential singularity",
+      "Branch cut exists"
+    ],
+    "a": "f is bounded near point"
+  },
+  {
+    "type": "mc",
+    "q": "Principal part consists of:",
+    "options": [
+      "Negative-power terms",
+      "Nonnegative powers",
+      "Constant only",
+      "Positive powers only"
+    ],
+    "a": "Negative-power terms"
+  },
+  {
+    "type": "mc",
+    "q": "Taylor series about a converges within:",
+    "options": [
+      "Radius to nearest singularity",
+      "Unit radius",
+      "Infinity",
+      "Zero"
+    ],
+    "a": "Radius to nearest singularity"
+  },
+  {
+    "type": "mc",
+    "q": "Harmonic conjugate exists locally if:",
+    "options": [
+      "Domain simply connected and u harmonic",
+      "u linear",
+      "u constant",
+      "Always"
+    ],
+    "a": "Domain simply connected and u harmonic"
+  },
+  {
+    "type": "mc",
+    "q": "The mean value property holds for:",
+    "options": [
+      "Harmonic functions",
+      "All functions",
+      "Polynomials only",
+      "Exponentials only"
+    ],
+    "a": "Harmonic functions"
+  },
+  {
+    "type": "mc",
+    "q": "Poisson kernel solves:",
+    "options": [
+      "Dirichlet problem on disk",
+      "Neumann problem on square",
+      "Wave eq",
+      "Heat eq"
+    ],
+    "a": "Dirichlet problem on disk"
+  },
+  {
+    "type": "mc",
+    "q": "If f has pole of order m at a, then (z\u2212a)^m f(z) is:",
+    "options": [
+      "Analytic & nonzero at a",
+      "Zero",
+      "Undefined",
+      "Constant only"
+    ],
+    "a": "Analytic & nonzero at a"
+  },
+  {
+    "type": "mc",
+    "q": "For simple pole at a of \u03c6/\u03c8, residue =:",
+    "options": [
+      "\u03c6(a)/\u03c8'(a)",
+      "\u03c6'(a)/\u03c8(a)",
+      "\u03c8(a)/\u03c6'(a)",
+      "0"
+    ],
+    "a": "\u03c6(a)/\u03c8'(a)"
+  },
+  {
+    "type": "mc",
+    "q": "Cauchy\u2019s inequality: |f^(n)(a)| \u2264",
+    "options": [
+      "n! M / R^n",
+      "M / n!",
+      "R^n / M",
+      "M n / R"
+    ],
+    "a": "n! M / R^n"
+  },
+  {
+    "type": "mc",
+    "q": "If f analytic on domain D and |f| constant, then f is:",
+    "options": [
+      "Constant",
+      "Linear",
+      "Conformal",
+      "Periodic"
+    ],
+    "a": "Constant"
+  },
+  {
+    "type": "mc",
+    "q": "Schwarz lemma applies to maps of:",
+    "options": [
+      "Unit disk fixing 0",
+      "Whole plane",
+      "Upper half-plane",
+      "Annulus"
+    ],
+    "a": "Unit disk fixing 0"
+  },
+  {
+    "type": "mc",
+    "q": "Schwarz reflection extends analytic f across:",
+    "options": [
+      "Real axis",
+      "Circle only",
+      "Imag axis only",
+      "Any line"
+    ],
+    "a": "Real axis"
+  },
+  {
+    "type": "mc",
+    "q": "Joukowski map w=z+1/z maps |z|=1 to:",
+    "options": [
+      "[-2,2]",
+      "Unit circle",
+      "Parabola",
+      "Ellipse"
+    ],
+    "a": "[-2,2]"
+  },
+  {
+    "type": "mc",
+    "q": "Residue at infinity equals:",
+    "options": [
+      "-sum of residues at finite poles",
+      "0",
+      "Sum of all residues",
+      "1"
+    ],
+    "a": "-sum of residues at finite poles"
+  },
+  {
+    "type": "mc",
+    "q": "If f is meromorphic, then number of zeros and poles (with mult) relate via:",
+    "options": [
+      "Argument principle",
+      "Green\u2019s theorem",
+      "Stokes",
+      "Gauss"
+    ],
+    "a": "Argument principle"
+  },
+  {
+    "type": "mc",
+    "q": "Harmonic measure relates boundary measure to:",
+    "options": [
+      "Probability of Brownian exit",
+      "Arc length",
+      "Area",
+      "Curvature"
+    ],
+    "a": "Probability of Brownian exit"
+  },
+  {
+    "type": "mc",
+    "q": "If f analytic has no zeros on simple closed contour, log f has:",
+    "options": [
+      "Well-defined change in arg",
+      "Undefined",
+      "Always zero",
+      "Only negative jumps"
+    ],
+    "a": "Well-defined change in arg"
+  },
+  {
+    "type": "mc",
+    "q": "Logarithmic derivative f'/f has poles at:",
+    "options": [
+      "Zeros and poles of f",
+      "Only zeros",
+      "Only poles",
+      "Neither"
+    ],
+    "a": "Zeros and poles of f"
+  },
+  {
+    "type": "mc",
+    "q": "Essential singularity example:",
+    "options": [
+      "e^{1/z} at 0",
+      "1/(z-a)",
+      "(z-a)^2",
+      "log z at 0"
+    ],
+    "a": "e^{1/z} at 0"
+  },
+  {
+    "type": "mc",
+    "q": "Uniform convergence of analytic functions implies limit is:",
+    "options": [
+      "Analytic",
+      "Continuous only",
+      "Real",
+      "Polynomial"
+    ],
+    "a": "Analytic"
+  },
+  {
+    "type": "mc",
+    "q": "Maximum principle implies non-constant harmonic function attains extrema on:",
+    "options": [
+      "Boundary",
+      "Interior",
+      "Anywhere",
+      "Zeros"
+    ],
+    "a": "Boundary"
+  },
+  {
+    "type": "mc",
+    "q": "Riemann mapping theorem: any simply connected proper domain \u2245",
+    "options": [
+      "Unit disk",
+      "Upper half-plane only",
+      "Whole plane",
+      "Annulus"
+    ],
+    "a": "Unit disk"
+  },
+  {
+    "type": "mc",
+    "q": "Argument of product equals:",
+    "options": [
+      "Sum of arguments (mod 2\u03c0)",
+      "Product of arguments",
+      "Difference of magnitudes",
+      "Average"
+    ],
+    "a": "Sum of arguments (mod 2\u03c0)"
+  },
+  {
+    "type": "fill",
+    "q": "Cauchy\u2013Riemann equations: u_x = __ and u_y = __",
+    "a": [
+      "v_y",
+      "-v_x"
+    ]
+  },
+  {
+    "type": "fill",
+    "q": "Residue theorem: \u222e f(z) dz = __ \u00d7 (sum of residues)",
+    "a": [
+      "2\u03c0i",
+      "2pi i",
+      "2*pi*i"
+    ]
+  },
+  {
+    "type": "fill",
+    "q": "Liouville says bounded entire functions are __",
+    "a": [
+      "constant"
+    ]
+  },
+  {
+    "type": "fill",
+    "q": "Principal branch of log uses a cut along the __ real axis",
+    "a": [
+      "negative",
+      "-"
+    ]
+  }
+]

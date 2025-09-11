@@ -1,0 +1,64 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Complex Analysis — Residue Rush</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
+<main class="wrap" style="padding:0">
+  <section class="card" style="max-width:none;width:100%;min-height:80vh;display:flex;flex-direction:column">
+    <div class="row" style="padding:12px">
+      <button id="new" class="pill-btn">New Level</button>
+      <span id="hud" style="margin-left:auto"></span>
+    </div>
+    <canvas id="cv" width="900" height="540" style="width:100%;background:#0e0e11;border:1px solid #ffffff22;border-radius:12px"></canvas>
+    <div style="padding:12px">
+      <p>Select all poles <em>inside</em> the circular contour. Then press <strong>Check</strong>.</p>
+      <button id="check" class="pill-btn">Check</button>
+      <div id="ans"></div>
+    </div>
+  </section>
+</main>
+<script>
+var c=document.getElementById('cv'), ctx=c.getContext('2d'); var hud=document.getElementById('hud');
+var poles=[], inside=[], R=180, score=0, level=0;
+function rand(min,max){ return Math.random()*(max-min)+min; }
+function reset(){
+  level++; poles=[]; inside=[]; var n=3+Math.floor(Math.random()*4); // 3..6 poles
+  for(var i=0;i<n;i++){ var a=(Math.random()*2-1)*2; // residue coefficient (real for simplicity)
+    var x=rand(-380,380), y=rand(-220,220);
+    var ins=(x*x + y*y) <= R*R - 30*30; // margin
+    poles.push({x:x,y:y,a:a,sel:false}); inside.push(ins);
+  }
+  draw();
+  hud.textContent='Score: '+score+'  Level: '+level;
+  document.getElementById('ans').innerHTML='';
+}
+function draw(){
+  ctx.clearRect(0,0,c.width,c.height);
+  ctx.save(); ctx.translate(c.width/2, c.height/2);
+  // axes
+  ctx.strokeStyle='#444'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(-420,0); ctx.lineTo(420,0); ctx.moveTo(0,-260); ctx.lineTo(0,260); ctx.stroke();
+  // contour
+  ctx.strokeStyle='#ffd166'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(0,0,R,0,Math.PI*2); ctx.stroke();
+  // poles
+  poles.forEach(function(p){ ctx.fillStyle=p.sel?'#ff3b3b':'#2ecc71'; ctx.beginPath(); ctx.arc(p.x, p.y, 6, 0, Math.PI*2); ctx.fill(); });
+  ctx.restore();
+}
+c.addEventListener('click', function(e){
+  var r=c.getBoundingClientRect(); var x=e.clientX-r.left - c.width/2; var y=e.clientY-r.top - c.height/2;
+  var nearest=-1, best=1e9;
+  for(var i=0;i<poles.length;i++){ var dx=poles[i].x-x, dy=poles[i].y-y; var d=dx*dx+dy*dy; if(d<best){ best=d; nearest=i; } }
+  if(best<25*25){ poles[nearest].sel=!poles[nearest].sel; draw(); }
+});
+document.getElementById('check').onclick=function(){
+  var ok=true; for(var i=0;i<poles.length;i++){ if(poles[i].sel !== inside[i]){ ok=false; break; } }
+  if(ok){
+    // integral = 2πi * sum residues of inside poles; here residues = a (real), show magnitude
+    var sum=0; for(var i=0;i<poles.length;i++){ if(inside[i]) sum+=poles[i].a; }
+    score += 10; document.getElementById('ans').innerHTML='✅ Correct. ∮ f(z) dz = 2πi × ('+sum.toFixed(2)+')';
+    // bump course progress
+    var key='progress_complex-analysis'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; var nv=Math.min(100, prev+5); localStorage.setItem(key, String(nv));
+  } else {
+    document.getElementById('ans').innerHTML='❌ Not quite. Toggle your selections and try again.';
+    score = Math.max(0, score-3);
+  }
+  hud.textContent='Score: '+score+'  Level: '+level;
+};
+document.getElementById('new').onclick=reset;
+reset();
+</script></body></html>
