@@ -1,0 +1,16 @@
+<!doctype html><meta charset="utf-8">
+<title>Source Viewer</title>
+<link rel="stylesheet" href="../assets/base.css">
+<style>body{background:#0e0b09;color:#fff} .wrap{max-width:1200px;margin:20px auto} .frame{width:100%;height:80vh;border:1px solid #ffffff22;border-radius:12px;background:#111}
+.note{padding:12px 14px;border:1px dashed #ffffff33;border-radius:12px;margin:12px 0}</style>
+<div class="wrap">
+  <h1>Source Document</h1>
+  <div id="msg" class="note">Loading PDF…</div>
+  <iframe id="pdf" class="frame"></iframe>
+  <p class="note">Tip: Place a real source PDF at <code>complex-analysis/resources/notes.pdf</code> in your repo to enable exact page jumps.</p>
+</div>
+<script>
+const params=new URLSearchParams(location.search); const page=params.get('page')||'1';
+const iframe=document.getElementById('pdf'); const msg=document.getElementById('msg');
+fetch('notes.pdf',{method:'HEAD'}).then(r=>{ if(r.ok){ iframe.src='notes.pdf#page='+page; msg.textContent='Page '+page; } else { msg.innerHTML='PDF not found. Add <code>notes.pdf</code> to this folder. Showing helper instead.'; iframe.style.display='none'; } }).catch(()=>{ msg.innerHTML='PDF not found. Add <code>notes.pdf</code> to this folder.'; iframe.style.display='none'; });
+</script>

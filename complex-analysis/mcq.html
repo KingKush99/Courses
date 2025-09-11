@@ -1,57 +1,73 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'><title>Complex Analysis — MCQ</title>
-<link rel='stylesheet' href='../assets/base.css'></head>
+
+<link rel='stylesheet' href='../assets/base.css'>
+<style>
+.hint-overlay{position:fixed;inset:0;background:#000000bb;display:none;align-items:center;justify-content:center;z-index:9999}
+.hint-modal{width:90vw;height:90vh;background:#1a120e;border:1px solid #ffffff22;border-radius:16px;box-shadow:0 10px 40px #000000aa;display:flex;flex-direction:column;overflow:hidden}
+.hint-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #ffffff22}
+.hint-body{padding:14px;overflow:auto;line-height:1.6}
+.qcard{position:relative;max-width:1100px;margin:auto;padding:18px 22px;border-radius:16px;background:#1b140f;border:1px solid #ffffff22;box-shadow:0 8px 30px #00000055;min-height:240px}
+.qbtn{position:absolute;border-radius:999px;width:46px;height:46px;display:grid;place-items:center;padding:0;font-weight:900}
+.qbtn.eye{top:10px;right:10px}
+.qbtn.hint{right:10px;bottom:10px}
+</style>
+<script>
+(function(){
+  window.__openSourcePDF = function(page){ window.open('resources/viewer.html?page='+encodeURIComponent(page||1),'_blank'); };
+  function openHint(text){
+    var ov=document.querySelector('.hint-overlay'); if(!ov) return;
+    ov.querySelector('.hint-body').innerHTML = text || 'No hint available.';
+    ov.style.display='flex';
+  }
+  window.__bindQE = function(container, item){
+    var hintBtn=document.createElement('button'); hintBtn.className='pill-btn qbtn hint'; hintBtn.textContent='?';
+    hintBtn.title='Hint'; hintBtn.onclick=function(){ openHint(item.hint||''); }; container.appendChild(hintBtn);
+    var eye=document.createElement('button'); eye.className='pill-btn qbtn eye'; eye.textContent='👁'; eye.title='Open source page';
+    eye.onclick=function(){ var p=item.page||1; __openSourcePDF(p); }; container.appendChild(eye);
+    if(!document.querySelector('.hint-overlay')){
+      var ov=document.createElement('div'); ov.className='hint-overlay';
+      ov.innerHTML = "<div class='hint-modal'><div class='hint-head'><strong>Hint</strong><button class='pill-btn' id='hintClose'>✖</button></div><div class='hint-body'></div></div>";
+      document.body.appendChild(ov);
+      document.addEventListener('click', function(e){ if(e.target===ov) ov.style.display='none'; });
+      document.getElementById('hintClose').onclick=function(){ ov.style.display='none'; };
+    }
+  }
+})();
+</script>
+
+</head>
 <body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
-<main class="wrap" style="padding:0">
-  <section class="card" style="max-width:none;width:100%;min-height:80vh;display:flex;flex-direction:column">
-    <div style="padding:16px">
+<main class="wrap" style="padding:0 12px">
+  <section class="card" style="max-width:none;width:100%;min-height:86vh;display:flex;flex-direction:column">
+    <div style="padding:16px 12px">
       <h1 style="margin-bottom:6px">Multiple Choice — Complex Analysis</h1>
       <div class="progress"><div class="bar" id="pbar"></div></div>
     </div>
-    <div id="stage" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;position:relative"></div>
+    <div id="stage" style="flex:1;display:grid;place-items:center;padding:0 10px"></div>
   </section>
 </main>
+<div class='hint-overlay'><div class='hint-modal'><div class='hint-head'><strong>Hint</strong><button class='pill-btn' id='hintClose'>✖</button></div><div class='hint-body'></div></div></div>
 <script>
 function el(t,c,h){ var d=document.createElement(t); if(c) d.className=c; if(h!=null) d.innerHTML=h; return d; }
-var qs=[],i=0,correct=0,total=0;
+var qs=[],i=0,correct=0;
+function ensure50(a){ while(a.length<50) a=a.concat(a.slice(0, Math.min(50-a.length,a.length))); return a.slice(0, Math.max(50,a.length)); }
 function renderQ(){
   var s=document.getElementById('stage'); s.innerHTML='';
   if(i>=qs.length){
-    var pct=Math.round(100*correct/total);
-    s.innerHTML='<h2>Done!</h2><p>Score: <span class="badge '+(pct>=75?'badge-green':(pct>=40?'badge-yellow':'badge-red'))+'">'+correct+'/'+total+' ('+pct+'%)</span></p><a class="pill-btn" href="./">Back to hub</a>';
+    var pct=Math.round(100*correct/qs.length);
+    s.innerHTML='<div class="qcard" style="text-align:center"><h2>Done!</h2><p>Score: <span class="badge '+(pct>=75?'badge-green':(pct>=40?'badge-yellow':'badge-red'))+'">'+correct+'/'+qs.length+' ('+pct+'%)</span></p><a class="pill-btn" href="./">Back to hub</a></div>';
     document.getElementById('pbar').style.width='100%';
     var key='progress_complex-analysis'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; if(pct>prev) localStorage.setItem(key, String(pct));
     return;
   }
-  var q=qs[i]; total=qs.length;
-  document.getElementById('pbar').style.width=Math.round(100*i/qs.length)+'%';
-  var box=el('div',null,'<h2 style="margin:10px 0 20px 0">'+q.q+(q.q.trim().endsWith('?')?'':'?')+'</h2>'); s.appendChild(box);
-  if(window.__addHintEye) window.__addHintEye(box, q);
+  var q=qs[i]; document.getElementById('pbar').style.width=Math.round(100*i/qs.length)+'%';
+  var card=el('div','qcard'); card.innerHTML='<h2 style="margin:10px 0 18px 0">'+q.q+(q.q.trim().endsWith('?')?'':'?')+'</h2>'; s.appendChild(card);
+  if(window.__bindQE) window.__bindQE(card, q);
   var opts=(q.options&&q.options.length)?q.options.slice():['True','False'];
-  for(var k=0;k<opts.length;k++){ var b=el('button','pill-btn',opts[k]); b.style.fontSize='20px'; b.style.padding='20px 28px'; b.style.margin='10px'; b.style.display='block';
-    b.onclick=(function(val){ return function(){ var ans=q.a; var ok=false; if(Array.isArray(ans)){ ok=ans.indexOf(val)>-1; } else { ok=(val===ans); } if(ok) correct++; i++; renderQ(); }; })(opts[k]);
-    s.appendChild(b);
-  }
+  opts.forEach(function(opt){ var b=el('button','pill-btn',opt); b.style.fontSize='20px'; b.style.padding='16px 22px'; b.style.margin='7px auto'; b.style.display='block';
+    b.onclick=function(){ var ans=q.a; var ok=Array.isArray(ans)?(ans.indexOf(opt)>-1):(opt===ans); if(ok) correct++; i++; renderQ(); }; card.appendChild(b); });
 }
-var x=new XMLHttpRequest(); x.onreadystatechange=function(){ if(x.readyState==4){ qs=JSON.parse(x.responseText); renderQ(); } }; x.open('GET','qbank.json',true); x.send();
+var x=new XMLHttpRequest(); x.onreadystatechange=function(){ if(x.readyState==4){ var data=JSON.parse(x.responseText); qs=ensure50(data); renderQ(); } }; x.open('GET','qbank.json',true); x.send();
 </script>
-
-<script>
-(function(){
-  function iconBtn(html,title){ var b=document.createElement('button'); b.className='pill-btn'; b.innerHTML=html; b.title=title||''; b.style.borderRadius='999px'; b.style.width='42px'; b.style.height='42px'; b.style.padding='0'; return b; }
-  function addHintEye(container, item){
-    var wrap=document.createElement('div'); wrap.style.position='relative'; container.style.position='relative';
-    while(container.firstChild) wrap.appendChild(container.firstChild);
-    container.appendChild(wrap);
-    var qBtn=iconBtn('?', 'Hint'); qBtn.style.position='absolute'; qBtn.style.right='8px'; qBtn.style.bottom='8px'; qBtn.style.fontWeight='900';
-    qBtn.onclick=function(){ alert(item.hint?item.hint:'No hint for this one — check definitions.'); };
-    container.appendChild(qBtn);
-    var eye=iconBtn('👁️', 'Open source page'); eye.style.position='absolute'; eye.style.right='8px'; eye.style.top='8px';
-    eye.onclick=function(){ var p=item.page||1; window.open('resources/notes.pdf#page='+p, '_blank'); };
-    container.appendChild(eye);
-  }
-  window.__addHintEye = addHintEye;
-})();
-</script>
-
 </body></html>
