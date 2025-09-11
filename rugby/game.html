@@ -1,64 +1,57 @@
-<!doctype html><html><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Rugby — Interactive Game</title>
-<link rel="stylesheet" href="../assets/base.css">
-<style>
-#stage{position:relative; width:min(900px,94vw); height:520px; margin:18px auto; background:linear-gradient(#146d3a,#0f4d2a); border-radius:16px; border:3px solid #0b2f12; overflow:hidden}
-.player,.def{position:absolute; width:28px; height:28px; border-radius:999px; display:grid; place-items:center; font-weight:900}
-.player{background:#ff6b00; color:#fff}
-.def{background:#ffd43b; color:#000}
-.goal{position:absolute; right:0; top:0; width:16px; height:100%; background:#ffffff22}
-.hud{display:flex; gap:10px; justify-content:center}
-</style>
-</head><body>
-<a class="back pill-btn" href="index.html">← Back</a>
-<script src="../assets/app.js"></script>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Rugby — Interactive Game</title>
+  <link rel="stylesheet" href="../assets/base.css">
+  <script defer src="../assets/app.js"></script>
+</head>
+<body>
 <main class="wrap">
-  <div class="card">
-    <h1>Interactive Game — Reach the Try Line</h1>
-    <div class="hud"><span>Mode:</span>
-      <button class="pill-btn" id="mode-off">Offense</button>
-      <button class="pill-btn" id="mode-def">Defense</button>
-      <span id="score" class="badge">Score: 0</span>
-      <span id="timer" class="badge">Time: 30</span>
+  <section class="card">
+    <h2>Interactive Game</h2>
+    <div class="hud">
+      <button id="mode" class="pill-btn sm">Mode: Offense</button>
+      <span class="badge">Reach the endzone on offense. Tag the runner on defense. ⬅️⬆️➡️⬇️</span>
+      <span class="badge" id="stats">Wins: 0</span>
     </div>
-    <div id="stage">
-      <div class="goal"></div>
-    </div>
-  </div>
+    <div id="stage"></div>
+  </section>
 </main>
 <script>
-const stage=document.getElementById('stage'); const w=stage.clientWidth, h=stage.clientHeight;
-let score=0, time=30, mode='off'; let timer=null;
-const player=document.createElement('div'); player.className='player'; player.textContent='O'; stage.appendChild(player);
-function placePlayer(){ player.style.left='10px'; player.style.top=(h/2-14)+'px'; }
-placePlayer();
-function spawnDefenders(n=5){ document.querySelectorAll('.def').forEach(e=>e.remove()); for(let i=0;i<n;i++){ const d=document.createElement('div'); d.className='def'; d.textContent='D'; d.style.left=(200+Math.random()*(w-260))+'px'; d.style.top=(20+Math.random()*(h-40))+'px'; d.vx = (Math.random()<0.5?-1:1)*(1+Math.random()*1.5); d.vy = (Math.random()<0.5?-1:1)*(1+Math.random()*1.2); stage.appendChild(d);} }
-spawnDefenders();
-function rect(el){ const r=el.getBoundingClientRect(); const rs=stage.getBoundingClientRect(); return {x:r.left-rs.left,y:r.top-rs.top,w:r.width,h:r.height}; }
-function collide(a,b){ return !(a.x+a.w<b.x||a.x>b.x+b.w||a.y+a.h<b.y||a.y>b.y+b.h); }
-function loop(){
-  document.querySelectorAll('.def').forEach(d=>{ let x=parseFloat(d.style.left), y=parseFloat(d.style.top); if(mode==='def'){ // chase
-      const pr=rect(player); const dr=rect(d); const dx=(pr.x-dr.x), dy=(pr.y-dr.y); const len=Math.max(1, Math.hypot(dx,dy)); x+=dx/len*2; y+=dy/len*2;
-    } else { // patrol
-      x+=d.vx; y+=d.vy; if(x<160||x>w-60)d.vx*=-1; if(y<0||y>h-30)d.vy*=-1;
-    } d.style.left=x+'px'; d.style.top=y+'px';
-    if(mode==='off' && collide(rect(player), rect(d))){ end('Tackled!'); }
-    if(mode==='def' && collide(rect(player), rect(d))){ score++; document.getElementById('score').textContent='Score: '+score; d.remove(); }
-  });
-  if(mode==='off'){ if(rect(player).x+rect(player).w > w-20){ score++; document.getElementById('score').textContent='Score: '+score; end('Try!'); } }
-  requestAnimationFrame(loop);
+const stage=document.getElementById('stage');
+const W=stage.clientWidth, H=stage.clientHeight;
+function make(el,cls){const d=document.createElement('div'); d.className=cls; d.style.position='absolute'; stage.appendChild(d); return d;}
+function circle(color){const d=make('div',''); d.style.width='24px'; d.style.height='24px'; d.style.borderRadius='999px'; d.style.background=color; d.style.boxShadow='0 6px 10px #0007'; return d;}
+let mode='offense', wins=0, running=true;
+const player=circle('#4adfff'), enemy=circle('#ff5b3b'), runner=circle('#ffd23b');
+let p={x:40,y:H/2}, e={x:W/2,y:H/2}, r={x:W-80,y:H/2}, speed=3;
+function place(){player.style.left=p.x+'px'; player.style.top=p.y+'px'; enemy.style.left=e.x+'px'; enemy.style.top=e.y+'px'; runner.style.left=r.x+'px'; runner.style.top=r.y+'px';}
+place();
+function clamp(v,min,max){return Math.max(min,Math.min(max,v));}
+const keys={}; window.addEventListener('keydown',e=>keys[e.key]=true); window.addEventListener('keyup',e=>keys[e.key]=false);
+function step(){
+  if(!running) return;
+  if(keys['ArrowLeft']) p.x-=speed;
+  if(keys['ArrowRight']) p.x+=speed;
+  if(keys['ArrowUp']) p.y-=speed;
+  if(keys['ArrowDown']) p.y+=speed;
+  p.x=clamp(p.x,0,W-24); p.y=clamp(p.y,0,H-24);
+  // Simple AI
+  if(mode==='offense'){ // enemy chases player
+    e.x+=Math.sign(p.x-e.x)*2; e.y+=Math.sign(p.y-e.y)*2;
+    if(Math.hypot(p.x-(W-40), p.y-H/2)<30){ wins++; updateCoins(25); reset(); }
+  } else { // defense: player chases runner
+    r.x+=-2; r.y+= (Math.sin(Date.now()/400))*1.5; if(r.x<30){reset();}
+    if(Math.hypot(p.x-r.x,p.y-r.y)<20){ wins++; updateCoins(20); reset(); }
+  }
+  place();
+  document.getElementById('stats').textContent='Wins: '+wins;
+  requestAnimationFrame(step);
 }
-loop();
-window.addEventListener('keydown',e=>{ const s=6; let x=parseFloat(player.style.left), y=parseFloat(player.style.top);
-  if(e.key==='ArrowRight'||e.key==='d'||e.key==='D'){ x+=s; } if(e.key==='ArrowLeft'||e.key==='a'||e.key==='A'){ x-=s; }
-  if(e.key==='ArrowUp'||e.key==='w'||e.key==='W'){ y-=s; } if(e.key==='ArrowDown'||e.key==='s'||e.key==='S'){ y+=s; }
-  x=Math.max(0,Math.min(w-28,x)); y=Math.max(0,Math.min(h-28,y)); player.style.left=x+'px'; player.style.top=y+'px';
-});
-function start(){ time=30; document.getElementById('timer').textContent='Time: '+time; clearInterval(timer); timer=setInterval(()=>{ time--; document.getElementById('timer').textContent='Time: '+time; if(time<=0) end('Time!'); }, 1000); }
-function end(msg){ clearInterval(timer); alert(msg); placePlayer(); spawnDefenders(); start(); }
-start();
-document.getElementById('mode-def').onclick=()=>{mode='def'; player.textContent='T';};
-document.getElementById('mode-off').onclick=()=>{mode='off'; player.textContent='O';};
+function reset(){ p={x:40,y:H/2}; e={x:W/2,y:H/2}; r={x:W-80,y:H/2}; place(); }
+document.getElementById('mode').onclick=()=>{ mode = (mode==='offense'?'defense':'offense'); document.getElementById('mode').textContent='Mode: '+(mode[0].toUpperCase()+mode.slice(1)); reset(); };
+requestAnimationFrame(step);
 </script>
-</body></html>
+</body>
+</html>

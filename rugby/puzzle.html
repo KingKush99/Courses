@@ -1,25 +1,30 @@
-<!doctype html><html><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Rugby — Puzzle Lab</title>
-<link rel="stylesheet" href="../assets/base.css">
-<style>.slot{padding:12px;border:1px dashed var(--muted);border-radius:12px;background:#211611;margin:8px 0}.chip{display:inline-block;padding:8px 12px;border-radius:999px;background:#2c1c15;border:1px solid var(--muted);margin:6px;cursor:grab}</style>
-</head><body>
-<a class="back pill-btn" href="index.html">← Back</a>
-<script src="../assets/app.js"></script>
-<main class="wrap"><div class="card"><h1>Puzzle Lab — Build the Call</h1>
-<div class="slot" id="s1">1) ________</div>
-<div class="slot" id="s2">2) ________</div>
-<div class="slot" id="s3">3) ________</div>
-<div class="row" id="pieces">
-  <span class="chip" draggable="true">Set 1-3-3-1</span>
-  <span class="chip" draggable="true">Go Wide</span>
-  <span class="chip" draggable="true">Scan Offside</span>
-</div>
-<button class="pill-btn" id="check">Check</button>
-</div></main>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Rugby — Puzzle Lab</title>
+  <link rel="stylesheet" href="../assets/base.css">
+  <script defer src="../assets/app.js"></script>
+</head>
+<body>
+<main class="wrap">
+  <section class="card">
+    <h2>Puzzle Lab</h2>
+    <p class="badge">Drag the ball to the try zone without touching defenders.</p>
+    <div id="stage" style="height:60vh"></div>
+  </section>
+</main>
 <script>
-['s1','s2','s3'].forEach(id=>{const s=document.getElementById(id); s.addEventListener('dragover',e=>e.preventDefault()); s.addEventListener('drop',e=>{const t=e.dataTransfer.getData('text/plain'); s.textContent=s.textContent.replace('________',t);});});
-[...document.querySelectorAll('.chip')].forEach(c=>{c.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',c.textContent));});
-document.getElementById('check').onclick=()=>{const ok=(s1.textContent.includes('Set 1-3-3-1') && s2.textContent.includes('Go Wide') && s3.textContent.includes('Scan Offside')); alert(ok?'Great shape!':'Try a different order.');};
+const s=document.getElementById('stage'); const W=s.clientWidth, H=s.clientHeight;
+function mk(cls,bg,w=28,h=28){const d=document.createElement('div'); d.style.position='absolute'; d.style.width=w+'px'; d.style.height=h+'px'; d.style.borderRadius='12px'; d.style.background=bg; s.appendChild(d); return d;}
+const ball=mk('','#ffd23b',24,24), goal=mk('','#50e15d',60,60); goal.style.right='10px'; goal.style.bottom='10px';
+ball.style.left='10px'; ball.style.top='10px';
+for(let i=0;i<8;i++){ const d=mk('','#ff5b3b',28,28); d.style.left=(50+i*60)+'px'; d.style.top=(80+ (i%2)*60)+'px'; }
+let drag=false,dx=0,dy=0; ball.addEventListener('mousedown',e=>{drag=true; dx=e.offsetX; dy=e.offsetY}); window.addEventListener('mouseup',()=>drag=false);
+s.addEventListener('mousemove',e=>{ if(!drag) return; const rect=s.getBoundingClientRect(); let x=e.clientX-rect.left-dx, y=e.clientY-rect.top-dy; ball.style.left=Math.max(0,Math.min(W-24,x))+'px'; ball.style.top=Math.max(0,Math.min(H-24,y))+'px';
+  if(hit(ball,goal)){ alert('Try! +20 coins'); updateCoins(20); drag=false;}
+});
+function hit(a,b){ const ar=a.getBoundingClientRect(), br=b.getBoundingClientRect(); return !(ar.right<br.left||ar.left>br.right||ar.bottom<br.top||ar.top>br.bottom); }
 </script>
-</body></html>
+</body>
+</html>

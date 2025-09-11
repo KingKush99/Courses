@@ -1,0 +1,654 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "q": "Which side gap is targeted in a 1-3-3-1 call?",
+      "a": "13 channel",
+      "opts": [
+        "decoy",
+        "blindside",
+        "gainline",
+        "13 channel"
+      ],
+      "hint": "Think about how 1-3-3-1 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.10 / OIRC Back Plays.pdf p.5"
+    },
+    {
+      "id": 2,
+      "q": "A 'Umbrella' line is usually run by which player?",
+      "a": "inside centre",
+      "opts": [
+        "blindside",
+        "inside centre",
+        "decoy",
+        "gainline"
+      ],
+      "hint": "Think about how Umbrella shapes space or pressure.",
+      "src": "Irish Plays.pdf p.11 / OIRC Back Plays.pdf p.6"
+    },
+    {
+      "id": 3,
+      "q": "Primary goal of the Wrap defense?",
+      "a": "force touchline",
+      "opts": [
+        "force touchline",
+        "gainline",
+        "decoy",
+        "blindside"
+      ],
+      "hint": "Think about how Wrap shapes space or pressure.",
+      "src": "Irish Plays.pdf p.12 / OIRC Back Plays.pdf p.7"
+    },
+    {
+      "id": 4,
+      "q": "A 'Switch' line is usually run by which player?",
+      "a": "inside centre",
+      "opts": [
+        "inside centre",
+        "gainline",
+        "decoy",
+        "blindside"
+      ],
+      "hint": "Think about how Switch shapes space or pressure.",
+      "src": "Irish Plays.pdf p.13 / OIRC Back Plays.pdf p.8"
+    },
+    {
+      "id": 5,
+      "q": "Which side gap is targeted in a 1-3-3-1 call?",
+      "a": "13 channel",
+      "opts": [
+        "13 channel",
+        "blindside",
+        "gainline",
+        "decoy"
+      ],
+      "hint": "Think about how 1-3-3-1 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.14 / OIRC Back Plays.pdf p.9"
+    },
+    {
+      "id": 6,
+      "q": "When do you kick a 'Blitz'?",
+      "a": "space behind line",
+      "opts": [
+        "blindside",
+        "space behind line",
+        "decoy",
+        "gainline"
+      ],
+      "hint": "Think about how Blitz shapes space or pressure.",
+      "src": "Irish Plays.pdf p.15 / OIRC Back Plays.pdf p.10"
+    },
+    {
+      "id": 7,
+      "q": "Primary goal of the Diamond defense?",
+      "a": "force touchline",
+      "opts": [
+        "decoy",
+        "gainline",
+        "blindside",
+        "force touchline"
+      ],
+      "hint": "Think about how Diamond shapes space or pressure.",
+      "src": "Irish Plays.pdf p.16 / OIRC Back Plays.pdf p.11"
+    },
+    {
+      "id": 8,
+      "q": "Primary goal of the Pod defense?",
+      "a": "force touchline",
+      "opts": [
+        "gainline",
+        "force touchline",
+        "blindside",
+        "decoy"
+      ],
+      "hint": "Think about how Pod shapes space or pressure.",
+      "src": "Irish Plays.pdf p.17 / OIRC Back Plays.pdf p.12"
+    },
+    {
+      "id": 9,
+      "q": "When do you kick a 'Slide'?",
+      "a": "space behind line",
+      "opts": [
+        "space behind line",
+        "gainline",
+        "blindside",
+        "decoy"
+      ],
+      "hint": "Think about how Slide shapes space or pressure.",
+      "src": "Irish Plays.pdf p.18 / OIRC Back Plays.pdf p.13"
+    },
+    {
+      "id": 10,
+      "q": "When do you kick a 'Drift'?",
+      "a": "space behind line",
+      "opts": [
+        "space behind line",
+        "decoy",
+        "blindside",
+        "gainline"
+      ],
+      "hint": "Think about how Drift shapes space or pressure.",
+      "src": "Irish Plays.pdf p.19 / OIRC Back Plays.pdf p.14"
+    },
+    {
+      "id": 11,
+      "q": "Primary goal of the Switch defense?",
+      "a": "force touchline",
+      "opts": [
+        "force touchline",
+        "decoy",
+        "gainline",
+        "blindside"
+      ],
+      "hint": "Think about how Switch shapes space or pressure.",
+      "src": "Irish Plays.pdf p.20 / OIRC Back Plays.pdf p.5"
+    },
+    {
+      "id": 12,
+      "q": "Key read to trigger a Switch?",
+      "a": "overlap",
+      "opts": [
+        "overlap",
+        "gainline",
+        "blindside",
+        "decoy"
+      ],
+      "hint": "Think about how Switch shapes space or pressure.",
+      "src": "Irish Plays.pdf p.21 / OIRC Back Plays.pdf p.6"
+    },
+    {
+      "id": 13,
+      "q": "A 'Slide' line is usually run by which player?",
+      "a": "inside centre",
+      "opts": [
+        "decoy",
+        "inside centre",
+        "gainline",
+        "blindside"
+      ],
+      "hint": "Think about how Slide shapes space or pressure.",
+      "src": "Irish Plays.pdf p.10 / OIRC Back Plays.pdf p.7"
+    },
+    {
+      "id": 14,
+      "q": "Primary goal of the Drift defense?",
+      "a": "force touchline",
+      "opts": [
+        "force touchline",
+        "blindside",
+        "gainline",
+        "decoy"
+      ],
+      "hint": "Think about how Drift shapes space or pressure.",
+      "src": "Irish Plays.pdf p.11 / OIRC Back Plays.pdf p.8"
+    },
+    {
+      "id": 15,
+      "q": "Key read to trigger a Umbrella?",
+      "a": "overlap",
+      "opts": [
+        "decoy",
+        "overlap",
+        "gainline",
+        "blindside"
+      ],
+      "hint": "Think about how Umbrella shapes space or pressure.",
+      "src": "Irish Plays.pdf p.12 / OIRC Back Plays.pdf p.9"
+    },
+    {
+      "id": 16,
+      "q": "Key read to trigger a Slide?",
+      "a": "overlap",
+      "opts": [
+        "gainline",
+        "overlap",
+        "blindside",
+        "decoy"
+      ],
+      "hint": "Think about how Slide shapes space or pressure.",
+      "src": "Irish Plays.pdf p.13 / OIRC Back Plays.pdf p.10"
+    },
+    {
+      "id": 17,
+      "q": "Which side gap is targeted in a Drift call?",
+      "a": "13 channel",
+      "opts": [
+        "blindside",
+        "13 channel",
+        "decoy",
+        "gainline"
+      ],
+      "hint": "Think about how Drift shapes space or pressure.",
+      "src": "Irish Plays.pdf p.14 / OIRC Back Plays.pdf p.11"
+    },
+    {
+      "id": 18,
+      "q": "Key read to trigger a 1-3-3-1?",
+      "a": "overlap",
+      "opts": [
+        "decoy",
+        "blindside",
+        "gainline",
+        "overlap"
+      ],
+      "hint": "Think about how 1-3-3-1 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.15 / OIRC Back Plays.pdf p.12"
+    },
+    {
+      "id": 19,
+      "q": "Key read to trigger a 2-4-2?",
+      "a": "overlap",
+      "opts": [
+        "decoy",
+        "overlap",
+        "blindside",
+        "gainline"
+      ],
+      "hint": "Think about how 2-4-2 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.16 / OIRC Back Plays.pdf p.13"
+    },
+    {
+      "id": 20,
+      "q": "Which side gap is targeted in a Diamond call?",
+      "a": "13 channel",
+      "opts": [
+        "gainline",
+        "13 channel",
+        "decoy",
+        "blindside"
+      ],
+      "hint": "Think about how Diamond shapes space or pressure.",
+      "src": "Irish Plays.pdf p.17 / OIRC Back Plays.pdf p.14"
+    },
+    {
+      "id": 21,
+      "q": "A '1-3-3-1' line is usually run by which player?",
+      "a": "inside centre",
+      "opts": [
+        "gainline",
+        "blindside",
+        "inside centre",
+        "decoy"
+      ],
+      "hint": "Think about how 1-3-3-1 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.18 / OIRC Back Plays.pdf p.5"
+    },
+    {
+      "id": 22,
+      "q": "Which side gap is targeted in a 1-3-3-1 call?",
+      "a": "13 channel",
+      "opts": [
+        "gainline",
+        "decoy",
+        "blindside",
+        "13 channel"
+      ],
+      "hint": "Think about how 1-3-3-1 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.19 / OIRC Back Plays.pdf p.6"
+    },
+    {
+      "id": 23,
+      "q": "Which side gap is targeted in a 1-3-3-1 call?",
+      "a": "13 channel",
+      "opts": [
+        "blindside",
+        "13 channel",
+        "gainline",
+        "decoy"
+      ],
+      "hint": "Think about how 1-3-3-1 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.20 / OIRC Back Plays.pdf p.7"
+    },
+    {
+      "id": 24,
+      "q": "Primary goal of the Pod defense?",
+      "a": "force touchline",
+      "opts": [
+        "decoy",
+        "blindside",
+        "gainline",
+        "force touchline"
+      ],
+      "hint": "Think about how Pod shapes space or pressure.",
+      "src": "Irish Plays.pdf p.21 / OIRC Back Plays.pdf p.8"
+    },
+    {
+      "id": 25,
+      "q": "Primary goal of the Diamond defense?",
+      "a": "force touchline",
+      "opts": [
+        "decoy",
+        "gainline",
+        "blindside",
+        "force touchline"
+      ],
+      "hint": "Think about how Diamond shapes space or pressure.",
+      "src": "Irish Plays.pdf p.10 / OIRC Back Plays.pdf p.9"
+    },
+    {
+      "id": 26,
+      "q": "Which side gap is targeted in a Wrap call?",
+      "a": "13 channel",
+      "opts": [
+        "13 channel",
+        "blindside",
+        "gainline",
+        "decoy"
+      ],
+      "hint": "Think about how Wrap shapes space or pressure.",
+      "src": "Irish Plays.pdf p.11 / OIRC Back Plays.pdf p.10"
+    },
+    {
+      "id": 27,
+      "q": "A '1-3-3-1' line is usually run by which player?",
+      "a": "inside centre",
+      "opts": [
+        "gainline",
+        "inside centre",
+        "decoy",
+        "blindside"
+      ],
+      "hint": "Think about how 1-3-3-1 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.12 / OIRC Back Plays.pdf p.11"
+    },
+    {
+      "id": 28,
+      "q": "When do you kick a 'Umbrella'?",
+      "a": "space behind line",
+      "opts": [
+        "decoy",
+        "space behind line",
+        "blindside",
+        "gainline"
+      ],
+      "hint": "Think about how Umbrella shapes space or pressure.",
+      "src": "Irish Plays.pdf p.13 / OIRC Back Plays.pdf p.12"
+    },
+    {
+      "id": 29,
+      "q": "A '2-4-2' line is usually run by which player?",
+      "a": "inside centre",
+      "opts": [
+        "decoy",
+        "gainline",
+        "blindside",
+        "inside centre"
+      ],
+      "hint": "Think about how 2-4-2 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.14 / OIRC Back Plays.pdf p.13"
+    },
+    {
+      "id": 30,
+      "q": "Key read to trigger a Pod?",
+      "a": "overlap",
+      "opts": [
+        "overlap",
+        "decoy",
+        "gainline",
+        "blindside"
+      ],
+      "hint": "Think about how Pod shapes space or pressure.",
+      "src": "Irish Plays.pdf p.15 / OIRC Back Plays.pdf p.14"
+    },
+    {
+      "id": 31,
+      "q": "A 'Pod' line is usually run by which player?",
+      "a": "inside centre",
+      "opts": [
+        "inside centre",
+        "blindside",
+        "gainline",
+        "decoy"
+      ],
+      "hint": "Think about how Pod shapes space or pressure.",
+      "src": "Irish Plays.pdf p.16 / OIRC Back Plays.pdf p.5"
+    },
+    {
+      "id": 32,
+      "q": "Key read to trigger a 1-3-3-1?",
+      "a": "overlap",
+      "opts": [
+        "blindside",
+        "overlap",
+        "decoy",
+        "gainline"
+      ],
+      "hint": "Think about how 1-3-3-1 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.17 / OIRC Back Plays.pdf p.6"
+    },
+    {
+      "id": 33,
+      "q": "Which side gap is targeted in a Umbrella call?",
+      "a": "13 channel",
+      "opts": [
+        "blindside",
+        "decoy",
+        "13 channel",
+        "gainline"
+      ],
+      "hint": "Think about how Umbrella shapes space or pressure.",
+      "src": "Irish Plays.pdf p.18 / OIRC Back Plays.pdf p.7"
+    },
+    {
+      "id": 34,
+      "q": "When do you kick a '2-4-2'?",
+      "a": "space behind line",
+      "opts": [
+        "blindside",
+        "space behind line",
+        "decoy",
+        "gainline"
+      ],
+      "hint": "Think about how 2-4-2 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.19 / OIRC Back Plays.pdf p.8"
+    },
+    {
+      "id": 35,
+      "q": "Primary goal of the Diamond defense?",
+      "a": "force touchline",
+      "opts": [
+        "decoy",
+        "gainline",
+        "force touchline",
+        "blindside"
+      ],
+      "hint": "Think about how Diamond shapes space or pressure.",
+      "src": "Irish Plays.pdf p.20 / OIRC Back Plays.pdf p.9"
+    },
+    {
+      "id": 36,
+      "q": "Key read to trigger a 2-4-2?",
+      "a": "overlap",
+      "opts": [
+        "overlap",
+        "blindside",
+        "decoy",
+        "gainline"
+      ],
+      "hint": "Think about how 2-4-2 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.21 / OIRC Back Plays.pdf p.10"
+    },
+    {
+      "id": 37,
+      "q": "When do you kick a 'Umbrella'?",
+      "a": "space behind line",
+      "opts": [
+        "gainline",
+        "space behind line",
+        "blindside",
+        "decoy"
+      ],
+      "hint": "Think about how Umbrella shapes space or pressure.",
+      "src": "Irish Plays.pdf p.10 / OIRC Back Plays.pdf p.11"
+    },
+    {
+      "id": 38,
+      "q": "Which side gap is targeted in a Pod call?",
+      "a": "13 channel",
+      "opts": [
+        "decoy",
+        "13 channel",
+        "gainline",
+        "blindside"
+      ],
+      "hint": "Think about how Pod shapes space or pressure.",
+      "src": "Irish Plays.pdf p.11 / OIRC Back Plays.pdf p.12"
+    },
+    {
+      "id": 39,
+      "q": "Key read to trigger a 2-4-2?",
+      "a": "overlap",
+      "opts": [
+        "gainline",
+        "decoy",
+        "blindside",
+        "overlap"
+      ],
+      "hint": "Think about how 2-4-2 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.12 / OIRC Back Plays.pdf p.13"
+    },
+    {
+      "id": 40,
+      "q": "Which side gap is targeted in a 2-4-2 call?",
+      "a": "13 channel",
+      "opts": [
+        "blindside",
+        "decoy",
+        "13 channel",
+        "gainline"
+      ],
+      "hint": "Think about how 2-4-2 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.13 / OIRC Back Plays.pdf p.14"
+    },
+    {
+      "id": 41,
+      "q": "Which side gap is targeted in a Diamond call?",
+      "a": "13 channel",
+      "opts": [
+        "13 channel",
+        "decoy",
+        "gainline",
+        "blindside"
+      ],
+      "hint": "Think about how Diamond shapes space or pressure.",
+      "src": "Irish Plays.pdf p.14 / OIRC Back Plays.pdf p.5"
+    },
+    {
+      "id": 42,
+      "q": "When do you kick a 'Switch'?",
+      "a": "space behind line",
+      "opts": [
+        "blindside",
+        "space behind line",
+        "decoy",
+        "gainline"
+      ],
+      "hint": "Think about how Switch shapes space or pressure.",
+      "src": "Irish Plays.pdf p.15 / OIRC Back Plays.pdf p.6"
+    },
+    {
+      "id": 43,
+      "q": "When do you kick a 'Blitz'?",
+      "a": "space behind line",
+      "opts": [
+        "gainline",
+        "blindside",
+        "decoy",
+        "space behind line"
+      ],
+      "hint": "Think about how Blitz shapes space or pressure.",
+      "src": "Irish Plays.pdf p.16 / OIRC Back Plays.pdf p.7"
+    },
+    {
+      "id": 44,
+      "q": "Key read to trigger a Blitz?",
+      "a": "overlap",
+      "opts": [
+        "decoy",
+        "blindside",
+        "overlap",
+        "gainline"
+      ],
+      "hint": "Think about how Blitz shapes space or pressure.",
+      "src": "Irish Plays.pdf p.17 / OIRC Back Plays.pdf p.8"
+    },
+    {
+      "id": 45,
+      "q": "Which side gap is targeted in a Drift call?",
+      "a": "13 channel",
+      "opts": [
+        "blindside",
+        "gainline",
+        "decoy",
+        "13 channel"
+      ],
+      "hint": "Think about how Drift shapes space or pressure.",
+      "src": "Irish Plays.pdf p.18 / OIRC Back Plays.pdf p.9"
+    },
+    {
+      "id": 46,
+      "q": "A 'Umbrella' line is usually run by which player?",
+      "a": "inside centre",
+      "opts": [
+        "blindside",
+        "gainline",
+        "inside centre",
+        "decoy"
+      ],
+      "hint": "Think about how Umbrella shapes space or pressure.",
+      "src": "Irish Plays.pdf p.19 / OIRC Back Plays.pdf p.10"
+    },
+    {
+      "id": 47,
+      "q": "Which side gap is targeted in a 2-4-2 call?",
+      "a": "13 channel",
+      "opts": [
+        "gainline",
+        "blindside",
+        "13 channel",
+        "decoy"
+      ],
+      "hint": "Think about how 2-4-2 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.20 / OIRC Back Plays.pdf p.11"
+    },
+    {
+      "id": 48,
+      "q": "Which side gap is targeted in a Slide call?",
+      "a": "13 channel",
+      "opts": [
+        "13 channel",
+        "gainline",
+        "decoy",
+        "blindside"
+      ],
+      "hint": "Think about how Slide shapes space or pressure.",
+      "src": "Irish Plays.pdf p.21 / OIRC Back Plays.pdf p.12"
+    },
+    {
+      "id": 49,
+      "q": "Primary goal of the Slide defense?",
+      "a": "force touchline",
+      "opts": [
+        "decoy",
+        "gainline",
+        "blindside",
+        "force touchline"
+      ],
+      "hint": "Think about how Slide shapes space or pressure.",
+      "src": "Irish Plays.pdf p.10 / OIRC Back Plays.pdf p.13"
+    },
+    {
+      "id": 50,
+      "q": "A '1-3-3-1' line is usually run by which player?",
+      "a": "inside centre",
+      "opts": [
+        "gainline",
+        "inside centre",
+        "blindside",
+        "decoy"
+      ],
+      "hint": "Think about how 1-3-3-1 shapes space or pressure.",
+      "src": "Irish Plays.pdf p.11 / OIRC Back Plays.pdf p.14"
+    }
+  ]
+}

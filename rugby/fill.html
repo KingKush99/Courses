@@ -1,28 +1,29 @@
-<!doctype html><html><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Rugby — Fill in the Blanks</title>
-<link rel="stylesheet" href="../assets/base.css">
-</head><body>
-<a class="back pill-btn" href="index.html">← Back</a>
-<script src="../assets/app.js"></script>
-<main class="wrap"><div class="card"><h1>Fill in the Blanks — Rugby</h1><div id="box"></div></div></main>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Rugby — Fill in the Blanks</title>
+  <link rel="stylesheet" href="../assets/base.css">
+  <script defer src="../assets/app.js"></script>
+</head>
+<body>
+<main class="wrap">
+  <section class="card">
+    <h2>Fill in the Blanks</h2>
+    <div id="q"></div>
+    <div class="hud"><input id="ans" class="pill-btn" placeholder="Type answer…"><button id="chk" class="pill-btn sm">Check</button><span class="badge" id="msg"></span><a class="pill-btn sm" id="hint">? Hint</a><a class="pill-btn sm" id="src">👁 Source</a></div>
+  </section>
+</main>
 <script>
-const rows=[
- {q:'A _______ forms after a knock-on to restart play.', a:'scrum', hint:'Eight bind and the ball is fed.'},
- {q:'At a ruck, offside is the last _______ of each team.', a:'feet', hint:'Look down.'},
-];
-while(rows.length<50){ rows.push({q:'The wide‑wide shape is called 1‑3‑3‑___.', a:'1', hint:'Edges!'}); }
-let i=0, score=0; const box=document.getElementById('box');
-function norm(s){ return s.toLowerCase().replace(/\s+/g,'').trim(); }
-function draw(){ const it=rows[i]; if(!it){ alert('Score '+score+'/'+rows.length); localStorage.setItem('progress_rugby_fill', score); return; }
-  box.innerHTML=`<div class="card" style="position:relative">
-    <button onclick="alert('${it.hint.replace(/'/g,"\'")}')" class="pill-btn" style="position:absolute; right:12px; bottom:12px">?</button>
-    <h3>${i+1}. ${it.q}</h3>
-    <input id="ans" class="pill-btn" style="background:#211611; box-shadow:none; text-align:left" placeholder="Type answer">
-    <button class="pill-btn" onclick="check()">Submit</button>
-  </div>`;
+const bankUrl='data/bank.json';
+let items=[], i=0; const qDiv=document.getElementById('q');
+function norm(s){return (s||'').toLowerCase().replace(/\s+/g,' ').trim();}
+function render(){const x=items[i%items.length]; qDiv.innerHTML='<h3>'+x.q+'</h3>'; 
+  document.getElementById('hint').onclick=()=>alert(x.hint||'');
+  document.getElementById('src').onclick=()=>alert(x.src||'');
+  document.getElementById('chk').onclick=()=>{ const ok=norm(document.getElementById('ans').value)===norm(x.a); document.getElementById('msg').textContent= ok?'✅ Correct':'❌ Try again'; if(ok){updateCoins(5); i++; document.getElementById('ans').value=''; render();} };
 }
-window.check=()=>{ const v=norm(document.getElementById('ans').value); if(v===norm(rows[i].a)) score++; i++; draw(); };
-draw();
+fetch(bankUrl).then(r=>r.json()).then(d=>{items=d.items; render();});
 </script>
-</body></html>
+</body>
+</html>

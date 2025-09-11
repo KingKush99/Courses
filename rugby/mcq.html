@@ -1,30 +1,35 @@
-<!doctype html><html><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Rugby — Multiple Choice</title>
-<link rel="stylesheet" href="../assets/base.css">
-</head><body>
-<a class="back pill-btn" href="index.html">← Back</a>
-<script src="../assets/app.js"></script>
-<main class="wrap"><div class="card"><h1>Multiple Choice — Rugby</h1>
-<div id="q"></div></div></main>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Rugby — Multiple Choice</title>
+  <link rel="stylesheet" href="../assets/base.css">
+  <script defer src="../assets/app.js"></script>
+</head>
+<body>
+<main class="wrap">
+  <section class="card">
+    <h2>Multiple Choice</h2>
+    <div id="qbox"></div>
+    <div class="hud"><span class="badge" id="score">Score: 0</span><a class="pill-btn sm" id="hint">? Hint</a><a class="pill-btn sm" id="src">👁 Source</a></div>
+  </section>
+</main>
 <script>
-const data=[
-  {q:'What restarts play after a forward pass?', a:['Lineout','Scrum','Maul','Ruck'], correct:1, hint:'Eight players bind…', src:'irish:5'},
-  {q:'Where is the offside line at a ruck?', a:['Ball','Last feet','Try line','Touch'], correct:1, hint:'Look at bodies…', src:'oirc:12'},
-  {q:'In a 1‑3‑3‑1, where are the widest players?', a:['Both edges','Middle third','Backfield','In the ruck'], correct:0, hint:'Edges!', src:'oirc:22'},
-];
-while(data.length<50){ data.push({q:'Identify the unit: 1‑3‑3‑1 — where do the widest players stand?', a:['Both edges','Middle third','Backfield','In the ruck'], correct:0, hint:'Edges!', src:'oirc:22'}); }
-let i=0, score=0; const box=document.getElementById('q'); 
-function draw(){ const it=data[i]; if(!it){ alert('Score '+score+'/'+data.length); localStorage.setItem('progress_rugby_mcq', score); return; }
-  box.innerHTML=`
-  <div class="card" style="position:relative">
-    <button onclick="alert('${it.hint.replace(/'/g,"\'")}')" class="pill-btn" style="position:absolute; right:12px; bottom:12px">?</button>
-    <button onclick="openSrc('${it.src}')" class="pill-btn" style="position:absolute; right:12px; top:12px">👁</button>
-    <h3>${i+1}. ${it.q}</h3>
-    ${it.a.map((t,idx)=>`<button class="pill-btn" onclick="mark(${idx})" style="display:block; margin:8px 0">${t}</button>`).join('')}
-  </div>`; }
-window.mark = (idx)=>{ const it=data[i]; if(idx===it.correct) score++; i++; draw(); };
-window.openSrc = (tag)=>{ const [f,p]=tag.split(':'); location.href = 'resources/viewer.html?file='+(f==='irish'?'irish':'oirc')+'&page='+(p||1); };
-draw();
+const bankUrl='data/bank.json';
+let items=[], i=0, score=0;
+const qbox=document.getElementById('qbox');
+function render(){
+  const q=items[i%items.length];
+  qbox.innerHTML=`<h3>${q.q}</h3>`+q.opts.map((o,idx)=>`<button class="pill-btn" data-i="${idx}">${o}</button>`).join(' ');
+  document.getElementById('hint').onclick=()=>alert(q.hint||'Consider alignment, gaps, or coverage.');
+  document.getElementById('src').onclick=()=>alert(q.src||'See team PDFs.');
+  qbox.querySelectorAll('button[data-i]').forEach(b=>b.onclick=()=>{
+    if(q.opts[b.dataset.i]===q.a){ score++; updateCoins(10);} else { score=Math.max(0,score-1); }
+    document.getElementById('score').textContent='Score: '+score;
+    i++; render();
+  });
+}
+fetch(bankUrl).then(r=>r.json()).then(d=>{items=d.items; render();});
 </script>
-</body></html>
+</body>
+</html>
