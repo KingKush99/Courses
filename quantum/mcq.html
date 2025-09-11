@@ -1,14 +1,40 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>MCQ</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
-<main class="wrap"><div class="card">
-  <h1>Multiple Choice Quiz</h1>
-  <div id="quiz"></div>
-  <button id="submit" class="pill-btn">Submit</button>
-  <div id="score" style="margin-top:10px"></div>
-</div></main>
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Multiple Choice</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
+<main class="wrap" style="padding:0">
+  <section class="card" style="max-width:none;width:100%;min-height:80vh;display:flex;flex-direction:column">
+    <div style="padding:16px">
+      <h1 style="margin-bottom:6px">Multiple Choice — One by One</h1>
+      <div class="progress"><div class="bar" id="pbar"></div></div>
+    </div>
+    <div id="stage" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center"></div>
+  </section>
+</main>
 <script>
-function el(tag,cls){ var d=document.createElement(tag); if(cls) d.className=cls; return d; }
-var x=new XMLHttpRequest(); x.onreadystatechange=function(){ if(x.readyState==4){ var qs=JSON.parse(x.responseText); build(qs); } }; x.open('GET','qbank.json',true); x.send();
-function build(qs){ var wrap=document.getElementById('quiz'); for(var i=0;i<qs.length && i<50; i++){ var q=qs[i].q; var div=el('div','card'); var h=el('div'); h.innerHTML='<strong>Q'+(i+1)+':</strong> '+q; div.appendChild(h); var opts=qs[i].options; for(var j=0;j<opts.length;j++){ var lab=el('label'); var radio=el('input'); radio.type='radio'; radio.name='q'+i; radio.value=opts[j]; lab.appendChild(radio); lab.appendChild(document.createTextNode(' '+opts[j])); div.appendChild(lab); div.appendChild(document.createElement('br')); } wrap.appendChild(div); }
-  document.getElementById('submit').onclick=function(){ var correct=0,total=Math.min(50,qs.length); for(var i=0;i<total;i++){ var ans=qs[i].a; var sel=(document.querySelector('input[name="q'+i+'"]:checked')||{}).value; if(sel===(ans.join? ans[0]: ans)) correct++; } var pct=Math.round(correct/total*100); document.getElementById('score').innerHTML='<span class="badge '+(pct>=75?'badge-green':(pct>=40?'badge-yellow':'badge-red'))+'">Score: '+correct+'/'+total+' ('+pct+'%)</span>'; var key='progress_quantum'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; if(pct>prev) localStorage.setItem(key, String(pct)); };
+function el(t,c,h){ var d=document.createElement(t); if(c) d.className=c; if(h!=null) d.innerHTML=h; return d; }
+function norm(x){ return (''+x).trim(); }
+var qs=[],i=0,correct=0,total=0;
+function renderQ(){
+  var s=document.getElementById('stage'); s.innerHTML='';
+  if(i>=qs.length){
+    var pct=Math.round(100*correct/total);
+    s.innerHTML='<h2>Done!</h2><p>Score: <span class="badge '+(pct>=75?'badge-green':(pct>=40?'badge-yellow':'badge-red'))+'">'+correct+'/'+total+' ('+pct+'%)</span></p><a class="pill-btn" href="./">Back to hub</a>';
+    var key='progress_quantum'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; if(pct>prev) localStorage.setItem(key, String(pct));
+    document.getElementById('pbar').style.width='100%';
+    return;
+  }
+  var q=qs[i]; total=qs.length;
+  document.getElementById('pbar').style.width=Math.round(100*i/qs.length)+'%';
+  var h=el('div',null,'<h2 style="margin:10px 0 20px 0">'+q.q+'</h2>');
+  s.appendChild(h);
+  var opts=(q.options&&q.options.length)?q.options.slice():['True','False'];
+  for(var k=0;k<opts.length;k++){
+    var b=el('button','pill-btn',opts[k]); b.style.fontSize='20px'; b.style.padding='20px 28px'; b.style.margin='10px'; b.style.display='block';
+    b.onclick=(function(val){ return function(){
+      var ans=q.a; var ok=false; if(Array.isArray(ans)){ ok=ans.indexOf(val)>-1; } else { ok=(val===ans); }
+      if(ok) correct++; i++; renderQ();
+    };})(opts[k]);
+    s.appendChild(b);
+  }
 }
-</script></body></html>
+var x=new XMLHttpRequest(); x.onreadystatechange=function(){ if(x.readyState==4){ qs=JSON.parse(x.responseText); renderQ(); } }; x.open('GET','qbank.json',true); x.send();
+</script>
+</body></html>

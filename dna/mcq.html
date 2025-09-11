@@ -1,0 +1,43 @@
+
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'><title>DNA — MCQ</title>
+<link rel='stylesheet' href='../assets/base.css'></head>
+<body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
+<main class="wrap" style="padding:0">
+  <section class="card" style="max-width:none;width:100%;min-height:80vh;display:flex;flex-direction:column">
+    <div style="padding:16px">
+      <h1 style="margin-bottom:6px">Multiple Choice — DNA</h1>
+      <div class="progress"><div class="bar" id="pbar"></div></div>
+    </div>
+    <div id="stage" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center"></div>
+  </section>
+</main>
+<script>
+function el(t,c,h){ var d=document.createElement(t); if(c) d.className=c; if(h!=null) d.innerHTML=h; return d; }
+var qs=[
+  {q:'DNA shape?', options:['Double helix','Square'], a:'Double helix'},
+  {q:'Base pairing?', options:['A–T, C–G','A–G, C–T'], a:'A–T, C–G'},
+  {q:'Start codon?', options:['AUG','UAA'], a:'AUG'}
+];
+while(qs.length<50){ qs.push({q:'PCR does?', options:['Amplifies DNA','Cuts proteins'], a:'Amplifies DNA'}); }
+var i=0,correct=0,total=qs.length;
+function renderQ(){
+  var s=document.getElementById('stage'); s.innerHTML='';
+  if(i>=qs.length){
+    var pct=Math.round(100*correct/total);
+    s.innerHTML='<h2>Done!</h2><p>Score: <span class="badge '+(pct>=75?'badge-green':(pct>=40?'badge-yellow':'badge-red'))+'">'+correct+'/'+total+' ('+pct+'%)</span></p><a class="pill-btn" href="./">Back to hub</a>';
+    document.getElementById('pbar').style.width='100%'; return;
+  }
+  var q=qs[i];
+  document.getElementById('pbar').style.width=Math.round(100*i/qs.length)+'%';
+  var h=el('div',null,'<h2 style="margin:10px 0 20px 0">'+q.q+'</h2>'); s.appendChild(h);
+  var opts=q.options.slice();
+  for(var k=0;k<opts.length;k++){
+    var b=el('button','pill-btn',opts[k]); b.style.fontSize='20px'; b.style.padding='20px 28px'; b.style.margin='10px'; b.style.display='block';
+    b.onclick=(function(val){ return function(){ if(val===q.a) correct++; i++; renderQ(); }; })(opts[k]);
+    s.appendChild(b);
+  }
+}
+renderQ();
+</script>
+</body></html>
