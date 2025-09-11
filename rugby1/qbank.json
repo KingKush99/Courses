@@ -1,552 +1,552 @@
 [
   {
     "type": "mc",
-    "q": "In PlaysX/SwitchOption, which pairing tends to attack wider channels?",
+    "q": "A try is worth:",
     "options": [
-      "10-12",
-      "13-12",
-      "9-11",
-      "12-13"
+      "5 points",
+      "3 points",
+      "2 points",
+      "7 points"
     ],
-    "a": "12-13"
+    "a": "5 points"
   },
   {
     "type": "mc",
-    "q": "For PlaysX/SwitchOption, which option is most direct?",
+    "q": "A successful conversion is worth:",
     "options": [
-      "Crash",
-      "Pull behind",
-      "Loop",
-      "Skip"
+      "2 points",
+      "3 points",
+      "5 points",
+      "1 point"
     ],
-    "a": "Crash"
+    "a": "2 points"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "A penalty goal is worth:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "3 points",
+      "2 points",
+      "5 points",
+      "4 points"
     ],
-    "a": "Pull behind"
+    "a": "3 points"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Offside generally means:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "In front of last teammate who played the ball",
+      "Behind the kicker",
+      "Over the sideline",
+      "In the in\u2011goal"
     ],
-    "a": "Pull behind"
+    "a": "In front of last teammate who played the ball"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Set piece after minor infringement:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Scrum",
+      "Lineout",
+      "Drop\u2011out",
+      "Kick\u2011off"
     ],
-    "a": "Pull behind"
+    "a": "Scrum"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Throw\u2011in from touch restarts with a:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Lineout",
+      "Scrum",
+      "Penalty",
+      "Mark"
     ],
-    "a": "Pull behind"
+    "a": "Lineout"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Ruck forms when:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Ball is on ground with players bound over it",
+      "Ball in air",
+      "At lineout",
+      "At scrum half pass"
     ],
-    "a": "Pull behind"
+    "a": "Ball is on ground with players bound over it"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Maul forms when:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Ball carrier held up with teammates bound",
+      "Ball on ground",
+      "Scrum collapses",
+      "Kick taken"
     ],
-    "a": "Pull behind"
+    "a": "Ball carrier held up with teammates bound"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "The 22\u2011meter line is used for:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Drop\u2011outs and tactical marking",
+      "Scrum mark",
+      "Offside only",
+      "Goal posts"
     ],
-    "a": "Pull behind"
+    "a": "Drop\u2011outs and tactical marking"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Fullback typically wears number:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "15",
+      "8",
+      "10",
+      "2"
     ],
-    "a": "Pull behind"
+    "a": "15"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Fly\u2011half typically wears number:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "10",
+      "9",
+      "12",
+      "13"
     ],
-    "a": "Pull behind"
+    "a": "10"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Scrum\u2011half typically wears number:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "9",
+      "10",
+      "8",
+      "7"
     ],
-    "a": "Pull behind"
+    "a": "9"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Hooker typically wears number:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "2",
+      "1",
+      "3",
+      "4"
     ],
-    "a": "Pull behind"
+    "a": "2"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Props typically wear numbers:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "1 and 3",
+      "4 and 5",
+      "6 and 7",
+      "11 and 14"
     ],
-    "a": "Pull behind"
+    "a": "1 and 3"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Locks typically wear numbers:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "4 and 5",
+      "1 and 3",
+      "6 and 7",
+      "11 and 14"
     ],
-    "a": "Pull behind"
+    "a": "4 and 5"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Flankers typically wear numbers:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "6 and 7",
+      "4 and 5",
+      "11 and 14",
+      "1 and 3"
     ],
-    "a": "Pull behind"
+    "a": "6 and 7"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Number 8 wears:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "8",
+      "7",
+      "6",
+      "12"
     ],
-    "a": "Pull behind"
+    "a": "8"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Wings typically wear numbers:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "11 and 14",
+      "12 and 13",
+      "6 and 7",
+      "1 and 3"
     ],
-    "a": "Pull behind"
+    "a": "11 and 14"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Centers typically wear numbers:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "12 and 13",
+      "10 and 15",
+      "4 and 5",
+      "1 and 3"
     ],
-    "a": "Pull behind"
+    "a": "12 and 13"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Tackler must:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Release and roll away after tackle",
+      "Hold on",
+      "Block ball",
+      "Kick ball"
     ],
-    "a": "Pull behind"
+    "a": "Release and roll away after tackle"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Ball must be passed:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Backward or lateral",
+      "Forward",
+      "Overhead only",
+      "Only by 9 or 10"
     ],
-    "a": "Pull behind"
+    "a": "Backward or lateral"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "A knock\u2011on is when ball:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Goes forward off hand/arm to ground/opponent",
+      "Goes backward",
+      "Is kicked forward",
+      "Is passed forward legally"
     ],
-    "a": "Pull behind"
+    "a": "Goes forward off hand/arm to ground/opponent"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Kick that bounces into touch gives:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Lineout to opposition (unless 50:22)",
+      "Scrum",
+      "Penalty",
+      "Drop\u2011goal"
     ],
-    "a": "Pull behind"
+    "a": "Lineout to opposition (unless 50:22)"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "50:22 law awards lineout to:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Kicking team if from own half into opp 22",
+      "Receiving team",
+      "Always opposition",
+      "Neither"
     ],
-    "a": "Pull behind"
+    "a": "Kicking team if from own half into opp 22"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Advantage allows play to:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Continue after infringement if beneficial",
+      "Stop immediately",
+      "Reset only",
+      "Go to scrum automatically"
     ],
-    "a": "Pull behind"
+    "a": "Continue after infringement if beneficial"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Mark can be called in:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Defensive 22 from clean catch",
+      "Anywhere on field",
+      "Only by 10",
+      "Only from lineout"
     ],
-    "a": "Pull behind"
+    "a": "Defensive 22 from clean catch"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Scrum engagement sequence:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Crouch, bind, set",
+      "Bind, set, crouch",
+      "Set, crouch, bind",
+      "Crouch, set, bind"
     ],
-    "a": "Pull behind"
+    "a": "Crouch, bind, set"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "At lineout, throw must be:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Straight down the middle",
+      "To attacking side",
+      "To defending side",
+      "Past 15m line"
     ],
-    "a": "Pull behind"
+    "a": "Straight down the middle"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Offside at ruck line is:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Hindmost foot of last teammate",
+      "10m line",
+      "22m line",
+      "Halfway line"
     ],
-    "a": "Pull behind"
+    "a": "Hindmost foot of last teammate"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "A drop\u2011goal is worth:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "3 points",
+      "2 points",
+      "5 points",
+      "1 point"
     ],
-    "a": "Pull behind"
+    "a": "3 points"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Illegal tackle above shoulders is:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "High tackle",
+      "Low tackle",
+      "Dump tackle allowed",
+      "Maul"
     ],
-    "a": "Pull behind"
+    "a": "High tackle"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Held up in goal now results in:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Goal\u2011line dropout",
+      "Try",
+      "Penalty try",
+      "Scrum attackers"
     ],
-    "a": "Pull behind"
+    "a": "Goal\u2011line dropout"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Deliberate knock\u2011on sanction:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Penalty (possible card)",
+      "Free kick",
+      "Lineout",
+      "Nothing"
     ],
-    "a": "Pull behind"
+    "a": "Penalty (possible card)"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Hands in ruck by attack:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Penalty",
+      "Free kick",
+      "Play on",
+      "Scrum"
     ],
-    "a": "Pull behind"
+    "a": "Penalty"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Not releasing at tackle:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Penalty",
+      "Scrum",
+      "Free kick",
+      "Lineout"
     ],
-    "a": "Pull behind"
+    "a": "Penalty"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Forward pass restart:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Scrum to opposition",
+      "Penalty",
+      "Lineout",
+      "Drop\u2011out"
     ],
-    "a": "Pull behind"
+    "a": "Scrum to opposition"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Ball hits ref and advantage gained:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Scrum to team last in possession",
+      "Play on",
+      "Penalty",
+      "Lineout"
     ],
-    "a": "Pull behind"
+    "a": "Scrum to team last in possession"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Intentional maul collapse:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Penalty",
+      "Free kick",
+      "Scrum",
+      "Play on"
     ],
-    "a": "Pull behind"
+    "a": "Penalty"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Offside from kick requires retreat of:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "10 meters",
+      "5 meters",
+      "22 meters",
+      "No retreat"
     ],
-    "a": "Pull behind"
+    "a": "10 meters"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Touch judge term now is:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Assistant referee",
+      "Linesman",
+      "Side judge",
+      "Judge"
     ],
-    "a": "Pull behind"
+    "a": "Assistant referee"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Yellow card lasts:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "10 minutes",
+      "5 minutes",
+      "15 minutes",
+      "2 minutes"
     ],
-    "a": "Pull behind"
+    "a": "10 minutes"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Red card means:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Sent off; no return",
+      "10\u2011min bin",
+      "Replace after 5",
+      "Scrum reset"
     ],
-    "a": "Pull behind"
+    "a": "Sent off; no return"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Try line is:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Goal line",
+      "Touch line",
+      "22 line",
+      "Dead\u2011ball line"
     ],
-    "a": "Pull behind"
+    "a": "Goal line"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Ball out of ruck when:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Leaves ruck/behind hindmost foot",
+      "Still under feet",
+      "Ref says regardless",
+      "Hands in ruck"
     ],
-    "a": "Pull behind"
+    "a": "Leaves ruck/behind hindmost foot"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Touch line is:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Sideline boundary",
+      "Goal line",
+      "Dead\u2011ball line",
+      "Offside line"
     ],
-    "a": "Pull behind"
+    "a": "Sideline boundary"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Penalty advantage vs scrum advantage:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Usually longer (ref discretion)",
+      "Shorter always",
+      "Fixed 5 sec",
+      "Always ends in scrum"
     ],
-    "a": "Pull behind"
+    "a": "Usually longer (ref discretion)"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Loosehead prop packs:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Left side",
+      "Right side",
+      "Back",
+      "Middle"
     ],
-    "a": "Pull behind"
+    "a": "Left side"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Tighthead prop packs:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Right side",
+      "Left side",
+      "Back",
+      "Middle"
     ],
-    "a": "Pull behind"
+    "a": "Right side"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Ball grounded in goal by attackers:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Try (unless infringement)",
+      "No score",
+      "Penalty to defence",
+      "Scrum"
     ],
-    "a": "Pull behind"
+    "a": "Try (unless infringement)"
   },
   {
     "type": "mc",
-    "q": "Which backline call pulls the ball behind a crashing runner?",
+    "q": "Obstruction off the ball:",
     "options": [
-      "Pull behind",
-      "Crash",
-      "Loop",
-      "Skip"
+      "Penalty",
+      "Play on",
+      "Scrum",
+      "Conversion"
     ],
-    "a": "Pull behind"
+    "a": "Penalty"
   }
 ]

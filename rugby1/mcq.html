@@ -1,8 +1,11 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Multiple Choice</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'><title>Rugby — MCQ</title>
+<link rel='stylesheet' href='../assets/base.css'></head>
+<body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
 <main class="wrap" style="padding:0">
   <section class="card" style="max-width:none;width:100%;min-height:80vh;display:flex;flex-direction:column">
     <div style="padding:16px">
-      <h1 style="margin-bottom:6px">Multiple Choice — One by One</h1>
+      <h1 style="margin-bottom:6px">Multiple Choice — Rugby</h1>
       <div class="progress"><div class="bar" id="pbar"></div></div>
     </div>
     <div id="stage" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center"></div>
@@ -10,28 +13,20 @@
 </main>
 <script>
 function el(t,c,h){ var d=document.createElement(t); if(c) d.className=c; if(h!=null) d.innerHTML=h; return d; }
-function norm(x){ return (''+x).trim(); }
 var qs=[],i=0,correct=0,total=0;
 function renderQ(){
   var s=document.getElementById('stage'); s.innerHTML='';
   if(i>=qs.length){
     var pct=Math.round(100*correct/total);
     s.innerHTML='<h2>Done!</h2><p>Score: <span class="badge '+(pct>=75?'badge-green':(pct>=40?'badge-yellow':'badge-red'))+'">'+correct+'/'+total+' ('+pct+'%)</span></p><a class="pill-btn" href="./">Back to hub</a>';
-    var key='progress_rugby1'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; if(pct>prev) localStorage.setItem(key, String(pct));
-    document.getElementById('pbar').style.width='100%';
-    return;
+    document.getElementById('pbar').style.width='100%'; return;
   }
   var q=qs[i]; total=qs.length;
   document.getElementById('pbar').style.width=Math.round(100*i/qs.length)+'%';
-  var h=el('div',null,'<h2 style="margin:10px 0 20px 0">'+q.q+'</h2>');
-  s.appendChild(h);
-  var opts=(q.options&&q.options.length)?q.options.slice():['True','False'];
-  for(var k=0;k<opts.length;k++){
-    var b=el('button','pill-btn',opts[k]); b.style.fontSize='20px'; b.style.padding='20px 28px'; b.style.margin='10px'; b.style.display='block';
-    b.onclick=(function(val){ return function(){
-      var ans=q.a; var ok=false; if(Array.isArray(ans)){ ok=ans.indexOf(val)>-1; } else { ok=(val===ans); }
-      if(ok) correct++; i++; renderQ();
-    };})(opts[k]);
+  var h=el('div',null,'<h2 style="margin:10px 0 20px 0">'+q.q+'</h2>'); s.appendChild(h);
+  var opts=q.options.slice();
+  for(var k=0;k<opts.length;k++){ var b=el('button','pill-btn',opts[k]); b.style.fontSize='20px'; b.style.padding='20px 28px'; b.style.margin='10px'; b.style.display='block';
+    b.onclick=(function(val){ return function(){ if((Array.isArray(q.a) && q.a.indexOf(val)>-1) || val===q.a) correct++; i++; renderQ(); }; })(opts[k]);
     s.appendChild(b);
   }
 }
