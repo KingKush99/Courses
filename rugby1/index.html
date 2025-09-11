@@ -1,23 +1,10 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Rugby</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='../'>← Back</a><script src='../assets/app.js'></script>
+
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'><title>Rugby</title>
+<link rel='stylesheet' href='../assets/base.css'></head>
+<body><a class='back' href='../'>← Back</a><script src='../assets/app.js'></script>
 <main class="wrap"><div class="card">
   <h1>Rugby (Course Hub)</h1>
-  <p>Pick a module:</p>
-  <p>
-    <a class="pill-btn" href="study.html">Spaced Repetition (50 Q)</a>
-    <a class="pill-btn" href="mcq.html">Multiple Choice Quiz</a>
-    <a class="pill-btn" href="fill-blanks.html">Fill in the Blanks</a>
-    <a class="pill-btn" href="word-search.html">Word Search</a>
-    <a class="pill-btn" href="replace.html">Replace & Search Words</a>
-    <a class="pill-btn" href="puzzles.html">Puzzle Lab</a>
-    <a class='pill-btn' href='drawing.html'>Drawing Exercises</a>
-    <a class="pill-btn" href="applications.html">Current Applications</a>
-    
-  </p>
-  <div class="progress"><div class="bar" id="bar"></div></div>
-  <small class="hint">Progress is saved locally.</small>
+  <p><a class="pill-btn" href="game.html">Interactive Game</a> <a class="pill-btn" target="_blank" href="pdfs/Irish Plays.pdf">Irish Plays</a> <a class="pill-btn" target="_blank" href="pdfs/OIRC Back Plays.pdf">OIRC Back Plays</a></p>
 </div></main>
-<script>
-var done=parseInt(localStorage.getItem('progress_rugby1')||'0',10)||0;
-document.getElementById('bar').style.width=done+'%';
-</script>
 </body></html>

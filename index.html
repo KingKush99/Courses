@@ -1,27 +1,21 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Choose Your Course</title><link rel='stylesheet' href='assets/base.css'></head><body><script src='assets/app.js'></script>
+
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'><title>Choose Your Course</title>
+<link rel='stylesheet' href='assets/base.css'></head>
+<body><script src='assets/app.js'></script>
 <main class="wrap"><div style="width:100%">
   <h1 style="text-align:center">🔥 Choose Your Course</h1>
   <div class="grid" id="courseGrid">
-    <a class="pill-btn pill-link" draggable="true" data-key="chess" href="chess/">♟️ Chess</a>
-    <a class="pill-btn pill-link" draggable="true" data-key="coding-evolution" href="coding-evolution/">💻 Coding Evolution</a>
-    <a class="pill-btn pill-link" draggable="true" data-key="music-maker" href="music-maker/">🎵 Music Maker</a>
-    <a class="pill-btn pill-link" draggable="true" data-key="offensive-coordinator" href="offensive-coordinator/">🏈 Offensive Coordinator</a>
-    <a class="pill-btn pill-link" draggable="true" data-key="quantum" href="quantum/">🧪 Quantum</a>
-    <a class="pill-btn pill-link" draggable="true" data-key="rugby1" href="rugby1/">🏉 Rugby</a>
-    <a class="pill-btn pill-link" draggable="true" data-key="poker" href="poker/">♠️ Poker</a>
-    <a class="pill-btn pill-link" draggable="true" data-key="books" href="books/">📚 Books</a>
-    <a class="pill-btn pill-link" draggable="true" data-key="driving" href="driving/">🚗 Driving</a>
-  </div>
-  <div id="colSelWrap" style="margin-top:12px;text-align:center">Columns:
-    <select id="colSel"><option value="1" selected>1</option><option value="2">2</option><option value="4">4</option></select>
+    <a class="pill-btn pill-link" href="chess/">♟️ Chess</a>
+    <a class="pill-btn pill-link" href="coding-evolution/">💻 Coding Evolution</a>
+    <a class="pill-btn pill-link" href="music-maker/">🎵 Music Maker</a>
+    <a class="pill-btn pill-link" href="offensive-coordinator/">🏈 Offensive Coordinator</a>
+    <a class="pill-btn pill-link" href="quantum/">🧪 Quantum</a>
+    <a class="pill-btn pill-link" href="rugby1/">🏉 Rugby</a>
+    <a class="pill-btn pill-link" href="poker/">♠️ Poker</a>
+    <a class="pill-btn pill-link" href="books/">📚 Books</a>
+    <a class="pill-btn pill-link" href="driving/">🚗 Driving</a>
+    <a class="pill-btn pill-link" href="dna/">🧬 DNA</a>
   </div>
 </div></main>
-<script>
-var grid=document.getElementById('courseGrid'); var colSel=document.getElementById('colSel'); var dragEl=null;
-grid.addEventListener('dragstart',function(e){ if(e.target.classList.contains('pill-link')){ dragEl=e.target; e.dataTransfer.effectAllowed='move'; } });
-grid.addEventListener('dragover',function(e){ e.preventDefault(); var t=e.target.closest? e.target.closest('.pill-link') : null; if(!t||t===dragEl) return;
-  var r=t.getBoundingClientRect(); grid.insertBefore(dragEl,(e.clientY-r.top)>r.height/2? t.nextSibling: t);
-});
-colSel.addEventListener('change',function(){ grid.style.gridTemplateColumns='repeat('+parseInt(colSel.value,10)+', minmax(280px,1fr))'; });
-</script>
 </body></html>

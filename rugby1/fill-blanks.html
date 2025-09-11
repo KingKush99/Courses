@@ -1,18 +1,47 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Fill in the Blanks</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
-<main class="wrap"><div class="card">
-  <h1>Fill in the Blanks</h1>
-  <p>Complete the sentences about key ideas.</p>
-  <div id="fb"></div>
-  <button id="check" class="pill-btn">Check</button>
-  <div id="out" style="margin-top:10px"></div>
-</div></main>
+<main class="wrap" style="padding:0">
+  <section class="card" style="max-width:none;width:100%;min-height:80vh;display:flex;flex-direction:column">
+    <div style="padding:16px">
+      <h1 style="margin-bottom:6px">Fill in the Blanks — Type Your Answer</h1>
+      <div class="progress"><div class="bar" id="pbar"></div></div>
+    </div>
+    <div id="stage" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center"></div>
+  </section>
+</main>
 <script>
-var items=[
-  {t:"A qubit can be in a superposition of |0⟩ and |1⟩ states.", b:["qubit","superposition"]},
-  {t:"Measurement collapses the quantum state to a basis state.", b:["Measurement","quantum","basis"]},
-  {t:"Entanglement creates strong correlations between particles.", b:["Entanglement","correlations","particles"]}
-];
-function build(){ var fb=document.getElementById('fb'); for(var i=0;i<items.length;i++){ var parts=items[i].t.split(' '); for(var j=0;j<parts.length;j++){ var w=parts[j].replace(/[^A-Za-z0-9⟩⟨|]/g,''); if(items[i].b.indexOf(w)>=0){ var inp=document.createElement('input'); inp.setAttribute('data-ans',w); inp.size=Math.max(4,w.length); fb.appendChild(inp); fb.appendChild(document.createTextNode(' ')); } else { fb.appendChild(document.createTextNode(parts[j]+' ')); } } var br=document.createElement('br'); fb.appendChild(br);} }
-build();
-document.getElementById('check').onclick=function(){ var nodes=document.querySelectorAll('#fb input'); var ok=0; for(var i=0;i<nodes.length;i++){ var v=nodes[i].value.trim(); var a=nodes[i].getAttribute('data-ans'); if(v.toLowerCase()==a.toLowerCase()){ nodes[i].style.borderColor='#2ecc71'; ok++; } else nodes[i].style.borderColor='#ff3b3b'; } var pct=Math.round(100*ok/nodes.length); document.getElementById('out').innerHTML='<span class="badge '+(pct>=75?'badge-green':(pct>=40?'badge-yellow':'badge-red'))+'">Correct: '+ok+'/'+nodes.length+' ('+pct+'%)</span>'; var key='progress_rugby1'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; if(pct>prev) localStorage.setItem(key, String(pct)); };
-</script></body></html>
+function el(t,c,h){ var d=document.createElement(t); if(c) d.className=c; if(h!=null) d.innerHTML=h; return d; }
+function normalize(s){ return (''+s).toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9|⟨⟩]/g,''); }
+var qs=[],i=0,correct=0,total=0;
+function renderQ(){
+  var s=document.getElementById('stage'); s.innerHTML='';
+  if(i>=qs.length){
+    var pct=Math.round(100*correct/total);
+    s.innerHTML='<h2>Done!</h2><p>Score: <span class="badge '+(pct>=75?'badge-green':(pct>=40?'badge-yellow':'badge-red'))+'">'+correct+'/'+total+' ('+pct+'%)</span></p><a class="pill-btn" href="./">Back to hub</a>';
+    var key='progress_rugby1'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; if(pct>prev) localStorage.setItem(key, String(pct));
+    document.getElementById('pbar').style.width='100%';
+    return;
+  }
+  var q=qs[i];
+  document.getElementById('pbar').style.width=Math.round(100*i/qs.length)+'%';
+  var prompt = q.q.replace(/\b(True|False)\b/gi,'____'); // rough blanking
+  var h=el('div',null,'<h2 style="margin:10px 0 16px 0">'+prompt+'</h2>');
+  s.appendChild(h);
+  var input=el('input'); input.style.fontSize='22px'; input.style.padding='14px 18px'; input.style.minWidth='320px'; input.placeholder='Type your answer';
+  s.appendChild(input);
+  var go=el('button','pill-btn','Submit'); go.style.fontSize='20px'; go.style.padding='16px 24px'; go.style.marginTop='12px';
+  s.appendChild(go);
+  go.onclick=function(){
+    var val=normalize(input.value);
+    var ans=q.a; var ok=false;
+    if(Array.isArray(ans)){ for(var j=0;j<ans.length;j++){ if(val===normalize(ans[j])){ ok=true; break; } } }
+    else { ok = (val===normalize(ans)); }
+    if(ok) correct++; i++; renderQ();
+  };
+  input.addEventListener('keydown',function(e){ if(e.key==='Enter'){ go.click(); } });
+  input.focus();
+}
+var x=new XMLHttpRequest(); x.onreadystatechange=function(){ if(x.readyState==4){ qs=JSON.parse(x.responseText); // prune to first 30 to keep flow quick
+  if(qs.length>50) qs=qs.slice(0,50);
+  total=qs.length; renderQ(); } }; x.open('GET','qbank.json',true); x.send();
+</script>
+</body></html>
