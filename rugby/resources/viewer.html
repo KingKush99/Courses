@@ -1,33 +1,16 @@
-<!doctype html><meta charset="utf-8">
-<title>Rugby Playbooks</title>
-<link rel="stylesheet" href="../base.css">
-<style>body{background:#0e0b09;color:#fff} .wrap{max-width:1200px;margin:20px auto;padding:0 12px}
-.frame{width:100%;height:80vh;border:1px solid #ffffff22;border-radius:12px;background:#111}
-.note{padding:12px 14px;border:1px dashed #ffffff33;border-radius:12px;margin:12px 0}</style>
-<div class="wrap">
+<!doctype html><html><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Playbook Viewer</title>
+<link rel="stylesheet" href="../../assets/base.css">
+</head><body>
+<a class="back pill-btn" href="../index.html">← Back</a>
+<script src="../../assets/app.js"></script>
+<main class="wrap"><div class="card">
   <h1>Playbook Viewer</h1>
-  <div class="note">Use the dropdown to choose a document. If a file is missing, you'll see a helper message.</div>
-  <div class="row" style="margin-bottom:8px">
-    <label>Document</label>
-    <select id="doc" class="pill-btn" style="border-radius:10px">
-      <option value="irish">Irish Plays (irish.pdf)</option>
-      <option value="oirc">OIRC Back Plays (oirc.pdf)</option>
-    </select>
-  </div>
-  <div id="msg" class="note">Loading...</div>
-  <iframe id="pdf" class="frame"></iframe>
-</div>
+  <div id="frame"></div>
+</div></main>
 <script>
-const params=new URLSearchParams(location.search); const page=params.get('page')||'1'; const file=params.get('file')||'irish';
-const map={irish:'irish.pdf', oirc:'oirc.pdf'};
-const sel=document.getElementById('doc'); sel.value=file;
-function load(which){
-  const f = map[which] || map['irish'];
-  fetch(f,{method:'HEAD'}).then(r=>{
-    if(r.ok){ document.getElementById('pdf').src=f+'#page='+page; document.getElementById('msg').textContent='Page '+page; }
-    else { document.getElementById('msg').innerHTML='PDF not found. Add <code>'+f+'</code> to this folder.'; document.getElementById('pdf').style.display='none'; }
-  }).catch(()=>{ document.getElementById('msg').innerHTML='PDF not found. Add <code>'+f+'</code> to this folder.'; document.getElementById('pdf').style.display='none'; });
-}
-sel.addEventListener('change',()=>{ load(sel.value); });
-load(file);
+const params=new URLSearchParams(location.search); const f=params.get('file')==='oirc'?'oirc.pdf':'irish.pdf'; const page=params.get('page')||1;
+document.getElementById('frame').innerHTML = `<embed src="${f}#page=${page}" type="application/pdf" width="100%" height="800px">`;
 </script>
+</body></html>

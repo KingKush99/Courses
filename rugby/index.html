@@ -1,63 +1,26 @@
 <!doctype html><html><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Rugby — Course Hub</title>
-<link rel="stylesheet" href="../assets/base.css" onerror="this.href='base.css'">
-<style>
-:root{--bg:#0e0b09;--card:#1a120e;--muted:#ffffff22;--text:#f6eadf;--accent:#ff6b00}
-*{box-sizing:border-box} html,body{height:100%}
-body{margin:0;font-family:'Comic Sans MS','Comic Sans',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1200px 700px at 80% 100%,#3a0d00 0%,#0e0b09 40%,#0b0908 100%);color:var(--text)}
-a{color:#ffd7b0;text-decoration:none}
-.wrap{max-width:1100px;margin:24px auto;padding:0 12px}
-.card{background:var(--card);border:1px solid var(--muted);border-radius:16px;box-shadow:0 10px 40px #00000066;padding:18px}
-h1,h2,h3{margin:.2em 0 .4em 0}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.pill-btn{border:none;border-radius:999px;padding:10px 16px;background:linear-gradient(45deg,#ff6b00,#ff3b3b);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 3px 10px #00000066}
-.pill-btn:hover{filter:brightness(1.05)}
-.badge{display:inline-block;padding:.3em .6em;border-radius:999px;border:1px solid var(--muted);background:#211611}
-.badge-green{background:#1b3b1b}
-.badge-yellow{background:#3b341b}
-.badge-red{background:#3b1b1b}
-.back{position:fixed;left:16px;top:64px;z-index:20}
-.progress{height:6px;background:#000;border-radius:8px;overflow:hidden;border:1px solid var(--muted)}
-.bar{height:100%;width:0;background:linear-gradient(90deg,#ff6b00,#ff3b3b)}
-#corner-note{position:fixed;left:12px;bottom:12px;opacity:.5;font-size:12px}
-.btn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
-.btn{display:block;text-align:center;padding:14px 18px;border-radius:12px;background:#291b14;border:1px solid var(--muted)}
-</style>
+<link rel="stylesheet" href="../assets/base.css">
 </head><body>
 <a class="back pill-btn" href="../index.html">← Back</a>
-<script src="../assets/app.js" onerror="var s=document.createElement('script');s.textContent=`
-// Corner buttons safety: only inject if the global site app didn't already do it.
-(function(){
-  if(document.querySelector('[data-site-corners]')) return;
-  const make = (cls, html, href) => {
-    const b = document.createElement('a'); b.href=href||'#'; b.className='pill-btn'; b.style.position='fixed';
-    b.style.zIndex='30'; b.style.width='42px'; b.style.height='42px'; b.style.borderRadius='999px'; b.style.display='grid'; b.style.placeItems='center';
-    b.title = cls;
-    return b;
-  };
-  const prof = make('profile','👤','../profile.html'); prof.style.left='12px'; prof.style.top='12px';
-  const back = make('back','←','../index.html'); back.style.left='12px'; back.style.top='60px'; back.style.width='64px';
-  const menu = make('menu','☰','#'); menu.style.right='12px'; menu.style.top='12px';
-  const chat = make('chat','💬','#'); chat.style.left='12px'; chat.style.bottom='12px';
-  const slots = make('slots','🎰','#'); slots.style.right='12px'; slots.style.bottom='12px';
-  const holder = document.createElement('div'); holder.dataset.siteCorners='1';
-  holder.append(prof, back, menu, chat, slots); document.body.appendChild(holder);
-})();
-`;document.head.appendChild(s)"></script>
+<script src="../assets/app.js"></script>
 <main class="wrap">
   <div class="card">
     <h1>Rugby (Course Hub)</h1>
     <p>Pick a module:</p>
-    <div class="btn-grid">
-      <a class="btn" href="game.html">🏉 Interactive Game</a>
-      <a class="btn" href="mcq.html">📝 Multiple Choice</a>
-      <a class="btn" href="fill.html">⌨️ Fill in the Blanks</a>
-      <a class="btn" href="srs.html">⏱ Spaced Repetition</a>
-      <a class="btn" href="resources/viewer.html?file=irish&page=1">📘 Irish Plays (PDF)</a>
-      <a class="btn" href="resources/viewer.html?file=oirc&page=1">📙 OIRC Back Plays (PDF)</a>
+    <div class="row" style="flex-wrap:wrap; gap:12px">
+      <a class="pill-btn" href="game.html">🏉 Interactive Game</a>
+      <a class="pill-btn" href="mcq.html">📝 Multiple Choice</a>
+      <a class="pill-btn" href="fill.html">⌨️ Fill in the Blanks</a>
+      <a class="pill-btn" href="srs.html">⏱ SRS</a>
+      <a class="pill-btn" href="wordsearch.html">🔎 Word Search</a>
+      <a class="pill-btn" href="replace.html">✍️ Replace & Search</a>
+      <a class="pill-btn" href="puzzle.html">🧩 Puzzle Lab</a>
+      <a class="pill-btn" href="applications.html">📚 Current Applications</a>
+      <a class="pill-btn" href="resources/viewer.html?file=irish&page=1">📘 Irish Plays</a>
+      <a class="pill-btn" href="resources/viewer.html?file=oirc&page=1">📙 OIRC Back Plays</a>
     </div>
   </div>
 </main>
-<div id="corner-note">Corner buttons auto-injected if site app is missing.</div>
 </body></html>

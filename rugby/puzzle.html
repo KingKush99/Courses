@@ -1,0 +1,25 @@
+<!doctype html><html><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Rugby — Puzzle Lab</title>
+<link rel="stylesheet" href="../assets/base.css">
+<style>.slot{padding:12px;border:1px dashed var(--muted);border-radius:12px;background:#211611;margin:8px 0}.chip{display:inline-block;padding:8px 12px;border-radius:999px;background:#2c1c15;border:1px solid var(--muted);margin:6px;cursor:grab}</style>
+</head><body>
+<a class="back pill-btn" href="index.html">← Back</a>
+<script src="../assets/app.js"></script>
+<main class="wrap"><div class="card"><h1>Puzzle Lab — Build the Call</h1>
+<div class="slot" id="s1">1) ________</div>
+<div class="slot" id="s2">2) ________</div>
+<div class="slot" id="s3">3) ________</div>
+<div class="row" id="pieces">
+  <span class="chip" draggable="true">Set 1-3-3-1</span>
+  <span class="chip" draggable="true">Go Wide</span>
+  <span class="chip" draggable="true">Scan Offside</span>
+</div>
+<button class="pill-btn" id="check">Check</button>
+</div></main>
+<script>
+['s1','s2','s3'].forEach(id=>{const s=document.getElementById(id); s.addEventListener('dragover',e=>e.preventDefault()); s.addEventListener('drop',e=>{const t=e.dataTransfer.getData('text/plain'); s.textContent=s.textContent.replace('________',t);});});
+[...document.querySelectorAll('.chip')].forEach(c=>{c.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',c.textContent));});
+document.getElementById('check').onclick=()=>{const ok=(s1.textContent.includes('Set 1-3-3-1') && s2.textContent.includes('Go Wide') && s3.textContent.includes('Scan Offside')); alert(ok?'Great shape!':'Try a different order.');};
+</script>
+</body></html>

@@ -1,0 +1,23 @@
+<!doctype html><html><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Rugby — Word Search</title>
+<link rel="stylesheet" href="../assets/base.css">
+<style>
+.grid{display:grid; grid-template-columns:repeat(14,28px); gap:4px; justify-content:center}
+.cell{width:28px; height:28px; display:grid; place-items:center; border:1px solid var(--muted); background:#211611; border-radius:6px}
+.found{background:#2c1c15; box-shadow:0 0 0 2px #ff6b00 inset}
+</style></head><body>
+<a class="back pill-btn" href="index.html">← Back</a>
+<script src="../assets/app.js"></script>
+<main class="wrap"><div class="card"><h1>Word Search — Rugby</h1>
+<div id="board" class="grid"></div>
+<p class="dim">Find: SCRUM, RUCK, MAUL, LINEOUT, OFFSIDE, TACKLE</p>
+</div></main>
+<script>
+const W=14,H=14,board=document.getElementById('board'); const words=['SCRUM','RUCK','MAUL','LINEOUT','OFFSIDE','TACKLE'];
+let cells=[]; for(let i=0;i<W*H;i++){const d=document.createElement('div'); d.className='cell'; board.appendChild(d); cells.push(d);}
+const grid=Array.from({length:H},()=>Array(W).fill('')); function place(word){let placed=false; let tries=0; while(!placed && tries++<100){const x=Math.floor(Math.random()*W), y=Math.floor(Math.random()*H); const dx=[1,0,1][Math.floor(Math.random()*3)], dy=dx?0:1; if(x+(word.length-1)*dx>=W||y+(word.length-1)*dy>=H) continue; let ok=true; for(let i=0;i<word.length;i++){if(grid[y+i*dy][x+i*dx] && grid[y+i*dy][x+i*dx]!==word[i]){ok=false;break;}} if(!ok) continue; for(let i=0;i<word.length;i++){grid[y+i*dy][x+i*dx]=word[i];} placed=true;}}
+words.forEach(w=>place(w)); const ABC='ABCDEFGHIJKLMNOPQRSTUVWXYZ'; for(let y=0;y<H;y++){for(let x=0;x<W;x++){grid[y][x]=grid[y][x]||ABC[Math.floor(Math.random()*ABC.length)]; cells[y*W+x].textContent=grid[y][x];}}
+board.addEventListener('click',e=>{const idx=[...cells].indexOf(e.target); if(idx<0) return; e.target.classList.toggle('found');});
+</script>
+</body></html>

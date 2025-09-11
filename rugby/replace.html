@@ -1,0 +1,16 @@
+<!doctype html><html><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Rugby — Replace & Search</title>
+<link rel="stylesheet" href="../assets/base.css">
+</head><body>
+<a class="back pill-btn" href="index.html">← Back</a>
+<script src="../assets/app.js"></script>
+<main class="wrap"><div class="card"><h1>Replace & Search — Rugby</h1>
+<textarea id="txt" class="pill-btn" style="width:100%;height:220px;background:#211611;box-shadow:none">Call: 1-3-3-1 shape. Target edge with +1 width. Avoid OFFSIDE at ruck. If MAUL forms, call fold.</textarea>
+<div class="row"><input id="find" class="pill-btn" style="background:#211611;box-shadow:none" placeholder="Find"><input id="rep" class="pill-btn" style="background:#211611;box-shadow:none" placeholder="Replace with"><button id="go" class="pill-btn">Replace All</button></div>
+<p class="dim">Try searching for OFFSIDE → ONSIDE or MAUL → RUCK.</p>
+</div></main>
+<script>
+document.getElementById('go').onclick=()=>{const t=document.getElementById('txt'); const f=document.getElementById('find').value; const r=document.getElementById('rep').value; if(!f) return; t.value=t.value.split(f).join(r);};
+</script>
+</body></html>
