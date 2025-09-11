@@ -23,7 +23,7 @@ const stage=document.getElementById('stage');
 const W=stage.clientWidth, H=stage.clientHeight;
 function make(el,cls){const d=document.createElement('div'); d.className=cls; d.style.position='absolute'; stage.appendChild(d); return d;}
 function circle(color){const d=make('div',''); d.style.width='24px'; d.style.height='24px'; d.style.borderRadius='999px'; d.style.background=color; d.style.boxShadow='0 6px 10px #0007'; return d;}
-let mode='offense', wins=0, running=true;
+let mode='offense', wins=0;
 const player=circle('#4adfff'), enemy=circle('#ff5b3b'), runner=circle('#ffd23b');
 let p={x:40,y:H/2}, e={x:W/2,y:H/2}, r={x:W-80,y:H/2}, speed=3;
 function place(){player.style.left=p.x+'px'; player.style.top=p.y+'px'; enemy.style.left=e.x+'px'; enemy.style.top=e.y+'px'; runner.style.left=r.x+'px'; runner.style.top=r.y+'px';}
@@ -31,23 +31,14 @@ place();
 function clamp(v,min,max){return Math.max(min,Math.min(max,v));}
 const keys={}; window.addEventListener('keydown',e=>keys[e.key]=true); window.addEventListener('keyup',e=>keys[e.key]=false);
 function step(){
-  if(!running) return;
   if(keys['ArrowLeft']) p.x-=speed;
   if(keys['ArrowRight']) p.x+=speed;
   if(keys['ArrowUp']) p.y-=speed;
   if(keys['ArrowDown']) p.y+=speed;
   p.x=clamp(p.x,0,W-24); p.y=clamp(p.y,0,H-24);
-  // Simple AI
-  if(mode==='offense'){ // enemy chases player
-    e.x+=Math.sign(p.x-e.x)*2; e.y+=Math.sign(p.y-e.y)*2;
-    if(Math.hypot(p.x-(W-40), p.y-H/2)<30){ wins++; updateCoins(25); reset(); }
-  } else { // defense: player chases runner
-    r.x+=-2; r.y+= (Math.sin(Date.now()/400))*1.5; if(r.x<30){reset();}
-    if(Math.hypot(p.x-r.x,p.y-r.y)<20){ wins++; updateCoins(20); reset(); }
-  }
-  place();
-  document.getElementById('stats').textContent='Wins: '+wins;
-  requestAnimationFrame(step);
+  if(mode==='offense'){ e.x+=Math.sign(p.x-e.x)*2; e.y+=Math.sign(p.y-e.y)*2; if(Math.hypot(p.x-(W-40), p.y-H/2)<30){ wins++; updateCoins(25); reset(); } }
+  else { r.x+=-2; r.y+= (Math.sin(Date.now()/400))*1.5; if(r.x<30){reset();} if(Math.hypot(p.x-r.x,p.y-r.y)<20){ wins++; updateCoins(20); reset(); } }
+  place(); document.getElementById('stats').textContent='Wins: '+wins; requestAnimationFrame(step);
 }
 function reset(){ p={x:40,y:H/2}; e={x:W/2,y:H/2}; r={x:W-80,y:H/2}; place(); }
 document.getElementById('mode').onclick=()=>{ mode = (mode==='offense'?'defense':'offense'); document.getElementById('mode').textContent='Mode: '+(mode[0].toUpperCase()+mode.slice(1)); reset(); };

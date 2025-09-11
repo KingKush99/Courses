@@ -26,14 +26,8 @@
 const bankUrl='data/bank.json';
 const storeKey='rugby_srs_v1';
 const now=()=>Date.now();
-const fmt=t=>new Date(t).toLocaleString();
-
 let deck=[], progress=JSON.parse(localStorage.getItem(storeKey)||'{}');
-function pickNext(){
-  const due=deck.filter(q=>!progress[q.id] || (progress[q.id].due||0)<=now());
-  document.getElementById('due').textContent=`Due: ${due.length}`;
-  return (due.length? due : deck)[0];
-}
+function pickNext(){ const due=deck.filter(q=>!progress[q.id] || (progress[q.id].due||0)<=now()); document.getElementById('due').textContent=`Due: ${due.length}`; return (due.length? due : deck)[0];}
 function render(q){
   const qa=document.getElementById('qa');
   qa.innerHTML=`<h3>${q.q}</h3><p class="badge">Answer: <b>${q.a}</b></p>`;
@@ -43,18 +37,17 @@ function render(q){
 }
 function grade(q,g){
   const st=progress[q.id]||{ease:2.5, interval:0, reps:0};
-  const ease=Math.max(1.3, st.ease+(g-3)*0.15);
-  let interval=1*60*1000; // default 1m
+  let interval=1*60*1000;
   if(g<=1){ interval=1*60*1000; st.reps=0; }
   else if(g==2){ interval=10*60*1000; st.reps=0; }
   else if(g==3){ interval=60*60*1000; st.reps=(st.reps||0)+1; }
   else { interval=4*24*60*60*1000; st.reps=(st.reps||0)+1; }
-  const due=now()+interval;
-  progress[q.id]={ease,interval,due,reps:st.reps};
+  const due=Date.now()+interval;
+  progress[q.id]={interval,due,reps:st.reps};
   localStorage.setItem(storeKey,JSON.stringify(progress));
+  updateCoins(2);
   render(pickNext());
 }
-
 fetch(bankUrl).then(r=>r.json()).then(data=>{deck=data.items; render(pickNext());});
 </script>
 </body>

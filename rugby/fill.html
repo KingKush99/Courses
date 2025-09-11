@@ -15,8 +15,7 @@
   </section>
 </main>
 <script>
-const bankUrl='data/bank.json';
-let items=[], i=0; const qDiv=document.getElementById('q');
+const bankUrl='data/bank.json'; let items=[], i=0; const qDiv=document.getElementById('q');
 function norm(s){return (s||'').toLowerCase().replace(/\s+/g,' ').trim();}
 function render(){const x=items[i%items.length]; qDiv.innerHTML='<h3>'+x.q+'</h3>'; 
   document.getElementById('hint').onclick=()=>alert(x.hint||'');

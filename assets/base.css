@@ -15,9 +15,12 @@ body{
 .pill-btn:hover{filter:brightness(1.06)}
 .badge{display:inline-block; padding:.3em .6em; border-radius:999px; border:1px solid var(--muted); background:#211611}
 
-/* Non-overlapping courses grid */
-.courses{display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap:12px; align-items:stretch}
+/* Non-overlapping courses grid + column picker */
+.courses{display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:12px; align-items:stretch}
 .courses .pill-btn{width:100%; justify-content:center}
+.courses.cols-1{grid-template-columns: 1fr}
+.courses.cols-2{grid-template-columns: repeat(2, minmax(200px, 1fr))}
+.courses.cols-4{grid-template-columns: repeat(4, minmax(160px, 1fr))}
 .columns-picker{display:flex; gap:8px; justify-content:center; margin-top:14px}
 .columns-picker .pill-btn{padding:8px 12px}
 
@@ -29,18 +32,18 @@ body{
 .corner.bot-left{left:12px; bottom:12px}
 .corner.bot-right{right:12px; bottom:12px}
 
-/* Drawers & modals */
-.drawer{position:fixed; inset:66px 12px auto auto; width:340px; max-width:92vw; background:var(--card); border:1px solid var(--muted); border-radius:16px; box-shadow:0 14px 50px #000a; display:none; z-index:50}
-.drawer.open{display:block; animation:fade .15s ease}
+/* Drawers & modals (drop/fade) */
+.drawer,.chat,#slots-modal{transition:transform .18s ease, opacity .18s ease}
+.drawer{position:fixed; inset:66px 12px auto auto; width:340px; max-width:92vw; background:var(--card); border:1px solid var(--muted); border-radius:16px; box-shadow:0 14px 50px #000a; display:none; z-index:50; transform:translateY(-6px); opacity:0}
+.drawer.open{display:block; transform:translateY(0); opacity:1}
 .drawer .section{padding:12px 14px; border-top:1px solid var(--muted)}
 .drawer h3{margin:.2em 0 .4em 0}
 .menu-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
 .btn-tile{display:block; padding:12px 14px; border-radius:12px; background:#291b14; border:1px solid var(--muted); text-align:center}
-@keyframes fade{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:translateY(0)}
 
-/* Mini-slots */
-#slots-modal{position:fixed; inset:auto 12px 66px auto; width:420px; max-width:95vw; background:var(--card); border:1px solid var(--muted); border-radius:16px; box-shadow:0 14px 50px #000a; display:none; z-index:50}
-#slots-modal.open{display:block; animation:fade .15s ease}
+/* Mini-slots (drop-up) */
+#slots-modal{position:fixed; inset:auto 12px 66px auto; width:420px; max-width:95vw; background:var(--card); border:1px solid var(--muted); border-radius:16px; box-shadow:0 14px 50px #000a; display:none; z-index:50; transform:translateY(8px); opacity:0}
+#slots-modal.open{display:block; transform:translateY(0); opacity:1}
 .reels{display:flex; gap:12px; align-items:center; justify-content:center; padding:12px}
 .reel{width:72px; height:72px; display:grid; place-items:center; border-radius:12px; background:#201511; border:1px solid var(--muted); box-shadow:inset 0 8px 18px #0008; font-size:30px}
 .spin-btn{position:absolute; width:72px; height:72px; border-radius:999px; display:grid; place-items:center; font-weight:900; box-shadow:inset 0 8px 0 #fff3, 0 10px 20px #000a}
@@ -53,9 +56,9 @@ body{
 .config{display:flex; gap:10px; padding:8px 12px}
 .select{background:#291b14; border:1px solid var(--muted); color:var(--fg); border-radius:10px; padding:8px 10px}
 
-/* Chatbot */
-.chat{position:fixed; inset:auto auto 66px 12px; width:360px; max-width:96vw; background:var(--card); border:1px solid var(--muted); border-radius:16px; box-shadow:0 14px 50px #000a; display:none; z-index:50}
-.chat.open{display:block; animation:fade .15s ease}
+/* Chatbot (drop-up) */
+.chat{position:fixed; inset:auto auto 66px 12px; width:360px; max-width:96vw; background:var(--card); border:1px solid var(--muted); border-radius:16px; box-shadow:0 14px 50px #000a; display:none; z-index:50; transform:translateY(8px); opacity:0}
+.chat.open{display:block; transform:translateY(0); opacity:1}
 .chat .head{display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid var(--muted)}
 .chat .log{padding:10px; max-height:46vh; overflow:auto}
 .chat .entry{display:flex; gap:8px; padding:10px}
@@ -67,3 +70,7 @@ body{
 #stage{position:relative; width:100%; height:70vh; background:linear-gradient(#1c5e1f,#155a1b); border-radius:16px; border:1px solid var(--muted); overflow:hidden}
 .hud{display:flex; gap:12px; align-items:center; margin:10px 0}
 .hud .pill-btn.sm{padding:6px 10px; font-size:.9em}
+
+/* MCQ two-by-two layout */
+.mcq-grid{display:grid; grid-template-columns:repeat(2, minmax(160px, 1fr)); gap:12px; justify-items:center; margin-top:16px}
+.mcq-grid .pill-btn{width:100%; justify-content:flex-start}

@@ -1,4 +1,6 @@
 (function(){
+  // Safe body getter
+  function body(){return document.body || document.querySelector('body');}
   const store={get:(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
   const coins=(function(){let v=store.get('coins',300); return {get:()=>v, set:(n)=>{v=n;store.set('coins',v);hud()}, add:(d)=>{v=Math.max(0,v+d);store.set('coins',v);hud();}}})();
   const themes=[
@@ -7,9 +9,13 @@
     {id:7,name:'Neon',class:'theme-7',cost:800},{id:8,name:'Amethyst',class:'theme-8',cost:1600},{id:9,name:'Solar',class:'theme-9',cost:3200},{id:10,name:'Obsidian',class:'theme-10',cost:6400}
   ];
   let owned=store.get('themes_owned',[1,2,3]); let active=store.get('theme_active',1);
-  function applyTheme(){document.body.classList.remove(...themes.map(t=>t.class)); const t=themes.find(x=>x.id===active); if(t) document.body.classList.add(t.class);} applyTheme();
+  function applyTheme(){
+    const b=body(); if(!b){document.addEventListener('DOMContentLoaded',applyTheme,{once:true}); return;}
+    try{ b.classList.remove(...themes.map(t=>t.class)); }catch(e){/* ignore */}
+    const t=themes.find(x=>x.id===active); if(t) b.classList.add(t.class);
+  } applyTheme();
 
-  function addCorner(text,cls,title){const b=document.createElement('button'); b.className='pill-btn corner '+cls; b.textContent=text; b.title=title||''; document.body.appendChild(b); return b;}
+  function addCorner(text,cls,title){const b=document.createElement('button'); b.className='pill-btn corner '+cls; b.textContent=text; b.title=title||''; body().appendChild(b); return b;}
   function hud(){document.querySelectorAll('#coin-count,#coins-hud').forEach(el=>el&& (el.textContent=coins.get()));}
 
   addCorner('👤','top-left','Profile');
@@ -27,7 +33,7 @@
         <a class="btn-tile" id="bigger-text">🔎 Bigger Text</a>
         <a class="btn-tile" id="contrast">🌓 High Contrast</a>
       </div>
-    </div>`; document.body.appendChild(drawer);
+    </div>`; body().appendChild(drawer);
 
   function closeAll(){drawer.classList.remove('open'); slots.classList.remove('open'); chat.classList.remove('open');}
   menuBtn.onclick=()=>{const on=drawer.classList.toggle('open'); if(on){slots.classList.remove('open'); chat.classList.remove('open');} };
@@ -43,20 +49,32 @@
     html+=`</div><p class="dim" style="margin:8px 12px">First 3 themes are free. Others cost coins.</p></div>`; m.innerHTML=html;
     m.addEventListener('click',e=>{const b=e.target.closest('button[data-id]'); if(!b) return; const id=parseInt(b.dataset.id,10); const t=themes.find(x=>x.id===id);
       if(!owned.includes(id)){const have=coins.get(); if(have<t.cost){b.textContent='Need '+t.cost; return;} coins.set(have - t.cost); owned.push(id); store.set('themes_owned',owned);}
-      active=id; store.set('theme_active',active); applyTheme(); document.body.removeChild(m);
+      active=id; store.set('theme_active',active); applyTheme(); body().removeChild(m);
     });
-    document.body.appendChild(m);
+    body().appendChild(m);
   }
-  document.getElementById('theme-store').onclick=openThemeStore;
+  document.getElementById('theme-store')?.addEventListener('click',openThemeStore);
 
-  // Slots
+  // Column pickers (attach to any container with .courses)
+  function attachColumnPicker(container){
+    if(!container) return;
+    const picker=document.createElement('div'); picker.className='columns-picker';
+    ['1','2','4'].forEach(n=>{ const b=document.createElement('button'); b.className='pill-btn'; b.textContent=n+' column'+(n==='1'?'':'s'); b.addEventListener('click',()=>{
+      container.classList.remove('cols-1','cols-2','cols-4'); container.classList.add('cols-'+n); localStorage.setItem('cols_pref','cols-'+n);
+    }); picker.appendChild(b); });
+    container.insertAdjacentElement('afterend', picker);
+    const pref=localStorage.getItem('cols_pref'); if(pref) {container.classList.add(pref);}
+  }
+  document.querySelectorAll('.courses').forEach(attachColumnPicker);
+
+  // Slots (drop-up)
   const slots=document.createElement('div'); slots.id='slots-modal'; slots.innerHTML=`
     <div class="row" style="padding:10px 12px; border-bottom:1px solid var(--muted)"><b>Mini Slots</b><span class="badge" style="margin-left:auto">Coins: <span id="coins-hud">0</span></span><button id="slots-close" class="pill-btn" style="border-radius:999px">✖</button></div>
     <div class="config"><label>Reels</label><select id="reels" class="select"><option>3</option><option>4</option><option>5</option><option>6</option></select>
     <label>Bet</label><select id="bet" class="select"><option>10</option><option>25</option><option>50</option><option>100</option></select></div>
     <div class="reels" id="reel-row"></div><div class="spin-wrap" id="spin-wrap"></div>
     <div class="lever-wrap"><div class="lever-stick lever-pull" id="lever"></div><div class="lever-knob lever-pull" id="knob"></div></div>`;
-  document.body.appendChild(slots); document.getElementById('slots-close').onclick=()=>slots.classList.remove('open');
+  body().appendChild(slots); document.getElementById('slots-close').onclick=()=>slots.classList.remove('open');
   slotsBtn.onclick=()=>{ const on=!slots.classList.contains('open'); closeAll(); if(on){ slots.classList.add('open'); buildReels(); hud(); } };
   const symbols=['🍒','🍋','🔔','⭐','💎','7️⃣'];
   function reelEl(){const d=document.createElement('div'); d.className='reel'; d.textContent=symbols[Math.floor(Math.random()*symbols.length)]; return d;}
@@ -75,15 +93,15 @@
     [lever,knob].forEach(el=>{el.addEventListener('mousedown',down); el.addEventListener('touchstart',down);}); window.addEventListener('mousemove',move,{passive:true}); window.addEventListener('touchend',up); window.addEventListener('mouseup',up);
   })();
 
-  // Chat
+  // Chat (drop-up)
   const chat=document.createElement('div'); chat.className='chat'; chat.innerHTML=`<div class="head"><b>Assistant</b><button id="chat-close" class="pill-btn" style="border-radius:999px">✖</button></div>
     <div class="log" id="chat-log"><div class="msg">👋 Welcome! I’m your Assistant. Ask me anything about the site, games, or settings. I can also chat in your language of choice!</div></div>
     <div class="entry"><input id="chat-input" class="pill-btn" style="flex:1; background:#211611; box-shadow:none; text-align:left" placeholder="Type here...">
       <select id="lang" class="select lang"><option>EN</option><option>ES</option><option>FR</option><option>DE</option><option>PT</option><option>ZH</option><option>JA</option><option>KO</option><option>AR</option><option>HI</option></select>
       <button id="cap" class="pill-btn cam-btn">📸</button><button id="send" class="pill-btn">Send</button></div>`;
-  document.body.appendChild(chat); chatBtn.onclick=()=>{ const on=!chat.classList.contains('open'); closeAll(); if(on){ chat.classList.add('open'); }}; document.getElementById('chat-close').onclick=()=>chat.classList.remove('open');
+  body().appendChild(chat); chatBtn.onclick=()=>{ const on=!chat.classList.contains('open'); closeAll(); if(on){ chat.classList.add('open'); }}; document.getElementById('chat-close').onclick=()=>chat.classList.remove('open');
   function pushMsg(t,you){const d=document.createElement('div'); d.className='msg'+(you?' you':''); d.textContent=t; document.getElementById('chat-log').appendChild(d); d.scrollIntoView({behavior:'smooth',block:'end'});}
-  function reply(q){if(/coin|theme/i.test(q)){pushMsg("Use ☰ → Themes to buy/apply backgrounds. Earn coins in 🎰.",false);return;} pushMsg("Got it! I’ll remember that while you browse.",false);}
+  function reply(q){if(/coin|theme/i.test(q)){pushMsg("Use ☰ → Themes to buy/apply backgrounds. Earn coins in 🎰 or by passing quizzes.",false);return;} pushMsg("Got it! I’ll remember that while you browse.",false);}
   document.getElementById('send').onclick=function(){const v=document.getElementById('chat-input').value.trim(); if(!v)return; pushMsg(v,true); document.getElementById('chat-input').value=''; reply(v);};
   document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('send').click()});
   document.getElementById('cap').onclick=function(){const stage=document.getElementById('stage'); if(!stage){pushMsg("📸 Screenshots are only allowed in‑game.",false); return;} if(!window.html2canvas){const s=document.createElement('script'); s.src='https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js'; s.onload=()=>document.getElementById('cap').click(); s.onerror=()=>pushMsg("Screenshot library unavailable.",false); document.head.appendChild(s); return;} window.html2canvas(stage).then(c=>{const a=document.createElement('a'); a.href=c.toDataURL(); a.download='screenshot.png'; a.click(); pushMsg("📸 Screenshot captured from the game area.",false);});};

@@ -1,31 +1,6 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Rugby — Replace & Search</title>
-  <link rel="stylesheet" href="../assets/base.css">
-  <script defer src="../assets/app.js"></script>
-</head>
-<body>
-<main class="wrap">
-  <section class="card">
-    <h2>Replace & Search</h2>
-    <textarea id="text" class="pill-btn" style="width:100%; min-height:160px; background:#211611; box-shadow:none"></textarea>
-    <div class="hud">
-      <input id="find" class="pill-btn" placeholder="Find">
-      <input id="rep" class="pill-btn" placeholder="Replace">
-      <button id="go" class="pill-btn sm">Do</button>
-      <span class="badge" id="out"></span>
-    </div>
-  </section>
-</main>
-<script>
-const t=document.getElementById('text'); t.value="Call a switch line to attack the 13 channel.\nSet up a dummy runner then wrap to the wing.\n";
-document.getElementById('go').onclick=()=>{
-  const f=document.getElementById('find').value; const r=document.getElementById('rep').value;
-  const re=new RegExp(f,'gi'); const n=(t.value.match(re)||[]).length;
-  t.value=t.value.replace(re,r); document.getElementById('out').textContent=`Replaced ${n} occurrence(s).`;
-};
-</script>
-</body>
-</html>
+<head><meta charset="utf-8"><title>Rugby — Replace & Search</title>
+<link rel="stylesheet" href="../assets/base.css">
+<script defer src="../assets/app.js"></script></head>
+<body><main class="wrap"><section class="card"><h2>Replace & Search</h2><textarea id='text' class='pill-btn' style='width:100%; min-height:160px; background:#211611; box-shadow:none'></textarea><div class='hud'><input id='find' class='pill-btn' placeholder='Find'><input id='rep' class='pill-btn' placeholder='Replace'><button id='go' class='pill-btn sm'>Do</button><span class='badge' id='out'></span></div><script>const t=document.getElementById('text'); t.value='Call a switch line to attack the 13 channel.\nSet up a dummy runner then wrap to the wing.\n'; document.getElementById('go').onclick=()=>{const f=document.getElementById('find').value; const r=document.getElementById('rep').value; const re=new RegExp(f,'gi'); const n=(t.value.match(re)||[]).length; t.value=t.value.replace(re,r); document.getElementById('out').textContent=`Replaced ${'{'}n{'}'} occurrence(s).`; };</script></section></main></body></html>

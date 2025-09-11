@@ -2,25 +2,28 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Rugby — Multiple Choice</title>
+  <title>Multiple Choice — Rugby</title>
   <link rel="stylesheet" href="../assets/base.css">
   <script defer src="../assets/app.js"></script>
 </head>
 <body>
 <main class="wrap">
   <section class="card">
-    <h2>Multiple Choice</h2>
+    <h2>Multiple Choice — Rugby</h2>
     <div id="qbox"></div>
     <div class="hud"><span class="badge" id="score">Score: 0</span><a class="pill-btn sm" id="hint">? Hint</a><a class="pill-btn sm" id="src">👁 Source</a></div>
   </section>
 </main>
 <script>
 const bankUrl='data/bank.json';
-let items=[], i=0, score=0;
-const qbox=document.getElementById('qbox');
+let items=[], i=0, score=0; const qbox=document.getElementById('qbox');
 function render(){
   const q=items[i%items.length];
-  qbox.innerHTML=`<h3>${q.q}</h3>`+q.opts.map((o,idx)=>`<button class="pill-btn" data-i="${idx}">${o}</button>`).join(' ');
+  const letters=['a','b','c','d'];
+  let grid='<div class="mcq-grid">';
+  q.opts.forEach((o,idx)=>{ grid+=`<button class="pill-btn" data-i="${idx}">${letters[idx]}) ${o}</button>`; });
+  grid+='</div>';
+  qbox.innerHTML=`<h3>${q.q}</h3>${grid}`;
   document.getElementById('hint').onclick=()=>alert(q.hint||'Consider alignment, gaps, or coverage.');
   document.getElementById('src').onclick=()=>alert(q.src||'See team PDFs.');
   qbox.querySelectorAll('button[data-i]').forEach(b=>b.onclick=()=>{
