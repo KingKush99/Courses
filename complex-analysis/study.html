@@ -1,7 +1,10 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Complex Analysis — Study (SRS)</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'><title>Complex Analysis — Study (SRS)</title>
+<link rel='stylesheet' href='../assets/base.css'></head>
+<body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
 <main class="wrap"><div class="card">
   <h1>Complex Analysis — Spaced Repetition</h1>
-  <div id="qa"></div>
+  <div id="qa" style="position:relative"></div>
   <div class="row" style="margin-top:12px">
     <button id="show" class="pill-btn">Show Answer</button>
     <button id="again" class="pill-btn">Again</button>
@@ -15,9 +18,9 @@ function loadQ(cb){ var x=new XMLHttpRequest(); x.onreadystatechange=function(){
 function now(){ return new Date().getTime(); }
 function dueAt(box){ var mins=[0,10,60,360,1440]; return now()+mins[Math.max(0,Math.min(4,box-1))]*60000; }
 function pick(qs){ var due=[]; for(var i=0;i<qs.length;i++){ var s=state.boxes[i]; if(!s||s.due<=now()) due.push({q:qs[i],i:i}); } var pool=due.length?due:qs.map(function(q,i){return {q:q,i:i};}); return pool[Math.floor(Math.random()*pool.length)]; }
-function render(cur){ var qa=document.getElementById('qa'); var item=cur.q; var html='<div><strong>Q:</strong> '+item.q+'</div>'; if((item.type==='mc'||item.options)&&item.options){ html+='<ol>'; for(var i=0;i<item.options.length;i++) html+='<li>'+item.options[i]+'</li>'; html+='</ol>'; } var ans=item.a; var ansText=Array.isArray(ans)? ans.join(', ') : (ans!=null? ans : ''); html+='<div id="ans" style="margin-top:8px;display:none"><strong>A:</strong> '+ansText+'</div>'; qa.innerHTML=html; }
+function render(cur){ var qa=document.getElementById('qa'); var item=cur.q; var html='<div><strong>Q:</strong> '+item.q+(item.q.trim().endsWith('?')?'':'?')+'</div>'; if((item.type==='mc'||item.options)&&item.options){ html+='<ol>'; for(var i=0;i<item.options.length;i++) html+='<li>'+item.options[i]+'</li>'; html+='</ol>'; } var ans=item.a; var ansText=Array.isArray(ans)? ans.join(', ') : (ans!=null? ans : ''); html+='<div id="ans" style="margin-top:8px;display:none"><strong>A:</strong> '+ansText+'</div>'; qa.innerHTML=html; if(window.__addHintEye) window.__addHintEye(qa, item); }
 var all=[],cur=null; loadQ(function(qs){ all=qs; next(); });
-function next(){ cur=pick(all); render(cur); document.getElementById('ans').style.display='none'; }
+function next(){ cur=pick(all); render(cur); var a=document.getElementById('ans'); if(a) a.style.display='none'; }
 document.getElementById('show').onclick=function(){ document.getElementById('ans').style.display='block'; };
 function upd(delta){ var s=state.boxes[cur.i]?state.boxes[cur.i].box:1; var nb=Math.max(1,Math.min(5,s+delta)); state.boxes[cur.i]={box:nb,due:dueAt(nb)}; localStorage.setItem(KEY,JSON.stringify(state));
   var mastered=0; for(var k in state.boxes){ if(state.boxes[k].box>=5) mastered++; } var prog=Math.round(100*mastered/all.length);
@@ -26,4 +29,24 @@ function upd(delta){ var s=state.boxes[cur.i]?state.boxes[cur.i].box:1; var nb=M
 document.getElementById('again').onclick=function(){ upd(-1); };
 document.getElementById('good').onclick=function(){ upd(+1); };
 document.getElementById('easy').onclick=function(){ upd(+2); };
-</script></body></html>
+</script>
+
+<script>
+(function(){
+  function iconBtn(html,title){ var b=document.createElement('button'); b.className='pill-btn'; b.innerHTML=html; b.title=title||''; b.style.borderRadius='999px'; b.style.width='42px'; b.style.height='42px'; b.style.padding='0'; return b; }
+  function addHintEye(container, item){
+    var wrap=document.createElement('div'); wrap.style.position='relative'; container.style.position='relative';
+    while(container.firstChild) wrap.appendChild(container.firstChild);
+    container.appendChild(wrap);
+    var qBtn=iconBtn('?', 'Hint'); qBtn.style.position='absolute'; qBtn.style.right='8px'; qBtn.style.bottom='8px'; qBtn.style.fontWeight='900';
+    qBtn.onclick=function(){ alert(item.hint?item.hint:'No hint for this one — check definitions.'); };
+    container.appendChild(qBtn);
+    var eye=iconBtn('👁️', 'Open source page'); eye.style.position='absolute'; eye.style.right='8px'; eye.style.top='8px';
+    eye.onclick=function(){ var p=item.page||1; window.open('resources/notes.pdf#page='+p, '_blank'); };
+    container.appendChild(eye);
+  }
+  window.__addHintEye = addHintEye;
+})();
+</script>
+
+</body></html>

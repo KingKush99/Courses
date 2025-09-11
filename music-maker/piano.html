@@ -1,18 +1,76 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Piano</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Music Maker — Piano Trainer</title>
+<link rel='stylesheet' href='../assets/base.css'>
+<style>
+#stage{position:relative;width:min(900px,95vw);height:460px;background:#0f0f12;border:1px solid #ffffff22;border-radius:12px;overflow:hidden;margin:auto}
+.lanes{position:absolute;bottom:0;left:0;right:0;height:180px;display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:6px}
+.lane{background:#1b130e;border:1px solid #ffffff22;border-radius:8px;display:grid;place-items:end center;color:#fff;font-weight:800}
+.note{position:absolute;width:calc((100% - 6*6px)/7);height:20px;background:#ff6b00;border:1px solid #fff;border-radius:6px}
+.keylbl{font-size:14px;opacity:.8;margin-bottom:6px}
+#hud{display:flex;gap:12px;justify-content:space-between;margin:10px auto;max-width:900px}
+</style>
+</head>
+<body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
 <main class="wrap"><div class="card">
-  <h1>Piano — Synthesia Practice</h1>
-  <canvas id="fall" width="1000" height="400" style="background:#0e0e11;border:1px solid #ffffff22;border-radius:12px;width:100%"></canvas>
-  <p>Press keys on your Mac keyboard: a, s, d, f, g, h, j, k, l, ;</p>
+  <h1>🎹 Piano Trainer (Synthesia‑style)</h1>
+  <div id="hud"><div>Keys: A S D F J K L</div><div>Score: <span id="sc">0</span></div></div>
+  <div id="stage">
+    <div class="lanes" id="lanes">
+      <div class="lane"><div class="keylbl">A</div></div>
+      <div class="lane"><div class="keylbl">S</div></div>
+      <div class="lane"><div class="keylbl">D</div></div>
+      <div class="lane"><div class="keylbl">F</div></div>
+      <div class="lane"><div class="keylbl">J</div></div>
+      <div class="lane"><div class="keylbl">K</div></div>
+      <div class="lane"><div class="keylbl">L</div></div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:10px">
+    <button id="start" class="pill-btn">Start</button>
+    <select id="song" class="pill-btn" style="border-radius:12px">
+      <option value="scale">C Major Scale</option>
+      <option value="twinkle">Twinkle (short)</option>
+    </select>
+  </div>
 </div></main>
 <script>
-var c=document.getElementById('fall'), ctx=c.getContext('2d'); var W=c.width, H=c.height;
-var cols={"a": 0, "s": 1, "d": 2, "f": 3, "g": 4, "h": 5, "j": 6, "k": 7, "l": 8, ";": 9};
-var notes=[];
-function spawn(){ var ks=Object.keys(cols); var k=ks[Math.floor(Math.random()*ks.length)]; notes.push({k:k,y:0}); }
-setInterval(spawn, 600);
-function draw(){ ctx.clearRect(0,0,W,H); for(var i=0;i<notes.length;i++){ var n=notes[i]; var x=cols[n.k]* (W/10); ctx.fillStyle="#ff9f1a"; ctx.fillRect(x+8, n.y, (W/10)-16, 14); n.y+=3; } requestAnimationFrame(draw); }
-draw();
-document.addEventListener('keydown',function(e){ var k=e.key.toLowerCase(); if(cols[k]!=null){ // hit detection near bottom
-  for(var i=0;i<notes.length;i++){ if(notes[i].k===k && notes[i].y>H-40){ notes.splice(i,1); break; } }
-}});
-</script></body></html>
+var sc=0, notes=[], playing=false, lanes=document.getElementById('lanes'), stage=document.getElementById('stage');
+var map={'a':0,'s':1,'d':2,'f':3,'j':4,'k':5,'l':6};
+function makeSong(kind){
+  var arr=[]; var t=0;
+  function add(col,len){ arr.push({col:col, t:t, len:len}); t+=0.5; }
+  if(kind==='scale'){ [0,1,2,3,4,5,6].forEach(function(c){ add(c,0.45); }); }
+  else { [0,0,4,4,5,5,4, 3,3,2,2,1,1,0].forEach(function(c){ add(c,0.5); }); }
+  return arr;
+}
+function spawn(note){
+  var w = (stage.clientWidth - 6*6)/7;
+  var n=document.createElement('div'); n.className='note'; n.style.left=(note.col*(w+6))+'px'; n.style.width=w+'px'; n.style.top='-20px'; stage.appendChild(n);
+  note.el=n; note.y=-20;
+}
+function start(){
+  if(playing) return; playing=true; sc=0; document.getElementById('sc').textContent=sc;
+  var song=document.getElementById('song').value; notes=makeSong(song); var idx=0; var startT=performance.now();
+  function loop(){
+    if(!playing) return;
+    // spawn gradually
+    var elapsed=(performance.now()-startT)/1000;
+    while(idx<notes.length && notes[idx].t <= elapsed){ spawn(notes[idx]); idx++; }
+    // move
+    var speed=180; // px/s
+    notes.forEach(function(n){ if(n.el){ n.y += speed/60; n.el.style.top=n.y+'px'; if(n.y>stage.clientHeight){ n.el.remove(); n.el=null; } } });
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+document.getElementById('start').onclick=start;
+document.addEventListener('keydown', function(e){
+  var col=map[e.key.toLowerCase()]; if(col==null) return;
+  notes.forEach(function(n){
+    if(n.el && n.col===col && n.y>stage.clientHeight-200 && n.y<stage.clientHeight-140){ sc+=10; document.getElementById('sc').textContent=sc; n.el.remove(); n.el=null; }
+  });
+  var key='progress_music-maker'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; localStorage.setItem(key, String(Math.min(100, prev+1)));
+});
+</script>
+</body></html>

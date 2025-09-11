@@ -1,11 +1,14 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Complex Analysis — MCQ</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'><title>Complex Analysis — MCQ</title>
+<link rel='stylesheet' href='../assets/base.css'></head>
+<body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
 <main class="wrap" style="padding:0">
   <section class="card" style="max-width:none;width:100%;min-height:80vh;display:flex;flex-direction:column">
     <div style="padding:16px">
       <h1 style="margin-bottom:6px">Multiple Choice — Complex Analysis</h1>
       <div class="progress"><div class="bar" id="pbar"></div></div>
     </div>
-    <div id="stage" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center"></div>
+    <div id="stage" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;position:relative"></div>
   </section>
 </main>
 <script>
@@ -22,7 +25,8 @@ function renderQ(){
   }
   var q=qs[i]; total=qs.length;
   document.getElementById('pbar').style.width=Math.round(100*i/qs.length)+'%';
-  var h=el('div',null,'<h2 style="margin:10px 0 20px 0">'+q.q+'</h2>'); s.appendChild(h);
+  var box=el('div',null,'<h2 style="margin:10px 0 20px 0">'+q.q+(q.q.trim().endsWith('?')?'':'?')+'</h2>'); s.appendChild(box);
+  if(window.__addHintEye) window.__addHintEye(box, q);
   var opts=(q.options&&q.options.length)?q.options.slice():['True','False'];
   for(var k=0;k<opts.length;k++){ var b=el('button','pill-btn',opts[k]); b.style.fontSize='20px'; b.style.padding='20px 28px'; b.style.margin='10px'; b.style.display='block';
     b.onclick=(function(val){ return function(){ var ans=q.a; var ok=false; if(Array.isArray(ans)){ ok=ans.indexOf(val)>-1; } else { ok=(val===ans); } if(ok) correct++; i++; renderQ(); }; })(opts[k]);
@@ -30,4 +34,24 @@ function renderQ(){
   }
 }
 var x=new XMLHttpRequest(); x.onreadystatechange=function(){ if(x.readyState==4){ qs=JSON.parse(x.responseText); renderQ(); } }; x.open('GET','qbank.json',true); x.send();
-</script></body></html>
+</script>
+
+<script>
+(function(){
+  function iconBtn(html,title){ var b=document.createElement('button'); b.className='pill-btn'; b.innerHTML=html; b.title=title||''; b.style.borderRadius='999px'; b.style.width='42px'; b.style.height='42px'; b.style.padding='0'; return b; }
+  function addHintEye(container, item){
+    var wrap=document.createElement('div'); wrap.style.position='relative'; container.style.position='relative';
+    while(container.firstChild) wrap.appendChild(container.firstChild);
+    container.appendChild(wrap);
+    var qBtn=iconBtn('?', 'Hint'); qBtn.style.position='absolute'; qBtn.style.right='8px'; qBtn.style.bottom='8px'; qBtn.style.fontWeight='900';
+    qBtn.onclick=function(){ alert(item.hint?item.hint:'No hint for this one — check definitions.'); };
+    container.appendChild(qBtn);
+    var eye=iconBtn('👁️', 'Open source page'); eye.style.position='absolute'; eye.style.right='8px'; eye.style.top='8px';
+    eye.onclick=function(){ var p=item.page||1; window.open('resources/notes.pdf#page='+p, '_blank'); };
+    container.appendChild(eye);
+  }
+  window.__addHintEye = addHintEye;
+})();
+</script>
+
+</body></html>

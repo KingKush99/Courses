@@ -1,5 +1,39 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Complex Analysis — Word Search</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'><title>Complex Analysis — Word Search</title>
+<link rel='stylesheet' href='../assets/base.css'>
+<style>
+table.ws{border-collapse:collapse;margin:auto}
+.ws td{border:1px solid #ffffff22;width:32px;height:32px;text-align:center;font-weight:800;cursor:pointer;user-select:none}
+.ws td.sel{background:#ff6b00aa}
+.ws td.found{background:#2ecc7199}
+#termList li.found{text-decoration:line-through;opacity:.6}
+</style>
+</head>
+<body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
 <main class="wrap"><div class="card">
   <h1>Word Search</h1>
-  <p>Practice key terms (simple version). Use Replace/Search module for progress credit.</p>
-</div></main></body></html>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+    <div>
+      <table class="ws" id="ws"><tr><td data-x='0' data-y='0'>H</td><td data-x='1' data-y='0'>H</td><td data-x='2' data-y='0'>J</td><td data-x='3' data-y='0'>G</td><td data-x='4' data-y='0'>C</td><td data-x='5' data-y='0'>P</td><td data-x='6' data-y='0'>A</td><td data-x='7' data-y='0'>H</td><td data-x='8' data-y='0'>Q</td><td data-x='9' data-y='0'>Z</td><td data-x='10' data-y='0'>O</td><td data-x='11' data-y='0'>B</td></tr><tr><td data-x='0' data-y='1'>C</td><td data-x='1' data-y='1'>O</td><td data-x='2' data-y='1'>N</td><td data-x='3' data-y='1'>T</td><td data-x='4' data-y='1'>O</td><td data-x='5' data-y='1'>U</td><td data-x='6' data-y='1'>R</td><td data-x='7' data-y='1'>P</td><td data-x='8' data-y='1'>P</td><td data-x='9' data-y='1'>E</td><td data-x='10' data-y='1'>Z</td><td data-x='11' data-y='1'>R</td></tr><tr><td data-x='0' data-y='2'>O</td><td data-x='1' data-y='2'>A</td><td data-x='2' data-y='2'>R</td><td data-x='3' data-y='2'>G</td><td data-x='4' data-y='2'>U</td><td data-x='5' data-y='2'>M</td><td data-x='6' data-y='2'>E</td><td data-x='7' data-y='2'>N</td><td data-x='8' data-y='2'>T</td><td data-x='9' data-y='2'>R</td><td data-x='10' data-y='2'>X</td><td data-x='11' data-y='2'>A</td></tr><tr><td data-x='0' data-y='3'>G</td><td data-x='1' data-y='3'>N</td><td data-x='2' data-y='3'>S</td><td data-x='3' data-y='3'>G</td><td data-x='4' data-y='3'>R</td><td data-x='5' data-y='3'>Y</td><td data-x='6' data-y='3'>Y</td><td data-x='7' data-y='3'>F</td><td data-x='8' data-y='3'>G</td><td data-x='9' data-y='3'>O</td><td data-x='10' data-y='3'>C</td><td data-x='11' data-y='3'>N</td></tr><tr><td data-x='0' data-y='4'>V</td><td data-x='1' data-y='4'>A</td><td data-x='2' data-y='4'>H</td><td data-x='3' data-y='4'>A</td><td data-x='4' data-y='4'>R</td><td data-x='5' data-y='4'>M</td><td data-x='6' data-y='4'>O</td><td data-x='7' data-y='4'>N</td><td data-x='8' data-y='4'>I</td><td data-x='9' data-y='4'>C</td><td data-x='10' data-y='4'>R</td><td data-x='11' data-y='4'>C</td></tr><tr><td data-x='0' data-y='5'>H</td><td data-x='1' data-y='5'>L</td><td data-x='2' data-y='5'>F</td><td data-x='3' data-y='5'>Y</td><td data-x='4' data-y='5'>E</td><td data-x='5' data-y='5'>P</td><td data-x='6' data-y='5'>A</td><td data-x='7' data-y='5'>N</td><td data-x='8' data-y='5'>Z</td><td data-x='9' data-y='5'>L</td><td data-x='10' data-y='5'>I</td><td data-x='11' data-y='5'>H</td></tr><tr><td data-x='0' data-y='6'>A</td><td data-x='1' data-y='6'>Y</td><td data-x='2' data-y='6'>B</td><td data-x='3' data-y='6'>I</td><td data-x='4' data-y='6'>O</td><td data-x='5' data-y='6'>Z</td><td data-x='6' data-y='6'>R</td><td data-x='7' data-y='6'>P</td><td data-x='8' data-y='6'>E</td><td data-x='9' data-y='6'>O</td><td data-x='10' data-y='6'>E</td><td data-x='11' data-y='6'>J</td></tr><tr><td data-x='0' data-y='7'>X</td><td data-x='1' data-y='7'>T</td><td data-x='2' data-y='7'>G</td><td data-x='3' data-y='7'>L</td><td data-x='4' data-y='7'>A</td><td data-x='5' data-y='7'>G</td><td data-x='6' data-y='7'>W</td><td data-x='7' data-y='7'>L</td><td data-x='8' data-y='7'>P</td><td data-x='9' data-y='7'>G</td><td data-x='10' data-y='7'>M</td><td data-x='11' data-y='7'>J</td></tr><tr><td data-x='0' data-y='8'>L</td><td data-x='1' data-y='8'>I</td><td data-x='2' data-y='8'>E</td><td data-x='3' data-y='8'>C</td><td data-x='4' data-y='8'>A</td><td data-x='5' data-y='8'>U</td><td data-x='6' data-y='8'>C</td><td data-x='7' data-y='8'>H</td><td data-x='8' data-y='8'>Y</td><td data-x='9' data-y='8'>I</td><td data-x='10' data-y='8'>A</td><td data-x='11' data-y='8'>D</td></tr><tr><td data-x='0' data-y='9'>A</td><td data-x='1' data-y='9'>C</td><td data-x='2' data-y='9'>I</td><td data-x='3' data-y='9'>N</td><td data-x='4' data-y='9'>T</td><td data-x='5' data-y='9'>E</td><td data-x='6' data-y='9'>G</td><td data-x='7' data-y='9'>R</td><td data-x='8' data-y='9'>A</td><td data-x='9' data-y='9'>L</td><td data-x='10' data-y='9'>N</td><td data-x='11' data-y='9'>P</td></tr><tr><td data-x='0' data-y='10'>G</td><td data-x='1' data-y='10'>L</td><td data-x='2' data-y='10'>A</td><td data-x='3' data-y='10'>U</td><td data-x='4' data-y='10'>R</td><td data-x='5' data-y='10'>E</td><td data-x='6' data-y='10'>N</td><td data-x='7' data-y='10'>T</td><td data-x='8' data-y='10'>A</td><td data-x='9' data-y='10'>F</td><td data-x='10' data-y='10'>N</td><td data-x='11' data-y='10'>G</td></tr><tr><td data-x='0' data-y='11'>H</td><td data-x='1' data-y='11'>K</td><td data-x='2' data-y='11'>R</td><td data-x='3' data-y='11'>E</td><td data-x='4' data-y='11'>S</td><td data-x='5' data-y='11'>I</td><td data-x='6' data-y='11'>D</td><td data-x='7' data-y='11'>U</td><td data-x='8' data-y='11'>E</td><td data-x='9' data-y='11'>C</td><td data-x='10' data-y='11'>E</td><td data-x='11' data-y='11'>D</td></tr></table>
+    </div>
+    <div>
+      <h3>Find these terms:</h3>
+      <ul id="termList"><li data-w='cauchy'>CAUCHY</li><li data-w='riemann'>RIEMANN</li><li data-w='analytic'>ANALYTIC</li><li data-w='harmonic'>HARMONIC</li><li data-w='laurent'>LAURENT</li><li data-w='residue'>RESIDUE</li><li data-w='pole'>POLE</li><li data-w='zero'>ZERO</li><li data-w='contour'>CONTOUR</li><li data-w='integral'>INTEGRAL</li><li data-w='branch'>BRANCH</li><li data-w='log'>LOG</li><li data-w='argument'>ARGUMENT</li><li data-w='mapping'>MAPPING</li></ul>
+      <div class="progress"><div class="bar" id="bar"></div></div>
+    </div>
+  </div>
+</div></main>
+<script>
+var start=null, sel=[], terms=['cauchy','riemann','analytic','harmonic','laurent','residue','pole','zero','contour','integral','branch','log','argument','mapping'];
+var grid=document.getElementById('ws'), bar=document.getElementById('bar');
+function updateBar(){ var total=terms.length; var done=document.querySelectorAll('#termList li.found').length; bar.style.width=Math.round(100*done/total)+'%'; var key='progress_complex-analysis'; var prev=parseInt(localStorage.getItem(key)||'0',10)||0; var nv=Math.max(prev, Math.round(100*done/total)); localStorage.setItem(key, String(nv)); }
+grid.addEventListener('mousedown', function(e){ if(e.target.tagName!=='TD') return; start=e.target; sel=[start]; start.classList.add('sel'); });
+grid.addEventListener('mouseover', function(e){ if(!start) return; if(e.target.tagName!=='TD') return; if(sel.indexOf(e.target)>=0) return; sel.push(e.target); e.target.classList.add('sel'); });
+document.addEventListener('mouseup', function(){ if(!start) return; 
+  var letters=sel.map(function(td){ return td.textContent; }).join('').toLowerCase();
+  var li=[].find.call(document.querySelectorAll('#termList li'), function(x){ return !x.classList.contains('found') && (letters.indexOf(x.dataset.w)>=0); });
+  if(li){ li.classList.add('found'); sel.forEach(function(td){ td.classList.add('found'); td.classList.remove('sel'); }); updateBar(); }
+  sel.forEach(function(td){ td.classList.remove('sel'); }); sel=[]; start=null;
+});
+</script>
+</body></html>

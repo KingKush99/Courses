@@ -1,11 +1,14 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Complex Analysis — Fill Blanks</title><link rel='stylesheet' href='../assets/base.css'></head><body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'><title>Complex Analysis — Fill Blanks</title>
+<link rel='stylesheet' href='../assets/base.css'></head>
+<body><a class='back' href='./'>← Back</a><script src='../assets/app.js'></script>
 <main class="wrap" style="padding:0">
   <section class="card" style="max-width:none;width:100%;min-height:80vh;display:flex;flex-direction:column">
     <div style="padding:16px">
       <h1 style="margin-bottom:6px">Fill in the Blanks</h1>
       <div class="progress"><div class="bar" id="pbar"></div></div>
     </div>
-    <div id="stage" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center"></div>
+    <div id="stage" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;position:relative"></div>
   </section>
 </main>
 <script>
@@ -23,12 +26,33 @@ function renderQ(){
   }
   var q=qs[i];
   document.getElementById('pbar').style.width=Math.round(100*i/qs.length)+'%';
-  var prompt=q.q.replace(/\b(True|False)\b/gi,'_____');
-  var h=el('div',null,'<h2 style="margin:10px 0 16px 0">'+prompt+'</h2>'); s.appendChild(h);
+  var prompt=q.q; if(!/[?]$/.test(prompt)) prompt += '?';
+  var box=el('div',null,'<h2 style="margin:10px 0 16px 0">'+prompt+'</h2>'); s.appendChild(box);
+  if(window.__addHintEye) window.__addHintEye(box, q);
   var input=el('input'); input.style.fontSize='22px'; input.style.padding='14px 18px'; input.style.minWidth='320px'; input.placeholder='Type your answer'; s.appendChild(input);
   var go=el('button','pill-btn','Submit'); go.style.fontSize='20px'; go.style.padding='16px 24px'; go.style.marginTop='12px'; s.appendChild(go);
-  go.onclick=function(){ var val=norm(input.value); var ans=q.a; var ok=false; if(Array.isArray(ans)){ for(var j=0;j<ans.length;j++){ if(val===norm(ans[j])){ ok=true; break; }} } else { ok=(val===norm(ans)); } if(ok) correct++; i++; renderQ(); };
+  go.onclick=function(){ var val=norm(input.value); var ans=q.a; var ok=false; if(Array.isArray(ans)){ for(var j=0;j<ans.length;j++){ if(val===norm(ans[j])){ ok=true; break; } } } else { ok=(val===norm(ans)); } if(ok) correct++; i++; renderQ(); };
   input.addEventListener('keydown',function(e){ if(e.key==='Enter'){ go.click(); } }); input.focus();
 }
 var x=new XMLHttpRequest(); x.onreadystatechange=function(){ if(x.readyState==4){ qs=JSON.parse(x.responseText); if(qs.length>50) qs=qs.slice(0,50); total=qs.length; renderQ(); } }; x.open('GET','qbank.json',true); x.send();
-</script></body></html>
+</script>
+
+<script>
+(function(){
+  function iconBtn(html,title){ var b=document.createElement('button'); b.className='pill-btn'; b.innerHTML=html; b.title=title||''; b.style.borderRadius='999px'; b.style.width='42px'; b.style.height='42px'; b.style.padding='0'; return b; }
+  function addHintEye(container, item){
+    var wrap=document.createElement('div'); wrap.style.position='relative'; container.style.position='relative';
+    while(container.firstChild) wrap.appendChild(container.firstChild);
+    container.appendChild(wrap);
+    var qBtn=iconBtn('?', 'Hint'); qBtn.style.position='absolute'; qBtn.style.right='8px'; qBtn.style.bottom='8px'; qBtn.style.fontWeight='900';
+    qBtn.onclick=function(){ alert(item.hint?item.hint:'No hint for this one — check definitions.'); };
+    container.appendChild(qBtn);
+    var eye=iconBtn('👁️', 'Open source page'); eye.style.position='absolute'; eye.style.right='8px'; eye.style.top='8px';
+    eye.onclick=function(){ var p=item.page||1; window.open('resources/notes.pdf#page='+p, '_blank'); };
+    container.appendChild(eye);
+  }
+  window.__addHintEye = addHintEye;
+})();
+</script>
+
+</body></html>

@@ -8,7 +8,9 @@
       "Closed segment",
       "Single point only"
     ],
-    "a": "Open set"
+    "a": "Open set",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 10
   },
   {
     "type": "mc",
@@ -19,7 +21,9 @@
       "u_x=u_y and v_x=v_y",
       "u_x=v_x and u_y=v_y"
     ],
-    "a": "u_x=v_y and u_y=-v_x"
+    "a": "u_x=v_y and u_y=-v_x",
+    "hint": "Match u_x with v_y, and u_y with -v_x.",
+    "page": 85
   },
   {
     "type": "mc",
@@ -30,7 +34,9 @@
       "Maximum modulus",
       "Open mapping"
     ],
-    "a": "Liouville\u2019s theorem"
+    "a": "Liouville\u2019s theorem",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 66
   },
   {
     "type": "mc",
@@ -41,7 +47,9 @@
       "Depends on C",
       "2\u03c0i"
     ],
-    "a": "0"
+    "a": "0",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 132
   },
   {
     "type": "mc",
@@ -52,7 +60,9 @@
       "\u222e z f(z) dz",
       "(1/\u03c0)\u222e f(z) dz"
     ],
-    "a": "(1/2\u03c0i)\u222e f(z)/(z\u2212a) dz"
+    "a": "(1/2\u03c0i)\u222e f(z)/(z\u2212a) dz",
+    "hint": "Recall: f(a) = (1/2\u03c0i) \u222e f(z)/(z-a) dz",
+    "page": 155
   },
   {
     "type": "mc",
@@ -63,7 +73,9 @@
       "A (constant)",
       "A(z\u2212z0)"
     ],
-    "a": "A/(z\u2212z0)"
+    "a": "A/(z\u2212z0)",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 115
   },
   {
     "type": "mc",
@@ -74,7 +86,9 @@
       "0",
       "h'(z0)/g(z0)"
     ],
-    "a": "g(z0)/h'(z0)"
+    "a": "g(z0)/h'(z0)",
+    "hint": "Residue of \u03c6/\u03c8 at a simple pole a is \u03c6(a)/\u03c8'(a).",
+    "page": 11
   },
   {
     "type": "mc",
@@ -85,7 +99,9 @@
       "All complex plane",
       "A line"
     ],
-    "a": "An annulus"
+    "a": "An annulus",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 74
   },
   {
     "type": "mc",
@@ -96,7 +112,9 @@
       "Depends on path length",
       "Real number"
     ],
-    "a": "0"
+    "a": "0",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 117
   },
   {
     "type": "mc",
@@ -107,7 +125,9 @@
       "Anywhere",
       "Zeros"
     ],
-    "a": "Boundary"
+    "a": "Boundary",
+    "hint": "Non-constant analytic functions reach max |f| on boundary.",
+    "page": 7
   },
   {
     "type": "mc",
@@ -118,7 +138,9 @@
       "Lines",
       "Points"
     ],
-    "a": "Open sets"
+    "a": "Open sets",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 150
   },
   {
     "type": "mc",
@@ -129,7 +151,9 @@
       "Heat equation",
       "Poisson\u2019s eq with charge"
     ],
-    "a": "Laplace\u2019s equation"
+    "a": "Laplace\u2019s equation",
+    "hint": "Harmonic \u21d2 \u0394u=0; properties like mean value.",
+    "page": 79
   },
   {
     "type": "mc",
@@ -140,7 +164,9 @@
       "Constant",
       "Quadratic"
     ],
-    "a": "Harmonic"
+    "a": "Harmonic",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 3
   },
   {
     "type": "mc",
@@ -151,7 +177,9 @@
       "Zero the function",
       "Remove continuity"
     ],
-    "a": "Make a single-valued branch"
+    "a": "Make a single-valued branch",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 6
   },
   {
     "type": "mc",
@@ -162,7 +190,9 @@
       "Imag axis",
       "Unit circle"
     ],
-    "a": "Negative real axis"
+    "a": "Negative real axis",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 90
   },
   {
     "type": "mc",
@@ -173,7 +203,9 @@
       "Line integral length",
       "Area"
     ],
-    "a": "Zeros minus poles inside"
+    "a": "Zeros minus poles inside",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 102
   },
   {
     "type": "mc",
@@ -184,7 +216,9 @@
       "Integrals",
       "Real parts"
     ],
-    "a": "Zeros of two functions"
+    "a": "Zeros of two functions",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 124
   },
   {
     "type": "mc",
@@ -195,7 +229,9 @@
       "Zero",
       "Real"
     ],
-    "a": "Analytic"
+    "a": "Analytic",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 118
   },
   {
     "type": "mc",
@@ -206,7 +242,9 @@
       "A circle",
       "Empty"
     ],
-    "a": "Dense in C"
+    "a": "Dense in C",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 39
   },
   {
     "type": "mc",
@@ -217,7 +255,9 @@
       "1 always",
       "Infinity"
     ],
-    "a": "Smallest n with f^(n)(a)\u22600"
+    "a": "Smallest n with f^(n)(a)\u22600",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 9
   },
   {
     "type": "mc",
@@ -228,7 +268,9 @@
       "Only straight boundaries",
       "Only circles"
     ],
-    "a": "No holes"
+    "a": "No holes",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 107
   },
   {
     "type": "mc",
@@ -239,7 +281,9 @@
       "Areas",
       "All distances"
     ],
-    "a": "Angles"
+    "a": "Angles",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 197
   },
   {
     "type": "mc",
@@ -250,7 +294,9 @@
       "Lines shifted",
       "Ellipses"
     ],
-    "a": "Rays doubled angle"
+    "a": "Rays doubled angle",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 46
   },
   {
     "type": "mc",
@@ -261,7 +307,9 @@
       "\u03c0 \u00d7 sum residues",
       "Depends only on endpoints"
     ],
-    "a": "2\u03c0i \u00d7 (sum of residues inside)"
+    "a": "2\u03c0i \u00d7 (sum of residues inside)",
+    "hint": "Residue of \u03c6/\u03c8 at a simple pole a is \u03c6(a)/\u03c8'(a).",
+    "page": 143
   },
   {
     "type": "mc",
@@ -272,7 +320,9 @@
       "Fourier series",
       "Power mean"
     ],
-    "a": "Taylor series"
+    "a": "Taylor series",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 59
   },
   {
     "type": "mc",
@@ -283,7 +333,9 @@
       "Linear",
       "Periodic"
     ],
-    "a": "Constant"
+    "a": "Constant",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 185
   },
   {
     "type": "mc",
@@ -294,7 +346,9 @@
       "Essential singularity",
       "Branch cut exists"
     ],
-    "a": "f is bounded near point"
+    "a": "f is bounded near point",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 60
   },
   {
     "type": "mc",
@@ -305,7 +359,9 @@
       "Constant only",
       "Positive powers only"
     ],
-    "a": "Negative-power terms"
+    "a": "Negative-power terms",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 33
   },
   {
     "type": "mc",
@@ -316,7 +372,9 @@
       "Infinity",
       "Zero"
     ],
-    "a": "Radius to nearest singularity"
+    "a": "Radius to nearest singularity",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 75
   },
   {
     "type": "mc",
@@ -327,7 +385,9 @@
       "u constant",
       "Always"
     ],
-    "a": "Domain simply connected and u harmonic"
+    "a": "Domain simply connected and u harmonic",
+    "hint": "Harmonic \u21d2 \u0394u=0; properties like mean value.",
+    "page": 38
   },
   {
     "type": "mc",
@@ -338,7 +398,9 @@
       "Polynomials only",
       "Exponentials only"
     ],
-    "a": "Harmonic functions"
+    "a": "Harmonic functions",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 168
   },
   {
     "type": "mc",
@@ -349,7 +411,9 @@
       "Wave eq",
       "Heat eq"
     ],
-    "a": "Dirichlet problem on disk"
+    "a": "Dirichlet problem on disk",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 52
   },
   {
     "type": "mc",
@@ -360,7 +424,9 @@
       "Undefined",
       "Constant only"
     ],
-    "a": "Analytic & nonzero at a"
+    "a": "Analytic & nonzero at a",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 164
   },
   {
     "type": "mc",
@@ -371,7 +437,9 @@
       "\u03c8(a)/\u03c6'(a)",
       "0"
     ],
-    "a": "\u03c6(a)/\u03c8'(a)"
+    "a": "\u03c6(a)/\u03c8'(a)",
+    "hint": "Residue of \u03c6/\u03c8 at a simple pole a is \u03c6(a)/\u03c8'(a).",
+    "page": 43
   },
   {
     "type": "mc",
@@ -382,7 +450,9 @@
       "R^n / M",
       "M n / R"
     ],
-    "a": "n! M / R^n"
+    "a": "n! M / R^n",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 86
   },
   {
     "type": "mc",
@@ -393,7 +463,9 @@
       "Conformal",
       "Periodic"
     ],
-    "a": "Constant"
+    "a": "Constant",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 177
   },
   {
     "type": "mc",
@@ -404,7 +476,9 @@
       "Upper half-plane",
       "Annulus"
     ],
-    "a": "Unit disk fixing 0"
+    "a": "Unit disk fixing 0",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 28
   },
   {
     "type": "mc",
@@ -415,7 +489,9 @@
       "Imag axis only",
       "Any line"
     ],
-    "a": "Real axis"
+    "a": "Real axis",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 140
   },
   {
     "type": "mc",
@@ -426,7 +502,9 @@
       "Parabola",
       "Ellipse"
     ],
-    "a": "[-2,2]"
+    "a": "[-2,2]",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 36
   },
   {
     "type": "mc",
@@ -437,7 +515,9 @@
       "Sum of all residues",
       "1"
     ],
-    "a": "-sum of residues at finite poles"
+    "a": "-sum of residues at finite poles",
+    "hint": "Residue of \u03c6/\u03c8 at a simple pole a is \u03c6(a)/\u03c8'(a).",
+    "page": 32
   },
   {
     "type": "mc",
@@ -448,7 +528,9 @@
       "Stokes",
       "Gauss"
     ],
-    "a": "Argument principle"
+    "a": "Argument principle",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 172
   },
   {
     "type": "mc",
@@ -459,7 +541,9 @@
       "Area",
       "Curvature"
     ],
-    "a": "Probability of Brownian exit"
+    "a": "Probability of Brownian exit",
+    "hint": "Harmonic \u21d2 \u0394u=0; properties like mean value.",
+    "page": 122
   },
   {
     "type": "mc",
@@ -470,7 +554,9 @@
       "Always zero",
       "Only negative jumps"
     ],
-    "a": "Well-defined change in arg"
+    "a": "Well-defined change in arg",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 163
   },
   {
     "type": "mc",
@@ -481,7 +567,9 @@
       "Only poles",
       "Neither"
     ],
-    "a": "Zeros and poles of f"
+    "a": "Zeros and poles of f",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 148
   },
   {
     "type": "mc",
@@ -492,7 +580,9 @@
       "(z-a)^2",
       "log z at 0"
     ],
-    "a": "e^{1/z} at 0"
+    "a": "e^{1/z} at 0",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 138
   },
   {
     "type": "mc",
@@ -503,7 +593,9 @@
       "Real",
       "Polynomial"
     ],
-    "a": "Analytic"
+    "a": "Analytic",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 44
   },
   {
     "type": "mc",
@@ -514,7 +606,9 @@
       "Anywhere",
       "Zeros"
     ],
-    "a": "Boundary"
+    "a": "Boundary",
+    "hint": "Non-constant analytic functions reach max |f| on boundary.",
+    "page": 195
   },
   {
     "type": "mc",
@@ -525,7 +619,9 @@
       "Whole plane",
       "Annulus"
     ],
-    "a": "Unit disk"
+    "a": "Unit disk",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 16
   },
   {
     "type": "mc",
@@ -536,7 +632,9 @@
       "Difference of magnitudes",
       "Average"
     ],
-    "a": "Sum of arguments (mod 2\u03c0)"
+    "a": "Sum of arguments (mod 2\u03c0)",
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 54
   },
   {
     "type": "fill",
@@ -544,7 +642,9 @@
     "a": [
       "v_y",
       "-v_x"
-    ]
+    ],
+    "hint": "Match u_x with v_y, and u_y with -v_x.",
+    "page": 169
   },
   {
     "type": "fill",
@@ -553,14 +653,18 @@
       "2\u03c0i",
       "2pi i",
       "2*pi*i"
-    ]
+    ],
+    "hint": "Residue of \u03c6/\u03c8 at a simple pole a is \u03c6(a)/\u03c8'(a).",
+    "page": 170
   },
   {
     "type": "fill",
     "q": "Liouville says bounded entire functions are __",
     "a": [
       "constant"
-    ]
+    ],
+    "hint": "Bounded + entire \u21d2 constant.",
+    "page": 137
   },
   {
     "type": "fill",
@@ -568,6 +672,8 @@
     "a": [
       "negative",
       "-"
-    ]
+    ],
+    "hint": "Think of the core theorem/definition that fits this statement.",
+    "page": 104
   }
 ]
