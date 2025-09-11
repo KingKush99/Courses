@@ -1,0 +1,90 @@
+<!doctype html><html><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Rugby — SRS</title>
+
+<link rel='stylesheet' href='../assets/base.css' onerror="this.href='../rugby/base.css'">
+<style>
+.hint-overlay{position:fixed;inset:0;background:#000000bb;display:none;align-items:center;justify-content:center;z-index:9999}
+.hint-modal{width:90vw;height:90vh;background:#1a120e;border:1px solid #ffffff22;border-radius:16px;box-shadow:0 10px 40px #000000aa;display:flex;flex-direction:column;overflow:hidden}
+.hint-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #ffffff22}
+.hint-body{padding:14px;overflow:auto;line-height:1.6}
+.qcard{position:relative;max-width:1100px;margin:auto;padding:18px 22px;border-radius:16px;background:#1b140f;border:1px solid #ffffff22;box-shadow:0 8px 30px #00000055;min-height:240px}
+.qbtn{position:absolute;border-radius:999px;width:46px;height:46px;display:grid;place-items:center;padding:0;font-weight:900}
+.qbtn.eye{top:10px;right:10px}
+.qbtn.hint{right:10px;bottom:10px}
+</style>
+<script>
+(function(){
+  window.__openRugbyPDF=function(name,page){ window.open('resources/viewer.html?file='+encodeURIComponent(name||'irish')+'&page='+encodeURIComponent(page||1),'_blank'); };
+  function openHint(text){
+    var ov=document.querySelector('.hint-overlay'); if(!ov) return;
+    ov.querySelector('.hint-body').innerHTML = text || 'No hint available.';
+    ov.style.display='flex';
+  }
+  window.__bindQE=function(container,item){
+    var h=document.createElement('button'); h.className='pill-btn qbtn hint'; h.textContent='?'; h.title='Hint'; h.onclick=function(){ openHint(item.hint||''); }; container.appendChild(h);
+    var e=document.createElement('button'); e.className='pill-btn qbtn eye'; e.textContent='👁'; e.title='Open source page';
+    e.onclick=function(){ __openRugbyPDF(item.src||'irish', item.page||1); }; container.appendChild(e);
+    if(!document.querySelector('.hint-overlay')){
+      var ov=document.createElement('div'); ov.className='hint-overlay';
+      ov.innerHTML="<div class='hint-modal'><div class='hint-head'><strong>Hint</strong><button class='pill-btn' id='hintClose'>✖</button></div><div class='hint-body'></div></div>";
+      document.body.appendChild(ov);
+      document.addEventListener('click',function(ev){ if(ev.target===ov) ov.style.display='none'; });
+      document.getElementById('hintClose').onclick=function(){ ov.style.display='none'; };
+    }
+  }
+})();
+</script>
+
+</head><body>
+<a class="back pill-btn" href="index.html">← Back</a>
+<script src="../assets/app.js" onerror="var s=document.createElement('script');s.textContent=`
+// Corner buttons safety: only inject if the global site app didn't already do it.
+(function(){
+  if(document.querySelector('[data-site-corners]')) return;
+  const make = (cls, html, href) => {
+    const b = document.createElement('a'); b.href=href||'#'; b.className='pill-btn'; b.style.position='fixed';
+    b.style.zIndex='30'; b.style.width='42px'; b.style.height='42px'; b.style.borderRadius='999px'; b.style.display='grid'; b.style.placeItems='center';
+    b.title = cls;
+    return b;
+  };
+  const prof = make('profile','👤','../profile.html'); prof.style.left='12px'; prof.style.top='12px';
+  const back = make('back','←','../index.html'); back.style.left='12px'; back.style.top='60px'; back.style.width='64px';
+  const menu = make('menu','☰','#'); menu.style.right='12px'; menu.style.top='12px';
+  const chat = make('chat','💬','#'); chat.style.left='12px'; chat.style.bottom='12px';
+  const slots = make('slots','🎰','#'); slots.style.right='12px'; slots.style.bottom='12px';
+  const holder = document.createElement('div'); holder.dataset.siteCorners='1';
+  holder.append(prof, back, menu, chat, slots); document.body.appendChild(holder);
+})();
+`;document.head.appendChild(s)"></script>
+<main class="wrap"><div class="card">
+  <h1>Rugby — Spaced Repetition (1/2/3/4)</h1>
+  <p>1=Again (now), 2=10min, 3=1h, 4=4d</p>
+  <div id="qa" class="qcard" style="min-height:200px;position:relative"></div>
+  <div class="row" style="margin-top:12px;gap:10px;flex-wrap:wrap">
+    <button data-q='1' class="pill-btn">1 — Again</button>
+    <button data-q='2' class="pill-btn">2 — 10 min</button>
+    <button data-q='3' class="pill-btn">3 — 1 hr</button>
+    <button data-q='4' class="pill-btn">4 — 4 days</button>
+    <button id="show" class="pill-btn" style="margin-left:auto">Show Answer</button>
+  </div>
+</div></main>
+<div class='hint-overlay'><div class='hint-modal'><div class='hint-head'><strong>Hint</strong><button class='pill-btn' id='hintClose'>✖</button></div><div class='hint-body'></div></div></div>
+<script>
+var KEY='leitner_rugby_v1';
+var raw=localStorage.getItem(KEY); var state=raw?JSON.parse(raw):{sched:{}};
+function loadQ(cb){ var x=new XMLHttpRequest(); x.onreadystatechange=function(){ if(x.readyState==4) cb(JSON.parse(x.responseText)); }; x.open('GET','qbank.json',true); x.send(); }
+function now(){ return Date.now(); }
+function addMin(m){ return now()+m*60000; }
+var delays={1:0, 2:10, 3:60, 4:5760};
+function dueAt(grade){ return addMin(delays[grade]||0); }
+function pick(qs){ var due=[]; for(var i=0;i<qs.length;i++){ var s=state.sched[i]; if(!s || s<=now()) due.push({q:qs[i],i:i}); } var pool=due.length?due:qs.map(function(q,i){return {q:q,i:i};}); return pool[Math.floor(Math.random()*pool.length)]; }
+function render(cur){ var qa=document.getElementById('qa'); var item=cur.q; var html='<div><strong>Q:</strong> '+item.q+(item.q.trim().endsWith('?')?'':'?')+'</div>'; if((item.type==='mc'||item.options)&&item.options){ html+='<ol>'; for(var i=0;i<item.options.length;i++) html+='<li>'+item.options[i]+'</li>'; html+='</ol>'; } var ans=item.a; var ansText=Array.isArray(ans)? ans.join(', ') : (ans!=null? ans : ''); html+='<div id="ans" style="margin-top:8px;display:none"><strong>A:</strong> '+ansText+'</div>'; qa.innerHTML=html; if(window.__bindQE) window.__bindQE(qa, item); }
+var all=[],cur=null; loadQ(function(qs){ all=qs; next(); });
+function next(){ cur=pick(all); render(cur); var a=document.getElementById('ans'); if(a) a.style.display='none'; }
+document.getElementById('show').onclick=function(){ var a=document.getElementById('ans'); if(a) a.style.display='block'; };
+document.querySelectorAll('[data-q]').forEach(function(btn){ btn.onclick=function(){ var g=parseInt(btn.dataset.q); state.sched[cur.i]=dueAt(g); localStorage.setItem(KEY, JSON.stringify(state));
+  var dueCount=0; for(var k in state.sched) if(state.sched[k]>now()) dueCount++; var prog=Math.round(100*dueCount/(all.length||1)); var keyP='progress_rugby'; var prev=parseInt(localStorage.getItem(keyP)||'0',10)||0; if(prog>prev) localStorage.setItem(keyP,String(prog));
+  next(); }; });
+</script>
+</body></html>

@@ -1,0 +1,151 @@
+<!doctype html><html><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Rugby — Interactive Game</title>
+<link rel="stylesheet" href="../assets/base.css" onerror="this.href='base.css'">
+<style>
+:root{--bg:#0e0b09;--card:#1a120e;--muted:#ffffff22;--text:#f6eadf;--accent:#ff6b00}
+*{box-sizing:border-box} html,body{height:100%}
+body{margin:0;font-family:'Comic Sans MS','Comic Sans',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1200px 700px at 80% 100%,#3a0d00 0%,#0e0b09 40%,#0b0908 100%);color:var(--text)}
+a{color:#ffd7b0;text-decoration:none}
+.wrap{max-width:1100px;margin:24px auto;padding:0 12px}
+.card{background:var(--card);border:1px solid var(--muted);border-radius:16px;box-shadow:0 10px 40px #00000066;padding:18px}
+h1,h2,h3{margin:.2em 0 .4em 0}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pill-btn{border:none;border-radius:999px;padding:10px 16px;background:linear-gradient(45deg,#ff6b00,#ff3b3b);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 3px 10px #00000066}
+.pill-btn:hover{filter:brightness(1.05)}
+.badge{display:inline-block;padding:.3em .6em;border-radius:999px;border:1px solid var(--muted);background:#211611}
+.badge-green{background:#1b3b1b}
+.badge-yellow{background:#3b341b}
+.badge-red{background:#3b1b1b}
+.back{position:fixed;left:16px;top:64px;z-index:20}
+.progress{height:6px;background:#000;border-radius:8px;overflow:hidden;border:1px solid var(--muted)}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#ff6b00,#ff3b3b)}
+#corner-note{position:fixed;left:12px;bottom:12px;opacity:.5;font-size:12px}
+.btn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.btn{display:block;text-align:center;padding:14px 18px;border-radius:12px;background:#291b14;border:1px solid var(--muted)}
+
+#stage{position:relative;width:min(1100px,94vw);height:min(620px,70vh);margin:14px auto;background:linear-gradient(#1c5d2b,#1b4d25);border-radius:16px;border:3px solid #0b2f12;box-shadow:inset 0 0 30px #0009}
+.yard{position:absolute;left:0;right:0;height:1px;background:#ffffff33}
+.player,.cpu,.ball{position:absolute;width:24px;height:24px;border-radius:999px;display:grid;place-items:center;font-size:12px;font-weight:900}
+.player{background:#ff6b00;color:#fff;border:2px solid #000}
+.cpu{background:#ffd43b;color:#000;border:2px solid #000}
+.ball{background:#8b4513;border:2px solid #000}
+.hud{display:flex;gap:10px;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto 8px auto}
+.tag{padding:6px 10px;border-radius:8px;background:#291b14;border:1px solid #ffffff22}
+</style>
+</head><body>
+<a class="back pill-btn" href="index.html">← Back</a>
+<script src="../assets/app.js" onerror="var s=document.createElement('script');s.textContent=`
+// Corner buttons safety: only inject if the global site app didn't already do it.
+(function(){
+  if(document.querySelector('[data-site-corners]')) return;
+  const make = (cls, html, href) => {
+    const b = document.createElement('a'); b.href=href||'#'; b.className='pill-btn'; b.style.position='fixed';
+    b.style.zIndex='30'; b.style.width='42px'; b.style.height='42px'; b.style.borderRadius='999px'; b.style.display='grid'; b.style.placeItems='center';
+    b.title = cls;
+    return b;
+  };
+  const prof = make('profile','👤','../profile.html'); prof.style.left='12px'; prof.style.top='12px';
+  const back = make('back','←','../index.html'); back.style.left='12px'; back.style.top='60px'; back.style.width='64px';
+  const menu = make('menu','☰','#'); menu.style.right='12px'; menu.style.top='12px';
+  const chat = make('chat','💬','#'); chat.style.left='12px'; chat.style.bottom='12px';
+  const slots = make('slots','🎰','#'); slots.style.right='12px'; slots.style.bottom='12px';
+  const holder = document.createElement('div'); holder.dataset.siteCorners='1';
+  holder.append(prof, back, menu, chat, slots); document.body.appendChild(holder);
+})();
+`;document.head.appendChild(s)"></script>
+<main class="wrap">
+  <div class="card">
+    <h1>🏉 Rugby Game</h1>
+    <div class="hud">
+      <div class="row">
+        <label>Mode</label>
+        <select id="mode" class="pill-btn" style="border-radius:10px">
+          <option value="offense">Offense (you run)</option>
+          <option value="defense">Defense (you tackle)</option>
+        </select>
+        <label>Difficulty</label>
+        <select id="diff" class="pill-btn" style="border-radius:10px">
+          <option value="easy">Easy</option>
+          <option value="med">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+        <button id="start" class="pill-btn">Start Play</button>
+      </div>
+      <div class="row">
+        <span class="tag">Score: <b id="score">0</b></span>
+        <span class="tag">Timer: <b id="timer">30</b>s</span>
+      </div>
+    </div>
+    <div id="stage"></div>
+    <p class="row" style="justify-content:center">Controls: <span class="tag">WASD / ⬆⬇⬅➡ to move</span> <span class="tag">Shift = sprint</span></p>
+  </div>
+</main>
+<script>
+const stage = document.getElementById('stage');
+const timerEl=document.getElementById('timer'); const scoreEl=document.getElementById('score');
+let w=stage.clientWidth, h=stage.clientHeight;
+function yardLines(){ for(let i=0;i<10;i++){ const y=document.createElement('div'); y.className='yard'; y.style.top=(h*i/10)+'px'; stage.appendChild(y);}}
+function mk(type,x,y){ const d=document.createElement('div'); d.className=type; d.style.left=x+'px'; d.style.top=y+'px'; stage.appendChild(d); return d; }
+let player, ball, cpus=[], mode='offense', score=0, tLeft=30, loopId=null, keys={}, spd=2.2;
+function resetPlay(){
+  stage.innerHTML=''; yardLines(); w=stage.clientWidth; h=stage.clientHeight;
+  mode=document.getElementById('mode').value; const diff=document.getElementById('diff').value;
+  let cpuN = diff==='easy'?3:(diff==='med'?5:7);
+  spd = diff==='easy'?2.2:(diff==='med'?2.7:3.1);
+  const startX=40, startY=h/2;
+  player=mk('player', startX, startY);
+  ball=mk('ball', startX+16, startY+4);
+  cpus=[];
+  for(let i=0;i<cpuN;i++){ const cx= w*0.45 + Math.random()*w*0.45; const cy= 40+ Math.random()*(h-80); cpus.push(mk('cpu',cx,cy)); }
+  tLeft=30; timerEl.textContent=tLeft.toString();
+}
+function dist(ax,ay,bx,by){ const dx=ax-bx, dy=ay-by; return Math.hypot(dx,dy); }
+function clamp(v,a,b){ return Math.max(a, Math.min(b,v)); }
+function tick(){
+  // movement
+  let vx=0, vy=0; if(keys['ArrowLeft']||keys['a']) vx-=1; if(keys['ArrowRight']||keys['d']) vx+=1; if(keys['ArrowUp']||keys['w']) vy-=1; if(keys['ArrowDown']||keys['s']) vy+=1;
+  let speed = spd * (keys['Shift']?1.45:1);
+  let px = parseFloat(player.style.left), py=parseFloat(player.style.top);
+  px += vx*speed; py += vy*speed;
+  px = clamp(px, 0, w-24); py = clamp(py, 0, h-24);
+  player.style.left=px+'px'; player.style.top=py+'px';
+  ball.style.left=(px+16)+'px'; ball.style.top=(py+4)+'px';
+  // AI
+  cpus.forEach(c=>{
+    let cx=parseFloat(c.style.left), cy=parseFloat(c.style.top);
+    let tx=px, ty=py;
+    if(mode==='defense'){ // chase AI ballcarrier
+      tx = parseFloat(ball.style.left); ty = parseFloat(ball.style.top);
+    }
+    let ang=Math.atan2(ty-cy, tx-cx); const cs = spd*0.92;
+    cx += Math.cos(ang)*cs; cy += Math.sin(ang)*cs;
+    c.style.left=cx+'px'; c.style.top=cy+'px';
+    // collision
+    if(dist(cx,cy,px,py) < 22){
+      // tackle detected
+      if(mode==='offense'){ endPlay(false); } else { score+=7; scoreEl.textContent=score; endPlay(true,'Tackle!'); }
+    }
+  });
+  // win conditions
+  if(mode==='offense' && px > w-70){ score+=7; scoreEl.textContent=score; endPlay(true,'Try!'); }
+  if(tLeft<=0){ endPlay(false); }
+}
+function endPlay(success,msg){
+  clearInterval(loopId); loopId=null;
+  const pop=document.createElement('div'); pop.className='card'; pop.style.position='absolute'; pop.style.left='50%'; pop.style.top='50%'; pop.style.transform='translate(-50%,-50%)'; pop.style.textAlign='center'; pop.style.minWidth='280px';
+  pop.innerHTML = '<h2>'+ (msg|| (success?'Success!':'Stopped!')) +'</h2><p><button class="pill-btn" id="again">Next Play</button></p>';
+  stage.appendChild(pop); document.getElementById('again').onclick=()=>{ resetPlay(); startLoop(); };
+}
+function startLoop(){
+  if(loopId) clearInterval(loopId);
+  loopId = setInterval(()=>{ tick(); }, 1000/60);
+  const timer = setInterval(()=>{ if(!loopId){ clearInterval(timer); return; } tLeft-=1; timerEl.textContent=tLeft.toString(); if(tLeft<=0){ clearInterval(timer); } }, 1000);
+}
+document.getElementById('start').onclick=function(){ resetPlay(); startLoop(); };
+window.addEventListener('keydown',e=>{ keys[e.key]=true; });
+window.addEventListener('keyup',e=>{ keys[e.key]=false; });
+// boot
+resetPlay();
+</script>
+</body></html>

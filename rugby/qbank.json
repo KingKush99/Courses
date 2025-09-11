@@ -1,0 +1,647 @@
+[
+  {
+    "type": "mc",
+    "q": "How many players per side in Rugby Union",
+    "options": [
+      "13",
+      "15",
+      "11",
+      "7"
+    ],
+    "a": "15",
+    "src": "irish",
+    "page": 2,
+    "hint": "Standard RU is 15; Rugby League is 13."
+  },
+  {
+    "type": "mc",
+    "q": "A 'knock-on' occurs when the ball is",
+    "options": [
+      "Kicked out on full",
+      "Passed forward",
+      "Dropped forward from the hand",
+      "Placed backwards"
+    ],
+    "a": "Dropped forward from the hand",
+    "src": "irish",
+    "page": 4,
+    "hint": "Forward from the hand is a knock-on."
+  },
+  {
+    "type": "mc",
+    "q": "After a minor infringement, play usually restarts with a",
+    "options": [
+      "Lineout",
+      "Scrum",
+      "Penalty kick",
+      "Drop-out"
+    ],
+    "a": "Scrum",
+    "src": "irish",
+    "page": 6,
+    "hint": "Knock-ons/forward passes \u2192 scrum."
+  },
+  {
+    "type": "mc",
+    "q": "Offside at a ruck is judged from the",
+    "options": [
+      "Ball carrier",
+      "Last feet",
+      "Goal line",
+      "Touch line"
+    ],
+    "a": "Last feet",
+    "src": "irish",
+    "page": 7,
+    "hint": "Offside line through last feet."
+  },
+  {
+    "type": "mc",
+    "q": "What is the 'gain line' used for",
+    "options": [
+      "Tracking territory won",
+      "Determining offside at lineout",
+      "Marking 22m",
+      "Kicking tee position"
+    ],
+    "a": "Tracking territory won",
+    "src": "oirc",
+    "page": 5,
+    "hint": "Territory measure per phase."
+  },
+  {
+    "type": "mc",
+    "q": "Crash ball is best run by",
+    "options": [
+      "Tight 5",
+      "Centers",
+      "Fullback",
+      "Wing"
+    ],
+    "a": "Centers",
+    "src": "oirc",
+    "page": 10,
+    "hint": "Crash lines from 12/13 into the seam."
+  },
+  {
+    "type": "mc",
+    "q": "On a 2\u2011pod, the tip option is",
+    "options": [
+      "Inside pass to 9",
+      "Flat pass to forward running outside shoulder",
+      "Skip pass to 15",
+      "Box kick"
+    ],
+    "a": "Flat pass to forward running outside shoulder",
+    "src": "oirc",
+    "page": 12,
+    "hint": "Tip = short to outside runner."
+  },
+  {
+    "type": "mc",
+    "q": "'Screen' in backs play means",
+    "options": [
+      "Forward screen at ruck",
+      "Decoy pass behind a pod",
+      "Chip over defensive line",
+      "Maul setup"
+    ],
+    "a": "Decoy pass behind a pod",
+    "src": "oirc",
+    "page": 14,
+    "hint": "Ball goes behind front runner."
+  },
+  {
+    "type": "mc",
+    "q": "'Unders' line breaks",
+    "options": [
+      "Away from ball",
+      "Toward passer",
+      "Only wide channels",
+      "Only by 10"
+    ],
+    "a": "Toward passer",
+    "src": "oirc",
+    "page": 16,
+    "hint": "Angle back to inside shoulder."
+  },
+  {
+    "type": "mc",
+    "q": "'Overs' line breaks",
+    "options": [
+      "Toward passer",
+      "Toward touchline",
+      "Only by 12",
+      "Only by 13"
+    ],
+    "a": "Toward touchline",
+    "src": "oirc",
+    "page": 18,
+    "hint": "Angle out to space."
+  },
+  {
+    "type": "fill",
+    "q": "A successful kick at goal that bounces and then goes over is a ______ kick",
+    "a": "drop",
+    "src": "irish",
+    "page": 20,
+    "hint": "Law / terminology basic. A successful kick at goal that bounces and then goes over is a ______ kick"
+  },
+  {
+    "type": "fill",
+    "q": "A tackle above the shoulders is a ______ tackle",
+    "a": "high",
+    "src": "irish",
+    "page": 21,
+    "hint": "Law / terminology basic. A tackle above the shoulders is a ______ tackle"
+  },
+  {
+    "type": "fill",
+    "q": "At the lineout, players must form a ______ between 5m and 15m lines",
+    "a": "line",
+    "src": "irish",
+    "page": 22,
+    "hint": "Law / terminology basic. At the lineout, players must form a ______ between 5m and 15m lines"
+  },
+  {
+    "type": "fill",
+    "q": "When a maul stops moving forward and the ball is not immediately available, the referee usually calls a ______ maul",
+    "a": "held",
+    "src": "irish",
+    "page": 23,
+    "hint": "Law / terminology basic. When a maul stops moving forward and the ball is not immediately available, the referee usually calls a ______ maul"
+  },
+  {
+    "type": "fill",
+    "q": "The scrumhalf is also called number ______",
+    "a": "9",
+    "src": "irish",
+    "page": 24,
+    "hint": "Law / terminology basic. The scrumhalf is also called number ______"
+  },
+  {
+    "type": "mc",
+    "q": "How many players per side in Rugby Union",
+    "options": [
+      "13",
+      "15",
+      "11",
+      "7"
+    ],
+    "a": "15",
+    "src": "irish",
+    "page": 2,
+    "hint": "Standard RU is 15; Rugby League is 13.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "A 'knock-on' occurs when the ball is",
+    "options": [
+      "Kicked out on full",
+      "Passed forward",
+      "Dropped forward from the hand",
+      "Placed backwards"
+    ],
+    "a": "Dropped forward from the hand",
+    "src": "irish",
+    "page": 4,
+    "hint": "Forward from the hand is a knock-on.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "After a minor infringement, play usually restarts with a",
+    "options": [
+      "Lineout",
+      "Scrum",
+      "Penalty kick",
+      "Drop-out"
+    ],
+    "a": "Scrum",
+    "src": "irish",
+    "page": 6,
+    "hint": "Knock-ons/forward passes \u2192 scrum.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "Offside at a ruck is judged from the",
+    "options": [
+      "Ball carrier",
+      "Last feet",
+      "Goal line",
+      "Touch line"
+    ],
+    "a": "Last feet",
+    "src": "irish",
+    "page": 7,
+    "hint": "Offside line through last feet.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "What is the 'gain line' used for",
+    "options": [
+      "Tracking territory won",
+      "Determining offside at lineout",
+      "Marking 22m",
+      "Kicking tee position"
+    ],
+    "a": "Tracking territory won",
+    "src": "oirc",
+    "page": 5,
+    "hint": "Territory measure per phase.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "Crash ball is best run by",
+    "options": [
+      "Tight 5",
+      "Centers",
+      "Fullback",
+      "Wing"
+    ],
+    "a": "Centers",
+    "src": "oirc",
+    "page": 10,
+    "hint": "Crash lines from 12/13 into the seam.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "On a 2\u2011pod, the tip option is",
+    "options": [
+      "Inside pass to 9",
+      "Flat pass to forward running outside shoulder",
+      "Skip pass to 15",
+      "Box kick"
+    ],
+    "a": "Flat pass to forward running outside shoulder",
+    "src": "oirc",
+    "page": 12,
+    "hint": "Tip = short to outside runner.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "'Screen' in backs play means",
+    "options": [
+      "Forward screen at ruck",
+      "Decoy pass behind a pod",
+      "Chip over defensive line",
+      "Maul setup"
+    ],
+    "a": "Decoy pass behind a pod",
+    "src": "oirc",
+    "page": 14,
+    "hint": "Ball goes behind front runner.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "'Unders' line breaks",
+    "options": [
+      "Away from ball",
+      "Toward passer",
+      "Only wide channels",
+      "Only by 10"
+    ],
+    "a": "Toward passer",
+    "src": "oirc",
+    "page": 16,
+    "hint": "Angle back to inside shoulder.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "'Overs' line breaks",
+    "options": [
+      "Toward passer",
+      "Toward touchline",
+      "Only by 12",
+      "Only by 13"
+    ],
+    "a": "Toward touchline",
+    "src": "oirc",
+    "page": 18,
+    "hint": "Angle out to space.",
+    "v": 1
+  },
+  {
+    "type": "fill",
+    "q": "A successful kick at goal that bounces and then goes over is a ______ kick",
+    "a": "drop",
+    "src": "irish",
+    "page": 20,
+    "hint": "Law / terminology basic. A successful kick at goal that bounces and then goes over is a ______ kick",
+    "v": 1
+  },
+  {
+    "type": "fill",
+    "q": "A tackle above the shoulders is a ______ tackle",
+    "a": "high",
+    "src": "irish",
+    "page": 21,
+    "hint": "Law / terminology basic. A tackle above the shoulders is a ______ tackle",
+    "v": 1
+  },
+  {
+    "type": "fill",
+    "q": "At the lineout, players must form a ______ between 5m and 15m lines",
+    "a": "line",
+    "src": "irish",
+    "page": 22,
+    "hint": "Law / terminology basic. At the lineout, players must form a ______ between 5m and 15m lines",
+    "v": 1
+  },
+  {
+    "type": "fill",
+    "q": "When a maul stops moving forward and the ball is not immediately available, the referee usually calls a ______ maul",
+    "a": "held",
+    "src": "irish",
+    "page": 23,
+    "hint": "Law / terminology basic. When a maul stops moving forward and the ball is not immediately available, the referee usually calls a ______ maul",
+    "v": 1
+  },
+  {
+    "type": "fill",
+    "q": "The scrumhalf is also called number ______",
+    "a": "9",
+    "src": "irish",
+    "page": 24,
+    "hint": "Law / terminology basic. The scrumhalf is also called number ______",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "How many players per side in Rugby Union",
+    "options": [
+      "13",
+      "15",
+      "11",
+      "7"
+    ],
+    "a": "15",
+    "src": "irish",
+    "page": 2,
+    "hint": "Standard RU is 15; Rugby League is 13.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "A 'knock-on' occurs when the ball is",
+    "options": [
+      "Kicked out on full",
+      "Passed forward",
+      "Dropped forward from the hand",
+      "Placed backwards"
+    ],
+    "a": "Dropped forward from the hand",
+    "src": "irish",
+    "page": 4,
+    "hint": "Forward from the hand is a knock-on.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "After a minor infringement, play usually restarts with a",
+    "options": [
+      "Lineout",
+      "Scrum",
+      "Penalty kick",
+      "Drop-out"
+    ],
+    "a": "Scrum",
+    "src": "irish",
+    "page": 6,
+    "hint": "Knock-ons/forward passes \u2192 scrum.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "Offside at a ruck is judged from the",
+    "options": [
+      "Ball carrier",
+      "Last feet",
+      "Goal line",
+      "Touch line"
+    ],
+    "a": "Last feet",
+    "src": "irish",
+    "page": 7,
+    "hint": "Offside line through last feet.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "What is the 'gain line' used for",
+    "options": [
+      "Tracking territory won",
+      "Determining offside at lineout",
+      "Marking 22m",
+      "Kicking tee position"
+    ],
+    "a": "Tracking territory won",
+    "src": "oirc",
+    "page": 5,
+    "hint": "Territory measure per phase.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "Crash ball is best run by",
+    "options": [
+      "Tight 5",
+      "Centers",
+      "Fullback",
+      "Wing"
+    ],
+    "a": "Centers",
+    "src": "oirc",
+    "page": 10,
+    "hint": "Crash lines from 12/13 into the seam.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "On a 2\u2011pod, the tip option is",
+    "options": [
+      "Inside pass to 9",
+      "Flat pass to forward running outside shoulder",
+      "Skip pass to 15",
+      "Box kick"
+    ],
+    "a": "Flat pass to forward running outside shoulder",
+    "src": "oirc",
+    "page": 12,
+    "hint": "Tip = short to outside runner.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "'Screen' in backs play means",
+    "options": [
+      "Forward screen at ruck",
+      "Decoy pass behind a pod",
+      "Chip over defensive line",
+      "Maul setup"
+    ],
+    "a": "Decoy pass behind a pod",
+    "src": "oirc",
+    "page": 14,
+    "hint": "Ball goes behind front runner.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "'Unders' line breaks",
+    "options": [
+      "Away from ball",
+      "Toward passer",
+      "Only wide channels",
+      "Only by 10"
+    ],
+    "a": "Toward passer",
+    "src": "oirc",
+    "page": 16,
+    "hint": "Angle back to inside shoulder.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "'Overs' line breaks",
+    "options": [
+      "Toward passer",
+      "Toward touchline",
+      "Only by 12",
+      "Only by 13"
+    ],
+    "a": "Toward touchline",
+    "src": "oirc",
+    "page": 18,
+    "hint": "Angle out to space.",
+    "v": 1
+  },
+  {
+    "type": "fill",
+    "q": "A successful kick at goal that bounces and then goes over is a ______ kick",
+    "a": "drop",
+    "src": "irish",
+    "page": 20,
+    "hint": "Law / terminology basic. A successful kick at goal that bounces and then goes over is a ______ kick",
+    "v": 1
+  },
+  {
+    "type": "fill",
+    "q": "A tackle above the shoulders is a ______ tackle",
+    "a": "high",
+    "src": "irish",
+    "page": 21,
+    "hint": "Law / terminology basic. A tackle above the shoulders is a ______ tackle",
+    "v": 1
+  },
+  {
+    "type": "fill",
+    "q": "At the lineout, players must form a ______ between 5m and 15m lines",
+    "a": "line",
+    "src": "irish",
+    "page": 22,
+    "hint": "Law / terminology basic. At the lineout, players must form a ______ between 5m and 15m lines",
+    "v": 1
+  },
+  {
+    "type": "fill",
+    "q": "When a maul stops moving forward and the ball is not immediately available, the referee usually calls a ______ maul",
+    "a": "held",
+    "src": "irish",
+    "page": 23,
+    "hint": "Law / terminology basic. When a maul stops moving forward and the ball is not immediately available, the referee usually calls a ______ maul",
+    "v": 1
+  },
+  {
+    "type": "fill",
+    "q": "The scrumhalf is also called number ______",
+    "a": "9",
+    "src": "irish",
+    "page": 24,
+    "hint": "Law / terminology basic. The scrumhalf is also called number ______",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "How many players per side in Rugby Union",
+    "options": [
+      "13",
+      "15",
+      "11",
+      "7"
+    ],
+    "a": "15",
+    "src": "irish",
+    "page": 2,
+    "hint": "Standard RU is 15; Rugby League is 13.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "A 'knock-on' occurs when the ball is",
+    "options": [
+      "Kicked out on full",
+      "Passed forward",
+      "Dropped forward from the hand",
+      "Placed backwards"
+    ],
+    "a": "Dropped forward from the hand",
+    "src": "irish",
+    "page": 4,
+    "hint": "Forward from the hand is a knock-on.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "After a minor infringement, play usually restarts with a",
+    "options": [
+      "Lineout",
+      "Scrum",
+      "Penalty kick",
+      "Drop-out"
+    ],
+    "a": "Scrum",
+    "src": "irish",
+    "page": 6,
+    "hint": "Knock-ons/forward passes \u2192 scrum.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "Offside at a ruck is judged from the",
+    "options": [
+      "Ball carrier",
+      "Last feet",
+      "Goal line",
+      "Touch line"
+    ],
+    "a": "Last feet",
+    "src": "irish",
+    "page": 7,
+    "hint": "Offside line through last feet.",
+    "v": 1
+  },
+  {
+    "type": "mc",
+    "q": "What is the 'gain line' used for",
+    "options": [
+      "Tracking territory won",
+      "Determining offside at lineout",
+      "Marking 22m",
+      "Kicking tee position"
+    ],
+    "a": "Tracking territory won",
+    "src": "oirc",
+    "page": 5,
+    "hint": "Territory measure per phase.",
+    "v": 1
+  }
+]
