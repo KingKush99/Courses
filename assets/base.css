@@ -8,15 +8,20 @@ body{
   font-family:'Comic Sans MS','Comic Sans',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
   background: radial-gradient(1200px 700px at 80% 100%, #3a0d00 0%, #0e0b09 40%, #0b0908 100%);
 }
-/* Content wrapper so fixed corners never overlap content */
 .wrap{max-width:1100px; margin:0 auto; padding:84px 14px 114px}
 .card{background:var(--card); border:1px solid var(--muted); border-radius:16px; box-shadow:0 10px 40px #0008; padding:18px}
 .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
-.pill-btn{border:none; border-radius:999px; padding:10px 16px; background:linear-gradient(45deg,#ff6b00,#ff3b3b); color:#fff; font-weight:800; cursor:pointer; box-shadow:0 3px 10px #0008}
+.pill-btn{border:none; border-radius:999px; padding:10px 16px; background:linear-gradient(45deg,#ff6b00,#ff3b3b); color:#fff; font-weight:800; cursor:pointer; box-shadow:0 3px 10px #0008; display:inline-flex; align-items:center; gap:8px}
 .pill-btn:hover{filter:brightness(1.06)}
 .badge{display:inline-block; padding:.3em .6em; border-radius:999px; border:1px solid var(--muted); background:#211611}
 
-/* Corner buttons — fixed positions */
+/* Non-overlapping courses grid */
+.courses{display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap:12px; align-items:stretch}
+.courses .pill-btn{width:100%; justify-content:center}
+.columns-picker{display:flex; gap:8px; justify-content:center; margin-top:14px}
+.columns-picker .pill-btn{padding:8px 12px}
+
+/* Corner controls */
 .corner{position:fixed; z-index:40; width:46px; height:46px; border-radius:999px; display:grid; place-items:center; box-shadow:0 6px 22px #0009}
 .corner.top-left{left:12px; top:12px}
 .corner.top-left.back{left:12px; top:62px}
@@ -31,7 +36,7 @@ body{
 .drawer h3{margin:.2em 0 .4em 0}
 .menu-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
 .btn-tile{display:block; padding:12px 14px; border-radius:12px; background:#291b14; border:1px solid var(--muted); text-align:center}
-@keyframes fade{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:translateY(0)}}
+@keyframes fade{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:translateY(0)}
 
 /* Mini-slots */
 #slots-modal{position:fixed; inset:auto 12px 66px auto; width:420px; max-width:95vw; background:var(--card); border:1px solid var(--muted); border-radius:16px; box-shadow:0 14px 50px #000a; display:none; z-index:50}
@@ -58,7 +63,7 @@ body{
 .msg.you{background:#2c1c15}
 .lang{margin-left:auto}
 
-/* Optional helper styles for your course buttons area */
-.courses-title{display:block; text-align:center; margin:0 0 12px 0; font-size:28px}
-.courses{display:flex; flex-wrap:wrap; gap:10px; justify-content:center}
-.courses .pill-btn{min-width:140px; text-align:center}
+/* Game canvas (rugby) */
+#stage{position:relative; width:100%; height:70vh; background:linear-gradient(#1c5e1f,#155a1b); border-radius:16px; border:1px solid var(--muted); overflow:hidden}
+.hud{display:flex; gap:12px; align-items:center; margin:10px 0}
+.hud .pill-btn.sm{padding:6px 10px; font-size:.9em}

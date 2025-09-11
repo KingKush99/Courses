@@ -1,8 +1,5 @@
 (function(){
-  // Local storage helpers
   const store={get:(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
-
-  // Coins + themes
   const coins=(function(){let v=store.get('coins',300); return {get:()=>v, set:(n)=>{v=n;store.set('coins',v);hud()}, add:(d)=>{v=Math.max(0,v+d);store.set('coins',v);hud();}}})();
   const themes=[
     {id:1,name:'Ember',class:'theme-1',cost:0},{id:2,name:'Sunset',class:'theme-2',cost:0},{id:3,name:'Cinder',class:'theme-3',cost:0},
@@ -12,18 +9,16 @@
   let owned=store.get('themes_owned',[1,2,3]); let active=store.get('theme_active',1);
   function applyTheme(){document.body.classList.remove(...themes.map(t=>t.class)); const t=themes.find(x=>x.id===active); if(t) document.body.classList.add(t.class);} applyTheme();
 
-  // Corners
   function addCorner(text,cls,title){const b=document.createElement('button'); b.className='pill-btn corner '+cls; b.textContent=text; b.title=title||''; document.body.appendChild(b); return b;}
   function hud(){document.querySelectorAll('#coin-count,#coins-hud').forEach(el=>el&& (el.textContent=coins.get()));}
 
-  addCorner('👤','top-left','Profile'); // (Hook your profile link if needed)
+  addCorner('👤','top-left','Profile');
   const backBtn=addCorner('←','top-left back','Back');
   backBtn.onclick=()=>{history.length>1?history.back():location.href=(window.siteHome||'../index.html')};
   const menuBtn=addCorner('☰','top-right','Menu');
   const chatBtn=addCorner('💬','bot-left','Chat');
   const slotsBtn=addCorner('🎰','bot-right','Mini Slots');
 
-  // Drawer
   const drawer=document.createElement('div'); drawer.className='drawer'; drawer.innerHTML=`
     <div class="section"><h3>Quick Access</h3>
       <div class="menu-grid">
@@ -39,7 +34,6 @@
   document.addEventListener('click',e=>{ if(!drawer.contains(e.target) && e.target!==menuBtn){ drawer.classList.remove('open'); }});
   hud();
 
-  // Theme store
   function openThemeStore(){
     const m=document.createElement('div'); m.className='drawer open'; m.style.width='520px'; m.style.right='360px';
     let html=`<div class="section"><h3>Theme Store</h3><div class="menu-grid" style="grid-template-columns:repeat(2,1fr)">`;
@@ -55,7 +49,7 @@
   }
   document.getElementById('theme-store').onclick=openThemeStore;
 
-  // Mini-slots
+  // Slots
   const slots=document.createElement('div'); slots.id='slots-modal'; slots.innerHTML=`
     <div class="row" style="padding:10px 12px; border-bottom:1px solid var(--muted)"><b>Mini Slots</b><span class="badge" style="margin-left:auto">Coins: <span id="coins-hud">0</span></span><button id="slots-close" class="pill-btn" style="border-radius:999px">✖</button></div>
     <div class="config"><label>Reels</label><select id="reels" class="select"><option>3</option><option>4</option><option>5</option><option>6</option></select>
@@ -81,7 +75,7 @@
     [lever,knob].forEach(el=>{el.addEventListener('mousedown',down); el.addEventListener('touchstart',down);}); window.addEventListener('mousemove',move,{passive:true}); window.addEventListener('touchend',up); window.addEventListener('mouseup',up);
   })();
 
-  // Chatbot (lightweight)
+  // Chat
   const chat=document.createElement('div'); chat.className='chat'; chat.innerHTML=`<div class="head"><b>Assistant</b><button id="chat-close" class="pill-btn" style="border-radius:999px">✖</button></div>
     <div class="log" id="chat-log"><div class="msg">👋 Welcome! I’m your Assistant. Ask me anything about the site, games, or settings. I can also chat in your language of choice!</div></div>
     <div class="entry"><input id="chat-input" class="pill-btn" style="flex:1; background:#211611; box-shadow:none; text-align:left" placeholder="Type here...">
@@ -94,7 +88,6 @@
   document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('send').click()});
   document.getElementById('cap').onclick=function(){const stage=document.getElementById('stage'); if(!stage){pushMsg("📸 Screenshots are only allowed in‑game.",false); return;} if(!window.html2canvas){const s=document.createElement('script'); s.src='https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js'; s.onload=()=>document.getElementById('cap').click(); s.onerror=()=>pushMsg("Screenshot library unavailable.",false); document.head.appendChild(s); return;} window.html2canvas(stage).then(c=>{const a=document.createElement('a'); a.href=c.toDataURL(); a.download='screenshot.png'; a.click(); pushMsg("📸 Screenshot captured from the game area.",false);});};
 
-  // Helpers
   window.updateCoins=(d)=>coins.add(d);
   window.siteHome=(document.querySelector('a.back')?document.querySelector('a.back').getAttribute('href'):'../index.html');
   hud();
